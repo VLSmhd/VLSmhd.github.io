@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://vlsmhd.github.io/2023/04/01/22.%20%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</loc>
+    
+    <lastmod>2023-04-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://vlsmhd.github.io/2023/03/31/3.%20%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</loc>
     
     <lastmod>2023-03-31</lastmod>
@@ -40,7 +49,7 @@
 
   <url>
     <loc>https://vlsmhd.github.io/</loc>
-    <lastmod>2023-03-31</lastmod>
+    <lastmod>2023-04-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>

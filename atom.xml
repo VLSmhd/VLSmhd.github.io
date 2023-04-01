@@ -6,7 +6,7 @@
   <link href="https://vlsmhd.github.io/atom.xml" rel="self"/>
   
   <link href="https://vlsmhd.github.io/"/>
-  <updated>2023-03-31T12:52:52.981Z</updated>
+  <updated>2023-04-01T01:20:33.909Z</updated>
   <id>https://vlsmhd.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://vlsmhd.github.io/2023/04/01/22.%20%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/"/>
+    <id>https://vlsmhd.github.io/2023/04/01/22.%20%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</id>
+    <published>2023-04-01T01:20:42.823Z</published>
+    <updated>2023-04-01T01:20:33.909Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="22-括号生成"><a href="#22-括号生成" class="headerlink" title="22. 括号生成"></a>22. 括号生成</h4><p>数字 <code>n</code> 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 <strong>有效的</strong> 括号组合。</p><p>示例 1：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3</span><br><span class="line">输出：[&quot;((()))&quot;,&quot;(()())&quot;,&quot;(())()&quot;,&quot;()(())&quot;,&quot;()()()&quot;]</span><br></pre></td></tr></table></figure><p>示例 2：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 1</span><br><span class="line">输出：[&quot;()&quot;]</span><br></pre></td></tr></table></figure><p>算法分析：</p><ul><li><p>回溯法 + 深度优先遍历DFS(思路借鉴：liweiwei1419 这位力扣大佬)：</p><ul><li><p>递归逻辑：</p><ul><li><p>参数：</p><ul><li>String curStr：当前字符串</li><li>int left：左括号剩余个数</li><li>int right：右括号剩余个数</li><li>这里结果集作为全局变量。</li></ul></li><li><p>终止条件：</p><ul><li><p>当左右括号剩余个数都为0，说明当前字符串符合条件，添加到结果集中。开始回溯</p></li><li><p>当左括号数大于右括号数：不合法，右括号不能在左括号前面。</p></li></ul></li><li><p>递推逻辑：</p><ul><li>左括号个数不为0，左子树递推。 curStr加上左括号，left个数-1， right不变。</li><li>右括号个数不为0，右子树递推。curStr加上右括号，left个数不变， right个数+1。</li></ul></li></ul></li><li><p>图解过程：</p><p><img src="C:\Users\LEGION\AppData\Roaming\Typora\typora-user-images\image-20230401091118750.png" alt="image-20230401091118750"></p></li><li><p>代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    List&lt;String&gt; ans = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; <span class="title function_">generateParenthesis</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        dfs(<span class="string">&quot;&quot;</span>, n, n);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">dfs</span><span class="params">(String curStr, <span class="type">int</span> left, <span class="type">int</span> right)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left == <span class="number">0</span> &amp;&amp; right == <span class="number">0</span>)&#123;</span><br><span class="line">            ans.add(curStr);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(left &gt; right)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(left &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            dfs(curStr + <span class="string">&quot;(&quot;</span>, left - <span class="number">1</span>, right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(right &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            dfs(curStr + <span class="string">&quot;)&quot;</span>, left, right - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;22-括号生成&quot;&gt;&lt;a href=&quot;#22-括号生成&quot; class=&quot;headerlink&quot; title=&quot;22. 括号生成&quot;&gt;&lt;/a&gt;22. 括号生成&lt;/h4&gt;&lt;p&gt;数字 &lt;code&gt;n&lt;/code&gt; 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>leetcode Hot100 3.无重复字符的最长子串</title>
