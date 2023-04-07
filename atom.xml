@@ -6,7 +6,7 @@
   <link href="https://vlsmhd.github.io/atom.xml" rel="self"/>
   
   <link href="https://vlsmhd.github.io/"/>
-  <updated>2023-04-06T03:23:13.582Z</updated>
+  <updated>2023-04-07T01:14:56.864Z</updated>
   <id>https://vlsmhd.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode-Hot100-617. 合并二叉树</title>
+    <link href="https://vlsmhd.github.io/2023/04/07/Leetcode-Hot100-617.-%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    <id>https://vlsmhd.github.io/2023/04/07/Leetcode-Hot100-617.-%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/</id>
+    <published>2023-04-07T00:20:47.402Z</published>
+    <updated>2023-04-07T01:14:56.864Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="合并二叉树"><ahref="https://leetcode.cn/problems/merge-two-binary-trees/">617.合并二叉树</a></h4><p>给你两棵二叉树： <code>root1</code> 和 <code>root2</code> 。</p><p>想象一下，当你将其中一棵覆盖到另一棵之上时，两棵树上的一些节点将会重叠（而另一些不会）。你需要将这两棵树合并成一棵新二叉树。合并的规则是：如果两个节点重叠，那么将这两个节点的值相加作为合并后节点的新值；否则，不为null 的节点将直接作为新二叉树的节点。</p><p>返回合并后的二叉树。</p><p><strong>注意:</strong> 合并过程必须从两个树的根节点开始。</p><p><strong>示例 1：</strong></p><figure><img src="Leetcode-Hot100-617.-合并二叉树/merge.jpg" alt="img" /><figcaption aria-hidden="true">img</figcaption></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root1 = [1,3,2,5], root2 = [2,1,3,null,4,null,7]</span><br><span class="line">输出：[3,4,5,5,4,null,7]</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root1 = [1], root2 = [1,2]</span><br><span class="line">输出：[2,2]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li>两棵树中的节点数目在范围 <code>[0, 2000]</code> 内</li><li><code>-104 &lt;= Node.val &lt;= 104</code></li></ul><h5 id="算法分析">算法分析：</h5><h6 id="递归">递归：</h6><ul><li><p>递归参数：root1的结点，root2的结点。</p></li><li><p><strong>递归函数返回值：TreeNode</strong></p><p>我第一遍写的时候，dfs设置的返回值是void，就会出现：如果传入的是空节点，无法操作。</p></li><li><p>递归终止条件：当传入的结点有空值，就返回不为空的结点。</p></li><li><p>递推逻辑：</p><p>假设传入的结点分别为root1，root2，如果root1的结点为空，而root2的结点不为空，则把root2的结点复制过去，赋值给root1。</p><p>都为空，则返回空结点，代表该处没有结点存在。</p><p>如果都不为空，把结点的值加起来。</p><p>然后递归调用，确定左右子树的结点。</p></li><li><p>代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">mergeTrees</span><span class="params">(TreeNode root1, TreeNode root2)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(root1 == <span class="literal">null</span> &amp;&amp; root2 == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root1 == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> root2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root2 == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> root1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">p</span> <span class="operator">=</span> root1;</span><br><span class="line">        dfs(p, root2);</span><br><span class="line">        <span class="keyword">return</span> root1;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    TreeNode <span class="title function_">dfs</span><span class="params">(TreeNode root1, TreeNode root2)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root1 == <span class="literal">null</span> || root2 == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> root1 == <span class="literal">null</span>? root2 : root1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        root1.val += root2.val;</span><br><span class="line">        root1.left =  dfs(root1.left, root2.left);</span><br><span class="line">        root1.right = dfs(root1.right, root2.right);</span><br><span class="line">        <span class="keyword">return</span> root1;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;合并二叉树&quot;&gt;&lt;a
+href=&quot;https://leetcode.cn/problems/merge-two-binary-trees/&quot;&gt;617.
+合并二叉树&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;给你两棵二叉树： &lt;code&gt;root1&lt;/code&gt; 和 &lt;code&gt;</summary>
+      
+    
+    
+    
+    <category term="leetcode" scheme="https://vlsmhd.github.io/categories/leetcode/"/>
+    
+    
+    <category term="学习" scheme="https://vlsmhd.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="Leetcode" scheme="https://vlsmhd.github.io/tags/Leetcode/"/>
+    
+    <category term="编程" scheme="https://vlsmhd.github.io/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="java" scheme="https://vlsmhd.github.io/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode-Hot100-448. 找到所有数组中消失的数字</title>
