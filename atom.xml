@@ -6,7 +6,7 @@
   <link href="https://vlsmhd.github.io/atom.xml" rel="self"/>
   
   <link href="https://vlsmhd.github.io/"/>
-  <updated>2023-04-11T01:02:30.426Z</updated>
+  <updated>2023-04-13T03:28:00.374Z</updated>
   <id>https://vlsmhd.github.io/</id>
   
   <author>
@@ -15,6 +15,92 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>算法分析与设计（屈婉玲）——课程学习笔记</title>
+    <link href="https://vlsmhd.github.io/2023/04/13/%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%B1%88%E5%A9%89%E7%8E%B2%EF%BC%89%E2%80%94%E2%80%94%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>https://vlsmhd.github.io/2023/04/13/%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%B1%88%E5%A9%89%E7%8E%B2%EF%BC%89%E2%80%94%E2%80%94%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <published>2023-04-13T03:15:26.709Z</published>
+    <updated>2023-04-13T03:28:00.374Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="算法分析与设计屈婉玲">算法分析与设计（屈婉玲）</h1><h2 id="动态规划算法">动态规划算法</h2><h3 id="背包问题">背包问题</h3><p>一个旅行者随身携带了一个背包，有n件物品可以放入背包，每件物品的重量和价值分别为<spanclass="math inline">\(w_i , v_i\)</span> ，背包的容量为b。</p><p>怎么装物品，能使物品重量不超过背包总重量的前提下，价值最大？</p><p>请给出最佳装配方案解的向量。</p><h4 id="问题建模">问题建模：</h4><h5 id="解集向量">解集向量：</h5><p><spanclass="math inline">\(&lt;x_1,x_2,x_3...x_n&gt;\)</span>其中，<spanclass="math inline">\(x_i, 1 \leq i \leqn\)</span>表示第i件物品装了<spanclass="math inline">\(x_i\)</span>件。</p><h5 id="目标函数">目标函数：</h5><p>总价值： <span class="math inline">\(max\sum^{i \to n}_{i =1}{v_ix_i}\)</span></p><p>限制：$^{i n}_{i = 1}{w_ix_i} b ， x_i N $</p><p>由此可见，两个函数都是线性规划问题。</p><h4 id="解题步骤">解题步骤</h4><h5 id="子问题的界定与递推顺序">子问题的界定与递推顺序：</h5><h6 id="子问题的界定">子问题的界定：</h6><p>给定两个参数k，y <span class="math inline">\((1 \leq k \leq n , 1\leq y \leq b 且 k,y \inZ_+)\)</span>，分别表示物品与背包的递推参数。</p><p>递推顺序：</p><p>k：1,2,3,4,5... n</p><p>对于给定的k，</p><p>y：1,2,3,4...b</p><h5 id="递推方程">递推方程：</h5><p>给定一个函数：<span class="math inline">\(F_k(y)\)</span>含义是：背包容量为y的时候，装前k种物品（装到第k种物品）的时候，最大价值是多少。</p><p><span class="math inline">\(F_k(y) = max\lbrace F_{k-1}(y), F_k(y -w_k) + v_k \rbrace\)</span></p><p>这个式子怎么得来的呢？</p><p>递推过程中，对于一件物品无外乎只有两种情况，放它或者不放它。</p><p>假如不放入它，那说明k这个物品没装，装的是前k-1种物品，那就直接借助上一层规划得到的结果即可。</p><p>假如我要放入这个物品一件，拿当前背包的重量减去这个物品的重量，这是当前背包所剩的重量<span class="math inline">\(y -w_k\)</span>，那么前面的递推过程中，一定得出了“当前所剩重量”装物品的最大价值<spanclass="math inline">\(F_k(y - w_k)\)</span>加上当前的物品价值，就是加入当前物品的总价值。</p><p>边界初始化：</p><p><span class="math inline">\(F_0(y) = 0 没有物品可装\)</span></p><p><span class="math inline">\(F_k(0) = 0 包里没有空间\)</span></p><p><span class="math inline">\(F_k(y) = -\infty解决超重情况的取最大值问题\)</span></p><h5id="标记函数问题需要解向量的时候这一步必不可少">标记函数（问题需要解向量的时候，这一步必不可少）：</h5><p><spanclass="math inline">\(i_k(y)\)</span>：装前k种物品，总重不超y,背包达到最大价值时装入物品的最大标号（装到第几个物品处）<span class="math display">\[i_k(y) = \begin{cases}i_{k-1}(y),&amp; F_{k-1}(y) &gt; F_k(y - w_k) +v_k，不装这个物品是最优的\\k, &amp; F_{k-1}(y) \leq F_k(y - w_k) + v_k, 装这个物品是最优的\end{cases}\]</span></p><h5 id="时间复杂度分析">时间复杂度分析：</h5><p>根据公式：<span class="math inline">\(F_k(y) = max\lbrace F_{k-1}(y),F_k(y - w_k) + v_k \rbrace\)</span>可得，dp数组（记录数组）要计算nb个<spanclass="math inline">\(F_k(y)\)</span>的值。</p><p>计算时间为O(nb).</p><p>伪多项式时间算法：</p><p>时间为参数b和n的多项式，不是输入规模的多项式.参数b是整数，表达b需要logb位,输入规模是logb .</p><p>笔者关于这一块不是很懂······，好像背包问题是NP-hard问题，然后输入的b其实是数值大小。。。 然后是<spanclass="math inline">\(2^b\)</span>复杂度，不懂···</p><h4 id="案例一">案例一：</h4><figure><img src="image-20230413111706214.png" alt="image-20230413111706214" /><figcaption aria-hidden="true">image-20230413111706214</figcaption></figure><figure><img src="image-20230413111736230.png" alt="image-20230413111736230" /><figcaption aria-hidden="true">image-20230413111736230</figcaption></figure><p>追踪标记的伪码：</p><figure><img src="image-20230413112351688.png" alt="image-20230413112351688" /><figcaption aria-hidden="true">image-20230413112351688</figcaption></figure><h4 id="背包问题推广">背包问题推广：</h4><ul><li>0-1背包</li><li>多重背包</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;算法分析与设计屈婉玲&quot;&gt;算法分析与设计（屈婉玲）&lt;/h1&gt;
+&lt;h2 id=&quot;动态规划算法&quot;&gt;动态规划算法&lt;/h2&gt;
+&lt;h3 id=&quot;背包问题&quot;&gt;背包问题&lt;/h3&gt;
+&lt;p&gt;一个旅行者随身携带了一个背包，有n件物品可以放入背包，每件物品的重量和价值分别为&lt;spa</summary>
+      
+    
+    
+    
+    <category term="算法" scheme="https://vlsmhd.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="学习" scheme="https://vlsmhd.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="编程" scheme="https://vlsmhd.github.io/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="算法" scheme="https://vlsmhd.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode-Hot100-155. 最小栈</title>
+    <link href="https://vlsmhd.github.io/2023/04/12/Leetcode-Hot100-155.-%E6%9C%80%E5%B0%8F%E6%A0%88/"/>
+    <id>https://vlsmhd.github.io/2023/04/12/Leetcode-Hot100-155.-%E6%9C%80%E5%B0%8F%E6%A0%88/</id>
+    <published>2023-04-12T01:50:37.059Z</published>
+    <updated>2023-04-12T01:50:39.320Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="最小栈"><a href="https://leetcode.cn/problems/min-stack/">155.最小栈</a></h4><p>设计一个支持 <code>push</code> ，<code>pop</code> ，<code>top</code>操作，并能在常数时间内检索到最小元素的栈。</p><p>实现 <code>MinStack</code> 类:</p><ul><li><code>MinStack()</code> 初始化堆栈对象。</li><li><code>void push(int val)</code> 将元素val推入堆栈。</li><li><code>void pop()</code> 删除堆栈顶部的元素。</li><li><code>int top()</code> 获取堆栈顶部的元素。</li><li><code>int getMin()</code> 获取堆栈中的最小元素。</li></ul><p><strong>示例 1:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">[&quot;MinStack&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;getMin&quot;,&quot;pop&quot;,&quot;top&quot;,&quot;getMin&quot;]</span><br><span class="line">[[],[-2],[0],[-3],[],[],[],[]]</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">[null,null,null,null,-3,null,0,-2]</span><br><span class="line"></span><br><span class="line">解释：</span><br><span class="line">MinStack minStack = new MinStack();</span><br><span class="line">minStack.push(-2);</span><br><span class="line">minStack.push(0);</span><br><span class="line">minStack.push(-3);</span><br><span class="line">minStack.getMin();   --&gt; 返回 -3.</span><br><span class="line">minStack.pop();</span><br><span class="line">minStack.top();      --&gt; 返回 0.</span><br><span class="line">minStack.getMin();   --&gt; 返回 -2.</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><ul><li><span class="math inline">\(2^{31}\)</span> &lt;= val &lt;= <spanclass="math inline">\(2^{31}\)</span> - 1</li></ul></li><li><code>pop</code>、<code>top</code> 和 <code>getMin</code> 操作总是在<strong>非空栈</strong> 上调用</li><li><code>push</code>, <code>pop</code>, <code>top</code>, and<code>getMin</code>最多被调用 <code>3 * 104</code> 次</li></ul><h5 id="算法分析">算法分析：</h5><h6 id="辅助栈">辅助栈：</h6><ul><li><p>思路：</p><p>利用一个额外的栈，这个辅助栈内元素的含义是：当前栈内的最小值。</p><p>初始化的时候，在辅助栈添加一个MAX值供特殊处理。</p><p>栈中每添加一个元素，就拿这个值与栈内最小值比较，假如添加的元素＞最小值，那辅助栈添加一个最小值，否则就把当前元素加到最小栈去。</p></li><li><p>代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MinStack</span> &#123;</span><br><span class="line"></span><br><span class="line">    Stack&lt;Integer&gt; stack;</span><br><span class="line">    Stack&lt;Integer&gt; help;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MinStack</span><span class="params">()</span> &#123;</span><br><span class="line">        stack = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        help = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        help.push(Integer.MAX_VALUE);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">        stack.push(val);</span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> getMin();</span><br><span class="line">        <span class="keyword">if</span>(val &lt; min)&#123;</span><br><span class="line">            help.push(val);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            help.push(min);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pop</span><span class="params">()</span> &#123;</span><br><span class="line">        stack.pop();</span><br><span class="line">        help.pop();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">top</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> stack.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getMin</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> help.peek();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;最小栈&quot;&gt;&lt;a href=&quot;https://leetcode.cn/problems/min-stack/&quot;&gt;155.
+最小栈&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;设计一个支持 &lt;code&gt;push&lt;/code&gt; ，&lt;code&gt;pop&lt;/code&gt; ，&lt;code&gt;top&lt;</summary>
+      
+    
+    
+    
+    <category term="leetcode" scheme="https://vlsmhd.github.io/categories/leetcode/"/>
+    
+    
+    <category term="学习" scheme="https://vlsmhd.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="Leetcode" scheme="https://vlsmhd.github.io/tags/Leetcode/"/>
+    
+    <category term="编程" scheme="https://vlsmhd.github.io/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="java" scheme="https://vlsmhd.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://vlsmhd.github.io/2023/04/11/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E2%80%94%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E2%80%94%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
+    <id>https://vlsmhd.github.io/2023/04/11/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E2%80%94%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E2%80%94%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</id>
+    <published>2023-04-11T12:05:05.076Z</published>
+    <updated>2023-04-11T12:05:05.175Z</updated>
+    
+    <content type="html"><![CDATA[<h1id="深入理解java虚拟机第二部分自动内存管理">深入理解Java虚拟机—第二部分—自动内存管理</h1><h2 id="section"></h2>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1
+id=&quot;深入理解java虚拟机第二部分自动内存管理&quot;&gt;深入理解Java虚拟机—第二部分—自动内存管理&lt;/h1&gt;
+&lt;h2 id=&quot;section&quot;&gt;&lt;/h2&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Leetcode-Hot100-49. 字母异位词分组</title>
