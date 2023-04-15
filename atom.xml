@@ -6,7 +6,7 @@
   <link href="https://vlsmhd.github.io/atom.xml" rel="self"/>
   
   <link href="https://vlsmhd.github.io/"/>
-  <updated>2023-04-15T00:48:01.932Z</updated>
+  <updated>2023-04-15T02:04:34.559Z</updated>
   <id>https://vlsmhd.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode-Hot100-152. 乘积最大子数组</title>
+    <link href="https://vlsmhd.github.io/2023/04/15/Leetcode-Hot100-152.-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/"/>
+    <id>https://vlsmhd.github.io/2023/04/15/Leetcode-Hot100-152.-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/</id>
+    <published>2023-04-15T02:04:31.984Z</published>
+    <updated>2023-04-15T02:04:34.559Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="乘积最大子数组"><ahref="https://leetcode.cn/problems/maximum-product-subarray/">152.乘积最大子数组</a></h4><p>给你一个整数数组 <code>nums</code>，请你找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。</p><p>测试用例的答案是一个 <strong>32-位</strong> 整数。</p><p><strong>子数组</strong> 是数组的连续子序列。</p><p><strong>示例 1:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [2,3,-2,4]</span><br><span class="line">输出: 6</span><br><span class="line">解释: 子数组 [2,3] 有最大乘积 6。</span><br></pre></td></tr></table></figure><p><strong>示例 2:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [-2,0,-1]</span><br><span class="line">输出: 0</span><br><span class="line">解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。</span><br></pre></td></tr></table></figure><p><strong>提示:</strong></p><ul><li><code>1 &lt;= nums.length &lt;= 2 * 104</code></li><li><code>-10 &lt;= nums[i] &lt;= 10</code></li><li><code>nums</code> 的任何前缀或后缀的乘积都 <strong>保证</strong>是一个 <strong>32-位</strong> 整数</li></ul><h5 id="算法分析">算法分析：</h5><h6 id="动态规划">动态规划：</h6><ul><li><p>这里dp数组转化为需要维护的三个参数：</p><ul><li>max：数组的子数组乘积最大值</li><li>cmax：当前的最大值</li><li>cmin：当前的最小值，注意当前的含义，一定要带当前元素玩。原本的dp数组的含义就是以当前下标i为结尾。。。。。。</li></ul><p>为什么要记录最小值？</p><p>因为数组中含有负数，最大的正数乘了负数会变最小，但是最小的数乘以负数也可能变成max。</p></li><li><p>递推方程：</p><p>如果遍历过程中遇到数组元素为负数的情况，直接交换cmax与cmin。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmax = Math.max(cmax * nums[i], nums[i]);</span><br><span class="line">         cmin = Math.min(cmin * nums[i], nums[i]);</span><br><span class="line">         max = Math.max(cmax, max);</span><br></pre></td></tr></table></figure></li></ul><p>代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProduct</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line">        <span class="type">int</span> <span class="variable">cmin</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">cmax</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> cmax;</span><br><span class="line">                cmax = cmin;</span><br><span class="line">                cmin = tmp;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            cmax = Math.max(cmax * nums[i], nums[i]);</span><br><span class="line">            cmin = Math.min(cmin * nums[i], nums[i]);</span><br><span class="line">            max = Math.max(cmax, max);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;乘积最大子数组&quot;&gt;&lt;a
+href=&quot;https://leetcode.cn/problems/maximum-product-subarray/&quot;&gt;152.
+乘积最大子数组&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;给你一个整数数组 &lt;code&gt;nums&lt;/code&gt;
+，请</summary>
+      
+    
+    
+    
+    <category term="leetcode" scheme="https://vlsmhd.github.io/categories/leetcode/"/>
+    
+    
+    <category term="学习" scheme="https://vlsmhd.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="Leetcode" scheme="https://vlsmhd.github.io/tags/Leetcode/"/>
+    
+    <category term="编程" scheme="https://vlsmhd.github.io/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="java" scheme="https://vlsmhd.github.io/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode-Hot100-621. 任务调度器</title>
