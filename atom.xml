@@ -6,7 +6,7 @@
   <link href="https://vlsmhd.github.io/atom.xml" rel="self"/>
   
   <link href="https://vlsmhd.github.io/"/>
-  <updated>2023-04-13T06:31:51.948Z</updated>
+  <updated>2023-04-15T00:48:01.932Z</updated>
   <id>https://vlsmhd.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode-Hot100-621. 任务调度器</title>
+    <link href="https://vlsmhd.github.io/2023/04/14/Leetcode-Hot100-621.-%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8/"/>
+    <id>https://vlsmhd.github.io/2023/04/14/Leetcode-Hot100-621.-%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8/</id>
+    <published>2023-04-14T00:59:09.859Z</published>
+    <updated>2023-04-15T00:48:01.932Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="任务调度器"><ahref="https://leetcode.cn/problems/task-scheduler/">621.任务调度器</a></h4><p>给你一个用字符数组 <code>tasks</code> 表示的 CPU需要执行的任务列表。其中每个字母表示一种不同种类的任务。任务可以以任意顺序执行，并且每个任务都可以在1 个单位时间内执行完。在任何一个单位时间，CPU可以完成一个任务，或者处于待命状态。</p><p>然而，两个 <strong>相同种类</strong> 的任务之间必须有长度为整数<code>n</code> 的冷却时间，因此至少有连续 <code>n</code> 个单位时间内CPU 在执行不同的任务，或者在待命状态。</p><p>你需要计算完成所有任务所需要的 <strong>最短时间</strong> 。</p><p><strong>示例 1：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：tasks = [&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;,&quot;B&quot;], n = 2</span><br><span class="line">输出：8</span><br><span class="line">解释：A -&gt; B -&gt; (待命) -&gt; A -&gt; B -&gt; (待命) -&gt; A -&gt; B</span><br><span class="line">     在本示例中，两个相同类型任务之间必须间隔长度为 n = 2 的冷却时间，而执行一个任务只需要一个单位时间，所以中间出现了（待命）状态。 </span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：tasks = [&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;,&quot;B&quot;], n = 0</span><br><span class="line">输出：6</span><br><span class="line">解释：在这种情况下，任何大小为 6 的排列都可以满足要求，因为 n = 0</span><br><span class="line">[&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;,&quot;B&quot;]</span><br><span class="line">[&quot;A&quot;,&quot;B&quot;,&quot;A&quot;,&quot;B&quot;,&quot;A&quot;,&quot;B&quot;]</span><br><span class="line">[&quot;B&quot;,&quot;B&quot;,&quot;B&quot;,&quot;A&quot;,&quot;A&quot;,&quot;A&quot;]</span><br><span class="line">...</span><br><span class="line">诸如此类</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：tasks = [&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;], n = 2</span><br><span class="line">输出：16</span><br><span class="line">解释：一种可能的解决方案是：</span><br><span class="line">     A -&gt; B -&gt; C -&gt; A -&gt; D -&gt; E -&gt; A -&gt; F -&gt; G -&gt; A -&gt; (待命) -&gt; (待命) -&gt; A -&gt; (待命) -&gt; (待命) -&gt; A</span><br></pre></td></tr></table></figure><h5 id="算法分析">算法分析：</h5><h6 id="构造-哈希表">构造 + 哈希表</h6><p>假如只有一类任务，A 有m个，n为2.那么任务序列可为： AXX AXX AXX A需要min = (n+1)*(m-1) + 1个CPU时间。那么假如有多类任务，我们考虑把数量最大的任务像一类任务那种情况排列，然后其它任务穿插排列。</p><p>那么，我们考虑一下，什么情况总时间会超过min？</p><ul><li><p>当任务种类的个数超过n+1：</p><p>假如A还是最多的那个任务，有4个，n为2，这时候B有三个、C两个、D两个。我们来看任务序列：</p><p>AXX -&gt; AB<strong>CD</strong></p><p>AXX -&gt; AB<strong>CD</strong></p><p>AXX -&gt; ABX</p><p>A -&gt; A</p><p>总时间为十一个CPU时间，为tasks的长度。也就是说，无论我们怎么横向添加任务种类，都不会产生CPU休眠时间，</p></li><li><p>当最多的任务类型有好几个</p><p>假如A有四个 B有四个 C有两个 n为2，我们来看任务序列：</p><p>AXX -&gt; ABC</p><p>AXX -&gt; ABC</p><p>AXX -&gt; AB</p><p>AXX -&gt; AB</p><p>总时间也和tasks的个数相同，为10个CPU时间</p></li></ul><p>以上两种情况，实际上可以归为一种情况：就是tasks的数量大于min=(n+1)*(m-1)+ 1。尤其注意第二种情况，要更新一下min，因为</p><p>代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">leastInterval</span><span class="params">(<span class="type">char</span>[] tasks, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] hash = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">26</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; tasks.length; i++)&#123;</span><br><span class="line">            hash[tasks[i] - <span class="string">&#x27;A&#x27;</span>] +=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(hash);</span><br><span class="line">        <span class="comment">//最多的任务左右最终长度</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">minLen</span> <span class="operator">=</span> (n+<span class="number">1</span>) * (hash[<span class="number">25</span>] - <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//假如任务种类不超过n</span></span><br><span class="line">        <span class="comment">//且有任务种类的个数与最多的那一种任务个数相同。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">24</span>; i &gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(hash[i] == hash[<span class="number">25</span>])&#123;</span><br><span class="line">                minLen += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Math.max(minLen, tasks.length);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;任务调度器&quot;&gt;&lt;a
+href=&quot;https://leetcode.cn/problems/task-scheduler/&quot;&gt;621.
+任务调度器&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;给你一个用字符数组 &lt;code&gt;tasks&lt;/code&gt; 表示的 CPU
+需要执行的任</summary>
+      
+    
+    
+    
+    <category term="leetcode" scheme="https://vlsmhd.github.io/categories/leetcode/"/>
+    
+    
+    <category term="学习" scheme="https://vlsmhd.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="Leetcode" scheme="https://vlsmhd.github.io/tags/Leetcode/"/>
+    
+    <category term="编程" scheme="https://vlsmhd.github.io/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="java" scheme="https://vlsmhd.github.io/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode-Hot100-64. 最小路径和</title>
