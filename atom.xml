@@ -6,7 +6,7 @@
   <link href="https://vlsmhd.github.io/atom.xml" rel="self"/>
   
   <link href="https://vlsmhd.github.io/"/>
-  <updated>2023-04-27T01:43:23.394Z</updated>
+  <updated>2023-04-28T01:23:40.973Z</updated>
   <id>https://vlsmhd.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode-Hot100-238. 除自身以外数组的乘积</title>
+    <link href="https://vlsmhd.github.io/2023/04/28/Leetcode-Hot100-238.-%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF/"/>
+    <id>https://vlsmhd.github.io/2023/04/28/Leetcode-Hot100-238.-%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF/</id>
+    <published>2023-04-28T00:42:49.572Z</published>
+    <updated>2023-04-28T01:23:40.973Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="除自身以外数组的乘积"><ahref="https://leetcode.cn/problems/product-of-array-except-self/">238.除自身以外数组的乘积</a></h3><p>给你一个整数数组 <code>nums</code>，返回 <em>数组 <code>answer</code>，其中 <code>answer[i]</code> 等于 <code>nums</code> 中除<code>nums[i]</code> 之外其余各元素的乘积</em> 。</p><p>题目数据 <strong>保证</strong> 数组<code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在 <strong>32位</strong> 整数范围内。</p><p>请<strong>不要使用除法，</strong>且在 <code>O(*n*)</code>时间复杂度内完成此题。</p><p><strong>示例 1:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [1,2,3,4]</span><br><span class="line">输出: [24,12,8,6]</span><br></pre></td></tr></table></figure><p><strong>示例 2:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [-1,1,0,-3,3]</span><br><span class="line">输出: [0,0,9,0,0]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>2 &lt;= nums.length &lt;= 105</code></li><li><code>-30 &lt;= nums[i] &lt;= 30</code></li><li><strong>保证</strong> 数组<code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在 <strong>32位</strong> 整数范围内</li></ul><h4 id="算法分析">算法分析</h4><p>这题目上来就感觉有点脑筋急转弯的韵味，一上来我是没有思路的，看了眼题解，觉得是动态规划</p><h5 id="左右子数组乘积矩阵分析法">左右子数组乘积+矩阵分析法</h5><p>定义结果数组res，假设当前nums = [2,2,3,4]</p><table><thead><tr class="header"><th style="text-align: center;">res</th><th style="text-align: center;"></th><th style="text-align: center;"></th><th style="text-align: center;"></th><th style="text-align: center;"></th></tr></thead><tbody><tr class="odd"><td style="text-align: center;">0</td><td style="text-align: center;">1</td><td style="text-align: center;">nums[1]</td><td style="text-align: center;">nums[2]</td><td style="text-align: center;">nums[3]</td></tr><tr class="even"><td style="text-align: center;">1</td><td style="text-align: center;">nums[0]</td><td style="text-align: center;">1</td><td style="text-align: center;">nums[2]</td><td style="text-align: center;">nums[3]</td></tr><tr class="odd"><td style="text-align: center;">2</td><td style="text-align: center;">nums[0]</td><td style="text-align: center;">nums[1]</td><td style="text-align: center;">1</td><td style="text-align: center;">nums[3]</td></tr><tr class="even"><td style="text-align: center;">3</td><td style="text-align: center;">nums[0]</td><td style="text-align: center;">nums[1]</td><td style="text-align: center;">nums[2]</td><td style="text-align: center;">1</td></tr></tbody></table><p>通过表格我们可以分析出，每个元素的res，其实就是左右两边子数组的乘积的乘积。</p><p>我们把矩阵分为上下三角，先计算下三角，再计算上三角。定义p =1为下三角乘积的初值 q = 1为上三角乘积的初值。</p><p>下三角：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">    res[i] = p;</span><br><span class="line">    p *= nums[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>我们得到结果：</p><p>res = [1, 2, 4, 12]</p><p>上三角：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> n-<span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">    res[i] *= q;</span><br><span class="line">    q *= nums[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>结果为：</p><p>res = [1×24, 2×12, 4×4, 12×1] = [24, 24, 16, 12]</p><h6 id="代码">代码：</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] productExceptSelf(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">q</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//先求下三角</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            res[i] = p;</span><br><span class="line">            p *= nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//上三角</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> n-<span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            res[i] *= q;</span><br><span class="line">            q *= nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;除自身以外数组的乘积&quot;&gt;&lt;a
+href=&quot;https://leetcode.cn/problems/product-of-array-except-self/&quot;&gt;238.
+除自身以外数组的乘积&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;给你一个整数数组 &lt;code&gt;nums&lt;</summary>
+      
+    
+    
+    
+    <category term="leetcode" scheme="https://vlsmhd.github.io/categories/leetcode/"/>
+    
+    
+    <category term="学习" scheme="https://vlsmhd.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="Leetcode" scheme="https://vlsmhd.github.io/tags/Leetcode/"/>
+    
+    <category term="编程" scheme="https://vlsmhd.github.io/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="java" scheme="https://vlsmhd.github.io/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode-Hot100-230. 二叉搜索树中第K小的元素&amp;二叉树中序遍历</title>
@@ -619,38 +652,6 @@ href=&quot;https://leetcode.cn/problems/group-anagrams/&quot;&gt;49.
     <category term="学习" scheme="https://vlsmhd.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
     
     <category term="Leetcode" scheme="https://vlsmhd.github.io/tags/Leetcode/"/>
-    
-    <category term="编程" scheme="https://vlsmhd.github.io/tags/%E7%BC%96%E7%A8%8B/"/>
-    
-    <category term="java" scheme="https://vlsmhd.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java中判断质数的方法</title>
-    <link href="https://vlsmhd.github.io/2023/04/10/java%E4%B8%AD%E5%88%A4%E6%96%AD%E8%B4%A8%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95/"/>
-    <id>https://vlsmhd.github.io/2023/04/10/java%E4%B8%AD%E5%88%A4%E6%96%AD%E8%B4%A8%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95/</id>
-    <published>2023-04-10T09:18:27.429Z</published>
-    <updated>2023-04-10T09:18:33.226Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="java中判断质数的方法">java中判断质数的方法</h3><h4 id="方法一最基本方法">方法一：最基本方法：</h4><p>最基本的方法是对于一个数 n，从 2 到 n-1 都除以它，如果都无法整除，则n 是质数。代码实现如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isPrime</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n % i == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>时间复杂度分析：0(n)</p><h4 id="优化方法一">优化方法一：</h4><p>优化上面的方法，可以只从 2 到 n 的平方根来除，因为如果 n有除数，则必定有一个小于等于它的平方根。代码实现如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isPrime</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= Math.sqrt(n); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n % i == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="方法二埃拉托斯特尼筛法">方法二：埃拉托斯特尼筛法</h4><p>这是一种用来筛选出所有小于等于 n 的质数的算法。它的基本思想是从 2开始，将每个质数的倍数都标记成合数，直到不能再找到新的质数为止。代码实现如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Integer&gt; <span class="title function_">getPrimes</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">boolean</span>[] isPrime = <span class="keyword">new</span> <span class="title class_">boolean</span>[n + <span class="number">1</span>];</span><br><span class="line">    Arrays.fill(isPrime, <span class="literal">true</span>);</span><br><span class="line">    List&lt;Integer&gt; primes = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (isPrime[i]) &#123;</span><br><span class="line">            primes.add(i);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i * <span class="number">2</span>; j &lt;= n; j += i) &#123;</span><br><span class="line">                isPrime[j] = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> primes;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>时间复杂度：O(n)</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;java中判断质数的方法&quot;&gt;java中判断质数的方法&lt;/h3&gt;
-&lt;h4 id=&quot;方法一最基本方法&quot;&gt;方法一：最基本方法：&lt;/h4&gt;
-&lt;p&gt;最基本的方法是对于一个数 n，从 2 到 n-1 都除以它，如果都无法整除，则
-n 是质数。代码实现如下：&lt;/p&gt;
-&lt;</summary>
-      
-    
-    
-    
-    <category term="Java" scheme="https://vlsmhd.github.io/categories/Java/"/>
-    
-    
-    <category term="学习" scheme="https://vlsmhd.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
     
     <category term="编程" scheme="https://vlsmhd.github.io/tags/%E7%BC%96%E7%A8%8B/"/>
     
