@@ -370,14 +370,14 @@
   </url>
   
   <url>
-    <loc>https://vlsmhd.github.io/tags/%E7%AC%94%E8%AF%95/</loc>
+    <loc>https://vlsmhd.github.io/tags/redis/</loc>
     <lastmod>2023-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://vlsmhd.github.io/tags/redis/</loc>
+    <loc>https://vlsmhd.github.io/tags/%E7%AC%94%E8%AF%95/</loc>
     <lastmod>2023-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -407,13 +407,6 @@
   </url>
   
   <url>
-    <loc>https://vlsmhd.github.io/categories/%E6%B1%82%E8%81%8C/</loc>
-    <lastmod>2023-04-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://vlsmhd.github.io/categories/%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2023-04-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -421,7 +414,7 @@
   </url>
   
   <url>
-    <loc>https://vlsmhd.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://vlsmhd.github.io/categories/%E6%B1%82%E8%81%8C/</loc>
     <lastmod>2023-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -429,6 +422,13 @@
   
   <url>
     <loc>https://vlsmhd.github.io/categories/%E9%A1%B9%E7%9B%AE/redis/</loc>
+    <lastmod>2023-04-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://vlsmhd.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2023-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
