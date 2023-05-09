@@ -6,7 +6,7 @@
   <link href="https://vlsmhd.github.io/atom.xml" rel="self"/>
   
   <link href="https://vlsmhd.github.io/"/>
-  <updated>2023-05-09T03:38:46.188Z</updated>
+  <updated>2023-05-09T03:41:05.519Z</updated>
   <id>https://vlsmhd.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>杭州亚信科技求职</title>
     <link href="https://vlsmhd.github.io/2023/05/09/%E6%9D%AD%E5%B7%9E%E4%BA%9A%E4%BF%A1%E7%A7%91%E6%8A%80%E6%B1%82%E8%81%8C/"/>
     <id>https://vlsmhd.github.io/2023/05/09/%E6%9D%AD%E5%B7%9E%E4%BA%9A%E4%BF%A1%E7%A7%91%E6%8A%80%E6%B1%82%E8%81%8C/</id>
     <published>2023-05-09T03:34:32.001Z</published>
-    <updated>2023-05-09T03:38:46.188Z</updated>
+    <updated>2023-05-09T03:41:05.519Z</updated>
     
     <content type="html"><![CDATA[<h1 id="杭州亚信科技求职">杭州亚信科技求职</h1><h2 id="笔试">5.5笔试</h2><p>一堆基础选择题。5.</p><h2 id="面试">5.9面试</h2><ol type="1"><li><p>介绍项目。关于redis的。</p></li><li><p>乐观锁 配合项目超卖问题</p></li><li><p>并发场景，对于并发问题的看法（没答明白，当时没懂问的啥）</p></li><li><p>spring的bean默认是单例的吗？有没有多例的情况？spring的bean会存在哪些并发安全问题？（没答出来）</p></li><li><p>问了我数据结构在学校能考多少分？</p></li><li><p>二叉平衡树是什么？</p></li><li><p>jvm的内存结构？</p></li><li><p>jvm虚拟机栈？</p></li><li><p>问了一下开发工具</p><p>idea maven这样的</p></li><li><p>部署项目用的什么？</p><p>linux服务器、打war包等</p><p>说我用的技术过时？？？ 没太懂这里</p></li><li><p>问了下vue使用情况</p></li></ol><h3 id="问题反思">问题反思</h3><ol start="4" type="1"><li>spring的bean默认是单例的吗？有没有多例的情况？spring的bean会存在哪些并发安全问题？<ol type="1"><li>状态共享问题：如果多个线程同时访问同一个有状态的Bean，可能会发生状态共享问题，即一个线程修改了Bean的状态，导致其他线程读取到的状态不一致。为避免这种情况，可以将有状态的Bean设计为无状态的或线程安全的。</li><li>线程不安全的Bean：如果一个Bean没有设计为线程安全的，多个线程同时访问它可能会导致数据损坏或其他问题。为避免这种情况，可以使用线程安全的Bean，如使用synchronized关键字或使用线程安全的集合类。</li><li>对象创建问题：Spring默认情况下是单例模式，如果多个线程同时访问一个Bean的实例，可能会导致创建多个实例或对象创建顺序错误的问题。为避免这种情况，可以使用Bean的作用域设置为“prototype”，以确保每次都创建一个新的实例。</li><li>上下文切换问题：如果在高并发环境下，Bean中存在大量的上下文切换操作，可能会导致性能问题。为避免这种情况，可以使用异步编程方式或线程池等技术，来减少上下文切换的次数。</li></ol></li></ol>]]></content>
     
@@ -38,6 +38,16 @@
     
     
     
+    <category term="求职" scheme="https://vlsmhd.github.io/categories/%E6%B1%82%E8%81%8C/"/>
+    
+    
+    <category term="学习" scheme="https://vlsmhd.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="编程" scheme="https://vlsmhd.github.io/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="笔试" scheme="https://vlsmhd.github.io/tags/%E7%AC%94%E8%AF%95/"/>
+    
+    <category term="面试" scheme="https://vlsmhd.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
