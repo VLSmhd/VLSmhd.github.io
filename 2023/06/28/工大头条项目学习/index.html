@@ -1,0 +1,976 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>工大热门头条_项目 | VLS_Blog</title><meta name="author" content="Vlong_shen"><meta name="copyright" content="Vlong_shen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="项目介绍 随着智能手机的普及，生活节奏的加快，很多人只能利用碎片时间来获取信息，因此，对于移动资讯客户端的需求也越来越高。工大热门头条项目正是在这样背景下开发出来。工大热门头条项目采用当下火热的微服务+大数据技术架构实现。本项目主要着手于获取最新最热新闻资讯，通过大数据分析用户喜好精确推送咨询新闻。 业务   image-20210407204405774  技术栈   img">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工大热门头条_项目">
+<meta property="og:url" content="https://vlsmhd.github.io/2023/06/28/%E5%B7%A5%E5%A4%A7%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="VLS_Blog">
+<meta property="og:description" content="项目介绍 随着智能手机的普及，生活节奏的加快，很多人只能利用碎片时间来获取信息，因此，对于移动资讯客户端的需求也越来越高。工大热门头条项目正是在这样背景下开发出来。工大热门头条项目采用当下火热的微服务+大数据技术架构实现。本项目主要着手于获取最新最热新闻资讯，通过大数据分析用户喜好精确推送咨询新闻。 业务   image-20210407204405774  技术栈   img">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://vlsmhd.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2023-06-28T06:30:49.315Z">
+<meta property="article:modified_time" content="2023-07-30T14:08:33.251Z">
+<meta property="article:author" content="Vlong_shen">
+<meta property="article:tag" content="learn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vlsmhd.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://vlsmhd.github.io/2023/06/28/%E5%B7%A5%E5%A4%A7%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '工大热门头条_项目',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-30 22:08:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="VLS_Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">92</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">39</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="VLS_Blog"><img class="site-icon" src="https://vlsmhd.github.io/img/avatar.jpg"/><span class="site-name">VLS_Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">工大热门头条_项目</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-28T06:30:49.315Z" title="发表于 2023-06-28 14:30:49">2023-06-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-30T14:08:33.251Z" title="更新于 2023-07-30 22:08:33">2023-07-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%A1%B9%E7%9B%AE/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="工大热门头条_项目"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="项目介绍">项目介绍</h1>
+<p>随着智能手机的普及，生活节奏的加快，很多人只能利用碎片时间来获取信息，因此，对于移动资讯客户端的需求也越来越高。工大热门头条项目正是在这样背景下开发出来。工大热门头条项目采用当下火热的微服务+大数据技术架构实现。本项目主要着手于获取最新最热新闻资讯，通过大数据分析用户喜好精确推送咨询新闻。</p>
+<h2 id="业务">业务</h2>
+<figure>
+<img src="工大头条项目学习/image-20210407204405774.png"
+alt="image-20210407204405774" />
+<figcaption aria-hidden="true">image-20210407204405774</figcaption>
+</figure>
+<h2 id="技术栈">技术栈</h2>
+<figure>
+<img src="工大头条项目学习/f3accd2ba01c41b0a9ac98370241eba3.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ul>
+<li>Spring-Cloud-Gateway :
+微服务之前架设的网关服务，实现服务注册中的API请求路由，以及控制流速控制和熔断处理都是常用的架构手段，而这些功能Gateway天然支持</li>
+<li>运用Spring Boot快速开发框架，构建项目工程；并结合Spring
+Cloud全家桶技术，实现后端个人中心、自媒体、管理中心等微服务。</li>
+<li>运用Spring Cloud Alibaba Nacos作为项目中的注册中心和配置中心</li>
+<li>运用mybatis-plus作为持久层提升开发效率</li>
+<li>运用Kafka完成内部系统消息通知；与客户端系统消息通知；以及实时数据计算</li>
+<li>运用Redis缓存技术，实现热数据的计算，提升系统性能指标</li>
+<li>使用Mysql存储用户数据，以保证上层数据查询的高性能</li>
+<li>使用Mongo存储用户热数据，以保证用户热数据高扩展和高性能指标</li>
+<li>使用FastDFS作为静态资源存储器，在其上实现热静态资源缓存、淘汰等功能</li>
+<li>运用Hbase技术，存储系统中的冷数据，保证系统数据的可靠性</li>
+<li>运用ES搜索技术，对冷数据、文章数据建立索引，以保证冷数据、文章查询性能</li>
+<li>运用AI技术，来完成系统自动化功能，以提升效率及节省成本。比如实名认证自动化</li>
+<li>PMD&amp;P3C :
+静态代码扫描工具，在项目中扫描项目代码，检查异常点、优化点、代码规范等，为开发团队提供规范统一，提升项目代码质量</li>
+</ul>
+<h1 id="环境搭建">环境搭建</h1>
+<h2 id="nacos环境搭建">nacos环境搭建</h2>
+<ol type="1">
+<li><p>虚拟机导入</p>
+<ul>
+<li>账号：root</li>
+<li>密码：itcast</li>
+</ul></li>
+<li><p>nacos虚拟机安装</p>
+<p>①：docker拉取镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nacos/nacos-server:1.2.0</span><br></pre></td></tr></table></figure>
+<p>②：创建容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --env MODE=standalone --name nacos --restart=always  -d -p 8848:8848 nacos/nacos-server:1.2.0</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>MODE=standalone 单机版</p></li>
+<li><p>--restart=always 开机启动</p></li>
+<li><p>-p 8848:8848 映射端口</p></li>
+<li><p>-d 创建一个守护式 容器在后台运行</p></li>
+</ul>
+<p>③：访问地址：http://192.168.200.130:8848/nacos</p></li>
+</ol>
+<h2 id="工程搭建">工程搭建</h2>
+<p>项目依赖环境（需提前安装好）</p>
+<ul>
+<li><p>JDK1.8</p></li>
+<li><p>Intellij Idea</p></li>
+<li><p>maven-3.6.1</p></li>
+<li><p>Git</p></li>
+</ul>
+<h3 id="项目主体结构">项目主体结构</h3>
+<figure>
+<img src="工大头条项目学习/image-20210412141711919.png"
+alt="image-20210412141711919" />
+<figcaption aria-hidden="true">image-20210412141711919</figcaption>
+</figure>
+<h2 id="项目工具包">项目工具包</h2>
+<p>JWT生成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppJwtUtil</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TOKEN的有效期一天（S）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">TOKEN_TIME_OUT</span> <span class="operator">=</span> <span class="number">3_600</span>;</span><br><span class="line">    <span class="comment">// 加密KEY</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TOKEN_ENCRY_KEY</span> <span class="operator">=</span> <span class="string">&quot;MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY&quot;</span>;</span><br><span class="line">    <span class="comment">// 最小刷新间隔(S)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">REFRESH_TIME</span> <span class="operator">=</span> <span class="number">300</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 生产ID</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">getToken</span><span class="params">(Long id)</span>&#123;</span><br><span class="line">        Map&lt;String, Object&gt; claimMaps = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        claimMaps.put(<span class="string">&quot;id&quot;</span>,id);</span><br><span class="line">        <span class="type">long</span> <span class="variable">currentTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">return</span> Jwts.builder()</span><br><span class="line">                .setId(UUID.randomUUID().toString())</span><br><span class="line">                .setIssuedAt(<span class="keyword">new</span> <span class="title class_">Date</span>(currentTime))  <span class="comment">//签发时间</span></span><br><span class="line">                .setSubject(<span class="string">&quot;system&quot;</span>)  <span class="comment">//说明</span></span><br><span class="line">                .setIssuer(<span class="string">&quot;haut&quot;</span>) <span class="comment">//签发者信息</span></span><br><span class="line">                .setAudience(<span class="string">&quot;app&quot;</span>)  <span class="comment">//接收用户</span></span><br><span class="line">                .compressWith(CompressionCodecs.GZIP)  <span class="comment">//数据压缩方式</span></span><br><span class="line">                .signWith(SignatureAlgorithm.HS512, generalKey()) <span class="comment">//加密方式</span></span><br><span class="line">                .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(currentTime + TOKEN_TIME_OUT * <span class="number">1000</span>))  <span class="comment">//过期时间戳</span></span><br><span class="line">                .addClaims(claimMaps) <span class="comment">//cla信息</span></span><br><span class="line">                .compact();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取token中的claims信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Jws&lt;Claims&gt; <span class="title function_">getJws</span><span class="params">(String token)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> Jwts.parser()</span><br><span class="line">                    .setSigningKey(generalKey())</span><br><span class="line">                    .parseClaimsJws(token);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取payload body信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Claims <span class="title function_">getClaimsBody</span><span class="params">(String token)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> getJws(token).getBody();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (ExpiredJwtException e)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取hearder body信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> JwsHeader <span class="title function_">getHeaderBody</span><span class="params">(String token)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> getJws(token).getHeader();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否过期</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> claims</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> -1：有效，0：有效，1：过期，2：过期</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">verifyToken</span><span class="params">(Claims claims)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(claims==<span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            claims.getExpiration()</span><br><span class="line">                    .before(<span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line">            <span class="comment">// 需要自动刷新TOKEN</span></span><br><span class="line">            <span class="keyword">if</span>((claims.getExpiration().getTime()-System.currentTimeMillis())&gt;REFRESH_TIME*<span class="number">1000</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExpiredJwtException ex) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 由字符串生成加密key</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SecretKey <span class="title function_">generalKey</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] encodedKey = Base64.getEncoder().encode(TOKEN_ENCRY_KEY.getBytes());</span><br><span class="line">        <span class="type">SecretKey</span> <span class="variable">key</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SecretKeySpec</span>(encodedKey, <span class="number">0</span>, encodedKey.length, <span class="string">&quot;AES&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="接口测试工具">接口测试工具</h2>
+<h3 id="postman">postman</h3>
+<h3 id="swaggerui">swaggerUI</h3>
+<p>(1)简介</p>
+<p>Swagger 是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful
+风格的 Web 服务(<a target="_blank" rel="noopener" href="https://swagger.io/"
+class="uri">https://swagger.io/</a>)。 它的主要作用是：</p>
+<ol type="1">
+<li><p>使得前后端分离开发更加方便，有利于团队协作</p></li>
+<li><p>接口的文档在线自动生成，降低后端开发人员编写接口文档的负担</p></li>
+<li><p>功能测试</p>
+<p>Spring已经将Swagger纳入自身的标准，建立了Spring-swagger项目，现在叫Springfox。通过在项目中引入Springfox
+，即可非常简单快捷的使用Swagger。</p></li>
+</ol>
+<p>(2)SpringBoot集成Swagger</p>
+<ul>
+<li><p>引入依赖,在heima-leadnews-model和heima-leadnews-common模块中引入该依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>只需要在heima-leadnews-common中进行配置即可，因为其他微服务工程都直接或间接依赖即可。</p>
+<ul>
+<li>在heima-leadnews-common工程中添加一个配置类</li>
+</ul>
+<p>新增：com.heima.common.swagger.SwaggerConfiguration</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.heima.common.swagger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.builders.ApiInfoBuilder;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.builders.PathSelectors;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.builders.RequestHandlerSelectors;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.service.ApiInfo;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.service.Contact;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.spi.DocumentationType;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.spring.web.plugins.Docket;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.swagger2.annotations.EnableSwagger2;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SwaggerConfiguration</span> &#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Bean</span></span><br><span class="line">   <span class="keyword">public</span> Docket <span class="title function_">buildDocket</span><span class="params">()</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Docket</span>(DocumentationType.SWAGGER_2)</span><br><span class="line">              .apiInfo(buildApiInfo())</span><br><span class="line">              .select()</span><br><span class="line">              <span class="comment">// 要扫描的API(Controller)基础包</span></span><br><span class="line">              .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.heima&quot;</span>))</span><br><span class="line">              .paths(PathSelectors.any())</span><br><span class="line">              .build();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> ApiInfo <span class="title function_">buildApiInfo</span><span class="params">()</span> &#123;</span><br><span class="line">      <span class="type">Contact</span> <span class="variable">contact</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Contact</span>(<span class="string">&quot;黑马程序员&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ApiInfoBuilder</span>()</span><br><span class="line">              .title(<span class="string">&quot;黑马头条-平台管理API文档&quot;</span>)</span><br><span class="line">              .description(<span class="string">&quot;黑马头条后台api&quot;</span>)</span><br><span class="line">              .contact(contact)</span><br><span class="line">              .version(<span class="string">&quot;1.0.0&quot;</span>).build();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在heima-leadnews-common模块中的resources目录中新增以下目录和文件</p>
+<p>文件：resources/META-INF/Spring.factories</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\</span><br><span class="line">  com.heima.common.swagger.SwaggerConfiguration</span><br></pre></td></tr></table></figure>
+<p>（3）Swagger常用注解</p>
+<p>在Java类中添加Swagger的注解即可生成Swagger接口文档，常用Swagger注解如下：</p>
+<p><span class="citation"
+data-cites="Api">@Api</span>：修饰整个类，描述Controller的作用</p>
+<p><span class="citation"
+data-cites="ApiOperation">@ApiOperation</span>：描述一个类的一个方法，或者说一个接口</p>
+<p><span class="citation"
+data-cites="ApiParam">@ApiParam</span>：单个参数的描述信息</p>
+<p><span class="citation"
+data-cites="ApiModel">@ApiModel</span>：用对象来接收参数</p>
+<p><span class="citation"
+data-cites="ApiModelProperty">@ApiModelProperty</span>：用对象接收参数时，描述对象的一个字段</p>
+<p><span class="citation"
+data-cites="ApiResponse">@ApiResponse</span>：HTTP响应其中1个描述</p>
+<p><span class="citation"
+data-cites="ApiResponses">@ApiResponses</span>：HTTP响应整体描述</p>
+<p><span class="citation"
+data-cites="ApiIgnore">@ApiIgnore</span>：使用该注解忽略这个API</p>
+<p><span class="citation" data-cites="ApiError">@ApiError</span>
+：发生错误返回的信息</p>
+<p><span class="citation"
+data-cites="ApiImplicitParam">@ApiImplicitParam</span>：一个请求参数</p>
+<p><span class="citation"
+data-cites="ApiImplicitParams">@ApiImplicitParams</span>：多个请求参数的描述信息</p>
+<p><span class="citation"
+data-cites="ApiImplicitParam属性">@ApiImplicitParam属性</span>：</p>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 9%" />
+<col style="width: 71%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>属性</th>
+<th>取值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>paramType</td>
+<td></td>
+<td>查询参数类型</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>path</td>
+<td>以地址的形式提交数据</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>query</td>
+<td>直接跟参数完成自动映射赋值</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>body</td>
+<td>以流的形式提交 仅支持POST</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>header</td>
+<td>参数在request headers 里边提交</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>form</td>
+<td>以form表单的形式提交 仅支持POST</td>
+</tr>
+<tr class="odd">
+<td>dataType</td>
+<td></td>
+<td>参数的数据类型 只作为标志说明，并没有实际验证</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Long</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>String</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>name</td>
+<td></td>
+<td>接收参数名</td>
+</tr>
+<tr class="odd">
+<td>value</td>
+<td></td>
+<td>接收参数的意义描述</td>
+</tr>
+<tr class="even">
+<td>required</td>
+<td></td>
+<td>参数是否必填</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>true</td>
+<td>必填</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>false</td>
+<td>非必填</td>
+</tr>
+<tr class="odd">
+<td>defaultValue</td>
+<td></td>
+<td>默认值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="knife4j">knife4j</h3>
+<ol type="1">
+<li>简介</li>
+</ol>
+<p>knife4j是为Java
+MVC框架集成Swagger生成Api文档的增强解决方案,前身是swagger-bootstrap-ui,取名kni4j是希望它能像一把匕首一样小巧,轻量,并且功能强悍!</p>
+<p>gitee地址：https://gitee.com/xiaoym/knife4j</p>
+<p>官方文档：https://doc.xiaominfo.com/</p>
+<p>效果演示：http://knife4j.xiaominfo.com/doc.html</p>
+<ol start="2" type="1">
+<li>核心功能</li>
+</ol>
+<p>该UI增强包主要包括两大核心功能：<strong>文档说明 和
+在线调试</strong></p>
+<ul>
+<li>文档说明：根据Swagger的规范说明，详细列出接口文档的说明，包括接口地址、类型、请求示例、请求参数、响应示例、响应参数、响应码等信息，使用swagger-bootstrap-ui能根据该文档说明，对该接口的使用情况一目了然。</li>
+<li>在线调试：提供在线接口联调的强大功能，自动解析当前接口参数,同时包含表单验证，调用参数可返回接口响应内容、headers、Curl请求命令实例、响应时间、响应状态码等信息，帮助开发者在线调试，而不必通过其他测试工具测试接口是否正确,简介、强大。</li>
+<li>个性化配置：通过个性化ui配置项，可自定义UI的相关显示信息</li>
+<li>离线文档：根据标准规范，生成的在线markdown离线文档，开发者可以进行拷贝生成markdown接口文档，通过其他第三方markdown转换工具转换成html或pdf，这样也可以放弃swagger2markdown组件</li>
+<li>接口排序：自1.8.5后，ui支持了接口排序功能，例如一个注册功能主要包含了多个步骤,可以根据swagger-bootstrap-ui提供的接口排序规则实现接口的排序，step化接口操作，方便其他开发者进行接口对接</li>
+</ul>
+<ol start="3" type="1">
+<li>快速集成</li>
+</ol>
+<ul>
+<li>在heima-leadnews-common模块中的<code>pom.xml</code>文件中引入<code>knife4j</code>的依赖,如下：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.xiaoymin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>knife4j-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建Swagger配置文件</li>
+</ul>
+<p>在heima-leadnews-common模块中新建配置类</p>
+<p>新建Swagger的配置文件<code>SwaggerConfiguration.java</code>文件,创建springfox提供的Docket分组对象,代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.heima.common.knife4j;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="meta">@EnableKnife4j</span></span><br><span class="line"><span class="meta">@Import(BeanValidatorPluginsConfiguration.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Swagger2Configuration</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean(value = &quot;defaultApi2&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Docket <span class="title function_">defaultApi2</span><span class="params">()</span> &#123;</span><br><span class="line">        Docket docket=<span class="keyword">new</span> <span class="title class_">Docket</span>(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                <span class="comment">//分组名称</span></span><br><span class="line">                .groupName(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">                .select()</span><br><span class="line">                <span class="comment">//这里指定Controller扫描包路径</span></span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.heima&quot;</span>))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">        <span class="keyword">return</span> docket;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> ApiInfo <span class="title function_">apiInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ApiInfoBuilder</span>()</span><br><span class="line">                .title(<span class="string">&quot;工大头条API文档&quot;</span>)</span><br><span class="line">                .description(<span class="string">&quot;工大头条API文档&quot;</span>)</span><br><span class="line">                .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上有两个注解需要特别说明，如下表：</p>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>注解</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>@EnableSwagger2</code></td>
+<td>该注解是Springfox-swagger框架提供的使用Swagger注解，该注解必须加</td>
+</tr>
+<tr class="even">
+<td><code>@EnableKnife4j</code></td>
+<td>该注解是<code>knife4j</code>提供的增强注解,Ui提供了例如动态参数、参数过滤、接口排序等增强功能,如果你想使用这些增强功能就必须加该注解，否则可以不用加</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>添加配置</li>
+</ul>
+<p>在Spring.factories中新增配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\</span><br><span class="line">  com.heima.common.swagger.Swagger2Configuration, \</span><br><span class="line">  com.heima.common.swagger.SwaggerConfiguration</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>访问</p>
+<p>在浏览器输入地址：<code>http://host:port/doc.html</code></p></li>
+</ul>
+<h2 id="网关搭建">网关搭建</h2>
+<p>每个子系统都有网关：</p>
+<figure>
+<img src="工大头条项目学习/image-20230629222425655.png"
+alt="image-20230629222425655" />
+<figcaption aria-hidden="true">image-20230629222425655</figcaption>
+</figure>
+<p>具体实现在具体业务中。</p>
+<h2 id="前端搭建">前端搭建</h2>
+<h3 id="项目部署思路">项目部署思路</h3>
+<figure>
+<img src="工大头条项目学习/image-20210416095950485.png"
+alt="image-20210416095950485" />
+<figcaption aria-hidden="true">image-20210416095950485</figcaption>
+</figure>
+<p>通过nginx来进行配置，功能如下</p>
+<ul>
+<li>通过nginx的反向代理功能访问后台的网关资源</li>
+<li>通过nginx的静态服务器功能访问前端静态页面</li>
+</ul>
+<h3 id="nginx配置">nginx配置</h3>
+<p>在nginx安装的conf目录下新建一个文件夹<code>leadnews.conf</code>,在当前文件夹中新建<code>haut-leadnews-app.conf</code>文件</p>
+<p>haut-leadnews-app.conf配置如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">upstream  heima-app-gateway&#123;</span><br><span class="line">    server <span class="attr">localhost</span>:<span class="number">51601</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">	listen <span class="number">8801</span>;</span><br><span class="line">	location / &#123;</span><br><span class="line">		root <span class="attr">D</span>: /前端路径;</span><br><span class="line">		index index.<span class="property">html</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	location ~<span class="regexp">/app/</span>(.*) &#123;</span><br><span class="line">		proxy_pass <span class="attr">http</span>:<span class="comment">//haut-app-gateway/$1;</span></span><br><span class="line">		proxy_set_header <span class="variable constant_">HOST</span> $host;  # 不改变源请求头的值</span><br><span class="line">		proxy_pass_request_body on;  #开启获取请求体</span><br><span class="line">		proxy_pass_request_headers on;  #开启获取请求头</span><br><span class="line">		proxy_set_header X-<span class="title class_">Real</span>-<span class="variable constant_">IP</span> $remote_addr;   # 记录真实发出请求的客户端<span class="variable constant_">IP</span></span><br><span class="line">		proxy_set_header X-<span class="title class_">Forwarded</span>-<span class="title class_">For</span> $proxy_add_x_forwarded_for;  #记录代理信息</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>nginx.conf
+把里面注释的内容和静态资源配置相关删除，引入heima-leadnews-app.conf文件加载</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#user  nobody;</span><br><span class="line">worker_processes  <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.<span class="property">types</span>;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  <span class="number">65</span>;</span><br><span class="line">	# 引入自定义配置文件</span><br><span class="line">	include leadnews.<span class="property">conf</span><span class="comment">/*.conf;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>④ ：启动nginx</p>
+<p>​ 在nginx安装包中使用命令提示符打开，输入命令nginx启动项目</p>
+<p>​ 可查看进程，检查nginx是否启动</p>
+<p>​ 重新加载配置文件：<code>nginx -s reload</code></p>
+<p>⑤：打开前端项目进行测试 -- &gt; http://localhost:8801</p>
+<p>​ 用谷歌浏览器打开，调试移动端模式进行访问</p>
+<h1 id="app端业务实现">app端业务实现</h1>
+<h2 id="app用户登录">app用户登录</h2>
+<h3 id="需求分析">需求分析</h3>
+<h4 id="表结构分析">表结构分析</h4>
+<p>关于app端用户相关的内容较多，可以单独设置一个库leadnews_user</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>表名称</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ap_user</td>
+<td>APP用户信息表</td>
+</tr>
+<tr class="even">
+<td>ap_user_fan</td>
+<td>APP用户粉丝信息表</td>
+</tr>
+<tr class="odd">
+<td>ap_user_follow</td>
+<td>APP用户关注信息表</td>
+</tr>
+<tr class="even">
+<td>ap_user_realname</td>
+<td>APP实名认证信息表</td>
+</tr>
+</tbody>
+</table>
+<p>项目中的持久层使用的mybatis-plus，一般都使用mybais-plus逆向生成对应的实体类</p>
+<p>登录需要用到的是ap_user表，表结构如下：</p>
+<figure>
+<img src="工大头条项目学习/image-20210412142006558.png"
+alt="image-20210412142006558" />
+<figcaption aria-hidden="true">image-20210412142006558</figcaption>
+</figure>
+<h3 id="用户微服务搭建">用户微服务搭建</h3>
+<p>直接右击service大包创建新模块即可。</p>
+<p>注意：</p>
+<p>别忘记选择继承service模块：</p>
+<figure>
+<img src="工大头条项目学习/image-20230628203211956.png"
+alt="image-20230628203211956" />
+<figcaption aria-hidden="true">image-20230628203211956</figcaption>
+</figure>
+<p>创建包结构、启动类：</p>
+<figure>
+<img src="工大头条项目学习/image-20230628203451836.png"
+alt="image-20230628203451836" />
+<figcaption aria-hidden="true">image-20230628203451836</figcaption>
+</figure>
+<figure>
+<img src="工大头条项目学习/image-20230628203528442.png"
+alt="image-20230628203528442" />
+<figcaption aria-hidden="true">image-20230628203528442</figcaption>
+</figure>
+<p>整体结构：</p>
+<figure>
+<img src="工大头条项目学习/image-20230628204355630.png"
+alt="image-20230628204355630" />
+<figcaption aria-hidden="true">image-20230628204355630</figcaption>
+</figure>
+<h4 id="配置文件">配置文件</h4>
+<p>logback.xml:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--定义日志文件的存储地址,使用绝对路径--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;LOG_HOME&quot;</span> <span class="attr">value</span>=<span class="string">&quot;e:/logs&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Console 输出设置 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;CONSOLE&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">charset</span>&gt;</span>utf8<span class="tag">&lt;/<span class="name">charset</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 按照每天生成日志文件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;FILE&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--日志文件输出的文件名--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;LOG_HOME&#125;/leadnews.%d&#123;yyyy-MM-dd&#125;.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 异步输出 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;ASYNC&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.classic.AsyncAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">discardingThreshold</span>&gt;</span>0<span class="tag">&lt;/<span class="name">discardingThreshold</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 更改默认的队列的深度,该值会影响性能.默认值为256 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">queueSize</span>&gt;</span>512<span class="tag">&lt;/<span class="name">queueSize</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 添加附加的appender,最多只能添加一个 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;FILE&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">&quot;org.apache.ibatis.cache.decorators.LoggingCache&quot;</span> <span class="attr">level</span>=<span class="string">&quot;DEBUG&quot;</span> <span class="attr">additivity</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;CONSOLE&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">&quot;org.springframework.boot&quot;</span> <span class="attr">level</span>=<span class="string">&quot;debug&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">&quot;info&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;appender-ref ref=&quot;ASYNC&quot;/&gt;--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;FILE&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;CONSOLE&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>bootstrap.yml:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">51801</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">leadnews-user</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.130</span><span class="string">:8848</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.130</span><span class="string">:8848</span></span><br><span class="line">        <span class="attr">file-extension:</span> <span class="string">yml</span></span><br></pre></td></tr></table></figure>
+<p>像mysql、redis这些配置属性，去nacos注册中心配置。</p>
+<p>nacos注册中心配置：</p>
+<ol type="1">
+<li><p>新建配置</p></li>
+<li><p>写入配置内容</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.130</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">leadnews</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">6379</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/leadnews_user?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">20020716</span></span><br><span class="line"><span class="comment"># 设置Mapper接口所对应的XML文件位置，如果你在Mapper接口中有自定义方法，需要进行该配置</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath*:mapper/*.xml</span></span><br><span class="line">  <span class="comment"># 设置别名包扫描路径，通过该属性可以给包中的类注册别名</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.haut.model.user.pojos</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="登录业务实现">登录业务实现</h3>
+<h4 id="接口文档">接口文档</h4>
+<figure>
+<img src="工大头条项目学习/image-20230628215856412.png"
+alt="image-20230628215856412" />
+<figcaption aria-hidden="true">image-20230628215856412</figcaption>
+</figure>
+<h4 id="流程">流程</h4>
+<p>md5手动加盐加密，数据库是有这个字段的，注册用户的时候，就可以在后端生成salt。</p>
+<p>注册流程：</p>
+<figure>
+<img src="工大头条项目学习/image-20230628214417935.png"
+alt="image-20230628214417935" />
+<figcaption aria-hidden="true">image-20230628214417935</figcaption>
+</figure>
+<p>登录流程：</p>
+<p><img src="工大头条项目学习/image-20230628215711057.png" alt="image-20230628215711057" style="zoom: 80%;" /></p>
+<h4 id="实现">实现</h4>
+<p>controller接口：新加了版本号机制v1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api/v1/login&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ApUserLoginController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ApUserService apUserService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/login_auth&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseResult <span class="title function_">login</span><span class="params">(<span class="meta">@RequestBody</span> LoginDto user)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> apUserService.login(user);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>service实现类ApUserServiceImpl：</p>
+<ul>
+<li><p>用户选择游客登录：jwt返回0</p></li>
+<li><p>用户正常登录：jwt创建</p></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ResponseResult <span class="title function_">login</span><span class="params">(LoginDto dto)</span> &#123;</span><br><span class="line">    <span class="comment">//用户正常登录</span></span><br><span class="line">    <span class="keyword">if</span>(StringUtils.isNotBlank(dto.getPhone()) &amp;&amp; StringUtils.isNotBlank(dto.getPassword()))&#123;</span><br><span class="line">        LambdaQueryWrapper&lt;ApUser&gt; apUserLambdaQueryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        apUserLambdaQueryWrapper.eq(ApUser::getPhone, dto.getPhone());</span><br><span class="line">        <span class="type">ApUser</span> <span class="variable">user</span> <span class="operator">=</span> getOne(apUserLambdaQueryWrapper);</span><br><span class="line">        <span class="keyword">if</span>(user == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseResult.errorResult(AppHttpCodeEnum.DATA_NOT_EXIST, <span class="string">&quot;用户不存在&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">String</span> <span class="variable">inputPassword</span> <span class="operator">=</span> dto.getPassword();</span><br><span class="line">        <span class="type">String</span> <span class="variable">salt</span> <span class="operator">=</span> user.getSalt();</span><br><span class="line">        <span class="comment">//将输入的密码加密比对真实密码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">md5Pwd</span> <span class="operator">=</span> DigestUtils.md5DigestAsHex((inputPassword + salt).getBytes());</span><br><span class="line">        <span class="keyword">if</span>(!md5Pwd.equals(user.getPassword()))&#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseResult.errorResult(AppHttpCodeEnum.LOGIN_PASSWORD_ERROR);</span><br><span class="line">        &#125;</span><br><span class="line">        Map&lt;String , Object&gt; data = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//防止密码泄露</span></span><br><span class="line">        user.setPassword(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        user.setSalt(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        data.put(<span class="string">&quot;user&quot;</span>, user);</span><br><span class="line">        data.put(<span class="string">&quot;token&quot;</span>, AppJwtUtil.getToken(user.getId().longValue()));</span><br><span class="line">        <span class="keyword">return</span> ResponseResult.okResult(data);</span><br><span class="line">    &#125;<span class="comment">//游客登录</span></span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        Map&lt;String , Object&gt; data = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        data.put(<span class="string">&quot;token&quot;</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> ResponseResult.okResult(data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="测试">测试</h4>
+<ul>
+<li>service实现类上注解</li>
+<li>nacos配置记得发布</li>
+</ul>
+<h3 id="app端网关搭建">app端网关搭建</h3>
+<ol type="1">
+<li><p>在haut-leadnews-gateway导入以下依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-gateway<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在haut-leadnews-gateway下创建haut-leadnews-app-gateway微服务</p>
+<ol type="1">
+<li><p>启动类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span>  <span class="comment">//开启注册中心</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppGatewayApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(AppGatewayApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>配置类</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">51601</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">leadnews-app-gateway</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.130</span><span class="string">:8848</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.130</span><span class="string">:8848</span></span><br><span class="line">        <span class="attr">file-extension:</span> <span class="string">yml</span></span><br></pre></td></tr></table></figure></li>
+</ol></li>
+<li><p>nacos的配置中心创建dataid为leadnews-app-gateway的yml配置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">gateway:</span></span><br><span class="line">      <span class="attr">globalcors:</span></span><br><span class="line">        <span class="attr">add-to-simple-url-handler-mapping:</span> <span class="literal">true</span></span><br><span class="line">        <span class="attr">corsConfigurations:</span></span><br><span class="line">          <span class="string">&#x27;[/**]&#x27;</span><span class="string">:</span></span><br><span class="line">            <span class="attr">allowedHeaders:</span> <span class="string">&quot;*&quot;</span></span><br><span class="line">            <span class="attr">allowedOrigins:</span> <span class="string">&quot;*&quot;</span></span><br><span class="line">            <span class="attr">allowedMethods:</span></span><br><span class="line">              <span class="bullet">-</span> <span class="string">GET</span></span><br><span class="line">              <span class="bullet">-</span> <span class="string">POST</span></span><br><span class="line">              <span class="bullet">-</span> <span class="string">DELETE</span></span><br><span class="line">              <span class="bullet">-</span> <span class="string">PUT</span></span><br><span class="line">              <span class="bullet">-</span> <span class="string">OPTION</span></span><br><span class="line">      <span class="attr">routes:</span></span><br><span class="line">        <span class="comment"># 平台管理</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">user</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://leadnews-user</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/user/**</span></span><br><span class="line">          <span class="attr">filters:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">StripPrefix=</span> <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="全局过滤器实现">全局过滤器实现</h4>
+<p>流程图：</p>
+<p><img src="工大头条项目学习/image-20230629215255775.png" alt="image-20230629215255775" style="zoom:67%;" /></p>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AuthorizeFilter</span> <span class="keyword">implements</span> <span class="title class_">Ordered</span>, GlobalFilter &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Mono&lt;Void&gt; <span class="title function_">filter</span><span class="params">(ServerWebExchange exchange, GatewayFilterChain chain)</span> &#123;</span><br><span class="line">        <span class="type">ServerHttpRequest</span> <span class="variable">request</span> <span class="operator">=</span> exchange.getRequest();</span><br><span class="line">        <span class="type">ServerHttpResponse</span> <span class="variable">response</span> <span class="operator">=</span> exchange.getResponse();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(request.getURI().getPath().contains(<span class="string">&quot;login&quot;</span>))&#123;</span><br><span class="line">            <span class="comment">//放行</span></span><br><span class="line">            <span class="keyword">return</span> chain.filter(exchange);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        MultiValueMap&lt;String, String&gt; queryParams = request.getQueryParams();</span><br><span class="line">        <span class="keyword">if</span>(!queryParams.containsKey(<span class="string">&quot;token&quot;</span>))&#123;</span><br><span class="line">            response.setStatusCode(HttpStatus.UNAUTHORIZED);</span><br><span class="line">            <span class="keyword">return</span> response.setComplete();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> queryParams.getFirst(<span class="string">&quot;token&quot;</span>);</span><br><span class="line">        <span class="comment">//判断token是否有效</span></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="type">Claims</span> <span class="variable">claimsBody</span> <span class="operator">=</span> AppJwtUtil.getClaimsBody(token);</span><br><span class="line">            <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> AppJwtUtil.verifyToken(claimsBody);</span><br><span class="line">            <span class="keyword">if</span>(result == <span class="number">1</span> || result == <span class="number">2</span>)&#123;</span><br><span class="line">                response.setStatusCode(HttpStatus.UNAUTHORIZED);</span><br><span class="line">                <span class="keyword">return</span> response.setComplete();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            response.setStatusCode(HttpStatus.UNAUTHORIZED);</span><br><span class="line">            <span class="keyword">return</span> response.setComplete();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//都认证成功</span></span><br><span class="line">        <span class="keyword">return</span> chain.filter(exchange);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getOrder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="文章列表">文章列表</h2>
+<h3 id="需求分析-1">需求分析</h3>
+<p>文章布局：</p>
+<figure>
+<img src="工大头条项目学习/image-20210419151801252.png"
+alt="image-20210419151801252" />
+<figcaption aria-hidden="true">image-20210419151801252</figcaption>
+</figure>
+<h4 id="表结构分析-1">表结构分析</h4>
+<p>ap_article 文章基本信息表</p>
+<figure>
+<img src="工大头条项目学习/image-20210419151839634.png"
+alt="image-20210419151839634" />
+<figcaption aria-hidden="true">image-20210419151839634</figcaption>
+</figure>
+<p>ap_article_config 文章配置表</p>
+<figure>
+<img src="工大头条项目学习/image-20210419151854868.png"
+alt="image-20210419151854868" />
+<figcaption aria-hidden="true">image-20210419151854868</figcaption>
+</figure>
+<p>ap_article_content 文章内容表</p>
+<figure>
+<img src="工大头条项目学习/image-20210419151912063.png"
+alt="image-20210419151912063" />
+<figcaption aria-hidden="true">image-20210419151912063</figcaption>
+</figure>
+<p>三张表关系分析</p>
+<figure>
+<img src="工大头条项目学习/image-20210419151938103.png"
+alt="image-20210419151938103" />
+<figcaption aria-hidden="true">image-20210419151938103</figcaption>
+</figure>
+<h5 id="表拆分垂直分表">表拆分——垂直分表</h5>
+<p>将一个表的字段拆分到别的表中</p>
+<p>作用：</p>
+<ul>
+<li>解耦</li>
+<li>提高io效率，减少IO争抢。像文章详情和文章概述可以互不干扰</li>
+<li>提高高频数据的操作效率</li>
+</ul>
+<p>拆分规则：</p>
+<ol type="1">
+<li><p>把不常用的字段单独放在一张表</p></li>
+<li><p>把text,blob等大字段拆分出来单独放在一张表</p></li>
+<li><p>经常组合查询的字段单独放在一张表中</p></li>
+</ol>
+<h4 id="滚动文章页面">滚动文章页面</h4>
+<p><img src="工大头条项目学习/image-20210419152011931.png" alt="image-20210419152011931" style="zoom: 67%;" /></p>
+<p>1,在默认频道展示10条文章信息</p>
+<p>2,可以切换频道查看不同种类文章</p>
+<p>3,当用户下拉可以加载最新的文章（分页）本页文章列表中发布时间为最大的时间为依据</p>
+<p>4,当用户上拉可以加载更多的文章信息（按照发布时间）本页文章列表中发布时间最小的时间为依据</p>
+<p>5，首页，前端传递默认参数：</p>
+<ul>
+<li><p>maxBehotTime：0（毫秒）</p></li>
+<li><p>minBehotTime：20000000000000（毫秒）---&gt;2063年</p></li>
+</ul>
+<h5 id="接口">接口</h5>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 26%" />
+<col style="width: 32%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>加载首页</strong></th>
+<th><strong>加载更多</strong></th>
+<th><strong>加载最新</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>接口路径</td>
+<td>/api/v1/article/load</td>
+<td>/api/v1/article/loadmore</td>
+<td>/api/v1/article/loadnew</td>
+</tr>
+<tr class="even">
+<td>请求方式</td>
+<td>POST</td>
+<td>POST</td>
+<td>POST</td>
+</tr>
+<tr class="odd">
+<td>参数</td>
+<td>ArticleHomeDto</td>
+<td>ArticleHomeDto</td>
+<td>ArticleHomeDto</td>
+</tr>
+<tr class="even">
+<td>响应结果</td>
+<td>ResponseResult</td>
+<td>ResponseResult</td>
+<td>ResponseResult</td>
+</tr>
+</tbody>
+</table>
+<p>ArticleHomeDto</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArticleHomeDto</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 最大时间</span></span><br><span class="line">    Date maxBehotTime;</span><br><span class="line">    <span class="comment">// 最小时间</span></span><br><span class="line">    Date minBehotTime;</span><br><span class="line">    <span class="comment">// 分页size</span></span><br><span class="line">    Integer size;</span><br><span class="line">    <span class="comment">// 频道ID</span></span><br><span class="line">    String tag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="文章微服务搭建">文章微服务搭建</h3>
+<p>service服务模块下，添加文章服务，项目工程如下：</p>
+<p><img src="工大头条项目学习/image-20230630164346169.png" alt="image-20230630164346169" style="zoom:67%;" /></p>
+<p>nacos配置文件：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/leadnews_article?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">20020716</span></span><br><span class="line"><span class="comment"># 设置Mapper接口所对应的XML文件位置，如果你在Mapper接口中有自定义方法，需要进行该配置</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath*:mapper/*.xml</span></span><br><span class="line">  <span class="comment"># 设置别名包扫描路径，通过该属性可以给包中的类注册别名</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.haut.model.article.pojos</span></span><br></pre></td></tr></table></figure>
+<h3 id="首页文章加载实现">首页文章加载实现</h3>
+<h4 id="实现-1">实现</h4>
+<p>Controller:</p>
+<p>Mapper:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ApArticleMapper</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;ApArticle&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 加载文章列表</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> dto</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> type  1：加载更多  2：加载最新</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;ApArticle&gt; <span class="title function_">loadArticleList</span><span class="params">(<span class="meta">@Param(&quot;dto&quot;)</span> ArticleHomeDto dto,<span class="meta">@Param(&quot;type&quot;)</span> Short type)</span>;<span class="comment">//加@param注解，sql语句可以调用这个参数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span> <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.haut.article.mapper.ApArticleMapper&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;resultMap&quot;</span> <span class="attr">type</span>=<span class="string">&quot;com.haut.model.article.pojos.ApArticle&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;title&quot;</span> <span class="attr">property</span>=<span class="string">&quot;title&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;author_id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;authorId&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;author_name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;authorName&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;channel_id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;channelId&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;channel_name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;channelName&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;layout&quot;</span> <span class="attr">property</span>=<span class="string">&quot;layout&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;flag&quot;</span> <span class="attr">property</span>=<span class="string">&quot;flag&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;images&quot;</span> <span class="attr">property</span>=<span class="string">&quot;images&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;labels&quot;</span> <span class="attr">property</span>=<span class="string">&quot;labels&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;likes&quot;</span> <span class="attr">property</span>=<span class="string">&quot;likes&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;collection&quot;</span> <span class="attr">property</span>=<span class="string">&quot;collection&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;comment&quot;</span> <span class="attr">property</span>=<span class="string">&quot;comment&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;views&quot;</span> <span class="attr">property</span>=<span class="string">&quot;views&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;province_id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;provinceId&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;city_id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;cityId&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;county_id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;countyId&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;created_time&quot;</span> <span class="attr">property</span>=<span class="string">&quot;createdTime&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;publish_time&quot;</span> <span class="attr">property</span>=<span class="string">&quot;publishTime&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;sync_status&quot;</span> <span class="attr">property</span>=<span class="string">&quot;syncStatus&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;static_url&quot;</span> <span class="attr">property</span>=<span class="string">&quot;staticUrl&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;loadArticleList&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;resultMap&quot;</span>&gt;</span></span><br><span class="line">        select aa.*</span><br><span class="line">        from `ap_article` aa</span><br><span class="line">        where dto</span><br><span class="line">        LEFT JOIN ap_article_config aac ON aa.id = aac.article_id</span><br><span class="line">        <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">            and aac.is_delete != 1</span><br><span class="line">            and aac.is_down != 1</span><br><span class="line">            <span class="comment">&lt;!-- loadmore --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;type != null and type == 1&quot;</span>&gt;</span></span><br><span class="line">                and aa.publish_time &lt;![CDATA[&lt;]]&gt; #&#123;dto.minBehotTime&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;type != null and type == 2&quot;</span>&gt;</span></span><br><span class="line">                and aa.publish_time &lt;![CDATA[&gt;]]&gt; #&#123;dto.maxBehotTime&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;dto.tag != &#x27;__all__&#x27;&quot;</span>&gt;</span></span><br><span class="line">                and aa.channel_id = #&#123;dto.tag&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">        order by aa.publish_time desc</span><br><span class="line">        limit #&#123;dto.size&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>service</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据参数加载文章列表</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> type 1为加载更多  2为加载最新</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> dto</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ResponseResult <span class="title function_">load</span><span class="params">(Short type, ArticleHomeDto dto)</span> &#123;</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">size</span> <span class="operator">=</span> dto.getSize();</span><br><span class="line">    <span class="keyword">if</span>(size == <span class="literal">null</span>)&#123;</span><br><span class="line">        size = <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    size = Math.min(size, MAX_PAGE_SIZE);</span><br><span class="line">    dto.setSize(size);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//类型参数检验</span></span><br><span class="line">    <span class="keyword">if</span>(!type.equals(ArticleConstants.LOADTYPE_LOAD_MORE) &amp;&amp; !type.equals(ArticleConstants.LOADTYPE_LOAD_NEW))&#123;</span><br><span class="line">        type = ArticleConstants.LOADTYPE_LOAD_MORE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(StringUtils.isEmpty(dto.getTag()))&#123;</span><br><span class="line">        dto.setTag(ArticleConstants.DEFAULT_TAG);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//时间校验</span></span><br><span class="line">    <span class="keyword">if</span>(dto.getMaxBehotTime() == <span class="literal">null</span>) dto.setMaxBehotTime(<span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line">    <span class="keyword">if</span>(dto.getMinBehotTime() == <span class="literal">null</span>) dto.setMinBehotTime(<span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line"></span><br><span class="line">    List&lt;ApArticle&gt; apArticles = apArticleMapper.loadArticleList(dto, type);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ResponseResult.okResult(apArticles);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="测试-1">测试</h4>
+<h5 id="mybatis-plus的配置文件">mybatis-plus的配置文件</h5>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MybatisPlusConfig</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加分页插件</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">MybatisPlusInterceptor</span> <span class="variable">mybatisPlusInterceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        mybatisPlusInterceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>(DbType.MYSQL));</span><br><span class="line">        <span class="keyword">return</span> mybatisPlusInterceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不要继承任何东西！！！！！！！！！！！！</p>
+<h2 id="文章详情">文章详情</h2>
+<h3 id="需求分析-2">需求分析</h3>
+<figure>
+<img src="工大头条项目学习/image-20210602180753705.png"
+alt="image-20210602180753705" />
+<figcaption aria-hidden="true">image-20210602180753705</figcaption>
+</figure>
+<p>实现方案：</p>
+<ul>
+<li><p>根据文章id查表，然后返回数据给前端渲染</p></li>
+<li><p>方案二：</p>
+<figure>
+<img src="工大头条项目学习/image-20230703164409449.png"
+alt="image-20230703164409449" />
+<figcaption aria-hidden="true">image-20230703164409449</figcaption>
+</figure></li>
+</ul>
+<p>对于本业务，方案二更好。原因是因为，文章可能有成千上万的字，从数据库获取，消耗的IO性能比较大，而我们后端提前生成好文章详情页的html文件，这样用户请求的时候直接就是访问服务器上的html页面，比IO方式访问数据库效率高，切响应性能好。</p>
+<h3 id="实现-2">实现</h3>
+<ol type="1">
+<li><p>导入freemaker和minIO包，微服务配置写入以下：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">minio:</span></span><br><span class="line">  <span class="attr">accessKey:</span> <span class="string">minio</span></span><br><span class="line">  <span class="attr">secretKey:</span> <span class="string">minio123</span></span><br><span class="line">  <span class="attr">bucket:</span> <span class="string">leadnews</span></span><br><span class="line">  <span class="attr">endpoint:</span> <span class="string">http://192.168.200.130:9000</span></span><br><span class="line">  <span class="attr">readPath:</span> <span class="string">http://192.168.200.130:9000</span></span><br></pre></td></tr></table></figure></li>
+<li><p>书写模板文件 article.ftl，放到resources/templates目录下</p></li>
+<li><p>将js、cs文件上传到minIO</p></li>
+<li><p>在artile微服务中新增测试类（后期新增文章的时候创建详情静态页，目前暂时手动生成）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest(classes = ApArticleApplication.class)</span></span><br><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArticleFreemarkerTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Configuration configuration;<span class="comment">//freemaker模板</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> FileStorageService fileStorageService;<span class="comment">//文件上传minIO服务</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ApArticleMapper apArticleMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ApArticleContentMapper apArticleContentMapper;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createStaticUrlTest</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//1.获取文章内容</span></span><br><span class="line">        <span class="type">ApArticleContent</span> <span class="variable">apArticleContent</span> <span class="operator">=</span> apArticleContentMapper.selectOne(Wrappers.&lt;ApArticleContent&gt;lambdaQuery().eq(ApArticleContent::getArticleId, <span class="number">1302862387124125698L</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(apArticleContent != <span class="literal">null</span> &amp;&amp; StringUtils.isNotBlank(apArticleContent.getContent()))&#123;</span><br><span class="line">            <span class="comment">//2. 通过freemaker 生成html模板</span></span><br><span class="line">            <span class="comment">//获取模板</span></span><br><span class="line">            <span class="type">Template</span> <span class="variable">template</span> <span class="operator">=</span> configuration.getTemplate(<span class="string">&quot;article.ftl&quot;</span>);<span class="comment">//只写文件名即可</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//导入对象数据</span></span><br><span class="line">            HashMap&lt;String, Object&gt; params = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">            params.put(<span class="string">&quot;content&quot;</span>, JSONObject.parseArray(apArticleContent.getContent()));</span><br><span class="line">            <span class="type">StringWriter</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringWriter</span>();</span><br><span class="line">            template.process(params, writer);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//3. 存入minIO</span></span><br><span class="line">            <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(writer.toString().getBytes());</span><br><span class="line">            <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> fileStorageService.uploadHtmlFile(<span class="string">&quot;&quot;</span>, apArticleContent.getArticleId() + <span class="string">&quot;.html&quot;</span>, is);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//4. 生成url存入数据库</span></span><br><span class="line">            <span class="type">ApArticle</span> <span class="variable">apArticle</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ApArticle</span>();</span><br><span class="line">            apArticle.setStaticUrl(path);</span><br><span class="line">            apArticle.setId(apArticleContent.getArticleId());</span><br><span class="line">            apArticleMapper.updateById(apArticle);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="测试-2">测试</h3>
+<p>只有2023年也就是目前传上去的文章，会有显示，其它的文章都因为日期不一致，无法显示</p>
+<h1 id="自媒体平台业务">自媒体平台业务</h1>
+<h2 id="自媒体前后端搭建">自媒体前后端搭建</h2>
+<h3 id="后台">后台</h3>
+<p><img src="工大头条项目学习/image-20210426110728659.png" alt="image-20210426110728659" style="zoom:67%;" /></p>
+<ul>
+<li>服务新增模块，别忘记nacos编写</li>
+<li>网关新增模块，nacos别忘记</li>
+</ul>
+<h3 id="前台">前台</h3>
+<ol type="1">
+<li><p>项目打包解压</p></li>
+<li><p>nginx新建配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">upstream  heima-wemedia-gateway&#123;</span><br><span class="line">    server localhost:51602;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">	listen 8802;</span><br><span class="line">	location / &#123;</span><br><span class="line">		root F:/Learn_project/haut-leadnews-app-web/wemedia-web/;</span><br><span class="line">		index index.html;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	location ~/wemedia/MEDIA/(.*) &#123;</span><br><span class="line">		proxy_pass http://heima-wemedia-gateway/$1;</span><br><span class="line">		proxy_set_header HOST $host;  # 不改变源请求头的值</span><br><span class="line">		proxy_pass_request_body on;  #开启获取请求体</span><br><span class="line">		proxy_pass_request_headers on;  #开启获取请求头</span><br><span class="line">		proxy_set_header X-Real-IP $remote_addr;   # 记录真实发出请求的客户端IP</span><br><span class="line">		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  #记录代理信息</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>启动nginx和自媒体对应的网关、服务。</p></li>
+</ol>
+<h2 id="自媒体素材管理">自媒体素材管理</h2>
+<h3 id="图片上传">图片上传</h3>
+<h4 id="需求分析-3">需求分析</h4>
+<p><img src="工大头条项目学习/image-20210426144327206.png" alt="image-20210426144327206" style="zoom:50%;" /></p>
+<p>图片上传的页面，首先是展示素材信息，可以点击图片上传，弹窗后可以上传图片</p>
+<h5 id="表结构">表结构</h5>
+<p>媒体图文素材信息表wm_material</p>
+<figure>
+<img src="工大头条项目学习/image-20210426144500239.png"
+alt="image-20210426144500239" />
+<figcaption aria-hidden="true">image-20210426144500239</figcaption>
+</figure>
+<p>对应实体类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自媒体图文素材信息表</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> itheima</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@TableName(&quot;wm_material&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WmMaterial</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 主键</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@TableId(value = &quot;id&quot;, type = IdType.AUTO)</span></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自媒体用户ID</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@TableField(&quot;user_id&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Integer userId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 图片地址</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@TableField(&quot;url&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 素材类型</span></span><br><span class="line"><span class="comment">            0 图片</span></span><br><span class="line"><span class="comment">            1 视频</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@TableField(&quot;type&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Short type;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否收藏</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@TableField(&quot;is_collection&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Short isCollection;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@TableField(&quot;created_time&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Date createdTime;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="实现-3">实现</h4>
+<p>思路：</p>
+<figure>
+<img src="工大头条项目学习/image-20230705164134106.png"
+alt="image-20230705164134106" />
+<figcaption aria-hidden="true">image-20230705164134106</figcaption>
+</figure>
+<h5 id="拦截器">拦截器</h5>
+<ol type="1">
+<li><p>token解析存入header</p>
+<p>AuthorizeFilter</p>
+<figure>
+<img src="工大头条项目学习/image-20230705170512746.png"
+alt="image-20230705170512746" />
+<figcaption aria-hidden="true">image-20230705170512746</figcaption>
+</figure></li>
+<li><p>书写拦截器</p>
+<p>ThreadLocal工具类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WmThreadLocalUtil</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> ThreadLocal&lt;WmUser&gt; WM_USER_THREAD_LOCAL = <span class="keyword">new</span> <span class="title class_">ThreadLocal</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">getUser</span><span class="params">()</span>&#123;</span><br><span class="line">        WM_USER_THREAD_LOCAL.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">setUser</span><span class="params">(WmUser wmUser)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(wmUser != <span class="literal">null</span>)&#123;</span><br><span class="line">            WM_USER_THREAD_LOCAL.set(wmUser);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span>&#123;</span><br><span class="line">        WM_USER_THREAD_LOCAL.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>WmTokenInterceptor</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WmTokenInterceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">userId</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;userId&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span>(userId != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="type">WmUser</span> <span class="variable">wmUser</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">WmUser</span>();</span><br><span class="line">            wmUser.setId(Integer.valueOf(userId));</span><br><span class="line">            WmThreadLocalUtil.WM_USER_THREAD_LOCAL.set(wmUser);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        WmThreadLocalUtil.WM_USER_THREAD_LOCAL.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>WebMVCConfig</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebMVCConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        registry.addInterceptor(<span class="keyword">new</span> <span class="title class_">WmTokenInterceptor</span>())</span><br><span class="line">                .addPathPatterns(<span class="string">&quot;/**&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="业务实现">业务实现</h5>
+<p>接口：</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>接口路径</td>
+<td>/api/v1/material/upload_picture</td>
+</tr>
+<tr class="even">
+<td>请求方式</td>
+<td>POST</td>
+</tr>
+<tr class="odd">
+<td>参数</td>
+<td>MultipartFile</td>
+</tr>
+<tr class="even">
+<td>响应结果</td>
+<td>ResponseResult</td>
+</tr>
+</tbody>
+</table>
+<p>MultipartFile ：Springmvc指定的文件接收类型</p>
+<ol type="1">
+<li><p>需要操作minIO，先导入包</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.heima<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>heima-file-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>业务代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WmMaterialServiceImpl</span> <span class="keyword">extends</span> <span class="title class_">ServiceImpl</span>&lt;WmMaterialMapper, WmMaterial&gt; <span class="keyword">implements</span> <span class="title class_">WmMaterialService</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> FileStorageService fileStorageService;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 图片上传</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> multipartFile</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> ResponseResult <span class="title function_">uploadPicture</span><span class="params">(MultipartFile multipartFile)</span> &#123;</span><br><span class="line">        <span class="comment">//1. 参数校验</span></span><br><span class="line">        <span class="keyword">if</span>(multipartFile == <span class="literal">null</span> || multipartFile.getSize() == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2. 上传minIO</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">filename</span> <span class="operator">=</span> UUID.randomUUID().toString().replace(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">originalFilename</span> <span class="operator">=</span> multipartFile.getOriginalFilename();</span><br><span class="line">        <span class="type">String</span> <span class="variable">suffix</span> <span class="operator">=</span> originalFilename.substring(originalFilename.lastIndexOf(<span class="string">&quot;.&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            url = fileStorageService.uploadHtmlFile(<span class="string">&quot;&quot;</span>, filename + suffix, multipartFile.getInputStream());</span><br><span class="line">            log.info(<span class="string">&quot;上传图片到MinIO中，fileId:&#123;&#125;&quot;</span>,url);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            log.error(<span class="string">&quot;WmMaterialServiceImpl-上传文件失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3. 上传数据库</span></span><br><span class="line">        <span class="type">WmMaterial</span> <span class="variable">wmMaterial</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">WmMaterial</span>();</span><br><span class="line">        wmMaterial.setUserId(WmThreadLocalUtil.getUser().getId());</span><br><span class="line">        wmMaterial.setUrl(url);</span><br><span class="line">        wmMaterial.setType((<span class="type">short</span>)<span class="number">0</span>);</span><br><span class="line">        wmMaterial.setIsCollection( (<span class="type">short</span>)<span class="number">0</span>);</span><br><span class="line">        wmMaterial.setCreatedTime(<span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line">        save(wmMaterial);</span><br><span class="line">        <span class="comment">//返回对象</span></span><br><span class="line">        <span class="keyword">return</span> ResponseResult.okResult(wmMaterial);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="素材列表查询">素材列表查询</h3>
+<h4 id="需求分析-4">需求分析</h4>
+<p>用户进入自己的素材主页，可以浏览自己拥有的全部素材，且可以看到自己的收藏列表。</p>
+<h5 id="需求解析">需求解析</h5>
+<ol type="1">
+<li>根据用户id查</li>
+</ol>
+<h4 id="接口-1">接口</h4>
+<p>接口：</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>接口路径</td>
+<td>/api/v1/material/list</td>
+</tr>
+<tr class="even">
+<td>请求方式</td>
+<td>POST</td>
+</tr>
+<tr class="odd">
+<td>参数</td>
+<td>WmMaterialDto</td>
+</tr>
+<tr class="even">
+<td>响应结果</td>
+<td>ResponseResult</td>
+</tr>
+</tbody>
+</table>
+<p>用到的类：</p>
+<p>WmMaterialDto ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WmMaterialDto</span> <span class="keyword">extends</span> <span class="title class_">PageRequestDto</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 1 收藏</span></span><br><span class="line"><span class="comment">     * 0 未收藏</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Short isCollection;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回值：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;host&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span><span class="number">200</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;errorMessage&quot;</span><span class="punctuation">:</span><span class="string">&quot;操作成功&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span><span class="number">52</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;userId&quot;</span><span class="punctuation">:</span><span class="number">1102</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span><span class="string">&quot;http://192.168.200.130:9000/leadnews/2021/04/26/ec893175f18c4261af14df14b83cb25f.jpg&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;isCollection&quot;</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;createdTime&quot;</span><span class="punctuation">:</span><span class="string">&quot;2021-01-20T16:49:48.000+0000&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    ....</span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;currentPage&quot;</span><span class="punctuation">:</span><span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;size&quot;</span><span class="punctuation">:</span><span class="number">20</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;total&quot;</span><span class="punctuation">:</span><span class="number">0</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="实现-4">实现</h4>
+<p>WmMaterialServiceImpl代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 素材列表查询</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> wmMaterialDto</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ResponseResult <span class="title function_">findList</span><span class="params">(WmMaterialDto wmMaterialDto)</span> &#123;</span><br><span class="line">    <span class="comment">//校验参数</span></span><br><span class="line">    wmMaterialDto.checkParam();</span><br><span class="line">        <span class="comment">//是否收藏</span></span><br><span class="line">    LambdaQueryWrapper&lt;WmMaterial&gt; lambdaQueryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span>(wmMaterialDto.getIsCollection() != <span class="literal">null</span> &amp;&amp; wmMaterialDto.getIsCollection() == <span class="number">1</span>)&#123;</span><br><span class="line">        lambdaQueryWrapper.eq(WmMaterial::getIsCollection, wmMaterialDto.getIsCollection());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//查询</span></span><br><span class="line">    lambdaQueryWrapper.eq(WmMaterial::getUserId, WmThreadLocalUtil.getUser().getId());</span><br><span class="line">    <span class="type">Page</span> <span class="variable">page</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Page</span>(wmMaterialDto.getPage(), wmMaterialDto.getSize());</span><br><span class="line">    <span class="type">Page</span> <span class="variable">dataPage</span> <span class="operator">=</span> page(page, lambdaQueryWrapper);</span><br><span class="line">    <span class="comment">//封装结果返回</span></span><br><span class="line">    <span class="type">ResponseResult</span> <span class="variable">responseResult</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PageResponseResult</span>(</span><br><span class="line">            (<span class="type">int</span>)dataPage.getCurrent()</span><br><span class="line">            ,(<span class="type">int</span>)dataPage.getSize()</span><br><span class="line">            ,(<span class="type">int</span>) dataPage.getTotal());</span><br><span class="line"></span><br><span class="line">    responseResult.setData(dataPage.getRecords());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> responseResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="测试-3">测试</h4>
+<p>更新代码的时候注意网关也要重启，不然网关路由不到新接口</p>
+<h2 id="自媒体文章管理">自媒体文章管理</h2>
+<h3 id="查询所有频道">查询所有频道</h3>
+<h4 id="需求分析-5">需求分析</h4>
+<p><img src="工大头条项目学习/image-20210426205631708.png" alt="image-20210426205631708" style="zoom:67%;" /></p>
+<h5 id="表结构-1">表结构</h5>
+<figure>
+<img src="工大头条项目学习/image-20230730200525456.png"
+alt="image-20230730200525456" />
+<figcaption aria-hidden="true">image-20230730200525456</figcaption>
+</figure>
+<h4 id="接口-2">接口</h4>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>接口路径</td>
+<td>/api/v1/channel/channels</td>
+</tr>
+<tr class="even">
+<td>请求方式</td>
+<td>POST</td>
+</tr>
+<tr class="odd">
+<td>参数</td>
+<td>无</td>
+</tr>
+<tr class="even">
+<td>响应结果</td>
+<td>ResponseResult</td>
+</tr>
+</tbody>
+</table>
+<p>ResponseResult ：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;host&quot;</span><span class="punctuation">:</span> <span class="string">&quot;null&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;errorMessage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;操作成功&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">4</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;java&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;java&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;status&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;ord&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;createdTime&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2019-08-16T10:55:41.000+0000&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    Object <span class="punctuation">&#123;</span>  ... <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    Object <span class="punctuation">&#123;</span>  ... <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="实现-5">实现</h4>
+<p>WmChannelServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ResponseResult <span class="title function_">listAll</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ResponseResult.okResult(list());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="文章列表查询">文章列表查询</h3>
+<h4 id="需求分析-6">需求分析</h4>
+<p>简单的查询文章。</p>
+<figure>
+<img src="工大头条项目学习/image-20210426210402672.png"
+alt="image-20210426210402672" />
+<figcaption aria-hidden="true">image-20210426210402672</figcaption>
+</figure>
+<p>这里DTO要更新，因为前端可能传过来很多字段。</p>
+<h5 id="表结构-2">表结构</h5>
+<figure>
+<img src="工大头条项目学习/image-20230730203250179.png"
+alt="image-20230730203250179" />
+<figcaption aria-hidden="true">image-20230730203250179</figcaption>
+</figure>
+<h4 id="接口-3">接口</h4>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>接口路径</td>
+<td>/api/v1/news/list</td>
+</tr>
+<tr class="even">
+<td>请求方式</td>
+<td>POST</td>
+</tr>
+<tr class="odd">
+<td>参数</td>
+<td>WmNewsPageReqDto</td>
+</tr>
+<tr class="even">
+<td>响应结果</td>
+<td>ResponseResult</td>
+</tr>
+</tbody>
+</table>
+<p>ResponseResult :</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;host&quot;</span><span class="punctuation">:</span> <span class="string">&quot;null&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;errorMessage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;操作成功&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    Object <span class="punctuation">&#123;</span> ... <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    Object <span class="punctuation">&#123;</span> ... <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    Object <span class="punctuation">&#123;</span> ... <span class="punctuation">&#125;</span></span><br><span class="line">    </span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;currentPage&quot;</span><span class="punctuation">:</span><span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;size&quot;</span><span class="punctuation">:</span><span class="number">10</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;total&quot;</span><span class="punctuation">:</span><span class="number">21</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="实现-6">实现</h4>
+<p>WmNewsPageReqDto：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WmNewsPageReqDto</span> <span class="keyword">extends</span> <span class="title class_">PageRequestDto</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 状态</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Short status;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 开始时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Date beginPubDate;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 结束时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Date endPubDate;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 所属频道ID</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Integer channelId;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 关键字</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String keyword;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io">Vlong_shen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io/2023/06/28/%E5%B7%A5%E5%A4%A7%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/">https://vlsmhd.github.io/2023/06/28/%E5%B7%A5%E5%A4%A7%E5%A4%B4%E6%9D%A1%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://vlsmhd.github.io" target="_blank">VLS_Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/07/02/leetcode%E7%AC%AC352%E5%9C%BA%E5%91%A8%E8%B5%9B/" title="leetcode第352场周赛"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">leetcode第352场周赛</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/26/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" title="面试总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">面试总结</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Vlong_shen</div><div class="author-info__description">一名热爱编程的程序员</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">92</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">39</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VLSmhd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/VLSmhd" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/-" target="_blank" title="联系我QQ：1067853293"><i class="fab fa-qq"></i></a><a class="social-icon" href="/-" target="_blank" title="微信：18956757208"><i class="fa fa-wechat"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">项目介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1"><span class="toc-number">1.1.</span> <span class="toc-text">业务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="toc-number">1.2.</span> <span class="toc-text">技术栈</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#nacos%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">2.1.</span> <span class="toc-text">nacos环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E6%90%AD%E5%BB%BA"><span class="toc-number">2.2.</span> <span class="toc-text">工程搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%BB%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.1.</span> <span class="toc-text">项目主体结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%B7%A5%E5%85%B7%E5%8C%85"><span class="toc-number">2.3.</span> <span class="toc-text">项目工具包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="toc-number">2.4.</span> <span class="toc-text">接口测试工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#postman"><span class="toc-number">2.4.1.</span> <span class="toc-text">postman</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#swaggerui"><span class="toc-number">2.4.2.</span> <span class="toc-text">swaggerUI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#knife4j"><span class="toc-number">2.4.3.</span> <span class="toc-text">knife4j</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E5%85%B3%E6%90%AD%E5%BB%BA"><span class="toc-number">2.5.</span> <span class="toc-text">网关搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E6%90%AD%E5%BB%BA"><span class="toc-number">2.6.</span> <span class="toc-text">前端搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E6%80%9D%E8%B7%AF"><span class="toc-number">2.6.1.</span> <span class="toc-text">项目部署思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx%E9%85%8D%E7%BD%AE"><span class="toc-number">2.6.2.</span> <span class="toc-text">nginx配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#app%E7%AB%AF%E4%B8%9A%E5%8A%A1%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">app端业务实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#app%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95"><span class="toc-number">3.1.</span> <span class="toc-text">app用户登录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-number">3.1.1.</span> <span class="toc-text">需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">表结构分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA"><span class="toc-number">3.1.2.</span> <span class="toc-text">用户微服务搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.2.1.</span> <span class="toc-text">配置文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E4%B8%9A%E5%8A%A1%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.1.3.</span> <span class="toc-text">登录业务实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3"><span class="toc-number">3.1.3.1.</span> <span class="toc-text">接口文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-number">3.1.3.2.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.1.3.3.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">3.1.3.4.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app%E7%AB%AF%E7%BD%91%E5%85%B3%E6%90%AD%E5%BB%BA"><span class="toc-number">3.1.4.</span> <span class="toc-text">app端网关搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E8%BF%87%E6%BB%A4%E5%99%A8%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.1.4.1.</span> <span class="toc-text">全局过滤器实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%88%97%E8%A1%A8"><span class="toc-number">3.2.</span> <span class="toc-text">文章列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90-1"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">表结构分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A8%E6%8B%86%E5%88%86%E5%9E%82%E7%9B%B4%E5%88%86%E8%A1%A8"><span class="toc-number">3.2.1.1.1.</span> <span class="toc-text">表拆分——垂直分表</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%9A%E5%8A%A8%E6%96%87%E7%AB%A0%E9%A1%B5%E9%9D%A2"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">滚动文章页面</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.2.1.2.1.</span> <span class="toc-text">接口</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA"><span class="toc-number">3.2.2.</span> <span class="toc-text">文章微服务搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E9%A1%B5%E6%96%87%E7%AB%A0%E5%8A%A0%E8%BD%BD%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.2.3.</span> <span class="toc-text">首页文章加载实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-1"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">测试</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#mybatis-plus%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.2.3.2.1.</span> <span class="toc-text">mybatis-plus的配置文件</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E8%AF%A6%E6%83%85"><span class="toc-number">3.3.</span> <span class="toc-text">文章详情</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90-2"><span class="toc-number">3.3.1.</span> <span class="toc-text">需求分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-2"><span class="toc-number">3.3.2.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-2"><span class="toc-number">3.3.3.</span> <span class="toc-text">测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%AA%92%E4%BD%93%E5%B9%B3%E5%8F%B0%E4%B8%9A%E5%8A%A1"><span class="toc-number">4.</span> <span class="toc-text">自媒体平台业务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AA%92%E4%BD%93%E5%89%8D%E5%90%8E%E7%AB%AF%E6%90%AD%E5%BB%BA"><span class="toc-number">4.1.</span> <span class="toc-text">自媒体前后端搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E5%8F%B0"><span class="toc-number">4.1.1.</span> <span class="toc-text">后台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%8F%B0"><span class="toc-number">4.1.2.</span> <span class="toc-text">前台</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AA%92%E4%BD%93%E7%B4%A0%E6%9D%90%E7%AE%A1%E7%90%86"><span class="toc-number">4.2.</span> <span class="toc-text">自媒体素材管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0"><span class="toc-number">4.2.1.</span> <span class="toc-text">图片上传</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90-3"><span class="toc-number">4.2.1.1.</span> <span class="toc-text">需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-number">4.2.1.1.1.</span> <span class="toc-text">表结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-3"><span class="toc-number">4.2.1.2.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">4.2.1.2.1.</span> <span class="toc-text">拦截器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.2.1.2.2.</span> <span class="toc-text">业务实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A0%E6%9D%90%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">4.2.2.</span> <span class="toc-text">素材列表查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90-4"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E8%A7%A3%E6%9E%90"><span class="toc-number">4.2.2.1.1.</span> <span class="toc-text">需求解析</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3-1"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-4"><span class="toc-number">4.2.2.3.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-3"><span class="toc-number">4.2.2.4.</span> <span class="toc-text">测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AA%92%E4%BD%93%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86"><span class="toc-number">4.3.</span> <span class="toc-text">自媒体文章管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E9%A2%91%E9%81%93"><span class="toc-number">4.3.1.</span> <span class="toc-text">查询所有频道</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90-5"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84-1"><span class="toc-number">4.3.1.1.1.</span> <span class="toc-text">表结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3-2"><span class="toc-number">4.3.1.2.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-5"><span class="toc-number">4.3.1.3.</span> <span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">4.3.2.</span> <span class="toc-text">文章列表查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90-6"><span class="toc-number">4.3.2.1.</span> <span class="toc-text">需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84-2"><span class="toc-number">4.3.2.1.1.</span> <span class="toc-text">表结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3-3"><span class="toc-number">4.3.2.2.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-6"><span class="toc-number">4.3.2.3.</span> <span class="toc-text">实现</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/06/leetcode%E5%93%88%E5%B8%8C%E8%A1%A8%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="leetcode哈希表题目专项训练">leetcode哈希表题目专项训练</a><time datetime="2023-07-06T02:37:18.266Z" title="发表于 2023-07-06 10:37:18">2023-07-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/05/Nginx/" title="Nginx">Nginx</a><time datetime="2023-07-05T06:54:12.757Z" title="发表于 2023-07-05 14:54:12">2023-07-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/03/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1MinIO/" title="对象存储服务MinIO">对象存储服务MinIO</a><time datetime="2023-07-03T08:23:53.203Z" title="发表于 2023-07-03 16:23:53">2023-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/02/freemaker%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/" title="freemaker模板引擎">freemaker模板引擎</a><time datetime="2023-07-02T09:41:02.413Z" title="发表于 2023-07-02 17:41:02">2023-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/02/leetcode%E7%AC%AC352%E5%9C%BA%E5%91%A8%E8%B5%9B/" title="leetcode第352场周赛">leetcode第352场周赛</a><time datetime="2023-07-02T03:53:59.774Z" title="发表于 2023-07-02 11:53:59">2023-07-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Vlong_shen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

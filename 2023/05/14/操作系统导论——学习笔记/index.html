@@ -1,0 +1,1184 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>操作系统导论——学习笔记 | VLS_Blog</title><meta name="author" content="Vlong_shen"><meta name="copyright" content="Vlong_shen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="操作系统导论（operating systems: three easy pieces）——学习笔记 操作系统简介 巴拉巴拉，讲述操作系统是什么东西，实际上就是接口，向下连接硬件，向上兼容用户。 虚拟化 并发 持久化 三方面举例子叙述。 操作系统发展历程： unix ... 概论部分，当小说看，没记住多少。 虚拟化——CPU虚拟化 虚拟化对话这一章节，作者用很形象的比喻来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统导论——学习笔记">
+<meta property="og:url" content="https://vlsmhd.github.io/2023/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="VLS_Blog">
+<meta property="og:description" content="操作系统导论（operating systems: three easy pieces）——学习笔记 操作系统简介 巴拉巴拉，讲述操作系统是什么东西，实际上就是接口，向下连接硬件，向上兼容用户。 虚拟化 并发 持久化 三方面举例子叙述。 操作系统发展历程： unix ... 概论部分，当小说看，没记住多少。 虚拟化——CPU虚拟化 虚拟化对话这一章节，作者用很形象的比喻来">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://vlsmhd.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2023-05-14T01:01:36.442Z">
+<meta property="article:modified_time" content="2023-07-28T12:56:14.019Z">
+<meta property="article:author" content="Vlong_shen">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vlsmhd.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://vlsmhd.github.io/2023/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '操作系统导论——学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-28 20:56:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="VLS_Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">92</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">39</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="VLS_Blog"><img class="site-icon" src="https://vlsmhd.github.io/img/avatar.jpg"/><span class="site-name">VLS_Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">操作系统导论——学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-14T01:01:36.442Z" title="发表于 2023-05-14 09:01:36">2023-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-28T12:56:14.019Z" title="更新于 2023-07-28 20:56:14">2023-07-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="操作系统导论——学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="操作系统导论operating-systems-three-easy-pieces学习笔记">操作系统导论（operating
+systems: three easy pieces）——学习笔记</h1>
+<h2 id="操作系统简介">操作系统简介</h2>
+<p>巴拉巴拉，讲述操作系统是什么东西，实际上就是接口，向下连接硬件，向上兼容用户。</p>
+<p>虚拟化</p>
+<p>并发</p>
+<p>持久化</p>
+<p>三方面举例子叙述。</p>
+<p>操作系统发展历程：</p>
+<p>unix</p>
+<p>...</p>
+<p>概论部分，当小说看，没记住多少。</p>
+<h2 id="虚拟化cpu虚拟化">虚拟化——CPU虚拟化</h2>
+<p>虚拟化对话这一章节，作者用很形象的比喻来描述操作系统的虚拟化作用：</p>
+<p>把操作系统想象成一个桃子，所有的进程表示为想吃桃子的人。我们必须通过某种技术，让每个人都产生错觉，以为自己拥有这个桃子（虚拟桃子）。但其实桃子也就只有一个。</p>
+<p>具体一点，假设对于单CPU主机，虚拟化的功能就是，让这个CPU虚拟成多个虚拟化CPU去供每个进程运行。所以，每个应用程序（进程）都以为自己掌握了CPU的使用权，其实不然，它们只是拥有了操作系统的一小部分。</p>
+<h3 id="抽象进程">抽象：进程</h3>
+<h4 id="进程概念">进程概念：</h4>
+<p><strong>进程的定义：</strong>运行中的程序。</p>
+<p>在只有一个CPU的情况下，如何同时运行多个程序呢？</p>
+<p>操作系统需要提供一个假象：有无数CPU供使用（虚拟CPU）</p>
+<p>操作系统通过虚拟化(Vitrtualizing)CPU来提供这种假象。</p>
+<h4 id="时分共享空分共享">时分共享、空分共享：</h4>
+<p><strong>时分共享CPU技术：</strong></p>
+<p>通过让一个进程只运行一个时间片，然后切换成其它进程，操作系统提供了多个虚拟CPU的假象。
+（通过允许资源由一个实</p>
+<p>体使用一小段时间，然后由另一个实体使用一小段时间）</p>
+<ul>
+<li>作用：允许运行多个并发进程。</li>
+<li>缺陷：性能损失，每个进程的运行速度会变慢。</li>
+</ul>
+<p><strong>空分共享CPU技术：</strong></p>
+<p>资源在空间上被划分给希望使用它的人。</p>
+<p>例如：磁盘空间</p>
+<h4 id="实现虚拟化">实现虚拟化：</h4>
+<p>低级<strong>机制</strong>：低级方法或者协议，实现了功能。</p>
+<p>例如：上下文切换。</p>
+<p>高级智能：以策略的形式存在。</p>
+<p>策略：算法。</p>
+<h4 id="进程的组成">进程的组成：</h4>
+<p><strong>进程的机器状态</strong>：运行时可以读取或者更新的内容。</p>
+<p>在任何时刻，机器的哪些部分对执行该程序很重要？</p>
+<p>机器状态的组成：</p>
+<ul>
+<li>内存：程序的指令在内存里，正在运行的程序读取和写入的数据也在内存中。</li>
+<li>寄存器：指令会频繁的访问寄存器。</li>
+<li>程序计数器PC：IP指令指针。</li>
+</ul>
+<h4 id="进程api">进程API：</h4>
+<p><strong>创建：</strong></p>
+<p><strong>销毁：</strong></p>
+<p><strong>等待：</strong></p>
+<p><strong>其它控制：</strong></p>
+<p><strong>状态（satsu）：</strong></p>
+<h4 id="进程创建">进程创建：</h4>
+<p><strong>操作系统如何启动一个程序？程序如何转化成进程？</strong></p>
+<ol type="1">
+<li><p>将代码和全部静态数据加载到内存中去，加载到进程的地址空间里。</p>
+<p>程序最初都存在磁盘中，所以操作系统的任务就是把这些数据从从磁盘中读取，放入内存中。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230517210420453.png" alt="image-20230517210420453">
+<figcaption aria-hidden="true">image-20230517210420453</figcaption>
+</figure></li>
+<li><p>为程序的运行时栈分配内存。</p>
+<p>栈会存放局部变量、函数参数、返回地址等数据信息。</p></li>
+<li><p>为程序的堆分配内存。</p></li>
+<li><p>执行其它初始化任务</p>
+<p>如IO系统。</p></li>
+<li><p>启动程序。</p>
+<p>跳转到程序入口main()函数。</p></li>
+</ol>
+<h4 id="进程状态">进程状态：</h4>
+<p>早期的计算机系统，进程的状态无外乎就三种：</p>
+<p><strong>就绪：</strong>程序的初始化等操作已准备就绪，由于某种原因，操作系统未给他获取CPU的机会。</p>
+<p><strong>运行：</strong>程序正在CPU上运行指令。</p>
+<p><strong>阻塞：</strong>进程执行了某种操作（可能是申请IO），会被阻塞一段时间不能执行，直到某事件发生或者结束，可以就绪运行。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230517211525994.png" alt="image-20230517211525994">
+<figcaption aria-hidden="true">image-20230517211525994</figcaption>
+</figure>
+<p>调度(scheduled)：为进程分配CPU的使用.</p>
+<p><strong>其它状态：</strong></p>
+<p>初始：刚创建时的状态。</p>
+<p>僵尸状态：允许其它进程（创建进程的父进程）检查本进程的返回代码，查看是否成功执行。
+随后父进程将进行最后一次调用，等待子进程完成，并告诉操作系统，它可以移除这个正在结束的进程的所有数据结构.</p>
+<h3 id="受限直接执行">受限：直接执行</h3>
+<p>虚拟化的实现：运行一个进程一段时间，然后运行另一个进程，如此轮换。</p>
+<p>难点：</p>
+<ul>
+<li>性能开销：如何在不增加系统开销的情况下实现虚拟化？</li>
+<li>控制权：有效运行进程，保留对CPU的控制。</li>
+</ul>
+<h4 id="受限直接执行-1">受限直接执行：</h4>
+<p>目的：使程序尽快的运行。</p>
+<p><strong>直接运行协议：</strong></p>
+<p>执行一个程序的流程：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230522151048225.png" alt="image-20230522151048225">
+<figcaption aria-hidden="true">image-20230522151048225</figcaption>
+</figure>
+<p>基于简单流程，分析问题：</p>
+<ol type="1">
+<li>执行一个进程，如何不让他做我们不希望它做的事情？也就是怎么限制程序的行为？</li>
+<li>进程间该如何切换？</li>
+</ol>
+<h4 id="受限的操作">受限的操作：</h4>
+<p>如果进程希望执行某种受限操作，该怎么办？</p>
+<p>答：在不同执行模式下协助操作系统。</p>
+<p>执行模式种类：</p>
+<ul>
+<li>用户模式：权利受限，只能执行部分给定权限的操作。</li>
+<li>内核模式：操作系统就以这种模式运行。</li>
+</ul>
+<p>用户模式下如何执行特权操作？</p>
+<p>​ 执行<strong>系统调用</strong>。</p>
+<p>如何执行系统调用？</p>
+<p>​ 执行陷阱trap指令 -&gt; 跳入系统内核，升级为内核模式 -&gt;
+执行特权操作。</p>
+<p>陷阱如何知道在 OS 内运行哪些代码？而不乱执行其它代码？</p>
+<p>​ 内核通过在启动时设置陷阱表（trap
+table）来实现。机器启动时，它在特权（内核）模式下执行，因此可以根据需要自由配置机器硬
+件。操作系统做的第一件事，就是告诉硬件在发生某些异常事件时要运行哪些代码。</p>
+<p>​
+例如，当发生硬盘中断，发生键盘中断或程序进行系统调用时，应该运行哪些代码？操作系统通常通过某种特殊的指令，通知硬件这些
+陷阱处理程序的位置。一旦硬件被通知，它就会记住这些处理程序的位置，直到下一次重新启动机器，并且硬件知道在发生系统调用和
+其他异常事件时要做什么（即跳转到哪段代码）。</p>
+<p>运行协议：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230522154805540.png" alt="image-20230522154805540">
+<figcaption aria-hidden="true">image-20230522154805540</figcaption>
+</figure>
+<h4 id="在进程之间切换">在进程之间切换 ：</h4>
+<p>进程运行时，是独占CPU的，操作系统没在运行，停止一个进程切换另一个进程是困难的，操作系统怎么实现？</p>
+<h5 id="协作方式等待系统调用">协作方式：等待系统调用</h5>
+<p>在这种风格下，操作系统相信系统的进程会合理运行。运行时间过长的进程被假定会定期放弃
+CPU，以便操作系统可以决定运行其他任务。</p>
+<p>缺点：进程无限循环，直接寄,只能重启计算机。</p>
+<h5 id="非协作方式操作系统进行控制">非协作方式：操作系统进行控制</h5>
+<p>如何在没有协作的情况下获得控制权？</p>
+<p><strong>时钟中断</strong>：时钟设备可以编程为每隔几毫秒产生一次中断。产生中断时，当前正在运行的进程停止，操作系统中预先配置的中断处理程序（interrupt
+handler）会运行。此时，操作系统重新获得 CPU
+的控制权，因此可以做它想做的事：停止当前进程，并启动另一个进程。</p>
+<p>操作系统如何通知硬件哪些代码在发生时钟中断时运行？</p>
+<p>​
+在启动过程中，操作系统也必须启动时钟，这当然是一项特权操作。一旦时钟开始运行，操作系统就感到安全了，因为控制权最终会归还给它，因此操作系统可以自由运行用户程序。</p>
+<h6 id="保存和恢复上下文"><strong>保存和恢复上下文</strong></h6>
+<p>进程切换会涉及到进程间的上下文操作，需要记录每一个线程的上下文，这样操作系统知道，切换进程的时候，应该切换到进程的哪个位置去执行。</p>
+<p>上下文切换：操作系统要做的就是为<strong>当前正在执行的进程保存一些寄存器的值</strong>（例如，到它的内核栈），并<strong>为即将执行的进程恢复一些寄存器的值</strong>（从它的内核栈）。这样一来，操作系统就可以确保最后执行从陷阱返回指令时，不是返回到之前运行的进程，而是继续执行另一个进程。</p>
+<p><strong>带有时钟中断的运行协议：</strong></p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230522171111952.png" alt="image-20230522171111952">
+<figcaption aria-hidden="true">image-20230522171111952</figcaption>
+</figure>
+<h3 id="进程调度">进程调度</h3>
+<h4 id="进程工作负载假设">进程工作负载假设：</h4>
+<p>1．每一个工作运行相同的时间。</p>
+<p>2．所有的工作同时到达。</p>
+<p>3．一旦开始，每个工作保持运行直到完成。</p>
+<p>4．所有的工作只是用 CPU（即它们不执行 IO 操作）。</p>
+<p>5．每个工作的运行时间是已知的。</p>
+<h4 id="调度指标">调度指标：</h4>
+<p>为了能让我们对比不同调度策略的好坏，需要一些个指标来衡量。</p>
+<p><strong>周转时间</strong>：是一个<strong>性能</strong>指标，表示这个进程在系统中从进入系统到完成任务期间产生的时间开销。</p>
+<p><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.72ex;" xmlns="http://www.w3.org/2000/svg" width="29.507ex" height="2.251ex" role="img" focusable="false" viewBox="0 -677 13042.3 995.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" transform="translate(617,-176.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">周</text></g><g data-mml-node="mi" transform="translate(1000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">转</text></g><g data-mml-node="mi" transform="translate(2000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">时</text></g><g data-mml-node="mi" transform="translate(3000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">间</text></g></g></g><g data-mml-node="mo" transform="translate(3773.2,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msub" transform="translate(4829,0)"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" transform="translate(617,-176.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">完</text></g><g data-mml-node="mi" transform="translate(1000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">成</text></g><g data-mml-node="mi" transform="translate(2000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">时</text></g><g data-mml-node="mi" transform="translate(3000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">间</text></g></g></g><g data-mml-node="mo" transform="translate(8546.6,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="msub" transform="translate(9546.9,0)"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" transform="translate(617,-176.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">到</text></g><g data-mml-node="mi" transform="translate(1000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">达</text></g><g data-mml-node="mi" transform="translate(2000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">时</text></g><g data-mml-node="mi" transform="translate(3000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">间</text></g></g></g></g></g></svg></mjx-container></span></p>
+<p><strong>公平</strong>：性能与公平是相背的。</p>
+<p>如果我们知道任务长度，而且任务只使用
+CPU，而我们唯一的衡量是周转时间。引入分时系统改变了这一切。现在，用户将会坐在终端前面，同时也要求系统的交互性好。因此产生了下面的指标：</p>
+<p><strong>响应时间</strong>：从任务到达系统到首次运行的时间。</p>
+<p><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.72ex;" xmlns="http://www.w3.org/2000/svg" width="29.507ex" height="2.251ex" role="img" focusable="false" viewBox="0 -677 13042.3 995.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" transform="translate(617,-176.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">响</text></g><g data-mml-node="mi" transform="translate(1000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">应</text></g><g data-mml-node="mi" transform="translate(2000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">时</text></g><g data-mml-node="mi" transform="translate(3000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">间</text></g></g></g><g data-mml-node="mo" transform="translate(3773.2,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msub" transform="translate(4829,0)"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" transform="translate(617,-176.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">首</text></g><g data-mml-node="mi" transform="translate(1000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">次</text></g><g data-mml-node="mi" transform="translate(2000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">运</text></g><g data-mml-node="mi" transform="translate(3000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">行</text></g></g></g><g data-mml-node="mo" transform="translate(8546.6,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="msub" transform="translate(9546.9,0)"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" transform="translate(617,-176.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">到</text></g><g data-mml-node="mi" transform="translate(1000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">达</text></g><g data-mml-node="mi" transform="translate(2000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">时</text></g><g data-mml-node="mi" transform="translate(3000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">间</text></g></g></g></g></g></svg></mjx-container></span></p>
+<h4 id="先进先出fifo">先进先出(FIFO)</h4>
+<p><strong>思想：</strong>先到先服务(FCFS)</p>
+<p><strong>特性：</strong>简单、易实现。</p>
+<p><strong>案例：</strong></p>
+<p>A、B、C三个工作，在大致相同的时间(<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.72ex;" xmlns="http://www.w3.org/2000/svg" width="8.857ex" height="2.251ex" role="img" focusable="false" viewBox="0 -677 3914.8 995.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" transform="translate(617,-176.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">到</text></g><g data-mml-node="mi" transform="translate(1000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">达</text></g></g></g><g data-mml-node="mo" transform="translate(2359,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(3414.8,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path></g></g></g></svg></mjx-container></span>)到达系统。每个工作工作10s，假设A最先来：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230525143921367.png" alt="image-20230525143921367">
+<figcaption aria-hidden="true">image-20230525143921367</figcaption>
+</figure>
+<p>这三个任务的平均周转时间：<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="27.292ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 12063 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(981.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mo" transform="translate(2037.6,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(2426.6,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(3648.8,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(4649,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(5871.2,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(6871.4,0)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(7871.4,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(8260.4,0)"><g data-mml-node="mo"><path data-c="2F" d="M423 750Q432 750 438 744T444 730Q444 725 271 248T92 -240Q85 -250 75 -250Q68 -250 62 -245T56 -231Q56 -221 230 257T407 740Q411 750 423 750Z"></path></g></g><g data-mml-node="mn" transform="translate(8760.4,0)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path></g><g data-mml-node="mo" transform="translate(9538.2,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(10594,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(11594,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg></mjx-container></span></p>
+<p>但放宽之前的假设一，同样的例子，只不过A的工作时间为100s，如图：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230525144225427.png" alt="image-20230525144225427">
+<figcaption aria-hidden="true">image-20230525144225427</figcaption>
+</figure>
+<p>此时，平均周转时间T = (100 + 110 + 120)/3 = 110s 出奇了高。</p>
+<p>这个问题通常被称为<strong>护航效应</strong>（convoy
+effect），一些耗时较少的潜在资源消费者被排在重量级的资源消费者之后。</p>
+<p>由此引发了SJF算法：</p>
+<h4 id="最短任务优先sjf">最短任务优先（SJF）</h4>
+<p><strong>思想：</strong>先运行最短的任务，然后是次短的任务，如此下去。</p>
+<p><strong>案例：</strong>同上面 A：100s B：10s C：10s
+同时到达系统：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230525144930173.png" alt="image-20230525144930173">
+<figcaption aria-hidden="true">image-20230525144930173</figcaption>
+</figure>
+<p>平均周转时间T = (10 + 20 + 120)/3 = 50s</p>
+<p>但如果我们放宽假设二，三个任务不同时到达，任务B,C在t =
+10时到达，A还是0时刻到达：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230526105316402.png" alt="image-20230526105316402">
+<figcaption aria-hidden="true">image-20230526105316402</figcaption>
+</figure>
+<p>T = (100 + (110 - 10) + (120 - 10))/3 = 103.33s</p>
+<h4 id="最短完成时间优先stcf">最短完成时间优先（STCF）</h4>
+<p>上面两个算法都是非抢占式的。我们需要放宽假设三，每个工作可以不运行到结束，可以被抢占转而运行其它进程。向
+SJF 添加抢占，称为最短完成时间优先（Shortest Time-to-Completion
+First，STCF）或抢占式最短作业优先（Preemptive Shortest Job First
+，PSJF）调度程序</p>
+<p><strong>算法思想：</strong>每当有新的任务进入系统，算法都会判断当前哪个任务的剩余完成时间最少，然后调度该工作（抢占CPU执行这个工作）。</p>
+<p><strong>特点：</strong>抢占式，SJF</p>
+<p><strong>案例：</strong>同SJF的第二个例子：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230526110113309.png" alt="image-20230526110113309">
+<figcaption aria-hidden="true">image-20230526110113309</figcaption>
+</figure>
+<p>T = (10 + 20 + 120)/3 = 50</p>
+<h4 id="时间片轮转rr">时间片轮转（RR）</h4>
+<p>上面三个算法，着重提高<strong>周转时间</strong>这个指标，但在如今提倡<strong>高交互性</strong>的时代，往往<strong>响应时间</strong>会是最重要的指标。</p>
+<p><strong>算法思想：</strong>RR 在一个时间片（time
+slice，有时称为调度量子，scheduling
+quantum）内运行一个工作，然后切换到运行队列中的下一个任务，而不是运行一个任务直到结束。它反复执行，直到所有任务完成。</p>
+<p><strong>时间片特征：</strong>是时钟中断周期的倍数。
+尽量小（结合实际情况）。</p>
+<p><strong>案例：</strong></p>
+<p>SJF与RR对比：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230526112326361.png" alt="image-20230526112326361">
+<figcaption aria-hidden="true">image-20230526112326361</figcaption>
+</figure>
+<p>时间片越短，对于响应时间是越有利的。但是越短的时间片，其切换进程所带来的性能开销也会增长，所以要权衡时间片的长度，使其足够长，足以摊销切换进程上下文所带来的开销，而又能及时响应。</p>
+<p><strong>平均响应时间与时间片、作业个数的关系：</strong></p>
+<p>假设作业个数为n，时间片大小为T</p>
+<p><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.72ex;" xmlns="http://www.w3.org/2000/svg" width="51.987ex" height="2.417ex" role="img" focusable="false" viewBox="0 -750 22978.1 1068.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" transform="translate(617,-176.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">平</text></g><g data-mml-node="mi" transform="translate(1000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">均</text></g></g></g><g data-mml-node="mo" transform="translate(2359,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mo" transform="translate(3414.8,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(3803.8,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path></g><g data-mml-node="mo" transform="translate(4526,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mi" transform="translate(5526.2,0)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(6452.4,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(7452.7,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mi" transform="translate(7952.7,0)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(8656.7,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mo" transform="translate(9434.7,0)"><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"></path></g><g data-mml-node="mo" transform="translate(9879.3,0)"><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"></path></g><g data-mml-node="mo" transform="translate(10324,0)"><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"></path></g><g data-mml-node="mo" transform="translate(10768.7,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mo" transform="translate(11546.7,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(11935.7,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(12757.9,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(13758.1,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(14258.1,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mi" transform="translate(14647.1,0)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(15351.1,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(15740.1,0)"><g data-mml-node="mo"><path data-c="2F" d="M423 750Q432 750 438 744T444 730Q444 725 271 248T92 -240Q85 -250 75 -250Q68 -250 62 -245T56 -231Q56 -221 230 257T407 740Q411 750 423 750Z"></path></g></g><g data-mml-node="mi" transform="translate(16240.1,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(17117.9,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mo" transform="translate(18173.7,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(18562.7,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(19384.9,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(20385.1,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(20885.1,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mi" transform="translate(21274.1,0)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(21978.1,0)"><g data-mml-node="mo"><path data-c="2F" d="M423 750Q432 750 438 744T444 730Q444 725 271 248T92 -240Q85 -250 75 -250Q68 -250 62 -245T56 -231Q56 -221 230 257T407 740Q411 750 423 750Z"></path></g></g><g data-mml-node="mn" transform="translate(22478.1,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></svg></mjx-container></span></p>
+<p><strong>响应时间与周转时间对比：</strong></p>
+<p>高响应低周转，两者相背。</p>
+<p>RR
+所做的正是延伸每个工作，只运行每个工作一小段时间，就转向下一个工作。因为周转时间只关心作业何时完成，RR
+几乎是最差的，在很多情况下甚至比简单的 FIFO 更差。</p>
+<p>响应时间对应<strong>公平</strong>策略，任何公平（fair）的政策（如
+RR），即在小规模的时间内将 CPU
+均匀分配到活动进程之间，在周转时间这类指标上表现不佳。</p>
+<h4 id="结合io运行的算法设计重叠">结合I/O运行的算法设计：重叠</h4>
+<p>放宽假设 4：所有程序都执行
+I/O。没有输入输出的程序，是毫无意义的。</p>
+<p><strong>调度程序的时机：</strong></p>
+<ul>
+<li>在当前进程发起I/O请求时调度。因为当前正在运行的作业在 I/O
+期间不会使用 CPU，它被<strong>阻塞等待 I/O 完成</strong>。</li>
+<li>I/O完成时：发生这种情况时，会产生中断，操作系统运行并将发出 I/O
+的进程从<strong>阻塞状态移回就绪状态</strong>。</li>
+</ul>
+<p><strong>案例：</strong></p>
+<p>假设有两项工作 A 和 B，每项工作需要 50ms 的
+CPU时间。但是，有一个明显的区别：A 运行 10ms，然后发出 I/O 请求（假设
+I/O 每个都需要10ms），而 B 只是使用 CPU 50ms，不执行 I/O。调度程序先运行
+A，然后运行 B。</p>
+<p>构建 STCF 调度程序：</p>
+<p>将 A 的每个 10ms
+的子工作视为一项独立的工作。因此，STCF的选择就是进程A，A执行完一轮10s之后，切换到B执行，此时A的I，然后提交
+A的一个新子工作，它抢占 B 并运行 10ms。实现了重叠。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230526113710988.png" alt="image-20230526113710988">
+<figcaption aria-hidden="true">image-20230526113710988</figcaption>
+</figure>
+<h4 id="无法预知的假设">无法预知的假设：</h4>
+<p>对于假设5，我们放宽一下，我们不知道任何进程的运行时间。事实上，在一个通用的操作系统中（比如我们所关心的操作系统），操作系统通常对每个作业的长度知之甚少。因此，我们如何建立一个没有这种先验知识的
+SJF/STCF？</p>
+<h3 id="调度多级反馈队列mlfq">调度：多级反馈队列MLFQ</h3>
+<p>—多级反馈队列（Multi-level Feedback
+Queue，MLFQ），应用于兼容时分共享系统（CTSS）。</p>
+<p>优化目标：优化周转时间和响应时间。</p>
+<h4 id="mlfq基本规则">MLFQ基本规则</h4>
+<p><strong>基本组成：</strong>含有多个独立队列，每个队列都有不同的优先级。<strong>任何时刻，一个工作只能存在于一个队列里。</strong>一个队列也可能有多个工作，这多个工作也有不同的优先级。多个工作会采用轮转的方式调度。</p>
+<p><strong>策略关键：</strong>优先级的设定。 同级轮转调度</p>
+<p><strong>如何设定优先级：</strong>观察者模式，根据工作的行为来决定优先级。
+例如：如果一个工作不断放弃CPU
+去等待键盘输入，这是交互型进程的可能行为，MLFQ
+因此会让它保持高优先级。相反，如果一个工作长时间地占用 CPU，MLFQ
+会降低其优先级。</p>
+<h5 id="规则1">规则1：</h5>
+<p>如果 A 的优先级 &gt; B 的优先级，运行 A（不运行 B）。</p>
+<h5 id="规则2">规则2：</h5>
+<p>如果 A 的优先级 = B 的优先级，轮转运行A 和 B。</p>
+<p>如下图，轮转执行A,B。由此可见，C，D的优先级比较低，所以如果A,B一直运行，C和D将饿死。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230527104752721.png" alt="image-20230527104752721">
+<figcaption aria-hidden="true">image-20230527104752721</figcaption>
+</figure>
+<h4 id="如何改变优先级">如何改变优先级:</h4>
+<p>多种工作负载：既有运行时间很短、频繁放弃 CPU
+的交互型工作，也有需要很多 CPU
+时间、响应时间却不重要的长时间计算密集型工作。</p>
+<h5 id="规则3">规则3：</h5>
+<p>工作进入系统时，放在最高优先级（最上层队列）</p>
+<h5 id="规则4a">规则4a：</h5>
+<p>工作用完整个时间片后，降低其优先级（移入下一个队列）。</p>
+<h5 id="规则4b">规则4b：</h5>
+<p>如果工作在其时间片以内<strong>主动释放</strong>
+CPU，则优先级不变。</p>
+<p><strong>案例1：单个长工作</strong></p>
+<p>根据规则3、4(a,b)，如果系统有一个长工作要执行，运行情况如下：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230527105238796-16851559610371.png" alt="image-20230527105238796">
+<figcaption aria-hidden="true">image-20230527105238796</figcaption>
+</figure>
+<p>该工作首先进入最高优先级（Q2）。执行一个 10ms
+的时间片后，调度程序将工作的优先级减 1，因此进入 Q1。在 Q1
+执行一个时间片后，最终降低优先级进入系统的最低优先级（Q0），一直留在那里。</p>
+<p><strong>案例2：短工作进入</strong></p>
+<p>该案例体现了MLFQ具有SJF的性质。</p>
+<p>A（用黑色表示）在最低优先级队列执行（长时间运行的 CPU
+密集型工作都这样）。B（用灰色表示）在时间 <em>T</em>=100
+时到达，并被加入最高优先级队列。由于它的运行时间很短（只有
+20ms），经过两个时间片，在被移入最低优先级队列之前，B 执行完毕。然后 A
+继续运行（在低优先级）。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230527105659685.png" alt="image-20230527105659685">
+<figcaption aria-hidden="true">image-20230527105659685</figcaption>
+</figure>
+<p><strong>观察者性质体现：</strong>进来的工作，系统是不知道它的工作时间长度的，但系统会默认它是短工作，然后将它放入第一优先级队列，执行一段时间后，发现它还在执行，也就是它没有那么“短”，这时候将它放入第二级优先队列...以此类推。优先级越低，它就被判定是长工作了。</p>
+<p><strong>案例3：带有I/O交互型工作进入</strong></p>
+<p>根据上述规则 4b，如果进程在时间片用完之前主动放弃
+CPU，则保持它的优先级不变。这条规则的意图很简单：假设交互型工作中有大量的
+I/O 操作（比如等待用户的键盘或鼠标输入），它会在时间片用完之前放弃
+CPU。在这种情况下，保持它的优先级不变。</p>
+<p>交互型工作 B（用灰色表示）每执行 1ms 便需要进行
+I/O操作，它与长时间运行的工作 A（用黑色表示）竞争 CPU。MLFQ 算法保持 B
+在最高优先级，因为 B 总是让出 CPU。如果 B 是交互型工作，MLFQ
+就进一步实现了它的目标，让<strong>交互型工作快速运行</strong>。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230527110350332.png" alt="image-20230527110350332">
+<figcaption aria-hidden="true">image-20230527110350332</figcaption>
+</figure>
+<p>由案例3引出的问题：</p>
+<ul>
+<li>饥饿（starvation）问题：系统有“太多”交互型工作，就会不断占用CPU，导致长工作永远无法得到
+CPU（它们饿死了）。</li>
+<li>调度程序被愚弄：愚弄调度程序指的是用一些卑鄙的手段欺骗调度程序，让它给你<strong>远超公平</strong>的资源。
+<ul>
+<li>攻击算法：进程在<strong>时间片用完之前，调用一个 I/O
+操作</strong>（比如访问一个无关的文件），从而主动释放
+CPU。如此便可以保持在高优先级，占用更多的 CPU
+时间。做得好时（比如，每运行 99%的时间片时间就主动放弃一次
+CPU），工作可以几乎独占 CPU。</li>
+</ul></li>
+</ul>
+<h4 id="提升优先级策略">提升优先级策略：</h4>
+<p><strong>策略关键：</strong>
+周期性地提升（boost）所有工作的优先级。</p>
+<p>解决问题：</p>
+<ul>
+<li><p>饥饿问题</p></li>
+<li><p>如果一个 CPU
+密集型工作变成了交互型，当它优先级提升时，调度程序会正确对待它。</p></li>
+</ul>
+<h5 id="规则-5">规则 <strong>5</strong>：</h5>
+<p>经过一段时间
+<em>S</em>，就将系统中所有工作重新加入最高优先级队列。</p>
+<p><strong>案例：</strong></p>
+<p>长工作与两个交互型短工作竞争 CPU
+时的行为。下图左边没有优先级提升，长工作在两个短工作到达后被饿死。右边每
+50ms
+就有一次优先级提升（这里只是举例，这个值可能过小），因此至少保证长工作会有一些进展，每过
+50ms 就被提升到最高优先级，从而定期获得执行。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230527111157297.png" alt="image-20230527111157297">
+<figcaption aria-hidden="true">image-20230527111157297</figcaption>
+</figure>
+<p>引发新问题：</p>
+<ul>
+<li>巫毒常量（voo-doo
+constant）：时间段S的值：如何设立这个值？如果过大，会导致饿死。如果过小，又不能及时处理响应型工作。交互型工作又得不到合适的
+CPU 时间比例</li>
+</ul>
+<h4 id="更好的计时方式">更好的计时方式：</h4>
+<p>该策略是为了解决“愚弄”问题。</p>
+<p><strong>策略方案：</strong>为 MLFQ 的每层队列提供更完善的 CPU
+计时方式（accounting）。调度程序记录每一层中的每一个工作的执行总时间，而不是在调度时重新计时，只要进程用完了自己的配额，就将它降到低一优先级的队列中去。不论它是一次用完的，还是拆成很多次用完。</p>
+<p>重写规则4a和4b：</p>
+<h5 id="规则4">规则4：</h5>
+<p>一旦工作用完了其在某一层中的时间配额（无论中间主动放弃了多少次CPU），就降低其优先级（移入低一级队列）。</p>
+<p><strong>案例：</strong></p>
+<p>对比了在规则 4a、4b 的策略下（左图），以及在新的规则
+4（右图）的策略下，同样试图愚弄调度程序的进程的表现。没有规则 4
+的保护时，进程可以在每个时间片结束前发起一次 I/O 操作，从而垄断 CPU
+时间。有了这样的保护后，不论进程的 I/O
+行为如何，都会慢慢地降低优先级，因而无法获得超过公平的 CPU
+时间比例。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230527112037681.png" alt="image-20230527112037681">
+<figcaption aria-hidden="true">image-20230527112037681</figcaption>
+</figure>
+<h4 id="mlfq调优">MLFQ调优</h4>
+<p>如何配置一个调度程序，例如，配置多少队列？每一层队列的时间片配置多大？为了避免饥饿问题以及进程行为改变，应该多久提升一次进程的优先级？</p>
+<p>答：没有显而易见的答案，因此只有利用对工作负载的经验，以及后续对调度程序的调优，才会导致令人满意的平衡。</p>
+<p>案例配置：</p>
+<p>默认有 60 层队列，时间片长度从 20ms（最高优先级），到几百
+ms（最低优先级），每一秒左右提升一次进程的优先级。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230527112244862.png" alt="image-20230527112244862">
+<figcaption aria-hidden="true">image-20230527112244862</figcaption>
+</figure>
+<h4 id="总结">总结：</h4>
+<p>规则 <strong>1</strong>：如果 A 的优先级 &gt; B 的优先级，运行
+A（不运行 B）。</p>
+<p>规则 <strong>2</strong>：如果 A 的优先级 = B 的优先级，轮转运行 A 和
+B。</p>
+<p>规则
+<strong>3</strong>：工作进入系统时，放在最高优先级（最上层队列）。</p>
+<p>规则
+<strong>4</strong>：一旦工作用完了其在某一层中的时间配额（无论中间主动放弃了多少次CPU），就降低其优先级（移入低一级队列）。</p>
+<p>规则 <strong>5</strong>：经过一段时间
+<em>S</em>，就将系统中所有工作重新加入最高优先级队列。</p>
+<p>MLFQ执行过程中不需要知道工作的长度，动态的进行工作优先级的判定，来给予它相对公平的资源。对于MLFQ的配置，需要长期的实验，根据不同业务环境，得到合适的配置。</p>
+<h3 id="调度比例份额">调度：比例份额</h3>
+<p>比例份额（proportional-share）调度程序，有时也称为公平份额（fair-share）调度程序。</p>
+<p><strong>算法思想：</strong>调度程序的最终目标，是使得每个工作都获得一定比例的CPU时间，而不是优化周转时间和响应时间。</p>
+<p>接下来以彩票调度来描述该算法：</p>
+<h4 id="基本概念彩票数表示份额">基本概念：彩票数表示份额</h4>
+<p>彩票数代表了进程(或用户或其它工作)所占有某种资源的份额。</p>
+<p><strong>案例：</strong>假设有两个进程 A 和 B，A 拥有 75 张彩票，B
+拥有 25 张。因此我们希望 A 占用 75%的 CPU 时间，而 B 占用 25%。</p>
+<p>通过<strong>不断定时地（比如，每个时间片）抽取</strong>彩票，彩票调度从概率上（但不是确定的）获得这种份额比例。</p>
+<p>抽取彩票的过程很简单：调度程序知道总共的彩票数（在我们的例子中，有
+100 张）。调度程序<strong>随机</strong>抽取中奖彩票，这是从 0 和
+99之间的一个数，拥有这个数对应的彩票的进程中奖。假设进程 A 拥有 0 到 74
+共 75 张彩票，进程 B 拥有 75 到 99 的 25 张，中奖的彩票就决定了运行 A 或
+B。调度程序然后加载中奖进程的状态，并运行它。</p>
+<h5 id="随机性">随机性：</h5>
+<p>彩票调度最精彩的地方在于利用了随机性（randomness）。当你需要做出决定时，采用随机的方式常常是既可靠又简单的选择。</p>
+<p>随机性的优势：</p>
+<ol type="1">
+<li>常常可以避免奇怪的边角情况</li>
+<li>随机方法很轻量，几乎不需要记录任何状态。</li>
+<li>很快。取决于产生随机数的速度。</li>
+</ol>
+<h4 id="彩票机制">彩票机制：</h4>
+<p>彩票调度还提供了一些机制，以不同且有效的方式来调度彩票。</p>
+<h5 id="彩票货币">彩票货币：</h5>
+<p>这种方式允许拥有一组彩票的用户<strong>以他们喜欢的某种货币</strong>，将彩票<strong>分给自己的不同工作</strong>。之后操作系统再自动将这种货币<strong>兑换为正确的全局彩票</strong>。</p>
+<p><strong>案例：</strong></p>
+<p>假设用户 A 和用户 B 每人拥有 100 张彩票。用户 A 有两个工作 A1 和
+A2，他以自己的货币，给每个工作 500 张彩票（共 1000 张）。用户 B
+只运行一个工作，给它 10 张彩票（总共 10 张）。操作系统将进行兑换，将 A1
+和 A2 拥有的 A 的货币 500 张，兑换成全局货币 50 张。类似地，兑换给 B1 的
+10 张彩票兑换成 100 张。然后会对全局彩票货币（共
+200张）举行抽奖，决定哪个工作运行。</p>
+<p>User A -&gt; 500 (A's currency) to A1 -&gt; 50 (global currency)</p>
+<p>​ -&gt; 500 (A's currency) to A2 -&gt; 50 (global currency)</p>
+<p>User B -&gt; 10 (B's currency) to B1 -&gt; 100 (global currency)</p>
+<p>说白了，就是自己决定工作的优先级。</p>
+<h5 id="彩票转让">彩票转让：</h5>
+<p>一个进程可以临时将自己的一部分彩票份额转让给别的进程。</p>
+<p><strong>案例：</strong>客户端进程向服务端发送消息，请求其按自己的需求执行工作，为了加速服务端的执行，客户端可以将自己的彩票转让给服务端，从而尽可能加速服务端执行自己请求的速度。服务端执行结束后会将这部分彩票归还给客户端。</p>
+<h5 id="彩票通胀">彩票通胀：</h5>
+<p>利用通胀，一个进程可以临时提升或降低自己拥有的彩票数量。但是在竞争情况下，每个进程都想让自己提高优先级，这种方法就失去了意义。</p>
+<p><strong>案例：</strong></p>
+<p>通胀可以用于进程之间相互信任的环境。在这种情况下，如果一个进程知道它需要更多
+CPU
+时间，就可以增加自己的彩票，从而将自己的需求告知操作系统，这一切不需要与任何其他进程通信。</p>
+<h4 id="彩票调度的简单实现">彩票调度的简单实现</h4>
+<p>假定我们用列表记录进程。下面的例子中有 A、B、C 这 3
+个进程，每个进程有一定数量的彩票。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230528111006241.png" alt="image-20230528111006241">
+<figcaption aria-hidden="true">image-20230528111006241</figcaption>
+</figure>
+<p>在做出调度决策之前，首先要从彩票总数 400
+中选择一个随机数（中奖号码）①。假设选择了
+300。然后，遍历链表，用一个简单的计数器帮助我们找到中奖者（见图
+9.1）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;<span class="comment">//计数器，track winner</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="variable">winner</span> <span class="operator">=</span> Random(<span class="number">0</span>, totalTickets);<span class="comment">//生成随机数，这个数字是中奖数字  核心：随机数生成算法</span></span><br><span class="line"></span><br><span class="line"><span class="type">Node</span> <span class="variable">p</span> <span class="operator">=</span> head;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(current &lt; winner){</span><br><span class="line">    current += p.tickets;<span class="comment">//加上彩票的值，寻找winner</span></span><br><span class="line">    <span class="keyword">if</span>(current &gt; winner) <span class="keyword">break</span>;</span><br><span class="line">    p = p.next;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> winnerJob;</span><br></pre></td></tr></table></figure>
+<p>这段代码从前向后遍历进程列表，将每张票的值加到 counter 上，直到值超过
+winner。这时，当前的列表元素所对应的进程就是中奖者。在我们的例子中，中奖彩票是
+300。首先，计 A 的票后，counter 增加到 100。因为 100 小于
+300，继续遍历。然后 counter 会增加到 150（B 的彩票），仍然小于
+300，继续遍历。最后，counter 增加到 400（显然大于
+300），因此退出遍历，current 指向 C（中奖者）。</p>
+<h4 id="彩票公平性研究">彩票公平性研究：</h4>
+<p>为了更好地理解彩票调度的运行过程，我们现在简单研究一下两个互相竞争工作的完成时间，每个工作都有相同数目的
+100 张彩票，以及相同的运行时间 <em>R</em>（稍后会改变）。</p>
+<p>我们希望两个工作在大约同时完成，但由于彩票调度算法的随机性，有时一个工作会先于另一个完成。为了量化这种区别，我们定义了一个简单的<strong>不公平指标
+<em>U</em></strong>（unfairness metric），将两个工作完成时刻相除得到
+<em>U</em> 的值。</p>
+<p>目标：尽可能让U达到1，也就是两个工作同时完成。</p>
+<p>展示了当两个工作的运行时间从 1 到1000 变化时，30 次试验的平均
+<em>U</em>
+值（利用本章末尾的模拟器产生的结果）。可以看出，当工作执行时间很短时，平均不公平度非常糟糕。<strong>只有当工作执行非常多的时间片时，彩票调度算法才能得到期望的结果。</strong></p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230528112916310.png" alt="image-20230528112916310">
+<figcaption aria-hidden="true">image-20230528112916310</figcaption>
+</figure>
+<h4 id="如何分配彩票">如何分配彩票：</h4>
+<h5 id="为什么采用随机性缺点呢">为什么采用随机性？缺点呢？</h5>
+<p>虽然随机方式可以使得调度程序的实现简单（且大致正确），但偶尔并不能产生正确的比例，尤其在工作运行时间很短的情况下。</p>
+<h5 id="步长调度">步长调度：</h5>
+<p>系统中的每个工作都有自己的步长，这个值与票数值成反比。</p>
+<p><strong>步长的计算：</strong>通过用一个大数分别除以他们的票数来获得每个进程的步长。</p>
+<p>之后，调度程序使用进程的步长及行程值来确定调度哪个进程。基本思路很简单：当需要进行<strong>调度时，选择目前拥有最小行程值</strong>的进程，并且在运行之后将该进程的行程值增加一个步长。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230528113729705.png" alt="image-20230528113729705">
+<figcaption aria-hidden="true">image-20230528113729705</figcaption>
+</figure>
+<p><strong>案例：</strong></p>
+<p>A、B、C 这 3 个工作的票数分别是 100、50 和 250，用 10000
+除以这些票数值，得到了 3 个进程的步长分别为 100、200 和 40。</p>
+<p>初始行程值都为 0。因此，最初，所有进程都可能被选择执行。假设选择
+A（任意的，所有具有同样低的行程值的进程，都可能被选中）。A
+执行一个时间片后，更新它的行程值为 100。然后运行 B，并更新其行程值为
+200。最后执行 C，C 的行程值变为 40。这时，算法选择最小的行程值，是
+C，执行并增加为 80（C 的步长是 40）。然后 C
+再次运行（依然行程值最小），行程值增加到 120。现在运行
+A，更新它的行程值为 200（现在与 B 相同）。然后 C
+再次连续运行两次，行程值也变为
+200。此时，所有行程值再次相等，这个过程会无限地重复下去。</p>
+<p>如下表执行过程：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230528113931562.png" alt="image-20230528113931562">
+<figcaption aria-hidden="true">image-20230528113931562</figcaption>
+</figure>
+<p>可以看出，C 运行了 5 次、A 运行了 2 次，B
+一次，正好是票数的比例——200、100 和
+50。彩票调度算法只能运行一段时间后，在概率上实现比例，而<strong>步长调度算法可以在每个调度周期后做到完全正确。</strong></p>
+<p><strong>彩票调度与步长调度的对比：</strong></p>
+<p>彩票调度有一个步长调度没有的优势——不需要全局状态。</p>
+<p>假如一个新的进程在上面的步长调度执行过程中加入系统，应该怎么设置它的行程值呢？设置成
+0 吗？这样的话，它就独占 CPU
+了。而彩票调度算法不需要对每个进程记录全局状态，只需要用新进程的票数更新全局的总票数就可以了。因此彩票调度算法能够更合理地处理新加入的进程。</p>
+<h3 id="多处理机调度高级">多处理机调度（高级）</h3>
+<h2 id="虚拟化内存虚拟化">虚拟化——内存虚拟化</h2>
+<h3 id="抽象地址空间">抽象：地址空间</h3>
+<h4 id="早期系统内存结构">早期系统内存结构：</h4>
+<p>操作系统曾经是一组函数（实际上是一个库），在内存中（在本例中，从物理地址
+0
+开始），然后有一个正在运行的程序（进程），目前在物理内存中（在本例中，从物理地址
+64KB
+开始），并使用剩余的内存。这里几乎没有抽象，用户对操作系统的要求也不多。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230530103953144.png" alt="image-20230530103953144">
+<figcaption aria-hidden="true">image-20230530103953144</figcaption>
+</figure>
+<h4 id="多道程序和时分共享">多道程序和时分共享：</h4>
+<p>由于机器昂贵，人们开始更有效地共享机器。因此，多道程序（multiprogramming）系统时代开启[DV66]，其中多个进程在给定时间准备运行，比如当有一个进程在等待
+I/O 操作的时候，操作系统会切换这些进程，这样<strong>增加了 CPU
+的有效利用率（utilization）</strong>。</p>
+<p><strong>多道程序的缺陷：</strong>长时间的（因此也是低效率的）编程—调试循环。交互性差。</p>
+<p><strong>时分共享技术：</strong>提高交互性。</p>
+<p>简单实现：</p>
+<p>让一个进程单独占用全部内存运行一小段时间（见图13.1），然后停止它，并将它所有的<strong>状态信息保存在磁盘</strong>上（包含所有的物理内存），加载其他进程的状态信息，再运行一段时间，这就实现了某种比较粗糙的机器共享。</p>
+<p>缺陷：慢、保存到磁盘需要频繁的I/O操作。</p>
+<p><strong>改进：</strong>在进程切换的时候，我们仍然将进程信息放在内存中，这样操作系统可以更有效率地实现时分共享。</p>
+<p>案例：在图 13.2 中，有 3 个进程（A、B、C），每个进程拥有从512KB
+物理内存中切出来给它们的一小部分内存。假定只有一个
+CPU，操作系统选择运行其中一个进程（比如 A），同时其他进程（B 和
+C）则在队列中等待运行</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230530104910702.png" alt="image-20230530104910702">
+<figcaption aria-hidden="true">image-20230530104910702</figcaption>
+</figure>
+<h4 id="地址空间">地址空间：</h4>
+<p>操作系统需要提供一个易用（easy to
+use）的<strong>物理内存抽象</strong>。这个抽象叫作<strong>地址空间</strong>（address
+space），是运行中的程序看到的系统重的内存。</p>
+<p><strong>进程的地址空间：</strong>包含运行的程序的所有内存状态。</p>
+<ul>
+<li>代码：</li>
+<li>栈：函数调用</li>
+<li>堆：动态分配用户管理的内存 new的对象等等。</li>
+</ul>
+<p>案例：</p>
+<p>如图，我们有一个很小的地址空间① （只有
+16KB）。程序代码位于地址空间的顶部（在本例中从 0
+开始，并且装入到地址空间的前
+1KB）。代码是静态的（因此很容易放在内存中），所以可以将它放在地址空间的顶部，我们知道程序运行时不再需要新的空间。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230530105852248.png" alt="image-20230530105852248">
+<figcaption aria-hidden="true">image-20230530105852248</figcaption>
+</figure>
+<p>接下来，在程序运行时，地址空间有两个区域可能增长（或者收缩）。它们就是堆（在顶部）和栈（在底部）。把它们放在那里，是因为它们都希望能够增长。通过将它们放在地址空间的两端，我们可以允许这样的增长：它们只需要在相反的方向增长。因此堆在代码（1KB）之下开始并向下增长（当用户通过
+malloc()请求更多内存时），栈从 16KB
+开始并向上增长（当用户进行程序调用时）。然而，堆栈和堆的这种放置方法只是一种约定，如果你愿意，可以用不同的方式安排地址空间。</p>
+<p>描述地址空间时，我们看到的0-16K其实是抽象的，事实上，这段内存块是放在物理内存中的任意位置处的，其物理内存地址并不是0-16K，具体计算要通过硬件来实现。</p>
+<p><strong>隔离原则：</strong></p>
+<p>隔离是建立可靠系统的关键原则。实体之间互相不受影响，即使一个实体出现了故障，也不会影响其它实体继续工作。通过内存隔离，操作系统进一步确保运行程序<strong>不会影响底层操作系统的操作</strong>。</p>
+<h4 id="虚拟化内存的目标">虚拟化内存的目标：</h4>
+<p><strong>透明：</strong>操作系统实现虚拟内存的方式，应该让运行的程序看不见。因此，程序不应该感知到内存被虚拟化的事实，相反，程序的行为就好像它拥有自己的私有物理内存。</p>
+<p><strong>效率：</strong>操作系统应该追求虚拟化尽可能高效（efficient），包括时间上（即不会使程序运行得更慢）和空间上（即不需要太多额外的内存来支持虚拟化）。在实现高效率虚拟化时，操作系统将不得不依靠硬件支持，包括
+TLB 这样的硬件功能。</p>
+<p><strong>保护：</strong>隔离。</p>
+<h3 id="机制地址转换">机制：地址转换</h3>
+<p><strong>目标：</strong>高效、控制、期望的虚拟化。</p>
+<p><strong>基于硬件的地址转换：</strong>为受限直接执行(LDE)方法的补充。硬件对每次内存访问进行处理（即指令获取、数据读取或写入），将指令中的<strong>虚拟（virtual）地址转换为数据实际存储的物理（physical）地址。</strong></p>
+<p><strong>操作系统的管理内存：</strong>操作系统必须在关键的位置介入，设置好硬件，以便完成正确的地址转换。、</p>
+<h4 id="地址空间假设">地址空间假设：</h4>
+<p>假设用户的地址空间必须<strong>连续</strong>地放在物理内存中。同时，为了简单，我们假设地址空间不是很大，具体来说，小于物理内存的大小。最后，假设每个地址空间的大小完全一样。</p>
+<p><strong>介入：</strong></p>
+<blockquote>
+<p>介入是一种很常见又很有用的技术，计算机系统中使用介入常常能带来很好的效果。在虚拟内存中，硬件可以介入到每次内存访问中，将进程提供的虚拟地址转换为数据实际存储的物理地址。但是，一般化的介入技术有更广阔的应用空间，实际上几乎所有良好定义的接口都应该提供功能介入机制，以便增加功能或者在其他方面提升系统。这种方式最基本的优点是透明（transparency），介入完成时通常不需要改动接口的客户端，因此客户端不需要任何改动。</p>
+</blockquote>
+<p><strong>案例：</strong></p>
+<p>程序代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void func() { </span><br><span class="line"></span><br><span class="line"> int x; </span><br><span class="line"></span><br><span class="line"> x = x + 3; // this is the line of code we are interested in </span><br></pre></td></tr></table></figure>
+<p>代码转换为汇编语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">128: movl 0x0(%ebx), %eax ;load 0+ebx into eax </span><br><span class="line">132: addl $0x03, %eax ;add 3 to eax register </span><br><span class="line">135: movl %eax, 0x0(%ebx) ;store eax back to mem</span><br><span class="line">//假定 x 的地址已经存入寄存器 ebx，之后通过 movl 指令将这个</span><br><span class="line">地址的值加载到通用寄存器 eax（长字移动）。下一条指令对 eax 的内容加 3。最后一条指令</span><br><span class="line">将 eax 中的值写回到内存的同一位置。</span><br></pre></td></tr></table></figure>
+<p>汇编语句会加载到内存块的程序代码处，变量等值会加载到栈内。</p>
+<p>如下图x位于栈里地址3000处</p>
+<p>进程空间：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230531114956112.png" alt="image-20230531114956112">
+<figcaption aria-hidden="true">image-20230531114956112</figcaption>
+</figure>
+<p>三条指令执行后，几次内存访问：</p>
+<ul>
+<li>从地址 128 获取指令；</li>
+<li>执行指令（从地址 15KB 加载数据）；</li>
+<li>从地址 132 获取命令；</li>
+<li>执行命令（没有内存访问）；</li>
+<li>从地址 135 获取指令；</li>
+<li>执行指令（新值存入地址 15KB）。</li>
+</ul>
+<p>从程序的角度来看，它的地址空间（address space）从 0 开始到 16KB
+结束。它包含的所有内存引用都应该在这个范围内。然而，对虚拟内存来说，操作系统希望将这个进程地址空间放在物理内存的其他位置，并不一定从地址
+0 开始。</p>
+<p>怎样在内存中重定位这个进程，同时对该进程透明（transparent）？怎么样提供一种虚拟地址空间从
+0 开始的假象，而实际上地址空间位于另外某个物理地址？</p>
+<p>如下重定位：</p>
+<p>操作系统将第一块物理内存留给了自己，并将上述例子中的进程地址空间重定位到从
+32KB 开始的物理内存地址。剩下的两块内存空闲（16～32KB 和
+48～64KB）。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230531151931077.png" alt="image-20230531151931077">
+<figcaption aria-hidden="true">image-20230531151931077</figcaption>
+</figure>
+<h4 id="动态重定位">动态重定位：</h4>
+<p>CPU需要两个硬件寄存器：</p>
+<ul>
+<li>基址寄存器：</li>
+<li>界限（限制）寄存器：</li>
+</ul>
+<p>这组基址和界限寄存器，让我们能够将<strong>地址空间放在物理内存的任何位置</strong>，同时<strong>又能确保进程只能访问自己的地址空间</strong>。</p>
+<p>程序执行时，操作系统会决定其程序在物理地址的真实位置，记录在基址寄存器里。该进程产生的所有内存引用，都会被处理</p>
+<p>器通过以下方式转换为物理地址：</p>
+<p>physical address = virtual address + base</p>
+<p>基于软件的静态重定位：</p>
+<blockquote>
+<p>在早期，在硬件支持重定位之前，一些系统曾经采用纯软件的重定位方式。基本技术被称为静态重定位（static
+relocation），其中一个名为加载程序（loader）的软件接手将要运行的可执行程序，将它的地址重写到物理内存中期望的偏移位置。
+例如，程序中有一条指令是从地址 1000 加载到寄存器（即 movl
+1000，%eax），当整个程序的地址空间被加载到从 3000（不是程序认为的
+0）开始的物理地址中，加载程序会重写指令中的地址（即 movl 4000,
+%eax），从而完成简单的静态重定位。然而，静态重定位有许多问题，首先也是最重要的是不提供访问保护，进程中的错误地址可能导致对其他进程或操作系统内存的非法访问，一般来说，需要硬件支持来实现真正的访问保护[WL+93]。静态重定位的另一个缺点是一旦完成，稍后很难将内存空间重定位到其他位置
+[M65]。</p>
+</blockquote>
+<p><strong>地址转换技术：</strong>虚拟地址——&gt;物理地址</p>
+<h3 id="分段">分段</h3>
+<p>基址+界限的局限性：栈和堆之间，有一大块“空闲”空间。如果我们将整个地址空间放入物理内存，那么栈和堆之间的空间并没有被进程使用，却依然占用了实际的物理内存。如果剩余物理内存无法提供连续区域来放置完整的地址空间，进程便无法运行。这种基址加界限的方式看来并不像我们期望的那样<strong>灵活</strong>。</p>
+<h4 id="泛化的基址界限">泛化的基址/界限：</h4>
+<p><strong>分段思想：</strong>给地址空间的每个逻辑段(segment)给上一对基址/界限寄存器。</p>
+<p><strong>例如：</strong></p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230608161503664.png" alt="image-20230608161503664">
+<figcaption aria-hidden="true">image-20230608161503664</figcaption>
+</figure>
+<p>段寄存器的值：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230608161534326.png" alt="image-20230608161534326">
+<figcaption aria-hidden="true">image-20230608161534326</figcaption>
+</figure>
+<p>引用代码段内偏移量为100的一处代码：</p>
+<p>基址：32KB 偏移量 100</p>
+<p>实际物理地址：32768 + 100 = 32868</p>
+<h4 id="怎么确定所要引用的段">怎么确定所要引用的段：</h4>
+<p>硬件在地址转换时使用段寄存器。它如何知道段内的偏移量，以及地址引用了哪个段？</p>
+<h5 id="显示标识">显示标识：</h5>
+<p>用虚拟地址的开头几位来标识不同的段。</p>
+<p>前面的例子，有三个段，需要两二进制位标识，虚拟地址如下：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230608162829363.png" alt="image-20230608162829363">
+<figcaption aria-hidden="true">image-20230608162829363</figcaption>
+</figure>
+<p>例如虚拟地址为4200，位于堆内：</p>
+<p>前两位为01标识了堆这个段，剩下12位为段内偏移。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230608163244967.png" alt="image-20230608163244967">
+<figcaption aria-hidden="true">image-20230608163244967</figcaption>
+</figure>
+<p>获取物理地址的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 	<span class="comment">// get top 2 bits of 14-bit VA </span></span><br><span class="line"><span class="number">2</span> 	Segment = (VirtualAddress &amp; SEG_MASK) &gt;&gt; SEG_SHIFT </span><br><span class="line"><span class="number">3</span> 	<span class="comment">// now get offset </span></span><br><span class="line"><span class="number">4</span> 	Offset = VirtualAddress &amp; OFFSET_MASK </span><br><span class="line"><span class="number">5</span> 	<span class="keyword">if</span> (Offset &gt;= Bounds[Segment]) </span><br><span class="line"><span class="number">6</span> 		RaiseException(PROTECTION_FAULT) </span><br><span class="line"><span class="number">7</span> 	<span class="keyword">else</span> </span><br><span class="line"><span class="number">8</span>		PhysAddr = Base[Segment] + Offset </span><br><span class="line"><span class="number">9</span> 		Register = AccessMemory(Phy</span><br></pre></td></tr></table></figure>
+<ul>
+<li>SEG_MASK：计算常量，为0x3000 换成二进制就是11 0000 0000
+0000，这样虚拟地址与它进行与运算，后面12位全为0，取前两位即可。</li>
+<li>OFFSET_MASK：0xFFF</li>
+<li>SEG_SHIFT：12</li>
+</ul>
+<h4 id="反向增长的栈">反向增长的栈：</h4>
+<p>需要硬件支持。除了基址和界限外，硬件还需要知道段的<strong>增长方向</strong>（用一位区分，比如
+1 代表自小而大增长，0 反之）。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230608164843263.png" alt="image-20230608164843263">
+<figcaption aria-hidden="true">image-20230608164843263</figcaption>
+</figure>
+<p>假设要访问虚拟地址 15KB，它应该映射到物理地址
+27KB。该虚拟地址的二进制形式是：11 1100 0000 0000（十六进制
+0x3C00）。硬件利用前两位（11）来指定段，但然后我们要处理偏移量 3KB。</p>
+<p>偏移量要减去最大段内存，3KB - 4KB = -1KB ，为反向偏移量。</p>
+<h4 id="共享">共享：</h4>
+<p><strong>共享的目的：</strong>节省内存。</p>
+<p><strong>额外硬件支持：</strong>保护位。为每个段增加了几个位，标识程序<strong>是否能够读写</strong>该段，或执行其中的代码。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230608165717490.png" alt="image-20230608165717490">
+<figcaption aria-hidden="true">image-20230608165717490</figcaption>
+</figure>
+<ul>
+<li>读-执行：进程之间只能读取并执行这段代码，并不能修改。</li>
+</ul>
+<p>有了保护位，前面描述的硬件算法也必须改变。除了检查虚拟地址是否越界，硬件还需要检查特定访问是否允许。</p>
+<h4 id="细粒度与粗粒度的分段">细粒度与粗粒度的分段</h4>
+<p>粗粒度：</p>
+<p>针对只有很少的几个段的系统（即代码、栈、堆）。它将地址空间分成较大的、粗粒度的块。</p>
+<p>细粒度：</p>
+<p>将地址空间划分为大量较小的段。</p>
+<h4 id="操作系统支持">操作系统支持：</h4>
+<p><strong>上下文切换</strong>：操作系统在进行进程上下文切换的时候，也需要对段寄存器的内容进行恢复、保存等操作。</p>
+<p><strong>管理物理内存的空闲空间</strong>：新的地址空间被创建时，操作系统需要在物理内存中为它的段找到空间。</p>
+<p><strong>物理内存的外部碎片问题：</strong></p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230608171655602.png" alt="image-20230608171655602">
+<figcaption aria-hidden="true">image-20230608171655602</figcaption>
+</figure>
+<p>解决方案：</p>
+<p>紧凑（compact）物理内存，重新安排原有的段。</p>
+<p>操作系统先<strong>终止</strong>运行的<strong>进程</strong>，将它们的<strong>数据复制</strong>到连续的内存区域中去，<strong>改变</strong>它们的<strong>段寄存器</strong>中的值，<strong>指向新的物理地址</strong>，从而得到了足够大的连续空闲空间。</p>
+<p>这样做，操作系统能让新的内存分配请求成功。但是，内存紧凑成本很高，因为拷贝段是内存密集型的，一般会占用大量的处理器时间。</p>
+<p>缺陷：性能损耗。</p>
+<h3 id="空闲空间管理">空闲空间管理</h3>
+<p>空闲内存会出现的问题：</p>
+<ul>
+<li>外部碎片：</li>
+<li>内部碎片：分配程序内存块的大小超出它自己所需要的内存的大小，多余的部分为内部碎片空间。它浪费在已分配单元的内部。
+<ul>
+<li>内存分配多了。</li>
+</ul></li>
+</ul>
+<h4 id="假设"><strong>假设：</strong></h4>
+<ul>
+<li>只有外部碎片问题。</li>
+<li>内存一旦被分配给客户，就<strong>不可以被重定位</strong>到其他位置</li>
+<li>分配程序所管理的是连续的一块字节区域</li>
+</ul>
+<h4 id="底层机制">底层机制：</h4>
+<p><strong>空闲列表：</strong></p>
+<p>记录堆中未分配的空间地址。</p>
+<p>案例：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230609215857724.png" alt="image-20230609215857724">
+<figcaption aria-hidden="true">image-20230609215857724</figcaption>
+</figure>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230609215914302.png" alt="image-20230609215914302">
+<figcaption aria-hidden="true">image-20230609215914302</figcaption>
+</figure>
+<h5 id="分割与合并堆">分割与合并（堆）：</h5>
+<p>如上面案例内存空闲列表，请求任何大于10字节的分配请求都会失败。</p>
+<p><strong>分割：</strong></p>
+<p>用户请求一字节的内存空间，分配程序找到可用空间，将空间分割为大小为1字节的内存块分给用户，剩下的空间还位于空闲列表中。</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230609220158519.png" alt="image-20230609220158519">
+<figcaption aria-hidden="true">image-20230609220158519</figcaption>
+</figure>
+<p><strong>合并：</strong></p>
+<p>假设案例中地址空间为[10,20]的内存空间free，得到三处空闲块：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230609220316989.png" alt="image-20230609220316989">
+<figcaption aria-hidden="true">image-20230609220316989</figcaption>
+</figure>
+<p>用户请求长度为30字节的内存空间，还是会失败，为了避免这种情况，分配程序会合并空闲块：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230609220400090.png" alt="image-20230609220400090">
+<figcaption aria-hidden="true">image-20230609220400090</figcaption>
+</figure>
+<h5 id="追踪已分配空间的大小">追踪已分配空间的大小：</h5>
+<p><strong>为何要追踪：</strong>free(void
+*ptr)接口没有块大小的参数。因此它是假定，对于给定的指针，内存分配库可以很快确定要释放空间的大小，从而将它放回空闲列表。</p>
+<p>要完成这个任务，大多数分配程序都会在头块（header）中保存一点额外的信息，它在内存中，通常就在返回的内存块之前。</p>
+<p><strong>头块的结构体：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">header</span>{</span></span><br><span class="line">    <span class="type">int</span> size;<span class="comment">// 内存块大小</span></span><br><span class="line">    <span class="type">int</span> magic;<span class="comment">//完整性校验</span></span><br><span class="line">} header</span><br></pre></td></tr></table></figure>
+<p>malloc时的内存块：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230609221317108.png" alt="image-20230609221317108">
+<figcaption aria-hidden="true">image-20230609221317108</figcaption>
+</figure>
+<p>free操作不仅会回收给调用者的内存块，还会回收头块。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">free</span>操作</span><br><span class="line"><span class="type">void</span> <span class="title function_">free</span><span class="params">(<span class="type">void</span>  *ptr)</span>{</span><br><span class="line">    <span class="comment">//获得头块内存起始地址（头块指针）</span></span><br><span class="line">	header *hptr = (<span class="type">void</span> *)ptr - <span class="keyword">sizeof</span>(header);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    recycle();</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h5 id="嵌入空闲列表">嵌入空闲列表：</h5>
+<p>在空闲内存内部构建空闲表：</p>
+<p>现在管理一个4096字节的内存块：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span>  <span class="class"><span class="keyword">struct</span> <span class="title">node_t</span> {</span></span><br><span class="line">	<span class="type">int</span> size;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span>* <span class="title">node_t</span> <span class="title">next</span>;</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>初始化堆：并将空闲列表的第一个元素放在该空间中假设堆构建在某块空闲空间上，这块空间通过系统调用
+<code>mmap()</code>获得。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mmap() returns a pointer to a chunk of free space </span></span><br><span class="line"><span class="type">node_t</span> *head = mmap(<span class="literal">NULL</span>, <span class="number">4096</span>, PROT_READ|PROT_WRITE, </span><br><span class="line"> MAP_ANON|MAP_PRIVATE, <span class="number">-1</span>, <span class="number">0</span>); </span><br><span class="line">head-&gt;size = <span class="number">4096</span> - <span class="keyword">sizeof</span>(<span class="type">node_t</span>); </span><br><span class="line">head-&gt;next = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+<p>假设有一个 100
+字节的内存请求。为了满足这个请求，库首先要找到一个足够大小的块。因为只有一个
+4088
+字节的块，所以选中这个块。然后，这个块被分割（split）为两块：一块足够满足请求（以及头块，如前所述），一块是剩余的空闲块。假设记录头块为
+8 个字节（一个整数记录大小，一个整数记录幻数），堆中的空间如图 17.4
+所示。</p>
+<p><img src="操作系统导论——学习笔记/image-20230616200633676.png" alt="image-20230616200633676" style="zoom: 67%;"></p>
+<p>free操作内存块会发生的变化：</p>
+<p>有 3 个已分配区域，每个 100（加上头块是 108）。这个堆如图
+17.5所示。可以看出，堆的前 324 字节已经分配，因此我们看到该空间中有 3
+个头块，以及 3 个
+100字节的用户使用空间。现在free中间已分配的一段内存空间：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230616201303701.png" alt="image-20230616201303701">
+<figcaption aria-hidden="true">image-20230616201303701</figcaption>
+</figure>
+<p>空闲块之间以链表的形式存储，当free的内存块很多的时候，会触发合并。</p>
+<p>堆内存不够了，让堆向操作系统请求更大的空间。</p>
+<h4 id="基本策略">基本策略：</h4>
+<p>空闲内存分配策略要注意的点：</p>
+<ul>
+<li>碎片最小化</li>
+<li>快速</li>
+</ul>
+<h5 id="最优匹配最小匹配">最优匹配（最小匹配）</h5>
+<p><strong>思想：</strong>遍历空闲块列表，找出和请求大小一样大或者稍大一点的空闲块，从这些空闲块中找出最小的那一块。</p>
+<p><strong>优缺点:：</strong>性能开销大（遍历）</p>
+<h5 id="最差匹配">最差匹配</h5>
+<p><strong>思想：</strong>尝试找最大的空闲块，然后分割，将剩余空间形成一个空闲块纳入空闲列表。配尝试在空闲列表中保留较大的块，而不是向最优匹配那样可能剩下很多难以利用的小块。</p>
+<p><strong>优缺点:：</strong>性能大（遍历），且碎片多</p>
+<h5 id="首次匹配">首次匹配</h5>
+<p><strong>思想：</strong>找到第一个足够大的块，将请求的空间返回给用户。剩余的空闲空间留给后续请求。</p>
+<p><strong>优缺点:</strong>速度快，但产生碎片量略多</p>
+<h5 id="下次匹配"><strong>下次匹配</strong></h5>
+<p><strong>思想：</strong>不同于首次匹配每次都从列表的开始查找，下次匹配（next
+fit）算法<strong>多维护一个指针</strong>，指向上一次查找结束的位置。避免对列表开头频繁的分割。</p>
+<p><strong>优缺点:</strong>速度快，但占空间</p>
+<h4 id="其它算法策略">其它算法策略：</h4>
+<h5 id="分离空闲列表">分离空闲列表：</h5>
+<p><strong>思想：</strong>如果某个应用程序经常申请一种或者几种大小的内存空间，那就重新建立一个独立的列表，专门存储这几种大小的内存块，其他大小的请求都一给更通用的内存分配程序。</p>
+<p><strong>优点：</strong>碎片少，速度快</p>
+<p>在内核启动时，它为可能频繁请求的内核对象创建一些对象缓存（object
+cache），如锁和文件系统 inode
+等。对象缓存每个分离了特定大小的空闲列表因此能够很快地响应内存请求和释放。</p>
+<h5 id="伙伴系统">伙伴系统：</h5>
+<p>针对合并操作。</p>
+<p><strong>思想：</strong>空闲空间首先从概念上被看成大小为 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.279ex" height="1.528ex" role="img" focusable="false" viewBox="0 -675.5 1007.3 675.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mi" transform="translate(533,363) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span>
+的大空间，有内存分配请求时，空闲块会被递归二等分，分到一个恰好大于需求空间的<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.279ex" height="1.528ex" role="img" focusable="false" viewBox="0 -675.5 1007.3 675.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mi" transform="translate(533,363) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span>大小的块。</p>
+<p>一个 64KB 大小的空闲空间被切分，以便提供 7KB 的块：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230616204454489.png" alt="image-20230616204454489">
+<figcaption aria-hidden="true">image-20230616204454489</figcaption>
+</figure>
+<p><strong>缺陷：</strong>会存在内部碎片。</p>
+<h3 id="分页">分页</h3>
+<p><strong>分页思想：</strong>将空间分割成固定长度的分片。每一片叫做一页。</p>
+<h4 id="分页案例">分页案例</h4>
+<p>一个简单64KB内存块分成四页：</p>
+<figure>
+<img src="操作系统导论——学习笔记/image-20230616204827581.png" alt="image-20230616204827581">
+<figcaption aria-hidden="true">image-20230616204827581</figcaption>
+</figure>
+<p>分页优势：</p>
+<ul>
+<li><p>灵活性：操作系统能够高效地提供地址空间的抽象，不会假定堆和栈的增长方向，以及它们如何使用。</p></li>
+<li><p>简单管理：如果操作系统希望将 64 字节的小地址空间放到 8
+页128KB的物理地址空间中，它只要在128KB的空间里找到 4 个空闲页</p>
+<p><img src="操作系统导论——学习笔记/image-20230616205013905.png" alt="image-20230616205013905" style="zoom: 67%;"></p></li>
+</ul>
+<p><strong>页表：</strong>为了记录地址空间的每个虚拟页放在物理内存中的位置，操作系统通常为<strong>每个进程保存一个数据结构</strong>，称为页表（page
+table）。</p>
+<ul>
+<li>作用：为每个虚拟页面进行地址转换，得出它在物理内存中的位置。</li>
+</ul>
+<p>相关名词解释：</p>
+<ul>
+<li>虚拟页面号：VPN
+<ul>
+<li>位数的确定：根据页数确定，n页，那么假设位数为x，<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex;" xmlns="http://www.w3.org/2000/svg" width="10.506ex" height="1.714ex" role="img" focusable="false" viewBox="0 -675.5 4643.5 757.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mi" transform="translate(533,363) scale(0.707)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><g data-mml-node="mo" transform="translate(1209.7,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(2209.9,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(2987.7,0)"><path data-c="3E" d="M84 520Q84 528 88 533T96 539L99 540Q106 540 253 471T544 334L687 265Q694 260 694 250T687 235Q685 233 395 96L107 -40H101Q83 -38 83 -20Q83 -19 83 -17Q82 -10 98 -1Q117 9 248 71Q326 108 378 132L626 250L378 368Q90 504 86 509Q84 513 84 520Z"></path></g><g data-mml-node="mi" transform="translate(4043.5,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container>即可</li>
+</ul></li>
+<li>业内偏移量：offset</li>
+<li>物理帧：Physical Frame</li>
+</ul>
+<p><strong>虚拟地址的转换</strong></p>
+<p>虚拟地址为21，假设一页为16kb，虚拟页号从00开始，求虚拟地址具体位置（几页、偏移量）。</p>
+<p>21 / 16 ... 5 在01页，偏移量为5 的位置。</p>
+<p>‘</p>
+<h4 id="页表的存储">页表的存储</h4>
+<p>典型的 32 位地址空间，带有 4KB 的页。这个虚拟地址分成 20 位的 VPN 和
+12 位的偏移量（回想一下，1KB 的页面大小需要 10 位，只需增加两位即可达到
+4KB）。</p>
+<p>20位的VPN -&gt; 操作系统管理<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.919ex" height="1.887ex" role="img" focusable="false" viewBox="0 -833.9 1290.1 833.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="TeXAtom" transform="translate(533,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g></g></g></g></g></svg></mjx-container></span>个地址转换信息，每个页表头条目（记录表一些信息）4字节
+-&gt; 4MB内存</p>
+<h5 id="页表项的内容">页表项的内容</h5>
+<p>操作系统通过虚拟页号（VPN）检索该数组，并在该索引处查找页表项（PTE），以便找到期望的物理帧号（PFN）。</p>
+<ul>
+<li>保护位</li>
+<li>存在位：表示该页是在物理存储器还是在磁盘上</li>
+<li>脏位：数据是否被修改</li>
+<li>参考位（访问位）：该页是否被访问</li>
+</ul>
+<h4 id="快速地址转换tlb">快速地址转换（TLB）</h4>
+<h2 id="并发">并发</h2>
+<h2 id="持久化">持久化</h2>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io">Vlong_shen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io/2023/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://vlsmhd.github.io/2023/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://vlsmhd.github.io" target="_blank">VLS_Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/14/Leetcode-Hot100-236.-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/" title="Leetcode-Hot100-236. 二叉树的最近公共祖先"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Leetcode-Hot100-236. 二叉树的最近公共祖先</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/13/2023%E6%9A%91%E6%9C%9F%E5%AE%9E%E4%B9%A0%E6%8A%95%E9%80%92%E8%AE%B0%E5%BD%95/" title="2023暑期实习投递记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2023暑期实习投递记录</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/04/04/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" title="Leetcode-Hot100-15. 三数之和"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-04</div><div class="title">Leetcode-Hot100-15. 三数之和</div></div></a></div><div><a href="/2023/04/01/22.%20%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/" title="Leetcode-Hot100-22.括号生成"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-01</div><div class="title">Leetcode-Hot100-22.括号生成</div></div></a></div><div><a href="/2023/04/03/226.%20%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/" title="Leetcode-Hot100-226. 翻转二叉树"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-03</div><div class="title">Leetcode-Hot100-226. 翻转二叉树</div></div></a></div><div><a href="/2023/03/31/3.%20%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" title="Leetcode-Hot100-3.无重复字符的最长子串"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">Leetcode-Hot100-3.无重复字符的最长子串</div></div></a></div><div><a href="/2023/05/04/Leetcode-Hot100-105.-%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/" title="Leetcode-Hot100-105. 从前序与中序遍历序列构造二叉树"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-04</div><div class="title">Leetcode-Hot100-105. 从前序与中序遍历序列构造二叉树</div></div></a></div><div><a href="/2023/04/24/Leetcode-Hot100-108.-%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" title="Leetcode-Hot100-108. 将有序数组转换为二叉搜索树"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-24</div><div class="title">Leetcode-Hot100-108. 将有序数组转换为二叉搜索树</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Vlong_shen</div><div class="author-info__description">一名热爱编程的程序员</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">92</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">39</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VLSmhd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/VLSmhd" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/-" target="_blank" title="联系我QQ：1067853293"><i class="fab fa-qq"></i></a><a class="social-icon" href="/-" target="_blank" title="微信：18956757208"><i class="fa fa-wechat"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BAoperating-systems-three-easy-pieces%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">操作系统导论（operating
+systems: three easy pieces）——学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">操作系统简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96cpu%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">虚拟化——CPU虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E8%BF%9B%E7%A8%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">抽象：进程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%A6%82%E5%BF%B5"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">进程概念：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E5%88%86%E5%85%B1%E4%BA%AB%E7%A9%BA%E5%88%86%E5%85%B1%E4%BA%AB"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">时分共享、空分共享：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">实现虚拟化：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">进程的组成：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8Bapi"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">进程API：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%88%9B%E5%BB%BA"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">进程创建：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="toc-number">1.2.1.7.</span> <span class="toc-text">进程状态：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%97%E9%99%90%E7%9B%B4%E6%8E%A5%E6%89%A7%E8%A1%8C"><span class="toc-number">1.2.2.</span> <span class="toc-text">受限：直接执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%97%E9%99%90%E7%9B%B4%E6%8E%A5%E6%89%A7%E8%A1%8C-1"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">受限直接执行：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%97%E9%99%90%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">受限的操作：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E5%88%87%E6%8D%A2"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">在进程之间切换 ：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8F%E4%BD%9C%E6%96%B9%E5%BC%8F%E7%AD%89%E5%BE%85%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.2.3.1.</span> <span class="toc-text">协作方式：等待系统调用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%9E%E5%8D%8F%E4%BD%9C%E6%96%B9%E5%BC%8F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E8%A1%8C%E6%8E%A7%E5%88%B6"><span class="toc-number">1.2.2.3.2.</span> <span class="toc-text">非协作方式：操作系统进行控制</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E5%92%8C%E6%81%A2%E5%A4%8D%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">1.2.2.3.2.1.</span> <span class="toc-text">保存和恢复上下文</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6"><span class="toc-number">1.2.3.</span> <span class="toc-text">进程调度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD%E5%81%87%E8%AE%BE"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">进程工作负载假设：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E6%8C%87%E6%A0%87"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">调度指标：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BAfifo"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">先进先出(FIFO)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E7%9F%AD%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88sjf"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">最短任务优先（SJF）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E7%9F%AD%E5%AE%8C%E6%88%90%E6%97%B6%E9%97%B4%E4%BC%98%E5%85%88stcf"><span class="toc-number">1.2.3.5.</span> <span class="toc-text">最短完成时间优先（STCF）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E7%89%87%E8%BD%AE%E8%BD%ACrr"><span class="toc-number">1.2.3.6.</span> <span class="toc-text">时间片轮转（RR）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E5%90%88io%E8%BF%90%E8%A1%8C%E7%9A%84%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E9%87%8D%E5%8F%A0"><span class="toc-number">1.2.3.7.</span> <span class="toc-text">结合I&#x2F;O运行的算法设计：重叠</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E6%B3%95%E9%A2%84%E7%9F%A5%E7%9A%84%E5%81%87%E8%AE%BE"><span class="toc-number">1.2.3.8.</span> <span class="toc-text">无法预知的假设：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%A4%9A%E7%BA%A7%E5%8F%8D%E9%A6%88%E9%98%9F%E5%88%97mlfq"><span class="toc-number">1.2.4.</span> <span class="toc-text">调度：多级反馈队列MLFQ</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mlfq%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">MLFQ基本规则</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%84%E5%88%991"><span class="toc-number">1.2.4.1.1.</span> <span class="toc-text">规则1：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%84%E5%88%992"><span class="toc-number">1.2.4.1.2.</span> <span class="toc-text">规则2：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%94%B9%E5%8F%98%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">如何改变优先级:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%84%E5%88%993"><span class="toc-number">1.2.4.2.1.</span> <span class="toc-text">规则3：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%84%E5%88%994a"><span class="toc-number">1.2.4.2.2.</span> <span class="toc-text">规则4a：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%84%E5%88%994b"><span class="toc-number">1.2.4.2.3.</span> <span class="toc-text">规则4b：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E5%8D%87%E4%BC%98%E5%85%88%E7%BA%A7%E7%AD%96%E7%95%A5"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">提升优先级策略：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%84%E5%88%99-5"><span class="toc-number">1.2.4.3.1.</span> <span class="toc-text">规则 5：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E5%A5%BD%E7%9A%84%E8%AE%A1%E6%97%B6%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.4.4.</span> <span class="toc-text">更好的计时方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%84%E5%88%994"><span class="toc-number">1.2.4.4.1.</span> <span class="toc-text">规则4：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mlfq%E8%B0%83%E4%BC%98"><span class="toc-number">1.2.4.5.</span> <span class="toc-text">MLFQ调优</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.4.6.</span> <span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E6%AF%94%E4%BE%8B%E4%BB%BD%E9%A2%9D"><span class="toc-number">1.2.5.</span> <span class="toc-text">调度：比例份额</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%BD%A9%E7%A5%A8%E6%95%B0%E8%A1%A8%E7%A4%BA%E4%BB%BD%E9%A2%9D"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">基本概念：彩票数表示份额</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%80%A7"><span class="toc-number">1.2.5.1.1.</span> <span class="toc-text">随机性：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%A9%E7%A5%A8%E6%9C%BA%E5%88%B6"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">彩票机制：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BD%A9%E7%A5%A8%E8%B4%A7%E5%B8%81"><span class="toc-number">1.2.5.2.1.</span> <span class="toc-text">彩票货币：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BD%A9%E7%A5%A8%E8%BD%AC%E8%AE%A9"><span class="toc-number">1.2.5.2.2.</span> <span class="toc-text">彩票转让：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BD%A9%E7%A5%A8%E9%80%9A%E8%83%80"><span class="toc-number">1.2.5.2.3.</span> <span class="toc-text">彩票通胀：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%A9%E7%A5%A8%E8%B0%83%E5%BA%A6%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.5.3.</span> <span class="toc-text">彩票调度的简单实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%A9%E7%A5%A8%E5%85%AC%E5%B9%B3%E6%80%A7%E7%A0%94%E7%A9%B6"><span class="toc-number">1.2.5.4.</span> <span class="toc-text">彩票公平性研究：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E5%BD%A9%E7%A5%A8"><span class="toc-number">1.2.5.5.</span> <span class="toc-text">如何分配彩票：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%87%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%80%A7%E7%BC%BA%E7%82%B9%E5%91%A2"><span class="toc-number">1.2.5.5.1.</span> <span class="toc-text">为什么采用随机性？缺点呢？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A5%E9%95%BF%E8%B0%83%E5%BA%A6"><span class="toc-number">1.2.5.5.2.</span> <span class="toc-text">步长调度：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%A4%84%E7%90%86%E6%9C%BA%E8%B0%83%E5%BA%A6%E9%AB%98%E7%BA%A7"><span class="toc-number">1.2.6.</span> <span class="toc-text">多处理机调度（高级）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">虚拟化——内存虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-number">1.3.1.</span> <span class="toc-text">抽象：地址空间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A9%E6%9C%9F%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">早期系统内存结构：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E9%81%93%E7%A8%8B%E5%BA%8F%E5%92%8C%E6%97%B6%E5%88%86%E5%85%B1%E4%BA%AB"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">多道程序和时分共享：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">地址空间：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E5%86%85%E5%AD%98%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">虚拟化内存的目标：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%88%B6%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.3.2.</span> <span class="toc-text">机制：地址转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E5%81%87%E8%AE%BE"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">地址空间假设：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E9%87%8D%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">动态重定位：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%AE%B5"><span class="toc-number">1.3.3.</span> <span class="toc-text">分段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%9B%E5%8C%96%E7%9A%84%E5%9F%BA%E5%9D%80%E7%95%8C%E9%99%90"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">泛化的基址&#x2F;界限：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E7%A1%AE%E5%AE%9A%E6%89%80%E8%A6%81%E5%BC%95%E7%94%A8%E7%9A%84%E6%AE%B5"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">怎么确定所要引用的段：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E6%A0%87%E8%AF%86"><span class="toc-number">1.3.3.2.1.</span> <span class="toc-text">显示标识：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E5%A2%9E%E9%95%BF%E7%9A%84%E6%A0%88"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">反向增长的栈：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">共享：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%86%E7%B2%92%E5%BA%A6%E4%B8%8E%E7%B2%97%E7%B2%92%E5%BA%A6%E7%9A%84%E5%88%86%E6%AE%B5"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">细粒度与粗粒度的分段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81"><span class="toc-number">1.3.3.6.</span> <span class="toc-text">操作系统支持：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E9%97%B2%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86"><span class="toc-number">1.3.4.</span> <span class="toc-text">空闲空间管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%81%87%E8%AE%BE"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">假设：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%95%E5%B1%82%E6%9C%BA%E5%88%B6"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">底层机制：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E5%89%B2%E4%B8%8E%E5%90%88%E5%B9%B6%E5%A0%86"><span class="toc-number">1.3.4.2.1.</span> <span class="toc-text">分割与合并（堆）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%BD%E8%B8%AA%E5%B7%B2%E5%88%86%E9%85%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.3.4.2.2.</span> <span class="toc-text">追踪已分配空间的大小：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5%E7%A9%BA%E9%97%B2%E5%88%97%E8%A1%A8"><span class="toc-number">1.3.4.2.3.</span> <span class="toc-text">嵌入空闲列表：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%AD%96%E7%95%A5"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">基本策略：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%80%E4%BC%98%E5%8C%B9%E9%85%8D%E6%9C%80%E5%B0%8F%E5%8C%B9%E9%85%8D"><span class="toc-number">1.3.4.3.1.</span> <span class="toc-text">最优匹配（最小匹配）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%80%E5%B7%AE%E5%8C%B9%E9%85%8D"><span class="toc-number">1.3.4.3.2.</span> <span class="toc-text">最差匹配</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A6%96%E6%AC%A1%E5%8C%B9%E9%85%8D"><span class="toc-number">1.3.4.3.3.</span> <span class="toc-text">首次匹配</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8B%E6%AC%A1%E5%8C%B9%E9%85%8D"><span class="toc-number">1.3.4.3.4.</span> <span class="toc-text">下次匹配</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E7%AE%97%E6%B3%95%E7%AD%96%E7%95%A5"><span class="toc-number">1.3.4.4.</span> <span class="toc-text">其它算法策略：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E7%A6%BB%E7%A9%BA%E9%97%B2%E5%88%97%E8%A1%A8"><span class="toc-number">1.3.4.4.1.</span> <span class="toc-text">分离空闲列表：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%99%E4%BC%B4%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.3.4.4.2.</span> <span class="toc-text">伙伴系统：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%A1%B5"><span class="toc-number">1.3.5.</span> <span class="toc-text">分页</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E9%A1%B5%E6%A1%88%E4%BE%8B"><span class="toc-number">1.3.5.1.</span> <span class="toc-text">分页案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B5%E8%A1%A8%E7%9A%84%E5%AD%98%E5%82%A8"><span class="toc-number">1.3.5.2.</span> <span class="toc-text">页表的存储</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A1%B5%E8%A1%A8%E9%A1%B9%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-number">1.3.5.2.1.</span> <span class="toc-text">页表项的内容</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2tlb"><span class="toc-number">1.3.5.3.</span> <span class="toc-text">快速地址转换（TLB）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91"><span class="toc-number">1.4.</span> <span class="toc-text">并发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">1.5.</span> <span class="toc-text">持久化</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/06/leetcode%E5%93%88%E5%B8%8C%E8%A1%A8%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="leetcode哈希表题目专项训练">leetcode哈希表题目专项训练</a><time datetime="2023-07-06T02:37:18.266Z" title="发表于 2023-07-06 10:37:18">2023-07-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/05/Nginx/" title="Nginx">Nginx</a><time datetime="2023-07-05T06:54:12.757Z" title="发表于 2023-07-05 14:54:12">2023-07-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/03/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1MinIO/" title="对象存储服务MinIO">对象存储服务MinIO</a><time datetime="2023-07-03T08:23:53.203Z" title="发表于 2023-07-03 16:23:53">2023-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/02/freemaker%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/" title="freemaker模板引擎">freemaker模板引擎</a><time datetime="2023-07-02T09:41:02.413Z" title="发表于 2023-07-02 17:41:02">2023-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/02/leetcode%E7%AC%AC352%E5%9C%BA%E5%91%A8%E8%B5%9B/" title="leetcode第352场周赛">leetcode第352场周赛</a><time datetime="2023-07-02T03:53:59.774Z" title="发表于 2023-07-02 11:53:59">2023-07-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Vlong_shen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

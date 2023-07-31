@@ -1,0 +1,1500 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Redis学习 | VLS_Blog</title><meta name="author" content="Vlong_shen"><meta name="copyright" content="Vlong_shen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="底层基础 基础数据类型 String String 是最基本的 key-value 结构，key 是唯一标识，value 是具体的值，value其实不仅是字符串， 也可以是数字（整数或浮点数），value 最多可以容纳的数据长度是 512M。 常用命令： 普通字符串的基本操作： 123456789101112131415# 设置 key-value 类型的值&gt; SET nam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis学习">
+<meta property="og:url" content="https://vlsmhd.github.io/2023/06/13/Redis%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="VLS_Blog">
+<meta property="og:description" content="底层基础 基础数据类型 String String 是最基本的 key-value 结构，key 是唯一标识，value 是具体的值，value其实不仅是字符串， 也可以是数字（整数或浮点数），value 最多可以容纳的数据长度是 512M。 常用命令： 普通字符串的基本操作： 123456789101112131415# 设置 key-value 类型的值&gt; SET nam">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://vlsmhd.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2023-06-13T12:51:55.468Z">
+<meta property="article:modified_time" content="2023-07-22T03:52:29.261Z">
+<meta property="article:author" content="Vlong_shen">
+<meta property="article:tag" content="learn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vlsmhd.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://vlsmhd.github.io/2023/06/13/Redis%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Redis学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-22 11:52:29'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="VLS_Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">92</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">39</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="VLS_Blog"><img class="site-icon" src="https://vlsmhd.github.io/img/avatar.jpg"/><span class="site-name">VLS_Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Redis学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-13T12:51:55.468Z" title="发表于 2023-06-13 20:51:55">2023-06-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-22T03:52:29.261Z" title="更新于 2023-07-22 11:52:29">2023-07-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/NoSql/">NoSql</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/NoSql/Redis/">Redis</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redis学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="底层基础">底层基础</h1>
+<h2 id="基础数据类型">基础数据类型</h2>
+<h3 id="string">String</h3>
+<p>String 是最基本的 key-value 结构，key 是唯一标识，value
+是具体的值，value其实不仅是字符串， 也可以是数字（整数或浮点数），value
+最多可以容纳的数据长度是 <code>512M</code>。</p>
+<h4 id="常用命令">常用命令：</h4>
+<p>普通字符串的基本操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置 key-value 类型的值</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SET name lin</span></span><br><span class="line">OK</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">根据 key 获得对应的 value</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">GET name</span></span><br><span class="line">&quot;lin&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">判断某个 key 是否存在</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">EXISTS name</span></span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回 key 所储存的字符串值的长度</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">STRLEN name</span></span><br><span class="line">(integer) 3</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除某个 key 对应的值</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">DEL name</span></span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+<p>批量设置 :</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量设置 key-value 类型的值</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">MSET key1 value1 key2 value2</span> </span><br><span class="line">OK</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量获取多个 key 对应的 value</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">MGET key1 key2</span> </span><br><span class="line">1) &quot;value1&quot;</span><br><span class="line">2) &quot;value2&quot;</span><br></pre></td></tr></table></figure>
+<p>计数器（字符串的内容为整数的时候可以使用）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置 key-value 类型的值</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SET number 0</span></span><br><span class="line">OK</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将 key 中储存的数字值增一</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">INCR number</span></span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将key中存储的数字值加 10</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">INCRBY number 10</span></span><br><span class="line">(integer) 11</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将 key 中储存的数字值减一</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">DECR number</span></span><br><span class="line">(integer) 10</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将key中存储的数字值键 10</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">DECRBY number 10</span></span><br><span class="line">(integer) 0</span><br></pre></td></tr></table></figure>
+<p>过期（默认为永不过期）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置 key 在 60 秒后过期（该方法是针对已经存在的key设置过期时间）</span></span><br><span class="line">&gt; EXPIRE name  60 </span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line"><span class="comment"># 查看数据还有多久过期</span></span><br><span class="line">&gt; TTL name </span><br><span class="line">(<span class="built_in">integer</span>) 51</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置 key-value 类型的值，并设置该key的过期时间为 60 秒</span></span><br><span class="line">&gt; SET key  value EX 60</span><br><span class="line">OK</span><br><span class="line">&gt; SETEX key  60 value</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+<p>不存在就插入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">不存在就插入（not exists）</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">SETNX key value</span></span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+<h4 id="内部实现">内部实现：</h4>
+<p>String 类型的底层的数据结构实现主要是 int 和
+SDS（简单动态字符串）。</p>
+<ul>
+<li><strong>SDS
+不仅可以保存文本数据，还可以保存二进制数据</strong>。SDS底层的API都是处理二进制的方式来处理
+SDS 存放在 <code>buf[]</code> 数组里的数据。</li>
+<li><strong>SDS 获取字符串长度的时间复杂度是
+O(1)</strong>。因为有len属性记录。</li>
+<li><strong>Redis 的 SDS API
+是安全的，拼接字符串不会造成缓冲区溢出</strong>。会自动扩容</li>
+</ul>
+<h5 id="内部编码方式">内部编码方式：</h5>
+<p><img src="string结构.png" alt="img" style="zoom: 80%;" /></p>
+<ul>
+<li><p>int：如果一个字符串对象保存的是整数值，并且这个整数值可以用<code>long</code>类型来表示，那么字符串对象会将整数值保存在字符串对象结构的<code>ptr</code>属性里面并将字符串对象的编码设置为<code>int</code>。</p>
+<p><img src="int.png" alt="img" style="zoom:50%;" /></p></li>
+<li><p>raw：如果字符串对象保存的是一个字符串，并且这个字符串的长度<strong>大于
+32 字节</strong>（redis
+2.+版本），那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串，并将对象的编码设置为<code>raw</code>：</p>
+<ul>
+<li>会调用两次内存分配函数分别分配redisObject和SDS</li>
+</ul>
+<figure>
+<img src="raw.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure></li>
+<li><p>embstr：如果字符串对象保存的是一个字符串，并且这个字符申的长度<strong>小于等于
+32 字节</strong>（redis
+2.+版本），那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串，并将对象的编码设置为<code>embstr</code>，
+<code>embstr</code>编码是<strong>专门用于保存短字符串</strong>的一种优化编码方式：</p>
+<ul>
+<li>调用一次分配函数，分配一块<strong>连续的内存空间</strong>，分配redisObject和SDS（如下图连接在一起）</li>
+</ul>
+<figure>
+<img src="embstr.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure></li>
+</ul>
+<p>embstr 编码和 raw 编码的边界在 redis 不同版本的值：</p>
+<ul>
+<li>redis 2.+ 是 32 字节</li>
+<li>redis 3.0-4.0 是 39 字节</li>
+<li>redis 5.0 是 44 字节</li>
+</ul>
+<p>embstr优缺点：</p>
+<ul>
+<li>优点：
+<ul>
+<li>内存分配次数少，效率高</li>
+<li>连续内存，能更好利用CPU缓存（局部性原理）</li>
+</ul></li>
+<li>缺点：
+<ul>
+<li><strong>embstr</strong>不可变。如需变化长度，需要重新分配空间。</li>
+</ul></li>
+</ul>
+<h4 id="应用场景">应用场景：</h4>
+<h5 id="缓存对象">缓存对象：</h5>
+<p>String 来缓存对象两种方式：</p>
+<ul>
+<li>直接缓存整个对象的 JSON，命令例子：
+<code>SET user:1 '&#123;"name":"xiaolin", "age":18&#125;'</code>。</li>
+<li>批量操作：采用将 key 进行分离为 user:ID:属性，采用 MSET 存储，用
+MGET 获取各属性值，命令例子：
+<code>MSET user:1:name xiaolin user:1:age 18 user:2:name xiaomei user:2:age 20</code>。</li>
+</ul>
+<h5 id="计数">计数：</h5>
+<p>redis处理命令单线程，操作都是原子性的。因此 String
+数据类型适合计数场景，比如计算访问次数、点赞、转发、库存数量等等。</p>
+<p>比如计算文章的阅读量：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化文章的阅读量</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SET aritcle:readcount:1001 0</span></span><br><span class="line">OK</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">阅读量+1</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">INCR aritcle:readcount:1001</span></span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">阅读量+1</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">INCR aritcle:readcount:1001</span></span><br><span class="line">(integer) 2</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">阅读量+1</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">INCR aritcle:readcount:1001</span></span><br><span class="line">(integer) 3</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取对应文章的阅读量</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">GET aritcle:readcount:1001</span></span><br><span class="line">&quot;3&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="分布式锁">分布式锁：</h5>
+<p>利用<code>SETNX</code>指令的特性：</p>
+<ul>
+<li>无则添加</li>
+<li>有则失败</li>
+</ul>
+<p>分布式锁命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SET lock_key unique_value NX PX 10000</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>lock_key：锁的逻辑名称</li>
+<li>unique_value：可以和客户端id绑定，如多线程下线程id</li>
+<li>PX 10000：过期时间设为10s。避免客户端异常引起锁无法释放。</li>
+</ul>
+<p>加锁：setnx创建key</p>
+<p>解锁：删除key</p>
+<p>解锁过程需要判断执行指令的客户端是不是锁主人，然后执行删锁过程。这个过程有多个步骤需要保证原子性，采用<strong>lua脚本</strong></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> redis.call(<span class="string">&quot;get&quot;</span>, KEYS[<span class="number">1</span>]) == ARGV[<span class="number">1</span>] <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> redis.call(<span class="string">&quot;del&quot;</span>,KEYS[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h5 id="分布式共享session">分布式共享session</h5>
+<p>用户登录时，用户信息会存在redis里方便校验。假如采用session方式，每个服务器都要复制一份用户信息，浪费资源空间。</p>
+<figure>
+<img src="Session2.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h3 id="list">List</h3>
+<p>List
+列表是简单的字符串列表，<strong>按照插入顺序排序</strong>，可以从头部或尾部向
+List 列表添加元素。</p>
+<p>列表的最大长度为 <code>2^32 - 1</code>，每个列表支持超过
+<code>40 亿</code>个元素。</p>
+<h4 id="内部实现-1">内部实现</h4>
+<p>redis3.2以前底层数据结构：<strong>双向链表或压缩列表</strong>，选择规则如下：</p>
+<ul>
+<li>元素个数小于 <code>512</code> 个（默认值，可由
+<code>list-max-ziplist-entries</code> 配置），列表每个元素的值都小于
+<code>64</code> 字节（默认值，可由 <code>list-max-ziplist-value</code>
+配置），Redis 会使用<strong>压缩列表</strong>作为 List
+类型的底层数据结构；</li>
+<li>否则使用双向链表</li>
+</ul>
+<p>redis3.2以后的数据结构：quicklist</p>
+<h4 id="常用命令-1">常用命令</h4>
+<p><img src="list.png" alt="img" style="zoom:67%;" /></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 将一个或多个值value插入到key列表的表头(最左边)，最后的值在最前面</span><br><span class="line">LPUSH key value [value ...] </span><br><span class="line"># 将一个或多个值value插入到key列表的表尾(最右边)</span><br><span class="line">RPUSH key value [value ...]</span><br><span class="line"># 移除并返回key列表的头元素</span><br><span class="line">LPOP key     </span><br><span class="line"># 移除并返回key列表的尾元素</span><br><span class="line">RPOP key </span><br><span class="line"></span><br><span class="line"># 返回列表key中指定区间内的元素，区间以偏移量start和stop指定，从<span class="number">0</span>开始</span><br><span class="line">LRANGE key start stop</span><br><span class="line"></span><br><span class="line"># 从key列表表头弹出一个元素，没有就阻塞timeout秒，如果timeout=<span class="number">0</span>则一直阻塞</span><br><span class="line">BLPOP key [key ...] timeout</span><br><span class="line"># 从key列表表尾弹出一个元素，没有就阻塞timeout秒，如果timeout=<span class="number">0</span>则一直阻塞</span><br><span class="line">BRPOP key [key ...] timeout</span><br></pre></td></tr></table></figure>
+<h4 id="应用场景-1">应用场景</h4>
+<h5 id="消息队列">消息队列</h5>
+<p>不建议。缺点如下：</p>
+<p><strong>List
+不支持多个消费者消费同一条消息</strong>，因为一旦消费者拉取一条消息后，这条消息就从
+List 中删除了，无法被其它消费者再次消费。</p>
+<p>比如订单分发给多个服务：用户、客服、后台处理...</p>
+<h3 id="hash">Hash</h3>
+<p>Hash 是一个键值对（key - value）集合，其中 value 的形式如：
+<code>value=[&#123;field1，value1&#125;，...&#123;fieldN，valueN&#125;]</code>。Hash
+特别适合用于存储对象。以{对象域，对象值}的形式存储。</p>
+<p>hash为什么适合存对象，与string的区别如下：</p>
+<figure>
+<img src="image-20230624153540520.png" alt="image-20230624153540520" />
+<figcaption aria-hidden="true">image-20230624153540520</figcaption>
+</figure>
+<h4 id="内部实现-2">内部实现</h4>
+<p>7.0之前：</p>
+<p>底层数据结构是由<strong>压缩列表或哈希表</strong>实现的：</p>
+<ul>
+<li>如果哈希类型元素个数小于 <code>512</code> 个（默认值，可由
+<code>hash-max-ziplist-entries</code> 配置），所有值小于 <code>64</code>
+字节（默认值，可由 <code>hash-max-ziplist-value</code> 配置）的话，Redis
+会使用<strong>压缩列表</strong>作为 Hash 类型的底层数据结构；</li>
+<li>否则使用<strong>哈希表</strong></li>
+</ul>
+<p>7.0之后：</p>
+<p><strong>压缩列表数据结构废弃</strong>，采用<strong>listpack</strong></p>
+<h4 id="常用命令-2">常用命令</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">存储一个哈希表key的键值</span></span><br><span class="line">HSET key field value   </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取哈希表key对应的field键值</span></span><br><span class="line">HGET key field</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在一个哈希表key中存储多个键值对</span></span><br><span class="line">HMSET key field value [field value...] </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">批量获取哈希表key中多个field键值</span></span><br><span class="line">HMGET key field [field ...]       </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除哈希表key中的field键值</span></span><br><span class="line">HDEL key field [field ...]    </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回哈希表key中field的数量</span></span><br><span class="line">HLEN key       </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回哈希表key中所有的键值</span></span><br><span class="line">HGETALL key </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">为哈希表key中field键的值加上增量n</span></span><br><span class="line">HINCRBY key field n                 </span><br></pre></td></tr></table></figure>
+<h4 id="应用场景-2">应用场景</h4>
+<h5 id="缓存对象-1">缓存对象</h5>
+<p>Hash 类型的 （key，field， value） 的结构与对象的（对象id， 属性，
+值）的结构相似，也可以用来存储对象。</p>
+<h5 id="购物车">购物车</h5>
+<p>用户id为key，商品 id 为 field，商品数量为
+value，恰好构成了购物车的3个要素：</p>
+<p><img src="购物车.png" alt="img" style="zoom: 25%;" /></p>
+<p>涉及命令：</p>
+<ul>
+<li>添加商品：<code>HSET cart:&#123;用户id&#125; &#123;商品id&#125; 1</code></li>
+<li>添加数量：<code>HINCRBY cart:&#123;用户id&#125; &#123;商品id&#125; 1</code></li>
+<li>商品总数：<code>HLEN cart:&#123;用户id&#125;</code></li>
+<li>删除商品：<code>HDEL cart:&#123;用户id&#125; &#123;商品id&#125;</code></li>
+<li>获取购物车所有商品：<code>HGETALL cart:&#123;用户id&#125;</code></li>
+</ul>
+<h3 id="set">Set</h3>
+<p>Set
+类型是一个<strong>无序</strong>并<strong>唯一</strong>的键值集合，它的存储顺序不会按照插入的先后顺序进行存储。</p>
+<p>一个集合最多可以存储 <code>2^32-1</code>
+个元素。概念和数学中个的集合基本类似，<strong>可以交集，并集，差集等等</strong>，所以
+Set
+类型除了支持集合内的增删改查，同时还支持多个集合取交集、并集、差集。</p>
+<p><img src="set.png" alt="img" style="zoom:50%;" /></p>
+<h4 id="内部实现-3">内部实现</h4>
+<p>Set
+类型的底层数据结构是由<strong>哈希表或整数集合</strong>实现的：</p>
+<ul>
+<li>如果集合中的<strong>元素都是整数</strong>且元素个数小于
+<code>512</code>
+（默认值，<code>set-maxintset-entries</code>配置）个，Redis
+会使用<strong>整数集合</strong>作为 Set 类型的底层数据结构；</li>
+<li>如果集合中的元素不满足上面条件，则 Redis
+使用<strong>哈希表</strong>作为 Set 类型的底层数据结构。</li>
+</ul>
+<h4 id="常用命令-3">常用命令</h4>
+<p>Set常用操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">往集合key中存入元素，元素存在则忽略，若key不存在则新建</span></span><br><span class="line">SADD key member [member ...]</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从集合key中删除元素</span></span><br><span class="line">SREM key member [member ...] </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取集合key中所有元素</span></span><br><span class="line">SMEMBERS key</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取集合key中的元素个数</span></span><br><span class="line">SCARD key</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">判断member元素是否存在于集合key中</span></span><br><span class="line">SISMEMBER key member</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从集合key中随机选出count个元素，元素不从key中删除</span></span><br><span class="line">SRANDMEMBER key [count]</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从集合key中随机选出count个元素，元素从key中删除</span></span><br><span class="line">SPOP key [count]</span><br></pre></td></tr></table></figure>
+<p>Set运算操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">交集运算</span></span><br><span class="line">SINTER key [key ...]</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将交集结果存入新集合destination中</span></span><br><span class="line">SINTERSTORE destination key [key ...]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">并集运算</span></span><br><span class="line">SUNION key [key ...]</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将并集结果存入新集合destination中</span></span><br><span class="line">SUNIONSTORE destination key [key ...]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">差集运算</span></span><br><span class="line">SDIFF key [key ...]</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将差集结果存入新集合destination中</span></span><br><span class="line">SDIFFSTORE destination key [key ...]</span><br></pre></td></tr></table></figure>
+<h4 id="应用场景-3">应用场景</h4>
+<p><strong>集合的特性：</strong>无序、不可重复、支持并交差等操作。</p>
+<p><strong>Set
+的差集、并集和交集的计算复杂度较高，在数据量较大的情况下，如果直接执行这些计算，会导致
+Redis 实例阻塞</strong>。</p>
+<h5 id="点赞">点赞</h5>
+<p>保证用户只点一个赞，key对应文章id，值就是点赞的用户集合。</p>
+<p><code>uid:1</code> 、<code>uid:2</code>、<code>uid:3</code>
+三个用户分别对 article:1 文章点赞了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">uid:1 用户对文章 article:1 点赞</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SADD article:1 uid:1</span></span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">uid:2 用户对文章 article:1 点赞</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SADD article:1 uid:2</span></span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">uid:3 用户对文章 article:1 点赞</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SADD article:1 uid:3</span></span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+<p><code>uid:1</code> 取消了对 article:1 文章点赞。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; SREM article:1 uid:1</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+<p>获取 article:1 文章所有点赞用户 :</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SMEMBERS article:1</span></span><br><span class="line">1) &quot;uid:3&quot;</span><br><span class="line">2) &quot;uid:2&quot;</span><br></pre></td></tr></table></figure>
+<p>获取 article:1 文章的点赞用户数量：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SCARD article:1</span></span><br><span class="line">(integer) 2</span><br></pre></td></tr></table></figure>
+<p>判断用户 <code>uid:1</code> 是否对文章 article:1 点赞了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SISMEMBER article:1 uid:1</span></span><br><span class="line">(integer) 0  # 返回0说明没点赞，返回1则说明点赞了</span><br></pre></td></tr></table></figure>
+<h5 id="共同关注">共同关注</h5>
+<p>交集运算，求多个用户的共同关注列表。</p>
+<p>key 可以是用户id，value 则是已关注的公众号的id。</p>
+<p><code>uid:1</code> 用户关注公众号 id 为
+5、6、7、8、9，<code>uid:2</code> 用户关注公众号 id 为
+7、8、9、10、11。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">uid:1 用户关注公众号 <span class="built_in">id</span> 为 5、6、7、8、9</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SADD uid:1 5 6 7 8 9</span></span><br><span class="line">(integer) 5</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">uid:2  用户关注公众号 <span class="built_in">id</span> 为 7、8、9、10、11</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SADD uid:2 7 8 9 10 11</span></span><br><span class="line">(integer) 5</span><br></pre></td></tr></table></figure>
+<p><code>uid:1</code> 和 <code>uid:2</code> 共同关注的公众号：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取共同关注</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SINTER uid:1 uid:2</span></span><br><span class="line">1) &quot;7&quot;</span><br><span class="line">2) &quot;8&quot;</span><br><span class="line">3) &quot;9&quot;</span><br></pre></td></tr></table></figure>
+<p>给 <code>uid:2</code> 推荐 <code>uid:1</code>
+关注的公众号：相当于好友推送，使用差集运算</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SDIFF uid:1 uid:2</span></span><br><span class="line">1) &quot;5&quot;</span><br><span class="line">2) &quot;6&quot;</span><br></pre></td></tr></table></figure>
+<p>验证某个公众号是否同时被 <code>uid:1</code> 或 <code>uid:2</code>
+关注:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SISMEMBER uid:1 5</span></span><br><span class="line">(integer) 1 # 返回0，说明关注了</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SISMEMBER uid:2 5</span></span><br><span class="line">(integer) 0 # 返回0，说明没关注</span><br></pre></td></tr></table></figure>
+<h5 id="抽奖活动">抽奖活动</h5>
+<p>存储某活动中中奖的用户名 ，Set
+类型因为有去重功能，可以保证同一个用户不会中奖两次。</p>
+<p>key为抽奖活动名，value为员工名称，把所有员工名称放入抽奖箱 ：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">SADD lucky Tom Jerry John Sean Marry Lindy Sary Mark</span></span><br><span class="line">(integer) 5</span><br></pre></td></tr></table></figure>
+<p>如果允许重复中奖，可以使用 SRANDMEMBER 命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">抽取 1 个一等奖：</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SRANDMEMBER lucky 1</span></span><br><span class="line">1) &quot;Tom&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">抽取 2 个二等奖：</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SRANDMEMBER lucky 2</span></span><br><span class="line">1) &quot;Mark&quot;</span><br><span class="line">2) &quot;Jerry&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">抽取 3 个三等奖：</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SRANDMEMBER lucky 3</span></span><br><span class="line">1) &quot;Sary&quot;</span><br><span class="line">2) &quot;Tom&quot;</span><br><span class="line">3) &quot;Jerry&quot;</span><br></pre></td></tr></table></figure>
+<p>如果不允许重复中奖，可以使用 SPOP 命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">抽取一等奖1个</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SPOP lucky 1</span></span><br><span class="line">1) &quot;Sary&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">抽取二等奖2个</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SPOP lucky 2</span></span><br><span class="line">1) &quot;Jerry&quot;</span><br><span class="line">2) &quot;Mark&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">抽取三等奖3个</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SPOP lucky 3</span></span><br><span class="line">1) &quot;John&quot;</span><br><span class="line">2) &quot;Sean&quot;</span><br><span class="line">3) &quot;Lindy&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="zset">Zset</h3>
+<p>相比于set集合，zset多了个排序属性score，插入进来的元素都根据这个字段排序。保持了set集合的特性后，还能排序。</p>
+<p><img src="zset.png" alt="img" style="zoom:50%;" /></p>
+<h4 id="内部实现-4">内部实现</h4>
+<p>Zset
+类型的底层数据结构是由<strong>压缩列表或跳表</strong>实现的：</p>
+<ul>
+<li>如果有序集合的元素个数小于 <code>128</code> 个，并且每个元素的值小于
+<code>64</code> 字节时，Redis 会使用<strong>压缩列表</strong>作为 Zset
+类型的底层数据结构；</li>
+<li>如果有序集合的元素不满足上面的条件，Redis
+会使用<strong>跳表</strong>作为 Zset 类型的底层数据结构；</li>
+</ul>
+<p>redis7.0废弃压缩列表。</p>
+<h4 id="常用命令-4">常用命令</h4>
+<p>Zset 常用操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">往有序集合key中加入带分值元素</span></span><br><span class="line">ZADD key score member [[score member]...]   </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">往有序集合key中删除元素</span></span><br><span class="line">ZREM key member [member...]                 </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回有序集合key中元素member的分值</span></span><br><span class="line">ZSCORE key member</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回有序集合key中元素个数</span></span><br><span class="line">ZCARD key </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">为有序集合key中元素member的分值加上increment</span></span><br><span class="line">ZINCRBY key increment member </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">正序获取有序集合key从start下标到stop下标的元素</span></span><br><span class="line">ZRANGE key start stop [WITHSCORES]</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">倒序获取有序集合key从start下标到stop下标的元素</span></span><br><span class="line">ZREVRANGE key start stop [WITHSCORES]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回有序集合中指定分数区间内的成员，分数由低到高排序。</span></span><br><span class="line">ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回指定成员区间内的成员，按字典正序排列, 分数必须相同。</span></span><br><span class="line">ZRANGEBYLEX key min max [LIMIT offset count]</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回指定成员区间内的成员，按字典倒序排列, 分数必须相同</span></span><br><span class="line">ZREVRANGEBYLEX key max min [LIMIT offset count]</span><br></pre></td></tr></table></figure>
+<p>Zset 运算操作（相比于 Set 类型，ZSet 类型没有支持差集运算）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">并集计算(相同元素分值相加)，numberkeys一共多少个key，WEIGHTS每个key对应的分值乘积</span></span><br><span class="line">ZUNIONSTORE destkey numberkeys key [key...] </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">交集计算(相同元素分值相加)，numberkeys一共多少个key，WEIGHTS每个key对应的分值乘积</span></span><br><span class="line">ZINTERSTORE destkey numberkeys key [key...]</span><br></pre></td></tr></table></figure>
+<h4 id="应用场景-4">应用场景</h4>
+<h5 id="排行榜">排行榜</h5>
+<p>有序集合比较典型的使用场景就是排行榜。例如学生成绩的排名榜、游戏积分排行榜、视频播放排名、电商系统中商品的销量排名等。</p>
+<p>以博文点赞排名为例：五篇博客，分别获得赞为
+200、40、100、50、150。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">arcticle:1 文章获得了200个赞</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZADD user:xiaolin:ranking 200 arcticle:1</span></span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">arcticle:2 文章获得了40个赞</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZADD user:xiaolin:ranking 40 arcticle:2</span></span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">arcticle:3 文章获得了100个赞</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZADD user:xiaolin:ranking 100 arcticle:3</span></span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">arcticle:4 文章获得了50个赞</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZADD user:xiaolin:ranking 50 arcticle:4</span></span><br><span class="line">(integer) 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">arcticle:5 文章获得了150个赞</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZADD user:xiaolin:ranking 150 arcticle:5</span></span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+<p>文章 arcticle:4 新增一个赞，可以使用 ZINCRBY
+命令（为有序集合key中元素member的分值加上increment）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZINCRBY user:xiaolin:ranking 1 arcticle:4</span></span><br><span class="line">&quot;51&quot;</span><br></pre></td></tr></table></figure>
+<p>查看某篇文章的赞数，可以使用 ZSCORE
+命令（返回有序集合key中元素个数）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZSCORE user:xiaolin:ranking arcticle:4</span></span><br><span class="line">&quot;50&quot;</span><br></pre></td></tr></table></figure>
+<p>获取文章赞数最多的 3 篇文章，可以使用 ZREVRANGE
+命令（倒序获取有序集合 key 从start下标到stop下标的元素）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">WITHSCORES 表示把 score 也显示出来</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZREVRANGE user:xiaolin:ranking 0 2 WITHSCORES</span></span><br><span class="line">1) &quot;arcticle:1&quot;</span><br><span class="line">2) &quot;200&quot;</span><br><span class="line">3) &quot;arcticle:5&quot;</span><br><span class="line">4) &quot;150&quot;</span><br><span class="line">5) &quot;arcticle:3&quot;</span><br><span class="line">6) &quot;100&quot;</span><br></pre></td></tr></table></figure>
+<p>获取小林 100 赞到 200 赞的文章，可以使用 ZRANGEBYSCORE
+命令（返回有序集合中指定分数区间内的成员，分数由低到高排序）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZRANGEBYSCORE user:xiaolin:ranking 100 200 WITHSCORES</span></span><br><span class="line">1) &quot;arcticle:3&quot;</span><br><span class="line">2) &quot;100&quot;</span><br><span class="line">3) &quot;arcticle:5&quot;</span><br><span class="line">4) &quot;150&quot;</span><br><span class="line">5) &quot;arcticle:1&quot;</span><br><span class="line">6) &quot;200&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="电话姓名排序">电话、姓名排序</h5>
+<p><strong>不要在分数不一致的 SortSet 集合中去使用 ZRANGEBYLEX和
+ZREVRANGEBYLEX 指令，因为获取的结果会不准确。</strong></p>
+<p><em>姓名排序</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">zadd names 0 Toumas 0 Jake 0 Bluetuo 0 Gaodeng 0 Aimini 0 Aidehua</span> </span><br><span class="line">(integer) 6</span><br></pre></td></tr></table></figure>
+<p>获取所有人的名字:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZRANGEBYLEX names - +</span></span><br><span class="line">1) &quot;Aidehua&quot;</span><br><span class="line">2) &quot;Aimini&quot;</span><br><span class="line">3) &quot;Bluetuo&quot;</span><br><span class="line">4) &quot;Gaodeng&quot;</span><br><span class="line">5) &quot;Jake&quot;</span><br><span class="line">6) &quot;Toumas&quot;</span><br></pre></td></tr></table></figure>
+<p>获取名字中大写字母A开头的所有人：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZRANGEBYLEX names [A (B</span></span><br><span class="line">1) &quot;Aidehua&quot;</span><br><span class="line">2) &quot;Aimini&quot;</span><br></pre></td></tr></table></figure>
+<p>获取名字中大写字母 C 到 Z 的所有人：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">ZRANGEBYLEX names [C [Z</span></span><br><span class="line">1) &quot;Gaodeng&quot;</span><br><span class="line">2) &quot;Jake&quot;</span><br><span class="line">3) &quot;Toumas&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="bitmap">bitmap</h3>
+<p>Bitmap，即位图，是一串连续的二进制数组（0和1），可以通过<strong>偏移量（offset）</strong>定位元素。</p>
+<p>通过最小单位比特位，进行0/1的设置，表示某个元素的值或状态。时间复杂度O(1).</p>
+<figure>
+<img src="bitmap.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>优点：</strong>节省空间。</p>
+<h4 id="内部实现-5">内部实现：</h4>
+<p>内部底层是用String实现的，String
+类型是会保存为二进制的字节数组，所以，Redis 就把字节数组的每个 bit
+位利用起来，用来表示一个元素的二值状态。</p>
+<h4 id="常用命令-5">常用命令：</h4>
+<p>bitmap 基本操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置值，其中value只能是 0 和 1</span></span><br><span class="line">SETBIT key offset value</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取值</span></span><br><span class="line">GETBIT key offset</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取指定范围内值为 1 的个数</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">start 和 end 以字节为单位</span></span><br><span class="line">BITCOUNT key start end</span><br></pre></td></tr></table></figure>
+<p>bitmap 运算操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">BitMap间的运算</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">operations 位移操作符，枚举值</span></span><br><span class="line">  AND 与运算 &amp;</span><br><span class="line">  OR 或运算 |</span><br><span class="line">  XOR 异或 ^</span><br><span class="line">  NOT 取反 ~</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">result 计算的结果，会存储在该key中</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">key1 … keyn 参与运算的key，可以有多个，空格分割，not运算只能一个key</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">当 BITOP 处理不同长度的字符串时，较短的那个字符串所缺少的部分会被看作 0。返回值是保存到 destkey 的字符串的长度（以字节byte为单位），和输入 key 中最长的字符串长度相等。</span></span><br><span class="line">BITOP [operations] [result] [key1] [keyn…]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回指定key中第一次出现指定value(0/1)的位置</span></span><br><span class="line">BITPOS [key] [value]</span><br></pre></td></tr></table></figure>
+<p>注意：offset从0开始，与数组下标类似。</p>
+<h4 id="应用场景-5">应用场景：</h4>
+<p>适合二值状态<strong>统计</strong>的场景。因为占用内存小。</p>
+<h5 id="签到统计">签到统计</h5>
+<p>签到（1）或未签到（0），它就是非常典型的二值状态。</p>
+<p>每个用户一天的签到用 1 个 bit 位就能表示，一个月（假设是 31
+天）的签到情况用 31 个 bit 位就可以，而一年的签到也只需要用 365 个 bit
+位。</p>
+<p>第一步，执行下面的命令，记录该用户 6 月 3 号已签到。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SETBIT uid:sign:100:202206 2 1</span><br></pre></td></tr></table></figure>
+<p>第二步，检查该用户 6 月 3 日是否签到。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GETBIT uid:sign:100:202206 2 </span><br></pre></td></tr></table></figure>
+<p>第三步，统计该用户在 6 月份的签到次数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BITCOUNT uid:sign:100:202206</span><br></pre></td></tr></table></figure>
+<h5 id="判断用户登录态">判断用户登录态：</h5>
+<p>key =
+login_status表示存储用户登陆状态集合数据，用用户的id作为offset，用户在线就设置为1，不在线就设置为0.</p>
+<p>通过 <code>GETBIT</code>判断对应的用户是否在线。 5000 万用户只需要 6
+MB 的空间。</p>
+<p>第一步，执行以下指令，表示用户已登录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SETBIT login_status 10086 1</span><br></pre></td></tr></table></figure>
+<p>第二步，检查该用户是否登陆，返回值 1 表示已登录。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GETBIT login_status 10086</span><br></pre></td></tr></table></figure>
+<p>第三步，登出，将 offset 对应的 value 设置成 0。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SETBIT login_status 10086 0</span><br></pre></td></tr></table></figure>
+<h5 id="连续签到用户总数"><strong>连续签到用户总数：</strong></h5>
+<p>统计连续七天内签到的用户总数。</p>
+<p>每一天的日期作为key，七天一共七个key，然后用用户的id作为offset。用户某一天签到了，就在offset位置处添加1，七天过后，把这七个key的值进行批量与运算处理，得到一个新的bitmap。</p>
+<p>在新的bitmap里看有几个1，就是用户的数量。</p>
+<p>批量操作bitmap命令：</p>
+<p><code>BITOP operation destkey key [key ...]</code>这个指令用于对一个或者多个
+key 的 Bitmap 进行位元操作。</p>
+<ul>
+<li><code>operation</code> 可以是
+<code>and</code>、<code>OR</code>、<code>NOT</code>、<code>XOR</code>。当
+BITOP
+处理不同长度的字符串时，<strong>较短的那个字符串所缺少的部分会被看作
+<code>0</code></strong> 。空的 <code>key</code> 也被看作是包含
+<code>0</code> 的字符串序列。</li>
+</ul>
+<p>假设要统计 3 天连续打卡的用户数，则是将三个 bitmap 进行 AND
+操作，并将结果保存到 destmap 中，接着对 destmap 执行 BITCOUNT
+统计，如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">与操作</span></span><br><span class="line">BITOP AND destmap bitmap:01 bitmap:02 bitmap:03</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">统计 bit 位 =  1 的个数</span></span><br><span class="line">BITCOUNT destmap</span><br></pre></td></tr></table></figure>
+<p>即使一天产生一个亿的数据，Bitmap 占用的内存也不大，大约占 12 MB
+的内存（10^8/8/1024/1024），7 天的 Bitmap 的内存开销约为 84
+MB。同时我们最好给 Bitmap 设置<strong>过期时间</strong>，让 Redis
+删除过期的打卡数据，节省内存。</p>
+<h3 id="hyperloglog">HyperLogLog</h3>
+<blockquote>
+<p>Redis HyperLogLog 是 Redis 2.8.9
+版本新增的数据类型，是一种用于「统计基数」的数据集合类型，基数统计就是指统计一个集合中不重复的元素个数。但要注意，HyperLogLog
+是统计规则是基于概率完成的，不是非常准确，标准误算率是 0.81%。</p>
+</blockquote>
+<p>优点：在输入元素的数量或者体积非常非常大时，计算基数所需的内存空间总是固定的、并且是很小的。在
+Redis 里面，<strong>每个 HyperLogLog 键只需要花费 12 KB
+内存，就可以计算接近 <code>2^64</code>
+个不同元素的基数</strong>，和元素越多就越耗费内存的 Set 和 Hash
+类型相比，HyperLogLog 就非常节省空间。</p>
+<h4 id="内部实现-6">内部实现：</h4>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HyperLogLog">HyperLogLog
+(opens new window)</a>。</p>
+<h4 id="常用命令-6">常用命令：</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加指定元素到 HyperLogLog 中</span></span><br><span class="line">PFADD key element [element ...]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回给定 HyperLogLog 的基数估算值。</span></span><br><span class="line">PFCOUNT key [key ...]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将多个 HyperLogLog 合并为一个 HyperLogLog</span></span><br><span class="line">PFMERGE destkey sourcekey [sourcekey ...]</span><br></pre></td></tr></table></figure>
+<h4 id="应用场景-6">应用场景</h4>
+<h5 id="百万级网页-uv-计数">百万级网页 UV 计数</h5>
+<p>在统计 UV 时，用 PFADD 命令（用于向 HyperLogLog
+中添加新元素）把访问页面的每个用户都添加到 HyperLogLog 中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PFADD page1:uv user1 user2 user3 user4 user5</span><br></pre></td></tr></table></figure>
+<p>接下来，就可以用 PFCOUNT 命令直接获得 page1 的 UV
+值了，这个命令的作用就是返回 HyperLogLog 的统计结果。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PFCOUNT page1:uv</span><br></pre></td></tr></table></figure>
+<p>不过，有一点需要你注意一下，HyperLogLog
+的统计规则是基于概率完成的，所以它给出的统计结果是有一定误差的，标准误算率是
+0.81%。</p>
+<p>这也就意味着，你使用 HyperLogLog 统计的 UV 是 100 万，但实际的 UV
+可能是 101
+万。虽然误差率不算大，但是，如果你需要精确统计结果的话，最好还是继续用
+Set 或 Hash 类型。</p>
+<h3 id="geo">GEO</h3>
+<p>Redis GEO 是 Redis 3.2
+版本新增的数据类型，主要用于<strong>存储地理位置信息</strong>，并对存储的信息进行操作。</p>
+<p>在日常生活中，我们越来越依赖搜索“附近的餐馆”、在打车软件上叫车，这些都离不开<strong>基于位置信息服务（Location-Based
+Service，LBS）的应用</strong>。LBS
+应用访问的数据是和人或物关联的一组经纬度信息，而且要能查询相邻的经纬度范围，GEO
+就非常适合应用在 LBS 服务的场景中。</p>
+<h4 id="内部实现-7">内部实现</h4>
+<p>直接使用了 Sorted Set 集合类型。</p>
+<p>GEO 类型使用 <code>GeoHash</code> 编码方法实现了经纬度到 Sorted Set
+中元素权重分数的转换，两个关键机制：</p>
+<ul>
+<li>对二维地图做区间划分</li>
+<li>对区间进行编码</li>
+</ul>
+<p>一组经纬度落在某个区间后，就用区间的编码值来表示，并把编码值作为
+Sorted Set 元素的权重分数。</p>
+<h4 id="常用命令-7">常用命令</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">存储指定的地理空间位置，可以将一个或多个经度(longitude)、纬度(latitude)、位置名称(member)添加到指定的 key 中。</span></span><br><span class="line">GEOADD key longitude latitude member [longitude latitude member ...]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从给定的 key 里返回所有指定名称(member)的位置（经度和纬度），不存在的返回 nil。</span></span><br><span class="line">GEOPOS key member [member ...]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">返回两个给定位置之间的距离。</span></span><br><span class="line">GEODIST key member1 member2 [m|km|ft|mi]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">根据用户给定的经纬度坐标来获取指定范围内的地理位置集合。</span></span><br><span class="line">GEORADIUS key longitude latitude radius m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [COUNT count] [ASC|DESC] [STORE key] [STOREDIST key]</span><br></pre></td></tr></table></figure>
+<h4 id="应用场景-7">应用场景</h4>
+<h5 id="滴滴叫车">滴滴叫车</h5>
+<p>使用 GEO 命令：GEOADD 和 GEORADIUS 这两个命令。</p>
+<p>假设车辆 ID 是
+33，经纬度位置是（116.034579，39.030452），我们可以用一个 GEO
+集合保存所有车辆的经纬度，集合 key 是 cars:locations。</p>
+<p>执行下面的这个命令，就可以把 ID 号为 33 的车辆的当前经纬度位置存入
+GEO 集合中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GEOADD cars:locations 116.034579 39.030452 33</span><br></pre></td></tr></table></figure>
+<p>当用户想要寻找自己附近的网约车时，LBS 应用就可以使用 GEORADIUS
+命令。</p>
+<p>例如，LBS 应用执行下面的命令时，Redis
+会根据输入的用户的经纬度信息（116.054579，39.030452
+），查找以这个经纬度为中心的 5 公里内的车辆信息，并返回给 LBS 应用。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GEORADIUS cars:locations 116.054579 39.030452 5 km ASC COUNT 10</span><br></pre></td></tr></table></figure>
+<h3 id="stream">Stream</h3>
+<h2 id="底层数据结构">底层数据结构</h2>
+<h3 id="redis数据库的整体结构">redis数据库的整体结构</h3>
+<p>Redis 的键值对中的 <strong>key 就是字符串对象</strong>，而
+<strong>value
+可以是字符串对象，也可以是集合数据类型的对象</strong>，比如 List
+对象、Hash 对象、Set 对象和 Zset 对象。</p>
+<p>命令演示：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; SET name &quot;xiaolincoding&quot;</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">&gt; HSET person name &quot;xiaolincoding&quot; age 18</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">&gt; RPUSH stu &quot;xiaolin&quot; &quot;xiaomei&quot;</span><br><span class="line">(integer) 4</span><br></pre></td></tr></table></figure>
+<p>这些命令代表着：</p>
+<ul>
+<li>第一条命令：name
+是一个<strong>字符串键</strong>，因为键的<strong>值是一个字符串对象</strong>；</li>
+<li>第二条命令：person
+是一个<strong>哈希表键</strong>，因为键的<strong>值是一个包含两个键值对的哈希表对象</strong>；</li>
+<li>第三条命令：stu
+是一个<strong>列表键</strong>，因为键的<strong>值是一个包含两个元素的列表对象</strong>；</li>
+</ul>
+<p><strong>键值对怎么存储在redis里？</strong></p>
+<p>哈希表存储。查询复杂度O(1)</p>
+<p><strong>Redis 的哈希桶是怎么保存键值对数据的呢？</strong></p>
+<p>哈希桶存放的是<strong>指向键值对数据</strong>的指针（dictEntry<em>），这样通过指针就能找到键值对数据的指针（因为键值对的值可以保存字符串对象和集合数据类型的对象，所以键值对的数据结构中并不是直接保存值本身），保存了
+void </em> key 和 void * value
+指针，分别指向了实际的键对象和值对象，</p>
+<p><img src="f302fce6c92c0682024f47bf7579b44c.png" alt="img" style="zoom: 50%;" /></p>
+<ul>
+<li>redisDb 结构，表示 <strong>Redis
+数据库的结构</strong>，结构体里存放了指向了 dict 结构的指针；</li>
+<li>dict 结构，结构体里存放了 2
+个哈希表，正常情况下都是用「哈希表1」，「哈希表2」只有在
+<code>rehash</code> 的时候才用</li>
+<li>ditctht
+结构，表示哈希表的结构，结构里存放了哈希表数组，数组中的每个元素都是指向一个<strong>哈希表节点结构（dictEntry）</strong>的指针；</li>
+<li>dictEntry 结构，表示哈希表节点的结构，结构里存放了 **void * key 和
+void * value 指针， *key 指向的是 String 对象，而 *value 则可以指向
+String 对象，也可以指向集合类型的对象，比如 List 对象、Hash 对象、Set
+对象和 Zset 对象**。</li>
+</ul>
+<h4 id="redis对象结构"><strong>redis对象结构：</strong></h4>
+<p><img src="58d3987af2af868dca965193fb27c464.png" alt="img" style="zoom:50%;" /></p>
+<p><strong>成员变量：</strong></p>
+<ul>
+<li>type，标识该对象是什么类型的对象（String 对象、 List 对象、Hash
+对象、Set 对象和 Zset 对象）；</li>
+<li>encoding，标识该对象使用了哪种底层的数据结构；</li>
+<li><strong>ptr，指向底层数据结构的指针</strong>。</li>
+</ul>
+<p>对象和数据结构的关系：</p>
+<figure>
+<img src="image-20230619210902639.png" alt="image-20230619210902639" />
+<figcaption aria-hidden="true">image-20230619210902639</figcaption>
+</figure>
+<h3 id="sds">SDS</h3>
+<p>C语言字符串缺陷：</p>
+<ul>
+<li>获取字符串长度需要手动计算，时间复杂度O(n)</li>
+<li>非二进制安全：因为C语言字符串有'\0'的存在，导致字符串中如果出现'\0'字符串丢失。</li>
+<li>不可变</li>
+</ul>
+<h4 id="sds数据结构设计">SDS数据结构设计：</h4>
+<p><img src="516738c4058cdf9109e40a7812ef4239.png" alt="img" style="zoom: 80%;" /></p>
+<ul>
+<li><strong>len，记录了字符串长度</strong>。<strong>字符串的实际长度</strong>。这样获取字符串长度的时候，只需要返回这个成员变量值就行，时间复杂度只需要
+O（1）。</li>
+<li><strong>alloc，分配给字符数组的空间长度</strong>。这样在修改字符串的时候，可以通过
+<code>alloc - len</code>
+计算出剩余的空间大小，可以用来判断空间是否满足修改需求，根据剩余空间大小扩容。</li>
+<li><strong>flags，用来表示不同类型的 SDS</strong>。一共设计了 5
+种类型，分别是 sdshdr5、sdshdr8、sdshdr16、sdshdr32 和
+sdshdr64，下标0~4</li>
+<li><strong>buf[]，字符数组，用来保存实际数据</strong>。不仅可以保存字符串，也可以保存二进制数据。</li>
+</ul>
+<h5 id="二进制安全">二进制安全</h5>
+<p>因为 SDS 不需要用 “\0” 字符来标识字符串结尾了，而是<strong>有个专门的
+len 成员变量来记录长度，读取的时候直接读len个长度即可，所以可存储包含
+“\0” 的数据</strong>。</p>
+<p>但是 SDS 为了兼容部分 C 语言标准库的函数， SDS 字符串结尾还是会加上
+“\0” 字符。</p>
+<p>因此， SDS 的 API 都是<strong>以处理二进制的方式</strong>来处理 SDS
+存放在 buf[]
+里的数据，程序不会对其中的数据做任何限制，数据写入的时候时什么样的，它被读取时就是什么样的。</p>
+<h5 id="扩容机制不会发生缓冲区溢出">扩容机制——不会发生缓冲区溢出</h5>
+<p>如果利用C语言底层的API去操作字符串，比如 strcat
+追加字符串函数，很可能造成内存空间溢出等状态</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> HI_SDS_MAX_PREALLOC 1MB</span></span><br><span class="line"></span><br><span class="line">hisds <span class="title function_">hi_sdsMakeRoomFor</span><span class="params">(hisds s, <span class="type">size_t</span> addlen)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//获取目前s的长度</span></span><br><span class="line">    len = hi_sdslen(s);</span><br><span class="line">    <span class="type">int</span> avail = s-&gt;alloc - len;</span><br><span class="line">    ... ...</span><br><span class="line">    <span class="comment">// s目前的剩余空间已足够，无需扩展，直接返回</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (avail &gt;= addlen)</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line"></span><br><span class="line">    sh = (<span class="type">char</span> *)s - hi_sdsHdrSize(oldtype);</span><br><span class="line">    <span class="comment">//扩展之后 s 至少需要的长度</span></span><br><span class="line">    newlen = (len + addlen);</span><br><span class="line">    <span class="comment">//根据新长度，为s分配新空间所需要的大小</span></span><br><span class="line">    <span class="keyword">if</span> (newlen &lt; HI_SDS_MAX_PREALLOC)</span><br><span class="line">        <span class="comment">//新长度&lt;HI_SDS_MAX_PREALLOC 则分配所需空间*2的空间</span></span><br><span class="line">        newlen *= <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="comment">//否则，分配长度为目前长度+1MB</span></span><br><span class="line">        newlen += HI_SDS_MAX_PREALLOC;</span><br><span class="line">       ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果所需的 sds 长度<strong>小于 1
+MB</strong>，那么最后的扩容是按照<strong>翻倍扩容</strong>来执行的，即 2
+倍的newlen</li>
+<li>如果所需的 sds 长度<strong>超过 1
+MB</strong>，那么最后的扩容长度应该是 newlen <strong>+
+1MB</strong>。</li>
+</ul>
+<h5 id="节省内存空间">节省内存空间：</h5>
+<p><strong>结构体源码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">attribute__</span> ((__<span class="title">packed__</span>)) <span class="title">sdshdr16</span> &#123;</span></span><br><span class="line">    <span class="type">uint16_t</span> len;</span><br><span class="line">    <span class="type">uint16_t</span> alloc; </span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> flags; </span><br><span class="line">    <span class="type">char</span> buf[];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">attribute__</span> ((__<span class="title">packed__</span>)) <span class="title">sdshdr32</span> &#123;</span></span><br><span class="line">    <span class="type">uint32_t</span> len;</span><br><span class="line">    <span class="type">uint32_t</span> alloc; </span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> flags;</span><br><span class="line">    <span class="type">char</span> buf[];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="image-20230619203748225.png" alt="image-20230619203748225" />
+<figcaption aria-hidden="true">image-20230619203748225</figcaption>
+</figure>
+<p><strong>SDS
+设计不同类型的结构体，是为了能灵活保存不同大小的字符串，从而有效节省内存空间</strong></p>
+<p>Redis
+在编程上还<strong>使用了专门的编译优化来节省内存空间</strong>，即在
+struct 声明了 <code>__attribute__ ((packed))</code>
+，它的作用是：<strong>告诉编译器取消结构体在编译过程中的优化对齐，按照实际占用字节数进行对齐</strong>。</p>
+<ul>
+<li><p>未优化案例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test1</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> a;</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line"> &#125; test1;</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;%lu\n&quot;</span>, <span class="keyword">sizeof</span>(test1));</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实际占用字节：</p>
+<figure>
+<img src="35820959e8cf4376391c427ed7f81495.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure></li>
+<li><p>优化案例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">attribute__</span>((<span class="title">packed</span>)) <span class="title">test2</span>  &#123;</span></span><br><span class="line">    <span class="type">char</span> a;</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line"> &#125; test2;</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;%lu\n&quot;</span>, <span class="keyword">sizeof</span>(test2));</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实际占用字节：</p>
+<figure>
+<img src="47e6c8fbc17fd6c89bdfcb5eedaaacff.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure></li>
+</ul>
+<h3 id="链表">链表</h3>
+<h4 id="结构设计">结构设计</h4>
+<p>结点的结构：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">listNode</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">listNode</span> *<span class="title">prev</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">listNode</span> *<span class="title">next</span>;</span></span><br><span class="line">    <span class="type">void</span> *value;<span class="comment">//应对不同类型的值，采用void指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>拥有前驱和后继指针，双向链表</li>
+</ul>
+<p>链表的结构</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">list</span> &#123;</span></span><br><span class="line">	listNode *head;</span><br><span class="line">    listNode *tail;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> len;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//以下为自定义属性</span></span><br><span class="line">    <span class="comment">//节点值复制函数</span></span><br><span class="line">    <span class="type">void</span> *(*dup)(<span class="type">void</span> *ptr);</span><br><span class="line">    <span class="comment">//节点值释放函数</span></span><br><span class="line">    <span class="type">void</span> (*<span class="built_in">free</span>)(<span class="type">void</span> *ptr);</span><br><span class="line">    <span class="comment">//节点值比较函数</span></span><br><span class="line">    <span class="type">int</span> (*match)(<span class="type">void</span> *ptr, <span class="type">void</span> *key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="Redis学习/cadf797496816eb343a19c2451437f1e.png" alt="img" style="zoom: 50%;" /></p>
+<h4 id="优缺点">优缺点</h4>
+<p>优点：</p>
+<ul>
+<li><strong>获取某个节点的前置节点或后置节点的时间复杂度只需O(1)，而且这两个指针都可以指向
+NULL，所以链表是无环链表</strong>；</li>
+<li>get 表头、表尾、链表长度时间复杂度为O(1)。</li>
+<li>使用 void* 指针保存节点值，灵活性高。可以通过 list 结构的
+dup、free、match
+函数指针为节点设置该节点类型特定的函数，因此<strong>链表节点可以保存各种不同类型的值</strong>；</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>内存不连续，不能很好的利用CPU的局部性原理（缓存）来加速访问。</li>
+<li>结点占内存。结点要存前（后）一个结点的地址信息。</li>
+</ul>
+<h3 id="压缩列表ziplist">压缩列表ziplist</h3>
+<p><strong>由连续内存块组成的顺序型数据结构</strong></p>
+<h4 id="结构设计-1">结构设计</h4>
+<figure>
+<img src="Redis学习/ab0b44f557f8b5bc7acb3a53d43ebfcb.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ul>
+<li><strong>zlbytes：</strong>整个压缩列表所占的内存字节数</li>
+<li><strong><em>zltail</em></strong>：记录压缩列表「尾部」节点距离起始地址由多少字节，也就是列表尾的偏移量；</li>
+<li><strong><em>zllen</em></strong>：记录压缩列表包含的<strong>节点数量</strong>；</li>
+<li><strong><em>zllen</em></strong>：记录压缩列表包含的节点数量；</li>
+</ul>
+<p>entry设计：</p>
+<figure>
+<img src="Redis学习/image-20230722093402526.png"
+alt="image-20230722093402526" />
+<figcaption aria-hidden="true">image-20230722093402526</figcaption>
+</figure>
+<ul>
+<li>prevlen：前一个结点的长度。</li>
+<li>encoding：记录了当前节点实际数据的「<strong>类型和长度</strong>」，类型主要有两种：字符串和整数。</li>
+<li>data</li>
+</ul>
+<h4 id="插入数据过程">插入数据过程</h4>
+<p>往压缩列表中插入数据时，压缩列表就会根据数据类型是字符串还是整数，以及数据的大小，使用不同空间大小的prevlen、encoding来创建结点。</p>
+<ul>
+<li>根据数据类型的不同来分配空间大小——节省内存</li>
+</ul>
+<p>prevlen、encoding的分配过程</p>
+<p>prevlen 属性的空间大小跟前一个节点长度值有关，比如：</p>
+<ul>
+<li>如果<strong>前一个节点的长度小于 254 字节</strong>，那么 prevlen
+属性需要用 <strong>1 字节的空间</strong>来保存这个长度值；</li>
+<li>如果<strong>前一个节点的长度大于等于 254 字节</strong>，那么 prevlen
+属性需要用 <strong>5 字节的空间</strong>来保存这个长度值；</li>
+</ul>
+<p>encoding
+属性的空间大小跟数据类型是字符串还是整数，以及字符串的长度有关：</p>
+<ul>
+<li>当前结点数据类型是整数：encoding 会使用 <strong>1
+字节的空间</strong>进行编码</li>
+<li>当前结点数据类型是字符串：encoding 会使用 <strong>1
+字节/2字节/5字节的空间</strong>进行编码，encoding 编码的前两个 bit
+表示数据的类型，后续的其他 bit 标识字符串数据的实际长度，即 data
+的长度。</li>
+</ul>
+<figure>
+<img src="Redis学习/压缩列表编码.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h4 id="优缺点-1">优缺点</h4>
+<p>优点：</p>
+<ul>
+<li>内存紧凑，很好的利用CPU缓存</li>
+<li>节省内存</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li><strong>连锁更新</strong></li>
+<li>元素不能太多，因为查找元素时间复杂度为O(N)</li>
+</ul>
+<h5 id="连锁更新">连锁更新</h5>
+<p>发生原因：prevlen根据前一个结点的大小更新。</p>
+<p>如下图：</p>
+<figure>
+<img src="Redis学习/462c6a65531667f2bcf420953b0aded9.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>假如新增一个节点，</p>
+<figure>
+<img src="Redis学习/d1a6deff4672580609c99a5b06bf3429.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>e1一开始，prevlen长度只有1个字节，现在要根据前一个结点new，更新prevlen为5个字节，然后更新后，自己就超过了254字节。这样e1
+- &gt; eN都需要更新。</p>
+<p>性能上会急剧下降。</p>
+<h3 id="哈希表">哈希表</h3>
+<h3 id="整数集合">整数集合</h3>
+<h3 id="调表">调表</h3>
+<h3 id="quicklist">quicklist</h3>
+<h3 id="listpack">listpack</h3>
+<h2 id="缓存">缓存</h2>
+<h1 id="高级特性原理">高级特性原理</h1>
+<h2 id="过期删除策略">过期删除策略</h2>
+<p>Redis 是可以对 key
+设置过期时间的，当key过期时，需要有相应的机制将已过期的键值对删除，如何删除？</p>
+<h3 id="设置过期时间">设置过期时间</h3>
+<p>设置 key 过期时间的命令一共有 4 个：</p>
+<ul>
+<li><code>expire &lt;key&gt; &lt;n&gt;</code>：设置 key 在 n
+秒后过期，比如 expire key 100 表示设置 key 在 100 秒后过期；</li>
+<li><code>pexpire &lt;key&gt; &lt;n&gt;</code>：设置 key 在 n
+毫秒后过期，比如 pexpire key2 100000 表示设置 key2 在 100000 毫秒（100
+秒）后过期。</li>
+<li><code>expireat &lt;key&gt; &lt;n&gt;</code>：设置 key
+在某个时间戳（精确到秒）之后过期，比如 expireat key3 1655654400 表示
+key3 在时间戳 1655654400 后过期（精确到秒）；</li>
+<li><code>pexpireat &lt;key&gt; &lt;n&gt;</code>：设置 key
+在某个时间戳（精确到毫秒）之后过期，比如 pexpireat key4 1655654400000
+表示 key4 在时间戳 1655654400000 后过期（精确到毫秒）</li>
+</ul>
+<p>设置键值对时，同时设置过期时间：</p>
+<ul>
+<li><code>set &lt;key&gt; &lt;value&gt; ex &lt;n&gt;</code>
+：设置键值对的时候，同时指定过期时间（精确到秒）；</li>
+<li><code>set &lt;key&gt; &lt;value&gt; px &lt;n&gt;</code>
+：设置键值对的时候，同时指定过期时间（精确到毫秒）；</li>
+<li><code>setex &lt;key&gt; &lt;n&gt; &lt;valule&gt;</code>
+：设置键值对的时候，同时指定过期时间（精确到秒）。</li>
+</ul>
+<p>查看存活时间：<code>TTL &lt;key&gt;</code></p>
+<p>取消key的过期时间：<code>persist &lt;key&gt;</code></p>
+<h3 id="redis如何判定key已过期">redis如何判定key已过期</h3>
+<p>只要对key设置了过期时间，redis就会把<strong>这个key带上过期时间</strong>存储到一个<strong>过期字典</strong>中。</p>
+<p>过期字典在redisDB的结构：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisDb</span> &#123;</span></span><br><span class="line">    dict *dict;    <span class="comment">/* 数据库键空间，存放着所有的键值对 */</span></span><br><span class="line">    dict *expires; <span class="comment">/* 键的过期时间 */</span></span><br><span class="line">    ....</span><br><span class="line">&#125; redisDb;</span><br></pre></td></tr></table></figure>
+<p>过期字典的数据结构：</p>
+<ul>
+<li>过期字典的 key 是一个指针，指向某个键对象；</li>
+<li>过期字典的 value 是一个 long long 类型的整数，这个整数保存了 key
+的过期时间；</li>
+</ul>
+<p><img src="过期字典数据结构.png" alt="img" style="zoom: 67%;" /></p>
+<p>查询一个存在的key，redis做了啥？</p>
+<ol type="1">
+<li>判断key在不在过期字典，不在，正常返回</li>
+<li>如果在过期字典，获取key的过期时间，与系统时间比较，假如比系统时间大，那就没有过期，否则判定该
+key 已过期。</li>
+</ol>
+<h3 id="过期删除策略-1">过期删除策略：</h3>
+<h4 id="定时删除">定时删除</h4>
+<p>在设置 key
+的过期时间时，同时创建一个定时事件，当时间到达时，由事件处理器自动执行
+key 的删除操作。</p>
+<p>优点：及时删除</p>
+<p>缺点：对CPU不友好。过期 key 比较多的情况下，删除过期 key
+可能会占用相当一部分 CPU 时间，在内存不紧张但 CPU 时间紧张的情况下，将
+CPU
+时间用于删除和当前任务无关的过期键上，无疑会对服务器的响应时间和吞吐量造成影响。</p>
+<h4 id="惰性删除">惰性删除</h4>
+<p>不主动删除过期键，每次从数据库访问 key 时，都检测 key
+是否过期，如果过期则删除该 key。</p>
+<p>优点：CPU友好。 不主动检查，删除，系统资源使用很少。</p>
+<p>缺点：内存不友好。 一直不访问，过期key会堆积</p>
+<h4 id="定期删除">定期删除</h4>
+<p><strong>每隔一段时间</strong>「<strong>随机</strong>」从数据库中<strong>取出一定数量的
+key</strong> 进行检查，并删除其中的过期key。</p>
+<p>优点：折中</p>
+<p>缺点：折中</p>
+<h4 id="redis的选择">Redis的选择</h4>
+<p>惰性+定期。</p>
+<p>惰性实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">expireIfNeeded</span><span class="params">(redisDb *db, robj *key)</span> &#123;<span class="comment">//传入了key，说明使用的时候才检查</span></span><br><span class="line">    <span class="comment">// 判断 key 是否过期</span></span><br><span class="line">    <span class="keyword">if</span> (!keyIsExpired(db,key)) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    ....</span><br><span class="line">    <span class="comment">/* 删除过期键 */</span></span><br><span class="line">    ....</span><br><span class="line">    <span class="comment">// 如果 server.lazyfree_lazy_expire 为 1 表示异步删除，反之同步删除；</span></span><br><span class="line">    <span class="keyword">return</span> server.lazyfree_lazy_expire ? dbAsyncDelete(db,key) :</span><br><span class="line">                                         dbSyncDelete(db,key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定期删除实现：</p>
+<p><strong>间隔时间：</strong>默认10s</p>
+<p>通过 Redis 的配置文件 redis.conf 进行配置，配置键为 hz，
+它的默认值是10。</p>
+<p><strong>随机取出key的数量：</strong></p>
+<p>在expire.c 文件下的 <code>activeExpireCycle</code> 函数中实现：</p>
+<p><code>ACTIVE_EXPIRE_CYCLE_LOOKUPS_PER_LOOP</code>
+定义了随机抽查数量：默认为20</p>
+<p>定期删除流程：</p>
+<ol type="1">
+<li>取这20个key</li>
+<li>检查这20个key是否过期，删除过期key，并记录过期的key数量m</li>
+<li>如果m &gt; 5(20 / 4) ，也就是 过期数量 / 抽查数量 &gt;
+25%，重复这个流程。 否则停止删除，等待下一轮定期删除。</li>
+</ol>
+<p>Redis
+为了保证定期删除不会出现循环过度，导致线程卡死现象，为此增加了<strong>定期删除循环流程的时间上限</strong>，默认不会超过
+25ms。</p>
+<p>伪码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">    <span class="comment">//过期的key数量</span></span><br><span class="line">	expired = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//随机抽取的key数量</span></span><br><span class="line">    nums = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">while</span>(num--)&#123;</span><br><span class="line">        <span class="comment">//1. 从过期字典中随机抽取 1 个 key</span></span><br><span class="line">        <span class="comment">//2. 判断该 key 是否过期，如果已过期则进行删除</span></span><br><span class="line">        expired++;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="comment">// 超过时间限制则退出,防止外层循环无限</span></span><br><span class="line">    <span class="keyword">if</span> (timelimit_exit) <span class="keyword">return</span>;</span><br><span class="line">&#125;<span class="keyword">while</span>(expired &gt; (<span class="number">20</span> &gt;&gt; <span class="number">2</span>) )</span><br></pre></td></tr></table></figure>
+<h2 id="内存淘汰策略">内存淘汰策略</h2>
+<p>前面说的过期删除策略，是删除已过期的 key，而当 Redis
+的运行内存已经超过 Redis
+设置的最大内存之后，则会使用内存淘汰策略删除符合条件的
+key，以此来<strong>保障 Redis 高效的运行</strong>。</p>
+<p>设置redis最大运行内存：</p>
+<p>在配置文件 redis.conf 中，可以通过参数
+<code>maxmemory &lt;bytes&gt;</code> 来设定最大运行内存，只有在 Redis
+的运行内存达到了我们设置的最大运行内存，才会触发内存淘汰策略。
+不同位数的操作系统，maxmemory 的默认值是不同的：</p>
+<ul>
+<li>在 64 位操作系统中，maxmemory 的默认值是
+0，表示没有内存大小限制，那么不管用户存放多少数据到 Redis 中，Redis
+也不会对可用内存进行检查，直到 Redis 实例因内存不足而崩溃也无作为。</li>
+<li>在 32 位操作系统中，maxmemory 的默认值是 3G，因为 32
+位的机器最大只支持 4GB
+的内存，而系统本身就需要一定的内存资源来支持运行，所以 32
+位操作系统限制最大 3 GB
+的可用内存是非常合理的，这样可以避免因为内存不足而导致 Redis
+实例崩溃。</li>
+</ul>
+<h3 id="内存策略淘汰">内存策略淘汰</h3>
+<h4 id="不设置淘汰">不设置淘汰</h4>
+<p><strong>noeviction</strong>（Redis3.0之后，默认的内存淘汰策略）
+：它表示当运行内存超过最大设置内存时，不淘汰任何数据，这时如果有新的数据写入，则会<strong>触发
+OOM</strong>，但是如果没用数据写入的话，只是单纯的查询或者删除操作的话，还是可以正常工作。</p>
+<h4 id="设置淘汰">设置淘汰</h4>
+<p>设置内存淘汰策略有两种方法：</p>
+<ul>
+<li>方式一：通过“<code>config set maxmemory-policy &lt;策略&gt;</code>”命令设置。它的优点是设置之后立即生效，不需要重启
+Redis 服务，缺点是重启 Redis 之后，设置就会失效。</li>
+<li>方式二：通过修改 Redis
+配置文件修改，设置“<code>maxmemory-policy &lt;策略&gt;</code>”，它的优点是重启
+Redis 服务后配置不会丢失，缺点是必须重启 Redis 服务，设置才能生效。</li>
+</ul>
+<p>针对两种数据对象有不同的策略：</p>
+<p><strong>针对设置了过期时间的键值</strong></p>
+<ul>
+<li><strong>volatile-random</strong>：随机淘汰设置了过期时间的任意键值；</li>
+<li><strong>volatile-ttl</strong>：优先淘汰更早过期的键值。</li>
+<li><strong>volatile-lru</strong>（Redis3.0
+之前，默认的内存淘汰策略）：淘汰所有设置了过期时间的键值中，最久未使用的键值；</li>
+<li><strong>volatile-lfu</strong>（Redis 4.0
+后新增的内存淘汰策略）：淘汰所有设置了过期时间的键值中，最少使用的键值；</li>
+</ul>
+<p><strong>全体数据</strong></p>
+<ul>
+<li><strong>allkeys-random</strong>：随机淘汰任意键值;</li>
+<li><strong>allkeys-lru</strong>：淘汰整个键值中最久未使用的键值；</li>
+<li><strong>allkeys-lfu</strong>（Redis 4.0
+后新增的内存淘汰策略）：淘汰整个键值中最少使用的键值。</li>
+</ul>
+<h5 id="lru">LRU</h5>
+<p><strong>LRU</strong> 全称是 Least Recently Used
+翻译为<strong>最近最少使用</strong>，会选择淘汰最近最少使用的数据。</p>
+<p>传统LRU：</p>
+<ul>
+<li>基于链表：用链表管理所有的缓存数据，内存额外开销很大。</li>
+<li>访问数据需要把对应结点移到头部：性能开销大</li>
+</ul>
+<p>redis实现的LRU：</p>
+<p>在 Redis
+的对象结构体中添加一个额外的字段，用于记录此数据的最后一次访问时间。</p>
+<p>内存淘汰时，随机取五个值，<strong>淘汰最久没有使用的那个</strong>。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>不用为所有的数据维护一个大链表，节省了空间占用；</li>
+<li>不用在每次数据访问时都移动链表项，提升了缓存的性能；</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<p><strong>缓存污染问题：</strong>应用一次读取了大量的数据，而这些数据只会被读取这一次，那么这些数据会留存在
+Redis 缓存中很长一段时间，造成缓存污染。</p>
+<h5 id="lfu">LFU</h5>
+<p>LFU 全称是 Least Frequently Used
+翻译为<strong>最近最不常用</strong>，LFU
+算法是根据数据访问次数来淘汰数据的，它的核心思想是“如果数据过去被访问多次，那么将来被访问的频率也更高”。</p>
+<p>LFU 算法会记录每个数据的访问次数。</p>
+<p>redis的具体实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisObject</span> &#123;</span></span><br><span class="line">    ...</span><br><span class="line">      </span><br><span class="line">    <span class="comment">// 24 bits，用于记录对象的访问信息</span></span><br><span class="line">    <span class="type">unsigned</span> lru:<span class="number">24</span>;  </span><br><span class="line">    ...</span><br><span class="line">&#125; robj;</span><br></pre></td></tr></table></figure>
+<p><strong>在 LRU 算法中</strong>，Redis 对象头的 24 bits 的 lru
+字段是用来<strong>记录 key 的访问时间戳</strong>，</p>
+<p><strong>在 LFU 算法中</strong>，Redis对象头的 24 bits 的 lru
+字段被分成两段来存储，高 16bit 存储 ldt(Last Decrement Time)，低 8bit
+存储 logc(Logistic Counter)。</p>
+<figure>
+<img src="lru字段.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ul>
+<li>ldt 是用来记录 key 的访问时间戳；</li>
+<li>logc 是用来记录 key
+的<strong>访问频次</strong>，它的值越小表示使用频率越低，越容易淘汰，每个新加入的
+key 的logc 初始值为 5。</li>
+</ul>
+<blockquote>
+<p>每次 key 被访问时，会先对 logc
+做一个衰减操作，衰减的值跟前后访问时间的差距有关系，如果上一次访问的时间与这一次访问的时间差距很大，那么衰减的值就越大，这样实现的
+LFU
+算法是根据<strong>访问频率</strong>来淘汰数据的，而不只是访问次数。访问频率需要考虑
+key 的访问是多长时间段内发生的。key 的先前访问距离当前时间越长，那么这个
+key 的访问频率相应地也就会降低，这样被淘汰的概率也会更大。</p>
+<p>对 logc 做完衰减操作后，就开始对 logc
+进行增加操作，增加操作并不是单纯的 + 1，而是根据概率增加，如果 logc
+越大的 key，它的 logc 就越难再增加。</p>
+</blockquote>
+<p>Redis 在访问 key 时，对于 logc 是这样变化的：</p>
+<ul>
+<li>按照上次访问时间距离当前的时长，进行衰减。</li>
+<li>按照概率增加logc的值</li>
+</ul>
+<p>redis.conf 提供了两个配置项，用于调整 LFU 算法从而控制 logc
+的增长和衰减：</p>
+<ul>
+<li><code>lfu-decay-time</code> 用于调整 logc
+的衰减速度，它是一个以分钟为单位的数值，默认值为1，lfu-decay-time
+值越大，衰减越慢；</li>
+<li><code>lfu-log-factor</code> 用于调整 logc 的增长速度，lfu-log-factor
+值越大，logc 增长越慢。</li>
+</ul>
+<h2 id="持久化">持久化</h2>
+<p>「 AOF 日志和 RDB 快照」</p>
+<p>这两种技术都会用各用一个日志文件来记录信息，但是记录的内容是不同的。</p>
+<ul>
+<li>AOF 文件的内容是操作命令；</li>
+<li>RDB 文件的内容是二进制数据。</li>
+</ul>
+<h3 id="rdb快照">RDB快照</h3>
+<p><strong>快照：</strong>记录某一瞬间的内存数据，（像照相机一样），记录的是实际数据。</p>
+<h4 id="使用">使用</h4>
+<p><strong>生成RDB的命令：</strong></p>
+<ul>
+<li><p>save：主线程生成 RDB
+文件。由于执行操作的命令也是在主线程上，如果写入RDB文件的时间过长，主线程会被阻塞。</p></li>
+<li><p>bgsave（background saving
+）：开启子进程执行生成RDB文件。<strong>避免主线程的阻塞。</strong></p>
+<ul>
+<li><p>配置自动执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
+<p>只要满足上面条件的任意一个，就会执行 bgsave，它们的意思分别是：</p>
+<ul>
+<li>900 秒之内，对数据库进行了至少 1 次修改；</li>
+<li>300 秒之内，对数据库进行了至少 10 次修改；</li>
+<li>60 秒之内，对数据库进行了至少 10000 次修改。</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>RDB的相关配置参数：</strong></p>
+<figure>
+<img src="image-20230613212521752.png" alt="image-20230613212521752" />
+<figcaption aria-hidden="true">image-20230613212521752</figcaption>
+</figure>
+<h4 id="特性">特性</h4>
+<p>redis的快照是<strong>全量快照</strong>。把内存中的「所有数据」都记录到磁盘中。</p>
+<p><strong>缺陷</strong></p>
+<ul>
+<li>操作重。如果写RDB文件的操作频繁，影响性能。</li>
+</ul>
+<h4 id="bgsave执行过程">bgsave执行过程：</h4>
+<p>bgsave开始时会fork主进程得到子进程，子进程和主进程共享同一片内存区域。完成fork后读取内存数据并写入RDB文件。</p>
+<figure>
+<img src="image-20230613213556836.png" alt="image-20230613213556836" />
+<figcaption aria-hidden="true">image-20230613213556836</figcaption>
+</figure>
+<p><strong>bgsave执行过程中，发生数据修改怎么办？</strong></p>
+<p>主进程保证效率，可以更改数据。</p>
+<p>如何保证主进程和子进程间的数据一致性：</p>
+<p><strong>采用写时复制技术（copy on write）：</strong></p>
+<ul>
+<li>主进程读操作：访问共享内存</li>
+<li>主进程写操作，拷贝一份共享物理内存，进行写操作</li>
+</ul>
+<p>把共享内存区域设置为只读，当主线程（父进程）对这些共享的内存数据也都是只读操作，那么，主线程（父进程）和
+bgsave 子进程相互不影响。</p>
+<p>如果主线程要修改某个数据B，B这块内存会复制一份，然后主线程在这副本B上面执行写操作。而子进程可以继续将原来的数据写入RDB里。不会发生冲突。</p>
+<figure>
+<img src="image-20230613214402920.png" alt="image-20230613214402920" />
+<figcaption aria-hidden="true">image-20230613214402920</figcaption>
+</figure>
+<p><strong>显而易见的问题：</strong></p>
+<p>主线程修改完数据，在这一次bgsave中，是无法同步到RDB快照中去的，需要交由下一次bgsave统一写入RDB。</p>
+<p>所以 Redis 在使用 bgsave
+快照过程中，如果主线程修改了内存数据，<strong>不管是否是共享的内存数据</strong>，RDB
+快照都无法写入主线程刚修改的数据，因为此时主线程（父进程）的内存数据和子进程的内存数据已经分离了，<strong>子进程写入到
+RDB 文件的内存数据只能是原本的内存数据。</strong></p>
+<p>如果系统恰好在 RDB 快照文件创建完毕后崩溃了，那么 Redis
+将会丢失主线程在快照期间修改的数据。</p>
+<p><strong>极端问题：</strong></p>
+<p>在 Redis 执行 RDB 持久化期间，刚 fork
+时，主进程和子进程共享同一物理内存，途中主进程进行了写操作，那就会复制一份内存，假设在这期间修改了全部内存，全部内存都要复制一遍，物理内存占用翻倍。</p>
+<p>所以，如果设置了redis的RDB快照，要预留一些内存。</p>
+<h3 id="aof日志">AOF日志</h3>
+<p>Redis 每执行一
+条<strong>写操作</strong>命令，就把该命令以追加的方式写入到一个文件里，然后重启
+Redis 的时候，先去读取这个文件里的命令，并且执行它。</p>
+<p><strong>注意只会记录写操作命令，读操作命令是不会被记录的</strong></p>
+<figure>
+<img src="6f0ab40396b7fc2c15e6f4487d3a0ad7.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>先执行写命令的好处：</strong></p>
+<ol type="1">
+<li><p>避免重复检查开销：</p>
+<p>如果先将写操作命令记录到 AOF
+日志里，再执行该命令的话，如果当前的命令语法有问题，那么如果不进行命令语法检查，该错误的命令记录到
+AOF 日志里后，Redis 在使用日志恢复数据时，就可能会出错。</p></li>
+<li><p><strong>不会阻塞当前写操作命令的执行</strong></p></li>
+</ol>
+<p>缺陷：</p>
+<ol type="1">
+<li><p>数据丢失风险。</p>
+<p>可能来不及写入AOF里，服务器宕机。</p></li>
+<li><p>可能阻塞下一个写操作命令。</p></li>
+</ol>
+<h4 id="使用-1">使用</h4>
+<p>AOF 持久化功能默认是不开启的，需要修改配置文件：</p>
+<figure>
+<img src="0e2d081af084c41802c7b5de8aa41bd4.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>案例：执行set name xiaolin</p>
+<figure>
+<img src="337021a153944fd0f964ca834e34d0f2.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>「<code>*3</code>」表示当前命令有三个部分，每部分都是以「<code>$+数字</code>」开头，后面紧跟着具体的命令、键或值。然后，这里的「<code>数字</code>」表示这部分中的命令、键或值一共有多少字节。例如，「<code>$3 set</code>」表示这部分有
+3 个字节，也就是「<code>set</code>」命令这个字符串的长度。</p>
+<h4 id="写回策略">写回策略</h4>
+<p>Redis 写入 AOF 日志的过程：</p>
+<figure>
+<img src="4eeef4dd1bedd2ffe0b84d4eaa0dbdea.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>三种模式：<code>redis.conf</code> 配置文件中的
+<code>appendfsync</code> 配置项可以有以下 3 种参数可填：</p>
+<ul>
+<li><strong>Always</strong>，这个单词的意思是「总是」，所以它的意思是每次写操作命令执行完后，同步将
+AOF 日志数据写回硬盘；</li>
+<li><strong>Everysec</strong>，这个单词的意思是「每秒」，所以它的意思是每次写操作命令执行完后，先将命令写入到
+AOF 文件的内核缓冲区，然后每隔一秒将缓冲区里的内容写回到硬盘；</li>
+<li><strong>No</strong>，意味着不由 Redis
+控制写回硬盘的时机，<strong>转交给操作系统控制写回的时机</strong>，也就是每次写操作命令执行完后，先将命令写入到
+AOF 文件的内核缓冲区，再由操作系统决定何时将缓冲区内容写回硬盘。</li>
+</ul>
+<p>三种策略都不能彻底解决‘性能’和‘可靠性’，这两个问题是对立的，要么追求极致的性能，放弃数据可靠性，要么追求数据可靠，放弃高性能。</p>
+<p>对比：</p>
+<figure>
+<img src="98987d9417b2bab43087f45fc959d32a.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h5 id="三种策略的实现">三种策略的实现</h5>
+<p>三种策略的区别是fsync()函数的调用时机。</p>
+<p>fsync()函数作用：应用程序向文件写入数据后，能立马将数据同步到硬盘</p>
+<ul>
+<li>Always 策略就是每次写入 AOF 文件数据后，就执行 fsync() 函数；</li>
+<li>Everysec 策略就会创建一个异步任务来执行 fsync() 函数；</li>
+<li>No 策略就是永不执行 fsync() 函数;</li>
+</ul>
+<h3 id="aof重写机制">AOF重写机制：</h3>
+<p><strong>为什么要重写：</strong>AOF
+日志是一个文件，随着执行的写操作命令越来越多，文件的大小会越来越大。</p>
+<p>就会带来如下性能问题：</p>
+<ul>
+<li>重启redis时，启动速度会降低，因为要从AOF日志执行命令恢复数据。</li>
+</ul>
+<p><strong>重写机制：</strong>当AOF文件大小超过设定的阈值，会触发重写。重写时，读取当前数据库内全部键值对，将每一个键值转换成一条命令<strong>记录到新的AOF文件</strong>，替换旧文件。</p>
+<p><strong>使用重写机制前后对比：</strong></p>
+<p>假设有个key：name前后执行了「<em>set name xiaolin</em>」和「<em>set
+name xiaolincoding</em>」这两个命令的话，就会将这两个命令记录到 AOF
+文件。<strong>在使用重写机制后，就会读取 name 最新的 value（键值对）
+，然后用一条 「set name xiaolincoding」命令记录到新的 AOF
+文件</strong>，之前的第一个命令就没有必要记录了，因为它属于「历史」命令，没有作用了。</p>
+<p><strong>良好的思想：</strong></p>
+<p>无论对数据进行多少次操作，其实我只要记住最后一次修改操作即可，因为之前的历史记录记了没意义，我恢复的时候肯定还是按照最新的数据来。</p>
+<h4 id="后台重写">后台重写：</h4>
+<p>Redis 的<strong>重写 AOF 过程是由后台子进程 *bgrewriteaof*
+来完成的</strong>，这么做可以达到两个好处：</p>
+<ul>
+<li>避免阻塞主进程</li>
+<li>开启进程，子进程带有主进程的数据副本。相比开启线程来说，线程共享内存，线程间对数据更改需要加锁，影响效率。而使用子进程，创建子进程时，父子进程是共享内存数据的，不过这个共享的内存只能以只读的方式，而当父子进程任意一方修改了该共享内存，就会发生「写时复制」，于是父子进程就有了独立的数据副本，就不用加锁来保证数据安全。</li>
+</ul>
+<p>子进程获取主进程数据副本的方式与RDB快照类似：</p>
+<ul>
+<li><p>读共享复制进程</p>
+<figure>
+<img src="5a1f2a90b5f3821c19bea3b7a5f27fa1.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure></li>
+<li><p>写时复制</p>
+<p>父进程/子进程调用写操作 ——&gt;
+触发CPU写保护中断（违反只读命令）——&gt;
+操作系统在「写保护中断处理函数」里进行<strong>物理内存的复制</strong>
+——&gt;更新映射关系（映射到复制的内存块里）——&gt; 执行写操作</p>
+<p><strong>主进程修改了已经存在
+key-value，就会发生写时复制，注意这里只会复制主进程修改的物理内存数据，没修改物理内存还是与子进程共享的</strong>。</p>
+<figure>
+<img src="d4cfac545377b54dd035c775603b4936.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure></li>
+</ul>
+<p><strong>会发生阻塞主进程的情况：</strong></p>
+<ul>
+<li>创建子进程的过程中。</li>
+<li>发生写时复制。</li>
+</ul>
+<p><strong>数据一致性问题：</strong></p>
+<p>重写AOF日志的过程中，当主进程修改了已经存在的 key-value ，此时这个
+key-value 数据在子进程的内存数据就跟主进程的内存数据不一致了。</p>
+<p>Redis采用了<strong>AOF重写缓冲区</strong>，这个缓冲区在创建
+bgrewriteaof 子进程之后开始使用。</p>
+<p>重写 AOF 期间，当 Redis
+执行完一个写命令之后，它会<strong>同时将这个写命令写入到 「AOF
+缓冲区」和 「AOF 重写缓冲区」</strong>。</p>
+<figure>
+<img
+src="watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0ODI3Njc0,size_16,color_FFFFFF,t_70-20230309231944807.png"
+alt="在这里插入图片描述" />
+<figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
+<p>当子进程完成 AOF
+重写工作后，会向主进程发送一条信号，信号是进程间通讯的一种方式，且是异步的。</p>
+<p>主进程收到该信号后，会调用一个信号处理函数，该函数主要做以下工作：</p>
+<ul>
+<li>将 AOF 重写缓冲区中的所有内容<strong>追加</strong>到新的 AOF
+的文件中，使得新旧两个AOF文件保存的数据库状态一致。</li>
+<li>新的 AOF 的文件进行改名，覆盖现有的 AOF 文件。</li>
+</ul>
+<h3 id="aof与rdb对比与共用">AOF与RDB对比与共用：</h3>
+<p>区别：</p>
+<figure>
+<img src="image-20230614162815188.png" alt="image-20230614162815188" />
+<figcaption aria-hidden="true">image-20230614162815188</figcaption>
+</figure>
+<h4 id="混合持久化">混合持久化 :</h4>
+<p>如果想要开启混合持久化功能，可以在 Redis
+配置文件将下面这个配置项设置成 yes：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aof-use-rdb-preamble yes</span><br></pre></td></tr></table></figure>
+<p>当开启了混合持久化时，在 AOF 重写日志时，<code>fork</code>
+出来的重写子进程会先将与主线程共享的内存数据以 RDB 方式写入到 AOF
+文件，然后主线程处理的操作命令会被记录在重写缓冲区里，重写缓冲区里的增量命令会以
+AOF 方式写入到 AOF 文件，写入完成后通知主进程将新的含有 RDB 格式和 AOF
+格式的 AOF 文件替换旧的的 AOF 文件。</p>
+<p>AOF文件的前半部分就是<strong>RDB格式的全量数据</strong>，后半部分是<strong>AOF格式的增量数据</strong>。</p>
+<h2 id="高可用主从集群">高可用——主从集群</h2>
+<p>单机模式下无法满足高并发场景，并且一旦这个服务器宕机，所以业务都会崩溃，为了解决这个问题，我们需要多台服务器，把redis中的数据复制几份，这样宕机一个还能用其它的服务器redis。</p>
+<p><img src="22c7fe97ce5d3c382b08d83a4d8a5b96.png" alt="图片" style="zoom:50%;" /></p>
+<p><strong>结构：</strong>一主多从。</p>
+<p>对于Redis而言，经常收到的命令就是读取，所以对于一主多从集群，可以设置<strong>读写分离</strong>，写操作给master，读操作给全部服务器分担压力。</p>
+<p><img src="2b7231b6aabb9a9a2e2390ab3a280b2d-20230309232920063.png" alt="图片" style="zoom: 67%;" /></p>
+<h3 id="搭建">搭建</h3>
+<p><a
+href="https://vlsmhd.github.io/2023/03/14/Redis集群搭建/">Redis集群搭建
+| VLS_Blog (vlsmhd.github.io)</a></p>
+<h3 id="第一次同步全量同步">第一次同步——全量同步</h3>
+<p>主从服务器间的第一次同步的过程可分为三个阶段：</p>
+<ol type="1">
+<li>建立连接，协商同步</li>
+<li>主服务器同步数据给从服务器；</li>
+<li>主服务器发送新写操作命令给从服务器。</li>
+</ol>
+<figure>
+<img src="ea4f7e86baf2435af3999e5cd38b6a26.png" alt="图片" />
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p><em>第一阶段：建立链接、协商同步</em></p>
+<p>从服务器执行了 replicaof 命令后，从服务器就会给主服务器发送
+<code>psync</code> 命令，表示要进行数据同步。</p>
+<p>这个命令包含两个参数：</p>
+<ul>
+<li>主服务器的runID：每个 Redis 服务器在启动时都会自动生产一个随机的 ID
+来唯一标识自己。当从服务器和主服务器第一次同步时，因为不知道主服务器的
+run ID，所以将其设置为 "?"。</li>
+<li>复制进度offset：表示复制的进度，第一次同步时，其值为 -1。</li>
+</ul>
+<p>主服务器收到 psync 命令后，会用 <code>FULLRESYNC</code>（全量复制）
+作为响应命令返回给对方。</p>
+<p>响应参数：</p>
+<ul>
+<li>主服务器的runID</li>
+<li>主服务器目前的复制进度 offset</li>
+</ul>
+<p><em>第二阶段：主服务器同步数据给从服务器</em></p>
+<p>主服务器执行bgsave生成RDB文件，然后把文件发送给从服务器。</p>
+<p>从服务器接收到文件，清空当地内存，拷贝RDB文件中数据。</p>
+<p><strong>数据一致性保证：</strong>生成RDB文件过程中，主服务器在这期间对数据的操作没有被记录下来为了保证主从服务器的数据一致性，<strong>主服务器在下面这三个时间间隙中将收到的写操作命令，写入到
+replication buffer 缓冲区里</strong>：</p>
+<ul>
+<li>主服务器生成 RDB 文件期间；</li>
+<li>主服务器发送 RDB 文件给从服务器期间；</li>
+<li>「从服务器」加载 RDB 文件期间；</li>
+</ul>
+<p><em>第三阶段：主服务器发送新写操作命令给从服务器</em></p>
+<p>从服务器完成RDB载入之后，会发送消息通知主服务器。</p>
+<p>接着，主服务器将 replication buffer
+缓冲区里所记录的写操作命令发送给从服务器，从服务器执行来自主服务器
+replication buffer
+缓冲区里发来的命令，这时主从服务器的数据就一致了。</p>
+<h4 id="命令传播">命令传播：</h4>
+<p>第一次同步之后，主从服务器之间会维护一个TCP连接用于主服务器向从服务器传输写操作命令。——<strong>基于长连接的命令传播</strong></p>
+<h4 id="分摊主服务器的压力">分摊主服务器的压力</h4>
+<p>进行一次全量数据同步，主服务器会做两件耗时较大的事：</p>
+<ul>
+<li>生成RDB</li>
+<li>传输RDB</li>
+</ul>
+<p>如果从服务器很多，那么一开始全部都进行全量同步，会导致主服务器长时间阻塞，无法处理正常请求</p>
+<p><strong>解决：</strong></p>
+<p>给主服务器找个“经理”，帮忙干活。</p>
+<p><img src="4d850bfe8d712d3d67ff13e59b919452.png" alt="图片" style="zoom:67%;" /></p>
+<p>在普通从服务器上使用命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">replicaof &lt;经理服务器的IP&gt; 6379</span><br></pre></td></tr></table></figure>
+<p>即可成为经理服务器的从服务器</p>
+<h3 id="增量同步">增量同步：</h3>
+<figure>
+<img src="image-20230615214529683.png" alt="image-20230615214529683" />
+<figcaption aria-hidden="true">image-20230615214529683</figcaption>
+</figure>
+<p>因为实际情况网络波动不稳定，从库可能会宕机断开连接，这时候从库重启后再次向主库请求同步，依旧是两个参数。然后主服务器判断replid和第一次是否一致，发现从服务器不是第一次来请求同步了，随后判断从库是否可以进行增量更新。</p>
+<p><strong>增量更新：</strong>把断开连接的这一段时间主数据库所做的写操作命令同步给从库，从库执行以达到和主库数据一致</p>
+<p><img src="2db4831516b9a8b79f833cf0593c1f12.png" alt="图片" style="zoom:50%;" /></p>
+<p><strong>缓冲池：</strong></p>
+<ul>
+<li><strong>repl_backlog_buffer</strong>，是一个「<strong>环形</strong>」缓冲区，用于主从服务器断连后，从中找到差异的数据；
+<ul>
+<li>环形缓冲区：主服务器写满数组的时候，会继续从索引0处写入新的操作命令，覆盖之前的内容。</li>
+</ul></li>
+<li><strong>replication
+offset</strong>，标记上面那个缓冲区的同步进度，主从服务器都有各自的偏移量，主服务器使用
+master_repl_offset 来记录自己「<em>写</em>」到的位置，从服务器使用
+slave_repl_offset 来记录自己「<em>读</em>」到的位置。</li>
+</ul>
+<p><strong>判断增量更新条件：</strong></p>
+<ul>
+<li><p>宕机时间不长：</p>
+<figure>
+<img src="image-20230615215926454.png" alt="image-20230615215926454" />
+<figcaption aria-hidden="true">image-20230615215926454</figcaption>
+</figure>
+<p>这时候可以进行增量同步</p></li>
+<li><p>宕机时间很长：</p>
+<figure>
+<img src="image-20230615220000560.png" alt="image-20230615220000560" />
+<figcaption aria-hidden="true">image-20230615220000560</figcaption>
+</figure>
+<p>网络恢复的过程中，从服务器想要恢复的内容已经被主服务器新的写操作命令覆盖，也就是主服务器写操作命令都超过slave上次读取的位置一周了，这时候没必要进行增量同步，于是主服务器会让从服务器做全量更新。</p>
+<ul>
+<li><p>当然做全量更新消耗的性能更大，可以适当增加repl_backlog_buffer的内存，尽可能避免全量更新。</p>
+<p>配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repl-backlog-size 1mb</span><br></pre></td></tr></table></figure>
+<p>修改内存大小。</p></li>
+</ul></li>
+</ul>
+<h3 id="redis哨兵">Redis哨兵</h3>
+<p>搭建：<a
+href="https://vlsmhd.github.io/2023/03/14/Redis集群搭建/">Redis集群搭建
+| VLS_Blog (vlsmhd.github.io)</a></p>
+<p>主从集群中，如果主库宕机，该如何？</p>
+<p><strong>哨兵机制</strong></p>
+<p>作用：</p>
+<ul>
+<li>监控集群状态</li>
+<li>故障转移，选择新主节点</li>
+<li>通知</li>
+</ul>
+<h4 id="监控集群状态">监控集群状态：</h4>
+<p>哨兵会每隔 1 秒给所有主从节点发送 PING 命令，当主从节点收到 PING
+命令后，会发送一个响应命令给哨兵，这样就可以判断它们是否在正常运行。</p>
+<figure>
+<img src="26f88373d8454682b9e0c1d4fd1611b4-20230309233114856.png"
+alt="哨兵监控主从节点" />
+<figcaption aria-hidden="true">哨兵监控主从节点</figcaption>
+</figure>
+<p><strong>主观下线：</strong>主节点或者从节点<em>没有在<strong>规定的时间</strong>内响应哨兵的
+PING 命令</em>，哨兵就会将它们标记为「<strong>主观下线</strong>」。</p>
+<ul>
+<li>规定的时间是由配置项 <code>down-after-milliseconds</code>
+参数设定的</li>
+</ul>
+<p><strong>客观下线：</strong>哨兵集群中会有投票机制，假如一个哨兵判断主节点为「主观下线」后，会通知其它哨兵结点来投票，是否支持。</p>
+<p>如果赞成的投票数超过了设置的值quorum ，判定该主节点下线。</p>
+<ul>
+<li>采用哨兵集群目的：降低误判率</li>
+<li>quorum 的值一般设置为哨兵个数的二分之一加1，例如 3 个哨兵就设置
+2。</li>
+</ul>
+<p><img src="d0bed80d28a543fd8dcd299d4b06cf04.png" alt="img" style="zoom:67%;" /></p>
+<h4 id="主从故障转移">主从故障转移：</h4>
+<h5 id="选举哨兵leader">选举哨兵leader</h5>
+<p><strong>选举哨兵集群的leader执行主从切换操作：</strong>一般是发起投票的那个哨兵结点先成为候选者，然后进行推举。</p>
+<p><strong>推举：</strong>候选者会向其他哨兵发送命令，表明希望成为
+Leader
+来执行主从切换，并让所有其他哨兵对它进行投票。每个哨兵只有一次投票机会，如果用完后就不能参与投票了，可以投给自己或投给别人，但是只有候选者才能把票投给自己。</p>
+<p>候选者要满足：</p>
+<ul>
+<li>第一，拿到半数以上的赞成票；</li>
+<li>第二，拿到的票数同时还需要大于等于哨兵配置文件中的 quorum 值。</li>
+</ul>
+<p>候选者每次先给自己投票，然后向其它哨兵发起投票请求。</p>
+<p>哨兵集群至少要有三个结点：假如只有两个节点，其中一个宕机，另一个哨兵的得票数不可能超过一半，因此不能完成故障转移的操作。</p>
+<h5 id="故障转移过程">故障转移过程：</h5>
+<figure>
+<img src="主从故障转移.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>选出新结点</strong></p>
+<p>在已下线主节点属下的所有「从节点」中，挑选出一个<strong>网络状态良好</strong>、数据完整的从节点，然后向这个「从节点」发送
+<code>SLAVEOF no one</code> 命令，将这个「从节点」转换为「主节点」。</p>
+<p>怎么判断从节点之前的网络连接状态不好呢？</p>
+<p>Redis 有个叫 down-after-milliseconds * 10
+配置项，其down-after-milliseconds
+是主从节点断连的最大连接超时时间。如果在 down-after-milliseconds
+毫秒内，主从节点都没有通过网络联系上，我们就可以认为主从节点断连了。如果发生断连的次数超过了
+10 次，就说明这个从节点的网络状况不好，不适合作为新主节点。</p>
+<p><strong>三轮考察：</strong> <strong>优先级、复制进度、ID
+号</strong>。</p>
+<ul>
+<li>第一轮考察：哨兵首先会根据从节点的优先级来进行排序，优先级越小排名越靠后</li>
+<li>第二轮考察：如果优先级相同，则查看复制的下标，哪个从「主节点」接收的复制数据多，哪个就靠前。
+<ul>
+<li>如果某个从节点的 slave_repl_offset 最接近
+master_repl_offset，说明它的复制进度是最靠前的，于是就可以将它选为新主节点。</li>
+</ul></li>
+<li>第三轮考察：如果优先级和下标都相同，就选择从节点 ID
+较小的那个。</li>
+</ul>
+<p><strong>让从结点指向新结点</strong></p>
+<p>向「从节点」发送 <code>SLAVEOF</code> 命令来实现。</p>
+<p><img src="从节点指向新主节点.png" alt="img" style="zoom: 33%;" /></p>
+<p><strong>通知客户端主节点已更换</strong></p>
+<p><strong><em>通过 Redis
+的发布者/订阅者机制来实现</em></strong>每个哨兵节点提供发布者/订阅者机制，客户端可以从哨兵订阅消息。</p>
+<p><img src="哨兵频道.webp" alt="img" style="zoom: 33%;" /></p>
+<p><strong>旧主结点变成从主节点</strong></p>
+<p>继续监视旧主节点，当旧主节点重新上线时，哨兵集群就会向它发送
+<code>SLAVEOF</code> 命令，让它成为新主节点的从节点。</p>
+<h4 id="哨兵群的组成方式">哨兵群的组成方式：</h4>
+<p>配置：设置主节点名字、主节点的 IP 地址和端口号以及 quorum 值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sentinel monitor &lt;master-name&gt; &lt;ip&gt; &lt;redis-port&gt; &lt;quorum&gt; </span><br></pre></td></tr></table></figure>
+<p><strong>哨兵节点之间是通过 Redis
+的发布者/订阅者机制来相互发现的</strong>。</p>
+<p>在主从集群中，主节点上有一个名为<code>__sentinel__:hello</code>的频道，不同哨兵就是通过它来相互发现，实现互相通信的。</p>
+<p>在下图中，哨兵 A 把自己的 IP
+地址和端口的<strong>信息发布到<code>__sentinel__:hello</code>
+频道</strong>上，哨兵 B 和 C
+<strong>订阅</strong>了该频道。那么此时，哨兵 B 和 C
+就可以从这个频道直接获取哨兵 A 的 IP 地址和端口号。然后，哨兵 B、C
+可以和哨兵 A 建立网络连接。</p>
+<p><img src="a6286053c6884cf58bf397d01674fe80.png" alt="img" style="zoom:50%;" /></p>
+<p>哨兵集群获得从节点消息：</p>
+<p>哨兵会每 10 秒一次的频率向主节点发送 INFO
+命令来获取所有「从节点」的信息。</p>
+<p><img src="fdd5f695bb3643258662886f9fba0aab.png" alt="img" style="zoom:50%;" /></p>
+<h2 id="多级缓存">多级缓存</h2>
+<p>传统缓存：</p>
+<figure>
+<img src="image-20210821075259137.png" alt="image-20210821075259137" />
+<figcaption aria-hidden="true">image-20210821075259137</figcaption>
+</figure>
+<p>存在下面的问题：</p>
+<ul>
+<li>请求经过tomcat，系统性能受tomcat影响</li>
+<li>缓存失效，会对数据库有冲击</li>
+</ul>
+<p>多级缓存：</p>
+<p>多级缓存就是充分利用请求处理的每个环节，分别添加缓存，<strong>减轻Tomcat压力</strong>，提升服务性能：</p>
+<figure>
+<img src="image-20210821075558137.png" alt="image-20210821075558137" />
+<figcaption aria-hidden="true">image-20210821075558137</figcaption>
+</figure>
+<ul>
+<li><p>浏览器本地缓存：缓存静态资源</p></li>
+<li><p>访问非静态资源（ajax查询数据）时，访问服务端</p>
+<ul>
+<li>请求到达Nginx后，优先读取Nginx本地缓存</li>
+<li>如果Nginx本地缓存未命中，则去直接查询Redis（不经过Tomcat）</li>
+<li>如果Redis查询未命中，则查询Tomcat</li>
+<li>请求进入Tomcat后，优先查询JVM进程缓存</li>
+<li>如果JVM进程缓存未命中，则查询数据库</li>
+</ul>
+<p>浏览器 -&gt; nginx -&gt; redis -&gt; tomcat -&gt; 数据库</p></li>
+</ul>
+<p>多级缓存优化：</p>
+<ul>
+<li>nginx集群：可在nginx编写一些业务逻辑如
+本地缓存查询、Redis查询、Tomcat查询的业务逻辑，不再做反向代理功能。结合lua语言。</li>
+<li>redis集群：</li>
+<li>tomcat集群：<strong>JVM进程缓存</strong>。</li>
+</ul>
+<figure>
+<img src="image-20210821080954947.png" alt="image-20210821080954947" />
+<figcaption aria-hidden="true">image-20210821080954947</figcaption>
+</figure>
+<h3 id="jvm进程缓存">JVM进程缓存</h3>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io">Vlong_shen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io/2023/06/13/Redis%E5%AD%A6%E4%B9%A0/">https://vlsmhd.github.io/2023/06/13/Redis%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://vlsmhd.github.io" target="_blank">VLS_Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/14/Netty%E5%AD%A6%E4%B9%A0/" title="Netty学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Netty学习</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/13/leetcode%E6%A0%88%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="leetcode栈题目专项训练"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">leetcode栈题目专项训练</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Vlong_shen</div><div class="author-info__description">一名热爱编程的程序员</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">92</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">39</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VLSmhd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/VLSmhd" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/-" target="_blank" title="联系我QQ：1067853293"><i class="fab fa-qq"></i></a><a class="social-icon" href="/-" target="_blank" title="微信：18956757208"><i class="fa fa-wechat"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%95%E5%B1%82%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">底层基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">基础数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#string"><span class="toc-number">1.1.1.</span> <span class="toc-text">String</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">常用命令：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">内部实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.1.2.1.</span> <span class="toc-text">内部编码方式：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">应用场景：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.1.1.3.1.</span> <span class="toc-text">缓存对象：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A1%E6%95%B0"><span class="toc-number">1.1.1.3.2.</span> <span class="toc-text">计数：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-number">1.1.1.3.3.</span> <span class="toc-text">分布式锁：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%B1%E4%BA%ABsession"><span class="toc-number">1.1.1.3.4.</span> <span class="toc-text">分布式共享session</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#list"><span class="toc-number">1.1.2.</span> <span class="toc-text">List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-1"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">内部实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-number">1.1.2.3.1.</span> <span class="toc-text">消息队列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hash"><span class="toc-number">1.1.3.</span> <span class="toc-text">Hash</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-2"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">内部实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-2"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-2"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%AF%B9%E8%B1%A1-1"><span class="toc-number">1.1.3.3.1.</span> <span class="toc-text">缓存对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B4%AD%E7%89%A9%E8%BD%A6"><span class="toc-number">1.1.3.3.2.</span> <span class="toc-text">购物车</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set"><span class="toc-number">1.1.4.</span> <span class="toc-text">Set</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-3"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">内部实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-3"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-3"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%82%B9%E8%B5%9E"><span class="toc-number">1.1.4.3.1.</span> <span class="toc-text">点赞</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B1%E5%90%8C%E5%85%B3%E6%B3%A8"><span class="toc-number">1.1.4.3.2.</span> <span class="toc-text">共同关注</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8A%BD%E5%A5%96%E6%B4%BB%E5%8A%A8"><span class="toc-number">1.1.4.3.3.</span> <span class="toc-text">抽奖活动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zset"><span class="toc-number">1.1.5.</span> <span class="toc-text">Zset</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-4"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">内部实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-4"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-4"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%92%E8%A1%8C%E6%A6%9C"><span class="toc-number">1.1.5.3.1.</span> <span class="toc-text">排行榜</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%B5%E8%AF%9D%E5%A7%93%E5%90%8D%E6%8E%92%E5%BA%8F"><span class="toc-number">1.1.5.3.2.</span> <span class="toc-text">电话、姓名排序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bitmap"><span class="toc-number">1.1.6.</span> <span class="toc-text">bitmap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-5"><span class="toc-number">1.1.6.1.</span> <span class="toc-text">内部实现：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-5"><span class="toc-number">1.1.6.2.</span> <span class="toc-text">常用命令：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-5"><span class="toc-number">1.1.6.3.</span> <span class="toc-text">应用场景：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AD%BE%E5%88%B0%E7%BB%9F%E8%AE%A1"><span class="toc-number">1.1.6.3.1.</span> <span class="toc-text">签到统计</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%80%81"><span class="toc-number">1.1.6.3.2.</span> <span class="toc-text">判断用户登录态：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E7%AD%BE%E5%88%B0%E7%94%A8%E6%88%B7%E6%80%BB%E6%95%B0"><span class="toc-number">1.1.6.3.3.</span> <span class="toc-text">连续签到用户总数：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hyperloglog"><span class="toc-number">1.1.7.</span> <span class="toc-text">HyperLogLog</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-6"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">内部实现：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-6"><span class="toc-number">1.1.7.2.</span> <span class="toc-text">常用命令：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-6"><span class="toc-number">1.1.7.3.</span> <span class="toc-text">应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%99%BE%E4%B8%87%E7%BA%A7%E7%BD%91%E9%A1%B5-uv-%E8%AE%A1%E6%95%B0"><span class="toc-number">1.1.7.3.1.</span> <span class="toc-text">百万级网页 UV 计数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#geo"><span class="toc-number">1.1.8.</span> <span class="toc-text">GEO</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-7"><span class="toc-number">1.1.8.1.</span> <span class="toc-text">内部实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-7"><span class="toc-number">1.1.8.2.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-7"><span class="toc-number">1.1.8.3.</span> <span class="toc-text">应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BB%B4%E6%BB%B4%E5%8F%AB%E8%BD%A6"><span class="toc-number">1.1.8.3.1.</span> <span class="toc-text">滴滴叫车</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stream"><span class="toc-number">1.1.9.</span> <span class="toc-text">Stream</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">底层数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">redis数据库的整体结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#redis%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">redis对象结构：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sds"><span class="toc-number">1.2.2.</span> <span class="toc-text">SDS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sds%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">SDS数据结构设计：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8"><span class="toc-number">1.2.2.1.1.</span> <span class="toc-text">二进制安全</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%E4%B8%8D%E4%BC%9A%E5%8F%91%E7%94%9F%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA"><span class="toc-number">1.2.2.1.2.</span> <span class="toc-text">扩容机制——不会发生缓冲区溢出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8A%82%E7%9C%81%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4"><span class="toc-number">1.2.2.1.3.</span> <span class="toc-text">节省内存空间：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">结构设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8ziplist"><span class="toc-number">1.2.4.</span> <span class="toc-text">压缩列表ziplist</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1-1"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">结构设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">插入数据过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-1"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9E%E9%94%81%E6%9B%B4%E6%96%B0"><span class="toc-number">1.2.4.3.1.</span> <span class="toc-text">连锁更新</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="toc-number">1.2.5.</span> <span class="toc-text">哈希表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E9%9B%86%E5%90%88"><span class="toc-number">1.2.6.</span> <span class="toc-text">整数集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E8%A1%A8"><span class="toc-number">1.2.7.</span> <span class="toc-text">调表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#quicklist"><span class="toc-number">1.2.8.</span> <span class="toc-text">quicklist</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#listpack"><span class="toc-number">1.2.9.</span> <span class="toc-text">listpack</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-number">1.3.</span> <span class="toc-text">缓存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">高级特性原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5"><span class="toc-number">2.1.</span> <span class="toc-text">过期删除策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4"><span class="toc-number">2.1.1.</span> <span class="toc-text">设置过期时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9Akey%E5%B7%B2%E8%BF%87%E6%9C%9F"><span class="toc-number">2.1.2.</span> <span class="toc-text">redis如何判定key已过期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5-1"><span class="toc-number">2.1.3.</span> <span class="toc-text">过期删除策略：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%88%A0%E9%99%A4"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">定时删除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%B0%E6%80%A7%E5%88%A0%E9%99%A4"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">惰性删除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E6%9C%9F%E5%88%A0%E9%99%A4"><span class="toc-number">2.1.3.3.</span> <span class="toc-text">定期删除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#redis%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">2.1.3.4.</span> <span class="toc-text">Redis的选择</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5"><span class="toc-number">2.2.</span> <span class="toc-text">内存淘汰策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AD%96%E7%95%A5%E6%B7%98%E6%B1%B0"><span class="toc-number">2.2.1.</span> <span class="toc-text">内存策略淘汰</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E8%AE%BE%E7%BD%AE%E6%B7%98%E6%B1%B0"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">不设置淘汰</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%B7%98%E6%B1%B0"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">设置淘汰</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#lru"><span class="toc-number">2.2.1.2.1.</span> <span class="toc-text">LRU</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#lfu"><span class="toc-number">2.2.1.2.2.</span> <span class="toc-text">LFU</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">2.3.</span> <span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rdb%E5%BF%AB%E7%85%A7"><span class="toc-number">2.3.1.</span> <span class="toc-text">RDB快照</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-number">2.3.1.2.</span> <span class="toc-text">特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bgsave%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">2.3.1.3.</span> <span class="toc-text">bgsave执行过程：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aof%E6%97%A5%E5%BF%97"><span class="toc-number">2.3.2.</span> <span class="toc-text">AOF日志</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-1"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E5%9B%9E%E7%AD%96%E7%95%A5"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">写回策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E7%AD%96%E7%95%A5%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.3.2.2.1.</span> <span class="toc-text">三种策略的实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aof%E9%87%8D%E5%86%99%E6%9C%BA%E5%88%B6"><span class="toc-number">2.3.3.</span> <span class="toc-text">AOF重写机制：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8E%E5%8F%B0%E9%87%8D%E5%86%99"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">后台重写：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aof%E4%B8%8Erdb%E5%AF%B9%E6%AF%94%E4%B8%8E%E5%85%B1%E7%94%A8"><span class="toc-number">2.3.4.</span> <span class="toc-text">AOF与RDB对比与共用：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">2.3.4.1.</span> <span class="toc-text">混合持久化 :</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8%E4%B8%BB%E4%BB%8E%E9%9B%86%E7%BE%A4"><span class="toc-number">2.4.</span> <span class="toc-text">高可用——主从集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA"><span class="toc-number">2.4.1.</span> <span class="toc-text">搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%90%8C%E6%AD%A5%E5%85%A8%E9%87%8F%E5%90%8C%E6%AD%A5"><span class="toc-number">2.4.2.</span> <span class="toc-text">第一次同步——全量同步</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E4%BC%A0%E6%92%AD"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">命令传播：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%91%8A%E4%B8%BB%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%8E%8B%E5%8A%9B"><span class="toc-number">2.4.2.2.</span> <span class="toc-text">分摊主服务器的压力</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5"><span class="toc-number">2.4.3.</span> <span class="toc-text">增量同步：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis%E5%93%A8%E5%85%B5"><span class="toc-number">2.4.4.</span> <span class="toc-text">Redis哨兵</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%91%E6%8E%A7%E9%9B%86%E7%BE%A4%E7%8A%B6%E6%80%81"><span class="toc-number">2.4.4.1.</span> <span class="toc-text">监控集群状态：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB"><span class="toc-number">2.4.4.2.</span> <span class="toc-text">主从故障转移：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%80%89%E4%B8%BE%E5%93%A8%E5%85%B5leader"><span class="toc-number">2.4.4.2.1.</span> <span class="toc-text">选举哨兵leader</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB%E8%BF%87%E7%A8%8B"><span class="toc-number">2.4.4.2.2.</span> <span class="toc-text">故障转移过程：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%A8%E5%85%B5%E7%BE%A4%E7%9A%84%E7%BB%84%E6%88%90%E6%96%B9%E5%BC%8F"><span class="toc-number">2.4.4.3.</span> <span class="toc-text">哨兵群的组成方式：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="toc-number">2.5.</span> <span class="toc-text">多级缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jvm%E8%BF%9B%E7%A8%8B%E7%BC%93%E5%AD%98"><span class="toc-number">2.5.1.</span> <span class="toc-text">JVM进程缓存</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/06/leetcode%E5%93%88%E5%B8%8C%E8%A1%A8%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="leetcode哈希表题目专项训练">leetcode哈希表题目专项训练</a><time datetime="2023-07-06T02:37:18.266Z" title="发表于 2023-07-06 10:37:18">2023-07-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/05/Nginx/" title="Nginx">Nginx</a><time datetime="2023-07-05T06:54:12.757Z" title="发表于 2023-07-05 14:54:12">2023-07-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/03/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1MinIO/" title="对象存储服务MinIO">对象存储服务MinIO</a><time datetime="2023-07-03T08:23:53.203Z" title="发表于 2023-07-03 16:23:53">2023-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/02/freemaker%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/" title="freemaker模板引擎">freemaker模板引擎</a><time datetime="2023-07-02T09:41:02.413Z" title="发表于 2023-07-02 17:41:02">2023-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/02/leetcode%E7%AC%AC352%E5%9C%BA%E5%91%A8%E8%B5%9B/" title="leetcode第352场周赛">leetcode第352场周赛</a><time datetime="2023-07-02T03:53:59.774Z" title="发表于 2023-07-02 11:53:59">2023-07-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Vlong_shen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
