@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Linux常用命令 | VLS_Blog</title><meta name="author" content="Vlong_shen"><meta name="copyright" content="Vlong_shen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="文件目录操作 命令规律： 关键字 [选项] [实体] ls 参考文章：每天一个linux命令(1)：ls命令 - peida - 博客园 (cnblogs.com) 定义：ls 命令是 linux 下最常用的命令，ls 命令就是 list 的缩写。 作用：打印出当前目录的清单，查看linux 文件夹包含的文件、目录和文件权限等信息。 命令格式：ls [选项][目录名] 常用选项">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Linux常用命令 | VLS_Blog</title><meta name="author" content="Vlong_shen"><meta name="copyright" content="Vlong_shen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="命令可以是下面四种形式之一：  是一个可执行程序，就像我们所看到的位于目录&#x2F;usr&#x2F;bin中的文件一样。属于这一类的程序，可以编译成二进制文件，诸如用 C 和 C++ 语言写成的程序，也可以是由脚本语言写成的程序，比如说 shell，perl，python，ruby，等等。 是一个内建于 shell 自身的命令。bash 支持若干命令，内部叫做 shell 内部命令 (builti">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux常用命令">
 <meta property="og:url" content="https://vlsmhd.github.io/2023/10/11/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="VLS_Blog">
-<meta property="og:description" content="文件目录操作 命令规律： 关键字 [选项] [实体] ls 参考文章：每天一个linux命令(1)：ls命令 - peida - 博客园 (cnblogs.com) 定义：ls 命令是 linux 下最常用的命令，ls 命令就是 list 的缩写。 作用：打印出当前目录的清单，查看linux 文件夹包含的文件、目录和文件权限等信息。 命令格式：ls [选项][目录名] 常用选项">
+<meta property="og:description" content="命令可以是下面四种形式之一：  是一个可执行程序，就像我们所看到的位于目录&#x2F;usr&#x2F;bin中的文件一样。属于这一类的程序，可以编译成二进制文件，诸如用 C 和 C++ 语言写成的程序，也可以是由脚本语言写成的程序，比如说 shell，perl，python，ruby，等等。 是一个内建于 shell 自身的命令。bash 支持若干命令，内部叫做 shell 内部命令 (builti">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://vlsmhd.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2023-10-11T12:54:14.613Z">
-<meta property="article:modified_time" content="2023-10-20T06:46:01.311Z">
+<meta property="article:modified_time" content="2023-10-23T05:15:10.879Z">
 <meta property="article:author" content="Vlong_shen">
 <meta property="article:tag" content="learn">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-10-20 14:46:01'
+  postUpdate: '2023-10-23 13:15:10'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -162,7 +162,21 @@
     }
     detectApple()
     })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="VLS_Blog" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">63</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="VLS_Blog"><img class="site-icon" src="https://vlsmhd.github.io/img/avatar.jpg"/><span class="site-name">VLS_Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux常用命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-11T12:54:14.613Z" title="发表于 2023-10-11 20:54:14">2023-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-20T06:46:01.311Z" title="更新于 2023-10-20 14:46:01">2023-10-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux常用命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="文件目录操作">文件目录操作</h1>
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">63</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="VLS_Blog"><img class="site-icon" src="https://vlsmhd.github.io/img/avatar.jpg"/><span class="site-name">VLS_Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux常用命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-11T12:54:14.613Z" title="发表于 2023-10-11 20:54:14">2023-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-23T05:15:10.879Z" title="更新于 2023-10-23 13:15:10">2023-10-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux常用命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>命令可以是下面四种形式之一：</p>
+<ol type="1">
+<li>是一个可执行程序，就像我们所看到的位于目录<code>/usr/bin</code>中的文件一样。属于这一类的程序，可以编译成二进制文件，诸如用
+C 和 C++ 语言写成的程序，也可以是由脚本语言写成的程序，比如说
+shell，perl，python，ruby，等等。</li>
+<li>是一个内建于 shell 自身的命令。bash 支持若干命令，内部叫做 shell
+内部命令 (builtins)。例如，上面我本地环境中的 cd 命令，就是一个 shell
+内部命令。</li>
+<li>是一个 shell 函数。这些是小规模的 shell 脚本，它们混合到环境变量中。
+比如上面讲到的 cd 命令，在某些环境中就是一个 shell 函数。</li>
+<li>是一个命令别名。我们可以定义自己的命令，建立在其它命令之上。</li>
+</ol>
+</blockquote>
+<h1 id="文件目录操作">文件目录操作</h1>
 <p>命令规律： 关键字 [选项] [实体]</p>
 <h2 id="ls">ls</h2>
 <p>参考文章：<a
@@ -1007,6 +1021,283 @@ cd 是 shell 内建命令，而 which 默认是找 PATH
 <ul>
 <li><code>echo $SHELL</code> 命令可以查看当前使用的 shell。</li>
 </ul>
+<h2 id="whereis">whereis</h2>
+<p>作用：用于定位可执行文件、源代码文件和帮助文件在文件系统中的位置。有<strong>搜索源代码</strong>、<strong>指定备用搜索路径</strong>和<strong>搜索不寻常项</strong>的功能。</p>
+<ul>
+<li>查找路径：在<code>/var/lib/mlocate/mlocate.db</code>查找，目标文件是一个数据库，查找速度较快，但是这个数据库一天更新一次，结果有时不准确。</li>
+</ul>
+<p>命令格式：<code>whereis [选项] 文件</code></p>
+<p><strong>常用选项参数</strong></p>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 93%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-b</td>
+<td>定位可执行文件（查找的是路径）</td>
+</tr>
+<tr class="even">
+<td>-m</td>
+<td>定位帮助文件</td>
+</tr>
+<tr class="odd">
+<td>-s</td>
+<td>定位源代码文件</td>
+</tr>
+<tr class="even">
+<td>-u</td>
+<td>搜索默认路径下除可执行文件、源代码文件和帮助文件以外的其它文件</td>
+</tr>
+<tr class="odd">
+<td>-B</td>
+<td>指定搜索可执行文件的路径</td>
+</tr>
+<tr class="even">
+<td>-M</td>
+<td>指定搜索帮助文件的路径</td>
+</tr>
+<tr class="odd">
+<td>-S</td>
+<td>指定搜索源代码文件的路径</td>
+</tr>
+</tbody>
+</table>
+<h3 id="案例-14">案例</h3>
+<p><strong>常用范例</strong></p>
+<p><strong>例一：</strong>搜索 gcc
+可执行文件的路径，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis -b gcc</span><br></pre></td></tr></table></figure>
+<p><strong>例二：</strong>搜索 gcc
+帮助文件的路径，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis -m gcc</span><br></pre></td></tr></table></figure>
+<p><strong>例三：</strong>搜索 gcc 源代码的路径，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis -s gcc</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="Linux常用命令/whereis1.png" alt="Alt text" />
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<h2 id="locate">locate</h2>
+<p>作用：类似whereis，但是信息更全面</p>
+<ul>
+<li>特性：使用了十分复杂的匹配语法，可以使用特殊字元（如 ’*’ 和 ’?’
+）来指定需要查找的样本。</li>
+<li>注意：需要安装这个命令包：<code>sudo apt-get install locate</code></li>
+</ul>
+<p>命令格式：<code>locate [选项] [搜索字符串]</code></p>
+<h3 id="案例-15">案例</h3>
+<p><strong>例一：</strong>搜索 etc 目录下所有以 sh
+开头的文件，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locate /etc/sh</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="Linux常用命令/locate1.png" alt="Alt text" />
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<p><strong>例二：</strong>搜索 etc 目录下文件名包含 lou
+的文件，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locate /etc/*lou*</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="Linux常用命令/locate2.png" alt="Alt text" />
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<h2 id="find">find</h2>
+<p>作用：沿着文件层次结构向下遍历，匹配符合条件的文件，并执行相应的操作。</p>
+<p>命令格式：<code>find [选项] [搜索路径] [表达式]</code></p>
+<ul>
+<li>默认路径：当前路径</li>
+<li>默认表达式：-print</li>
+</ul>
+<p><strong>常用参数</strong></p>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 83%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-print</td>
+<td>find 命令将匹配的文件输出到标准输出</td>
+</tr>
+<tr class="even">
+<td>-exec</td>
+<td>find 命令对匹配的文件执行该参数所给出的 shell 命令</td>
+</tr>
+<tr class="odd">
+<td>-name</td>
+<td>按照文件名查找文件</td>
+</tr>
+<tr class="even">
+<td>-type</td>
+<td>查找某一类型的文件</td>
+</tr>
+<tr class="odd">
+<td>-prune</td>
+<td>使用这一选项可以使 find 命令不在当前指定的目录中查找，如果同时使用
+-depth 选项，那么 -prune 将被 find 命令忽略</td>
+</tr>
+<tr class="even">
+<td>-user</td>
+<td>按照文件属主来查找文件</td>
+</tr>
+<tr class="odd">
+<td>-group</td>
+<td>按照文件所属的组来查找文件</td>
+</tr>
+<tr class="even">
+<td>-mtime -n +n</td>
+<td>按照文件的更改时间来查找文件，-n 表示文件更改时间距现在小于 n 天，+n
+表示文件更改时间距现在大于 n 天，find 命令还有 -atime 和 -ctime
+选项</td>
+</tr>
+</tbody>
+</table>
+<p>其它选项：</p>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485012419.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h3 id="案例-16">案例</h3>
+<p><strong>例一：</strong>打印当前目录下的文件目录列表，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -<span class="built_in">print</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>.</code> ：相当于搜索路径</li>
+</ul>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485049983.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>例二：</strong>打印当前目录下所有以.txt
+结尾的文件名，可以使用如下命令（截图只显示部分）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">print</span></span><br></pre></td></tr></table></figure>
+<p>-iname 选项跟-name 选项作用一样，不同的地方在于-iname
+会忽略字母大小写。</p>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485125680.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>例三：</strong>打印当前目录下所有以.txt 或.pdf
+结尾的文件名，可以使用如下命令（截图只显示部分）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . \( -name <span class="string">&quot;*.pdf&quot;</span> -or -name <span class="string">&quot;*.txt&quot;</span> \)</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485200246.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>例四：</strong>打印当前目录下所有<strong>不以</strong>.txt
+结尾的文件名，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . ! -name <span class="string">&quot;*.txt&quot;</span></span><br></pre></td></tr></table></figure>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485266187.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h3 id="具体查找匹配文件">具体查找匹配文件</h3>
+<p>根据文件类型来查找文件，使用 -type 选项，常见 find
+文件类型见下表：</p>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485465186.jpeg"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>根据文件权限查找文件，使用 -perm 选项。所有者使用 -user 选项。</p>
+<p>另外，find 命令可以通过逻辑操作符来创建更复杂的逻辑关系，例如 find
+命令（一）中的例三就使用了操作符 -or 。find 命令的逻辑操作符见下表：</p>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485513603.jpeg"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h4 id="案例-17">案例</h4>
+<p><strong>例一：</strong>打印当前目录下所有以 .txt
+结尾的符号链接，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -<span class="built_in">type</span> l -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">print</span></span><br></pre></td></tr></table></figure>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485577965.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>例二：</strong>打印当前目录下所有权限为 777 的 php 文件（web
+服务器上的 php 文件一般需要执行权限），可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -<span class="built_in">type</span> f -name <span class="string">&quot;*.php&quot;</span> -perm 777</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485634144.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>例三：</strong>打印当前目录下 root
+用户拥有的所有文件，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -<span class="built_in">type</span> f -user root</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485682625.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>例四：</strong>打印当前目录下权限不是 777 和 664
+的所有文件，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -<span class="built_in">type</span> f \( ! -perm 777 -and ! -perm 644 \)</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485725524.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h3 id="指定文件动作">指定文件动作</h3>
+<p><strong>常用范例</strong></p>
+<p><strong>例一：</strong>找到当前目录下所有 php
+文件，并显示其详细信息，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name <span class="string">&quot;*.php&quot;</span> -<span class="built_in">exec</span> <span class="built_in">ls</span> -l &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485834752.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ul>
+<li>-exec 是 find
+命令对找到的文件执行的动作，这个动作就是对找到的文件执行命令，上面的命令就是<code>ls -l &#123;&#125;</code>。</li>
+<li><code>&#123;&#125;</code>其实它就是一个占位符，在 find
+命令的执行过程中会不断地替换成当前找到的文件，相当于”<code>ls -l 找到的文件</code>”。</li>
+<li><code>\;</code>是 -exec 命令结束的标记，因为规定 -exec
+后面的命令必须以<code>;</code>结束，但<code>;</code>在 shell
+中有特殊含义，必须要转义，所以写成<code>\;</code>。</li>
+</ul>
+<p><strong>例二：</strong>在实验楼环境中有很多自己编写的 c
+语言代码文件，现在想要把所有 c
+语言代码文件下载下来，如果一个一个的下载很麻烦，我们可以先查找到所有的 c
+语言代码文件，然后将这些文件内容写入到一个文件中，下载这一个文件就可以了，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name <span class="string">&quot;*.c&quot;</span> -<span class="built_in">exec</span> <span class="built_in">cat</span> &#123;&#125; \; &gt; all.c</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419485908149.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>例三：</strong>默认下，-exec
+后面只能使用单个命令，如果想要多个命令，可以将多个命令写入脚本文件中，然后在
+-exec 中使用这个脚本，可以使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name <span class="string">&quot;*.c&quot;</span> -<span class="built_in">exec</span> ./command.sh &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<p>脚本内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">ls</span> -l <span class="variable">$1</span>       <span class="comment">#$1表示第一个参数</span></span><br><span class="line"><span class="built_in">cat</span> <span class="variable">$1</span></span><br></pre></td></tr></table></figure>
+<p>注意，直接运行上面的代码可能会提示你<code>find './command.sh' : 权限不够</code>，这是因为新建的<code>command.sh</code>没有执行权限，只需要使用<code>chmod +x command.sh</code>给予它可执行权限再执行就可以了。</p>
+<figure>
+<img src="Linux常用命令/userid3372labid348time1419486194690.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h2 id="xargs">xargs</h2>
 <h1 id="文件和目录属性">文件和目录属性</h1>
 <h1 id="文件打包上传下载">文件打包、上传、下载</h1>
 <h1 id="文件权限设置">文件权限设置</h1>
@@ -1014,4 +1305,4 @@ cd 是 shell 内建命令，而 which 默认是找 PATH
 <h1 id="性能监测优化">性能监测、优化</h1>
 <h1 id="网络">网络</h1>
 <h1 id="其它">其它</h1>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io">Vlong_shen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io/2023/10/11/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">https://vlsmhd.github.io/2023/10/11/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://vlsmhd.github.io" target="_blank">VLS_Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/17/SQL%E5%AD%A6%E4%B9%A0/" title="SQL学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SQL学习</div></div></a></div><div class="next-post pull-right"><a href="/2023/09/26/maven%E5%AD%A6%E4%B9%A0/" title="maven学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">maven学习</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Vlong_shen</div><div class="author-info__description">一名热爱编程的程序员</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">63</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VLSmhd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/VLSmhd" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/-" target="_blank" title="联系我QQ：1067853293"><i class="fab fa-qq"></i></a><a class="social-icon" href="/-" target="_blank" title="微信：18956757208"><i class="fa fa-wechat"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">文件目录操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ls"><span class="toc-number">1.1.</span> <span class="toc-text">ls</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.2.</span> <span class="toc-text">文件信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cd"><span class="toc-number">1.2.</span> <span class="toc-text">cd</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwd"><span class="toc-number">1.3.</span> <span class="toc-text">pwd</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%93%E5%B1%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">拓展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E8%B7%AF%E5%BE%84%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%89%A9%E7%90%86%E8%B7%AF%E5%BE%84"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">连接路径（软连接）和物理路径</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mkdir"><span class="toc-number">1.4.</span> <span class="toc-text">mkdir</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-3"><span class="toc-number">1.4.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rm"><span class="toc-number">1.5.</span> <span class="toc-text">rm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-4"><span class="toc-number">1.5.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mv"><span class="toc-number">1.6.</span> <span class="toc-text">mv</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-5"><span class="toc-number">1.6.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cp"><span class="toc-number">1.7.</span> <span class="toc-text">cp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-6"><span class="toc-number">1.7.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cat"><span class="toc-number">1.8.</span> <span class="toc-text">cat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-7"><span class="toc-number">1.8.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nl"><span class="toc-number">1.9.</span> <span class="toc-text">nl</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-8"><span class="toc-number">1.9.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#more"><span class="toc-number">1.10.</span> <span class="toc-text">more</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-9"><span class="toc-number">1.10.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less"><span class="toc-number">1.11.</span> <span class="toc-text">less</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-10"><span class="toc-number">1.11.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#head"><span class="toc-number">1.12.</span> <span class="toc-text">head</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-11"><span class="toc-number">1.12.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tail"><span class="toc-number">1.13.</span> <span class="toc-text">tail</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-12"><span class="toc-number">1.13.1.</span> <span class="toc-text">案例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE"><span class="toc-number">2.</span> <span class="toc-text">文件查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#which"><span class="toc-number">2.1.</span> <span class="toc-text">which</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-13"><span class="toc-number">2.1.1.</span> <span class="toc-text">案例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E5%B1%9E%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">文件和目录属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD"><span class="toc-number">4.</span> <span class="toc-text">文件打包、上传、下载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">文件权限设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E5%AD%98%E5%82%A8"><span class="toc-number">6.</span> <span class="toc-text">磁盘存储</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E7%9B%91%E6%B5%8B%E4%BC%98%E5%8C%96"><span class="toc-number">7.</span> <span class="toc-text">性能监测、优化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C"><span class="toc-number">8.</span> <span class="toc-text">网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-number">9.</span> <span class="toc-text">其它</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/17/SQL%E5%AD%A6%E4%B9%A0/" title="SQL学习">SQL学习</a><time datetime="2023-10-17T00:40:06.220Z" title="发表于 2023-10-17 08:40:06">2023-10-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/11/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux常用命令">Linux常用命令</a><time datetime="2023-10-11T12:54:14.613Z" title="发表于 2023-10-11 20:54:14">2023-10-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/26/maven%E5%AD%A6%E4%B9%A0/" title="maven学习">maven学习</a><time datetime="2023-09-26T12:52:34.829Z" title="发表于 2023-09-26 20:52:34">2023-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/26/git%E5%AD%A6%E4%B9%A0/" title="git学习">git学习</a><time datetime="2023-09-26T08:06:58.379Z" title="发表于 2023-09-26 16:06:58">2023-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/21/%E5%B0%8F%E6%9E%97%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9B%BE%E8%A7%A3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="小林操作系统图解学习笔记">小林操作系统图解学习笔记</a><time datetime="2023-09-21T09:23:59.557Z" title="发表于 2023-09-21 17:23:59">2023-09-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Vlong_shen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io">Vlong_shen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io/2023/10/11/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">https://vlsmhd.github.io/2023/10/11/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://vlsmhd.github.io" target="_blank">VLS_Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/17/SQL%E5%AD%A6%E4%B9%A0/" title="SQL学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SQL学习</div></div></a></div><div class="next-post pull-right"><a href="/2023/09/26/maven%E5%AD%A6%E4%B9%A0/" title="maven学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">maven学习</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Vlong_shen</div><div class="author-info__description">一名热爱编程的程序员</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">63</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VLSmhd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/VLSmhd" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/-" target="_blank" title="联系我QQ：1067853293"><i class="fab fa-qq"></i></a><a class="social-icon" href="/-" target="_blank" title="微信：18956757208"><i class="fa fa-wechat"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">文件目录操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ls"><span class="toc-number">1.1.</span> <span class="toc-text">ls</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.2.</span> <span class="toc-text">文件信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cd"><span class="toc-number">1.2.</span> <span class="toc-text">cd</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwd"><span class="toc-number">1.3.</span> <span class="toc-text">pwd</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%93%E5%B1%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">拓展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E8%B7%AF%E5%BE%84%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%89%A9%E7%90%86%E8%B7%AF%E5%BE%84"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">连接路径（软连接）和物理路径</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mkdir"><span class="toc-number">1.4.</span> <span class="toc-text">mkdir</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-3"><span class="toc-number">1.4.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rm"><span class="toc-number">1.5.</span> <span class="toc-text">rm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-4"><span class="toc-number">1.5.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mv"><span class="toc-number">1.6.</span> <span class="toc-text">mv</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-5"><span class="toc-number">1.6.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cp"><span class="toc-number">1.7.</span> <span class="toc-text">cp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-6"><span class="toc-number">1.7.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cat"><span class="toc-number">1.8.</span> <span class="toc-text">cat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-7"><span class="toc-number">1.8.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nl"><span class="toc-number">1.9.</span> <span class="toc-text">nl</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-8"><span class="toc-number">1.9.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#more"><span class="toc-number">1.10.</span> <span class="toc-text">more</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-9"><span class="toc-number">1.10.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less"><span class="toc-number">1.11.</span> <span class="toc-text">less</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-10"><span class="toc-number">1.11.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#head"><span class="toc-number">1.12.</span> <span class="toc-text">head</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-11"><span class="toc-number">1.12.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tail"><span class="toc-number">1.13.</span> <span class="toc-text">tail</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-12"><span class="toc-number">1.13.1.</span> <span class="toc-text">案例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE"><span class="toc-number">2.</span> <span class="toc-text">文件查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#which"><span class="toc-number">2.1.</span> <span class="toc-text">which</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-13"><span class="toc-number">2.1.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#whereis"><span class="toc-number">2.2.</span> <span class="toc-text">whereis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-14"><span class="toc-number">2.2.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#locate"><span class="toc-number">2.3.</span> <span class="toc-text">locate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-15"><span class="toc-number">2.3.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#find"><span class="toc-number">2.4.</span> <span class="toc-text">find</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-16"><span class="toc-number">2.4.1.</span> <span class="toc-text">案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%9F%A5%E6%89%BE%E5%8C%B9%E9%85%8D%E6%96%87%E4%BB%B6"><span class="toc-number">2.4.2.</span> <span class="toc-text">具体查找匹配文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-17"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%8A%A8%E4%BD%9C"><span class="toc-number">2.4.3.</span> <span class="toc-text">指定文件动作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xargs"><span class="toc-number">2.5.</span> <span class="toc-text">xargs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E5%B1%9E%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">文件和目录属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD"><span class="toc-number">4.</span> <span class="toc-text">文件打包、上传、下载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">文件权限设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E5%AD%98%E5%82%A8"><span class="toc-number">6.</span> <span class="toc-text">磁盘存储</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E7%9B%91%E6%B5%8B%E4%BC%98%E5%8C%96"><span class="toc-number">7.</span> <span class="toc-text">性能监测、优化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C"><span class="toc-number">8.</span> <span class="toc-text">网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-number">9.</span> <span class="toc-text">其它</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/17/SQL%E5%AD%A6%E4%B9%A0/" title="SQL学习">SQL学习</a><time datetime="2023-10-17T00:40:06.220Z" title="发表于 2023-10-17 08:40:06">2023-10-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/11/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux常用命令">Linux常用命令</a><time datetime="2023-10-11T12:54:14.613Z" title="发表于 2023-10-11 20:54:14">2023-10-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/26/maven%E5%AD%A6%E4%B9%A0/" title="maven学习">maven学习</a><time datetime="2023-09-26T12:52:34.829Z" title="发表于 2023-09-26 20:52:34">2023-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/26/git%E5%AD%A6%E4%B9%A0/" title="git学习">git学习</a><time datetime="2023-09-26T08:06:58.379Z" title="发表于 2023-09-26 16:06:58">2023-09-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/21/%E5%B0%8F%E6%9E%97%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9B%BE%E8%A7%A3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="小林操作系统图解学习笔记">小林操作系统图解学习笔记</a><time datetime="2023-09-21T09:23:59.557Z" title="发表于 2023-09-21 17:23:59">2023-09-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Vlong_shen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
