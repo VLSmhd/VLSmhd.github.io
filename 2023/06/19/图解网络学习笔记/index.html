@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>图解网络学习笔记 | VLS_Blog</title><meta name="author" content="Vlong_shen"><meta name="copyright" content="Vlong_shen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="基础 TCP&#x2F;IP网络模型 层级自上而下： 应用层 对象：应用软件，如：HTTP、FTP、Telnet、DNS、SMTP等 作用：给用户提供服务 应用层之间数据传输：交付给下面一层传输层进行传输。 传输层 作用：为应用层提供数据传输服务，为应用层提供网络支持。 传输协议：  TCP传输控制协议（Transmission Control Protocol）：保证数据交付——可">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>图解网络学习笔记 | VLS_Blog</title><meta name="author" content="Vlong_shen"><meta name="copyright" content="Vlong_shen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="基础 OSI网络模型  应用层：网络服务与最终用户的一个接口，常见的协议有：HTTP FTP SMTP SNMP DNS. 表示层：数据的表示、安全、压缩。确保一个系统的应用层所发送的信息可以被另一个系统的应用层读取。 会话层：建立、管理、终止会话,对应主机进程，指本地主机与远程主机正在进行的会话. 传输层：定义传输数据的协议端口号，以及流控和差错校验,协议有TCP UDP. 网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图解网络学习笔记">
 <meta property="og:url" content="https://vlsmhd.github.io/2023/06/19/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="VLS_Blog">
-<meta property="og:description" content="基础 TCP&#x2F;IP网络模型 层级自上而下： 应用层 对象：应用软件，如：HTTP、FTP、Telnet、DNS、SMTP等 作用：给用户提供服务 应用层之间数据传输：交付给下面一层传输层进行传输。 传输层 作用：为应用层提供数据传输服务，为应用层提供网络支持。 传输协议：  TCP传输控制协议（Transmission Control Protocol）：保证数据交付——可">
+<meta property="og:description" content="基础 OSI网络模型  应用层：网络服务与最终用户的一个接口，常见的协议有：HTTP FTP SMTP SNMP DNS. 表示层：数据的表示、安全、压缩。确保一个系统的应用层所发送的信息可以被另一个系统的应用层读取。 会话层：建立、管理、终止会话,对应主机进程，指本地主机与远程主机正在进行的会话. 传输层：定义传输数据的协议端口号，以及流控和差错校验,协议有TCP UDP. 网">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://vlsmhd.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2023-06-19T06:36:56.436Z">
-<meta property="article:modified_time" content="2023-11-10T01:26:44.696Z">
+<meta property="article:modified_time" content="2023-11-24T04:33:40.922Z">
 <meta property="article:author" content="Vlong_shen">
 <meta property="article:tag" content="学习">
 <meta property="article:tag" content="计算机网络">
@@ -58,7 +58,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-11-10 09:26:44'
+  postUpdate: '2023-11-24 12:33:40'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -275,7 +275,20 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="VLS_Blog" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">122</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">68</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="VLS_Blog"><img class="site-icon" src="https://vlsmhd.github.io/img/avatar.jpg"/><span class="site-name">VLS_Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">图解网络学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-19T06:36:56.436Z" title="发表于 2023-06-19 14:36:56">2023-06-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-10T01:26:44.696Z" title="更新于 2023-11-10 09:26:44">2023-11-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="图解网络学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="基础">基础</h1>
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">121</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">69</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="VLS_Blog"><img class="site-icon" src="https://vlsmhd.github.io/img/avatar.jpg"/><span class="site-name">VLS_Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">图解网络学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-19T06:36:56.436Z" title="发表于 2023-06-19 14:36:56">2023-06-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-24T04:33:40.922Z" title="更新于 2023-11-24 12:33:40">2023-11-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="图解网络学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="基础">基础</h1>
+<h2 id="osi网络模型">OSI网络模型</h2>
+<ul>
+<li>应用层：网络服务与最终用户的一个接口，常见的协议有：<strong>HTTP FTP
+SMTP SNMP DNS</strong>.</li>
+<li>表示层：数据的表示、安全、压缩。确保一个系统的应用层所发送的信息可以被另一个系统的应用层读取。</li>
+<li>会话层：建立、管理、终止会话,对应主机进程，指本地主机与远程主机正在进行的会话.</li>
+<li>传输层：定义传输数据的协议端口号，以及流控和差错校验,协议有<strong>TCP
+UDP</strong>.</li>
+<li>网络层：进行逻辑地址寻址，实现不同网络之间的路径选择,协议有<strong>ICMP
+IGMP IP等</strong>.</li>
+<li>数据链路层：在物理层提供比特流服务的基础上，建立相邻结点之间的数据链路。</li>
+<li>物理层：建立、维护、断开物理连接。</li>
+</ul>
 <h2 id="tcpip网络模型">TCP/IP网络模型</h2>
 <p>层级自上而下：</p>
 <h3 id="应用层">应用层</h3>
@@ -324,7 +337,7 @@ Protocol</em>）：保证数据交付——可靠性</p>
 Layer</em>）在 IP 头部的前面加上 MAC 头部，并封装成数据帧（Data
 frame）发送到网络上。</p>
 <p><strong>作用：</strong>为网络层提供「链路级别」传输的服务，在以太网这样的底层网络发送数据包。使用MAC地址标识设备。</p>
-<h3 id="数据封装格式">数据封装格式：</h3>
+<h3 id="数据封装格式">数据封装格式</h3>
 <p><img src="图解网络学习笔记/封装.png" alt="img" style="zoom:80%;"></p>
 <h2 id="键入网址到网页显示的底层逻辑">键入网址到网页显示的底层逻辑</h2>
 <figure>
@@ -517,12 +530,30 @@ Unavailable</strong>」表示服务器当前很忙，暂时无法响应客户端
 <p>客户端在请求时，用 <code>Accept-Encoding</code>
 字段说明自己可以接受哪些压缩方法。</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Encoding: gzip, default</span><br></pre></td></tr></table></figure>
+<h3 id="uri和url">URI和URL</h3>
+<ul>
+<li>URI，全称是Uniform Resource
+Identifier)，中文翻译是统一资源标志符，主要作用是<strong>唯一标识一个资源</strong>。
+<ul>
+<li>具体资源具体地址</li>
+</ul></li>
+<li>URL，全称是Uniform Resource
+Location)，中文翻译是统一资源定位符，主要作用是<strong>提供资源的路径</strong>。打个经典比喻吧，URI像是身份证，可以唯一标识一个人，而URL更像一个住址，可以通过URL找到这个人。
+<ul>
+<li>全部资源，自己在里面找具体资源</li>
+</ul></li>
+</ul>
 <h2 id="get与post">Get与POST</h2>
 <h3 id="get">GET</h3>
 <p>定义：从服务器获取指定的资源。</p>
 <p>请求参数位置：在 URL 中，URL 规定只能支持 ASCII码字符</p>
 <p>请求过程：</p>
 <p><img src="图解网络学习笔记/12-Get请求.png" alt="GET 请求" style="zoom: 80%;"></p>
+<p>注意：</p>
+<ul>
+<li>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。</li>
+<li>一般会被缓存</li>
+</ul>
 <h3 id="post">POST</h3>
 <p>根据请求负荷对指定的资源做出处理。</p>
 <figure>
@@ -980,6 +1011,57 @@ SYN-ACK 报文</strong>，直到收到第三次握手，或者达到最大重传
 <p>假设 tcp_synack_retries 参数值为
 2，那么当第三次握手一直丢失时，发生的过程如下图：</p>
 <p><img src="图解网络学习笔记/第三次握手丢失.drawio.png" alt="img" style="zoom:50%;"></p>
+<h3 id="初始序列号isn">初始序列号ISN</h3>
+<p>随机产生原理：基于时钟，每4微秒 + 1，转一圈要 4.55 个小时。</p>
+<p>ISN随机生成算法：<code>ISN = M + F(localhost, localport, remotehost, remoteport)</code>。</p>
+<ul>
+<li><code>M</code> 是一个计时器，这个计时器每隔 4 微秒加 1。</li>
+<li><code>F</code> 是一个 Hash 算法，根据源 IP、目的
+IP、源端口、目的端口生成一个随机数值。要保证 Hash
+算法不能被外部轻易推算得出，用 MD5 算法是一个比较好的选择。</li>
+</ul>
+<h4 id="为什么每次建立连接都要不一样的isn">为什么每次建立连接都要不一样的ISN</h4>
+<p><strong>防止历史报文被下一个相同的四元组接收</strong></p>
+<p><img src="图解网络学习笔记/isn相同.png" alt="历史报文被新四元组接收" style="zoom:50%;"></p>
+<ul>
+<li>由于历史报文刚好在服务端接收范围内，因此可以接收</li>
+</ul>
+<p>解决：采用不同ISN号</p>
+<p><img src="图解网络学习笔记/isn不同-17001030466155.png" alt="isn不同" style="zoom: 33%;"></p>
+<ul>
+<li>采用不同的ISN，<strong>很大程度上</strong>避免历史报文被下一个相同四元组的连接接收。</li>
+<li>保证ISN不同，因此，大概率使得对方接收窗口接收范围不包含历史报文</li>
+</ul>
+<h5 id="序列号回绕">序列号回绕</h5>
+<p>序列号和初始序列化：</p>
+<ul>
+<li><strong>序列号</strong>，是 TCP 一个头部字段，标识了 TCP 发送端到
+TCP 接收端的数据流的一个字节，因为 TCP
+是面向字节流的可靠协议，为了保证消息的顺序性和可靠性，TCP
+为每个传输方向上的每个字节都赋予了一个编号，以便于传输成功后确认、丢失后重传以及在接收端保证不会乱序。<strong>序列号是一个
+32 位的无符号数，因此在到达 4G 之后再循环回到 0</strong>。</li>
+<li><strong>初始序列号</strong>，在 TCP
+建立连接的时候，客户端和服务端都会各自生成一个初始序列号，它是基于时钟生成的一个随机数，来保证每个连接都拥有不同的初始序列号。<strong>初始化序列号可被视为一个
+32 位的计数器，该计数器的数值每 4 微秒加 1，循环一次需要 4.55
+小时</strong>。</li>
+</ul>
+<p>回绕现象：序列号不是无限递增，当达到32位上限4G，会回归到0值。回归到0值以后，如果发生了连接断开重连，那很有可能新连接会接收到回归0值以后的就报文。</p>
+<p>解决：采用TCP时间戳字段，tcp_timestamps 参数是默认开启的，开启了
+tcp_timestamps 参数，TCP
+头部就会使用时间戳选项，它有两个好处，<strong>一个是便于精确计算 RTT
+，另一个是能防止序列号回绕（PAWS）</strong>。</p>
+<p>案例：假设 TCP 的发送窗口是 1
+GB，并且使用了时间戳选项，发送方会为每个 TCP
+报文分配时间戳数值，我们假设每个报文时间加 1，然后使用这个连接传输一个
+6GB 大小的数据流。</p>
+<p><img src="图解网络学习笔记/1d497c38621ebc44ee3d8763fd03da67.png" alt="图片" style="zoom:80%;"></p>
+<p>32 位的序列号在时刻 D 和 E
+之间回绕。假设在时刻B有一个报文丢失并被重传，又假设这个报文段在网络上绕了远路并在时刻
+F 重新出现。如果 TCP
+无法识别这个绕回的报文，那么数据完整性就会遭到破坏。</p>
+<p>使用时间戳选项能够有效的防止上述问题，如果丢失的报文会在时刻 F
+重新出现，由于它的时间戳为 2，小于最近的有效时间戳（5 或
+6），因此防回绕序列号算法（PAWS）会将其丢弃。</p>
 <h2 id="连接断开">连接断开</h2>
 <h3 id="四次挥手过程">四次挥手过程</h3>
 <p><img src="图解网络学习笔记/format,png-20230309230614791.png" alt="客户端主动关闭连接 —— TCP 四次挥手" style="zoom: 67%;"></p>
@@ -990,6 +1072,35 @@ SYN-ACK 报文</strong>，直到收到第三次握手，或者达到最大重传
 <li>第四次挥手：客户端接收服务端的FIN报文后，回复一个ACK确认应答报文，进入TIME_WAIT状态，服务器收到后直接进入CLOSE状态关闭连接。随后客户端会等个一段时间也进入CLOSE状态。</li>
 </ol>
 <p>注意：主动申请关闭连接的，才会有TIME_WAIT状态。</p>
+<h4 id="为什么-time_wait-等待的时间是-2msl">为什么 TIME_WAIT
+等待的时间是 2MSL</h4>
+<p><strong>MSL（Maximum Segment
+Lifetime）概念：</strong>报文最大生存时间，它是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。</p>
+<ul>
+<li>在 Linux 系统里 <code>2MSL</code> 默认是 <code>60</code>
+秒，那么一个 <code>MSL</code> 也就是 <code>30</code> 秒。<strong>Linux
+系统停留在 TIME_WAIT 的时间为固定的 60 秒</strong>。</li>
+</ul>
+<blockquote>
+<p>MSL 与 TTL 的区别： MSL 的单位是时间，而 TTL 是经过路由跳数。所以
+<strong>MSL 应该要大于等于 TTL 消耗为 0
+的时间</strong>，以确保报文已被自然消亡。</p>
+<p><strong>TTL 的值一般是 64，Linux 将 MSL 设置为 30 秒，意味着 Linux
+认为数据报文经过 64 个路由器的时间不会超过 30
+秒，如果超过了，就认为报文已经消失在网络中了</strong>。</p>
+</blockquote>
+<p>等待2MSL的作用：</p>
+<ol type="1">
+<li><p>允许自己最后一次挥手的ACK丢失一次：若 ACK 在第一个 MSL
+内丢失，这样被动方重发的 FIN 会在第 2 个 MSL 内到达，TIME_WAIT
+状态的连接可以应对。</p></li>
+<li><p>防止失效的连接请求报文段出现在本次连接中。</p></li>
+</ol>
+<p>MSL为什么不是4 或者 8：</p>
+<ol type="1">
+<li>丢包率低，连续丢包的概率更低，你设置成4MSL，肯定是想容许多次报文丢失的场景出现，但这种概率低，抛弃这种情况获得的收益更大。</li>
+<li>防止失效的连接请求报文段出现在本次连接中。</li>
+</ol>
 <h3 id="丢失挥手报文">丢失挥手报文</h3>
 <h4 id="第一次丢失-1">第一次丢失</h4>
 <p>第一次挥手丢失了，那么客户端迟迟收不到被动方的 ACK
@@ -1283,4 +1394,533 @@ ACK，于是发送端就会快速地重传，不必等待超时再重传。</p>
 </ul>
 <h3 id="快速恢复">快速恢复</h3>
 <p><img src="图解网络学习笔记/拥塞发生-快速重传.drawio.png" alt="快速重传和快速恢复" style="zoom:50%;"></p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io">Vlong_shen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io/2023/06/19/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://vlsmhd.github.io/2023/06/19/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://vlsmhd.github.io" target="_blank">VLS_Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/26/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0/" title="设计模式学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">设计模式学习</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/19/leetcode%E6%A0%91%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="leetcode树题目专项训练"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">leetcode树题目专项训练</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/05/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="计算机网络—自顶向下方法——学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-26</div><div class="title">计算机网络—自顶向下方法——学习笔记</div></div></a></div><div><a href="/2023/04/04/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" title="Leetcode-Hot100-15. 三数之和"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-04</div><div class="title">Leetcode-Hot100-15. 三数之和</div></div></a></div><div><a href="/2023/04/01/22.%20%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/" title="Leetcode-Hot100-22.括号生成"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-01</div><div class="title">Leetcode-Hot100-22.括号生成</div></div></a></div><div><a href="/2023/03/31/3.%20%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" title="Leetcode-Hot100-3.无重复字符的最长子串"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">Leetcode-Hot100-3.无重复字符的最长子串</div></div></a></div><div><a href="/2023/04/03/226.%20%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/" title="Leetcode-Hot100-226. 翻转二叉树"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-03</div><div class="title">Leetcode-Hot100-226. 翻转二叉树</div></div></a></div><div><a href="/2023/05/04/Leetcode-Hot100-105.-%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/" title="Leetcode-Hot100-105. 从前序与中序遍历序列构造二叉树"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-04</div><div class="title">Leetcode-Hot100-105. 从前序与中序遍历序列构造二叉树</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Vlong_shen</div><div class="author-info__description">一名热爱编程的程序员</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">122</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">68</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VLSmhd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/VLSmhd" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/-" target="_blank" title="联系我QQ：1067853293"><i class="fab fa-qq"></i></a><a class="social-icon" href="/-" target="_blank" title="微信：18956757208"><i class="fa fa-wechat"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#tcpip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">TCP&#x2F;IP网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">1.1.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">1.1.2.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">1.1.3.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82"><span class="toc-number">1.1.4.</span> <span class="toc-text">网络接口层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.5.</span> <span class="toc-text">数据封装格式：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%AE%E5%85%A5%E7%BD%91%E5%9D%80%E5%88%B0%E7%BD%91%E9%A1%B5%E6%98%BE%E7%A4%BA%E7%9A%84%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91"><span class="toc-number">1.2.</span> <span class="toc-text">键入网址到网页显示的底层逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E8%A7%A3%E6%9E%90url"><span class="toc-number">1.2.1.</span> <span class="toc-text">HTTP解析URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9C%9F%E5%AE%9E%E5%9C%B0%E5%9D%80%E6%9F%A5%E8%AF%A2dns"><span class="toc-number">1.2.2.</span> <span class="toc-text">真实地址查询——DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">域名解析流程：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="toc-number">1.2.3.</span> <span class="toc-text">协议栈：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="toc-number">1.2.4.</span> <span class="toc-text">TCP可靠传输</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http"><span class="toc-number">2.</span> <span class="toc-text">HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number">2.1.1.</span> <span class="toc-text">常见状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E5%B8%B8%E8%A7%81%E5%AD%97%E6%AE%B5"><span class="toc-number">2.1.2.</span> <span class="toc-text">http常见字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get%E4%B8%8Epost"><span class="toc-number">2.2.</span> <span class="toc-text">Get与POST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-number">2.2.1.</span> <span class="toc-text">GET</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#post"><span class="toc-number">2.2.2.</span> <span class="toc-text">POST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%AF%E5%90%A6%E5%AE%89%E5%85%A8%E5%92%8C%E5%B9%82%E7%AD%89"><span class="toc-number">2.2.3.</span> <span class="toc-text">是否安全和幂等</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E7%BC%93%E5%AD%98"><span class="toc-number">2.3.</span> <span class="toc-text">HTTP缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E7%BC%93%E5%AD%98"><span class="toc-number">2.3.1.</span> <span class="toc-text">强制缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="toc-number">2.3.2.</span> <span class="toc-text">协商缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E7%89%B9%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">HTTP特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81"><span class="toc-number">2.4.1.</span> <span class="toc-text">无状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cookie"><span class="toc-number">2.4.1.1.</span> <span class="toc-text">cookie</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%8E%E6%96%87%E4%BC%A0%E8%BE%93"><span class="toc-number">2.4.2.</span> <span class="toc-text">明文传输</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#https"><span class="toc-number">2.5.</span> <span class="toc-text">HTTPS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#https%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">2.5.1.</span> <span class="toc-text">https的安全性操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E5%8A%A0%E5%AF%86"><span class="toc-number">2.5.1.1.</span> <span class="toc-text">混合加密</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">2.5.1.1.1.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">2.5.1.1.2.</span> <span class="toc-text">非对称加密</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="toc-number">2.5.1.2.</span> <span class="toc-text">摘要算法 + 数字签名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="toc-number">2.5.1.3.</span> <span class="toc-text">数字证书</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#https%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-number">2.5.2.</span> <span class="toc-text">https建立连接的过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E7%89%88%E6%9C%AC%E6%BC%94%E5%8F%98"><span class="toc-number">2.6.</span> <span class="toc-text">HTTP版本演变</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http1.1"><span class="toc-number">2.7.</span> <span class="toc-text">HTTP1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http2"><span class="toc-number">2.8.</span> <span class="toc-text">HTTP2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http3"><span class="toc-number">2.9.</span> <span class="toc-text">HTTP3</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tcp"><span class="toc-number">3.</span> <span class="toc-text">TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="toc-number">3.1.</span> <span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp%E5%A4%B4%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">TCP头格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.1.2.</span> <span class="toc-text">TCP连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp%E4%B8%8Eudp%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.1.3.</span> <span class="toc-text">TCP与UDP的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B"><span class="toc-number">3.2.</span> <span class="toc-text">连接建立</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B"><span class="toc-number">3.2.1.</span> <span class="toc-text">三次握手过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">3.2.2.</span> <span class="toc-text">为什么三次握手</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E5%8E%86%E5%8F%B2%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">避免历史连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%8F%8C%E6%96%B9%E5%88%9D%E5%A7%8B%E5%BA%8F%E5%88%97%E5%8F%B7"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">同步双方初始序列号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E8%B5%84%E6%BA%90%E6%B5%AA%E8%B4%B9"><span class="toc-number">3.2.2.3.</span> <span class="toc-text">避免资源浪费</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A2%E5%A4%B1%E6%8F%A1%E6%89%8B%E6%8A%A5%E6%96%87"><span class="toc-number">3.2.3.</span> <span class="toc-text">丢失握手报文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%A2%E5%A4%B1"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">第一次丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%A2%E5%A4%B1"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">第二次丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%A2%E5%A4%B1"><span class="toc-number">3.2.3.3.</span> <span class="toc-text">第三次丢失</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%96%AD%E5%BC%80"><span class="toc-number">3.3.</span> <span class="toc-text">连接断开</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E8%BF%87%E7%A8%8B"><span class="toc-number">3.3.1.</span> <span class="toc-text">四次挥手过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A2%E5%A4%B1%E6%8C%A5%E6%89%8B%E6%8A%A5%E6%96%87"><span class="toc-number">3.3.2.</span> <span class="toc-text">丢失挥手报文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%A2%E5%A4%B1-1"><span class="toc-number">3.3.2.1.</span> <span class="toc-text">第一次丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%A2%E5%A4%B1-1"><span class="toc-number">3.3.2.2.</span> <span class="toc-text">第二次丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%A2%E5%A4%B1-1"><span class="toc-number">3.3.2.3.</span> <span class="toc-text">第三次丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%A2%E5%A4%B1"><span class="toc-number">3.3.2.4.</span> <span class="toc-text">第四次丢失</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E4%BC%A0%E6%9C%BA%E5%88%B6"><span class="toc-number">3.4.</span> <span class="toc-text">重传机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0"><span class="toc-number">3.4.1.</span> <span class="toc-text">超时重传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0"><span class="toc-number">3.4.2.</span> <span class="toc-text">快速重传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sack"><span class="toc-number">3.4.3.</span> <span class="toc-text">SACK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#duplicate-sack"><span class="toc-number">3.4.4.</span> <span class="toc-text">Duplicate SACK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%BA%E5%88%B6"><span class="toc-number">3.5.</span> <span class="toc-text">滑动窗口机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E6%96%B9"><span class="toc-number">3.5.1.</span> <span class="toc-text">发送方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%96%B9"><span class="toc-number">3.5.2.</span> <span class="toc-text">接收方</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">3.6.</span> <span class="toc-text">流量控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E8%BF%87%E7%A8%8B"><span class="toc-number">3.6.1.</span> <span class="toc-text">流量控制过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F"><span class="toc-number">3.6.2.</span> <span class="toc-text">操作系统缓冲区&amp;滑动窗口大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E5%85%B3%E9%97%AD"><span class="toc-number">3.6.3.</span> <span class="toc-text">窗口关闭</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%E7%8E%B0%E8%B1%A1"><span class="toc-number">3.6.3.1.</span> <span class="toc-text">死锁现象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%8A%E6%B6%82%E7%AA%97%E5%8F%A3%E7%BB%BC%E5%90%88%E5%BE%81"><span class="toc-number">3.6.4.</span> <span class="toc-text">糊涂窗口综合征</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%96%B9%E8%A7%A3%E5%86%B3%E7%AD%96%E7%95%A5"><span class="toc-number">3.6.4.1.</span> <span class="toc-text">接收方解决策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E6%96%B9%E8%A7%A3%E5%86%B3%E7%AD%96%E7%95%A5"><span class="toc-number">3.6.4.2.</span> <span class="toc-text">发送方解决策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#nagle-%E7%AE%97%E6%B3%95"><span class="toc-number">3.6.4.2.1.</span> <span class="toc-text">Nagle 算法</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">3.7.</span> <span class="toc-text">拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%85%A2%E5%90%AF%E5%8A%A8"><span class="toc-number">3.7.1.</span> <span class="toc-text">慢启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D"><span class="toc-number">3.7.2.</span> <span class="toc-text">拥塞避免</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E5%8F%91%E7%94%9F"><span class="toc-number">3.7.3.</span> <span class="toc-text">拥塞发生</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0-1"><span class="toc-number">3.7.3.1.</span> <span class="toc-text">超时重传</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0-1"><span class="toc-number">3.7.3.2.</span> <span class="toc-text">快速重传</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%81%A2%E5%A4%8D"><span class="toc-number">3.7.4.</span> <span class="toc-text">快速恢复</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/08/leetcode%E6%95%B0%E5%AD%A6%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="leetcode数学题目专项训练">leetcode数学题目专项训练</a><time datetime="2023-11-08T01:18:07.132Z" title="发表于 2023-11-08 09:18:07">2023-11-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/06/leetcode%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="leetcode字符串题目专项训练">leetcode字符串题目专项训练</a><time datetime="2023-11-06T03:35:20.394Z" title="发表于 2023-11-06 11:35:20">2023-11-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/04/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="并发编程设计模式">并发编程设计模式</a><time datetime="2023-11-04T07:19:35.683Z" title="发表于 2023-11-04 15:19:35">2023-11-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/04/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" title="JUC并发编程应用场景">JUC并发编程应用场景</a><time datetime="2023-11-04T06:48:15.410Z" title="发表于 2023-11-04 14:48:15">2023-11-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/29/leetcode%E8%B4%AA%E5%BF%83%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="leetcode贪心题目专项训练">leetcode贪心题目专项训练</a><time datetime="2023-10-29T09:43:44.750Z" title="发表于 2023-10-29 17:43:44">2023-10-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Vlong_shen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+<h1 id="ip">IP</h1>
+<p>IP工作在：网络层，主要作用：实现主机之间的通信（点对点通信）。</p>
+<p><img src="图解网络学习笔记/2-17001911207131.jpg" alt="IP 的作用" style="zoom:50%;"></p>
+<p>网络层IP与数据链路层MAC的关系：</p>
+<ul>
+<li>MAC：实现 <strong>直连</strong>的两个<strong>设备</strong>通信</li>
+<li>IP：负责在
+<strong>没有直连</strong>的两个<strong>网络</strong>之间的通信</li>
+</ul>
+<p><img src="图解网络学习笔记/3.jpg" alt="IP 的作用与 MAC 的作用" style="zoom: 67%;"></p>
+<ul>
+<li>传输过程中：
+<ul>
+<li>源IP和目的IP都不会改变</li>
+<li>源MAC和目标MAC一直在变</li>
+</ul></li>
+</ul>
+<h2 id="ip地址ipv4">IP地址（IPV4）</h2>
+<p>IP地址配置单位：并不是主机，而是网卡</p>
+<p>表示方式：</p>
+<p><img src="图解网络学习笔记/4.jpg" alt="点分十进制" style="zoom:80%;"></p>
+<h3 id="分类地址">分类地址</h3>
+<p>分类地址：</p>
+<p><img src="图解网络学习笔记/7-17001916446728.jpg" alt="IP 地址分类" style="zoom:80%;"></p>
+<p>优点：</p>
+<ul>
+<li>快速判断分类地址，选路简单</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>不灵活：<strong>同一网络下没有地址层次</strong>，比如一个公司里用了
+B
+类地址，但是可能需要根据生产环境、测试环境、开发环境来划分地址层次，而这种
+IP
+分类是没有地址层次划分的功能，所以这就<strong>缺少地址的灵活性</strong>。</li>
+<li>不现实：<strong>不能很好的与现实网络匹配</strong>，主机数是定死的，不好实现
+<ul>
+<li>C 类地址能包含的最大主机数量实在太少了，只有 254
+个，估计一个网吧都不够用。</li>
+<li>而 B 类地址能包含的最大主机数量又太多了，6
+万多台机器放在一个网络下面，一般的企业基本达不到这个规模，闲着的地址就是浪费。</li>
+</ul></li>
+</ul>
+<h4 id="abc类地址">ABC类地址</h4>
+<p>A、B、C类地址主机号范围信息：</p>
+<p><img src="图解网络学习笔记/8.jpg" alt="img" style="zoom:67%;"></p>
+<p><strong>最大主机数计算方式</strong></p>
+<p>看主机号有多少位，有n位，那就有<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex;" xmlns="http://www.w3.org/2000/svg" width="6.176ex" height="1.714ex" role="img" focusable="false" viewBox="0 -675.5 2729.7 757.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mi" transform="translate(533,363) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mo" transform="translate(1229.5,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(2229.7,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></svg></mjx-container></span>个主机数。</p>
+<p>减去的2个特殊主机地址：</p>
+<p><img src="图解网络学习笔记/10-170019180059213.jpg" alt="img" style="zoom:67%;"></p>
+<ul>
+<li>主机号全为 1
+指定某个网络下的所有主机，用于<strong>广播</strong></li>
+<li>主机号全为 0 指定<strong>某个网络</strong></li>
+</ul>
+<h5 id="广播地址"><strong>广播地址</strong></h5>
+<p>作用：<strong>同一个链路中相互连接的主机之间发送数据包</strong>。</p>
+<p>分类：</p>
+<ul>
+<li><strong>在本网络内广播的叫做本地广播</strong>。例如网络地址为
+192.168.0.0/24 的情况下，广播地址是 192.168.0.255 。因为这个广播地址的
+IP 包会被路由器屏蔽，所以不会到达 192.168.0.0/24 以外的其他链路上。</li>
+<li><strong>在不同网络之间的广播叫做直接广播</strong>。例如网络地址为
+192.168.0.0/24 的主机向 <strong>192.168.1.255/24 的目标地址</strong>发送
+IP 包。收到这个包的路由器，将数据转发给 192.168.1.0/24，从而使得所有
+192.168.1.1~192.168.1.254
+的主机都能收到这个包（由于直接广播有一定的安全问题，多数情况下会在路由器上设置为不转发。）
+。</li>
+</ul>
+<h4 id="de类地址">DE类地址</h4>
+<p><img src="图解网络学习笔记/12-170019196383016.jpg" alt="img" style="zoom:80%;"></p>
+<h5 id="多播地址">多播地址</h5>
+<p>作用：<strong>将包发送给特定组内的所有主机。</strong></p>
+<p><img src="图解网络学习笔记/13-170019201814819.jpg" alt="单播、广播、多播通信" style="zoom:50%;"></p>
+<h3 id="无分类地址cidr">无分类地址CIDR</h3>
+<p>IP地址划分：网络号 + 主机号</p>
+<p>表示形式： <code>a.b.c.d/x</code>，其中 <code>/x</code> 表示前 x
+位属于<strong>网络号</strong>， x 的范围是 <code>0 ~ 32</code></p>
+<p>案例：比如 10.100.122.2/24，这种地址表示形式就是 CIDR，/24 表示前 24
+位是网络号，剩余的 8 位是主机号。</p>
+<p><img src="图解网络学习笔记/15-170019236238422.jpg" alt="img" style="zoom:50%;"></p>
+<p><strong>为什么分离网络号和主机号</strong></p>
+<ul>
+<li><p>两台计算机要通讯，要判断是否在一个广播域，也就是<strong>网络地址</strong>是否相同。如果网络地址相同，表明接受方在本网络上，那么可以把数据包直接发送到目标主机。</p></li>
+<li><p>不在同一广播域，靠路由器寻址。而路由器寻址，也是靠找到每一个网络，然后把包发到网络内的路由器，进而定位到具体主机··</p></li>
+</ul>
+<h4 id="子网掩码">子网掩码</h4>
+<p>掩码：掩盖掉主机号，只显示网络号。<strong>将子网掩码和 IP
+地址按位计算 AND，就可得到网络号。</strong></p>
+<p><img src="图解网络学习笔记/16-170019252574725.jpg" alt="img" style="zoom: 67%;"></p>
+<h4 id="子网划分">子网划分</h4>
+<p>划分形式：</p>
+<p><img src="图解网络学习笔记/18-170019313364528.jpg" alt="img" style="zoom: 67%;"></p>
+<p>对C类地址划分：</p>
+<p>从8位主机号借用两位作为子网号：</p>
+<p><img src="图解网络学习笔记/19.jpg" alt="img" style="zoom:50%;"></p>
+<p>这样就有四个子网：</p>
+<p><img src="图解网络学习笔记/21.jpg" alt="四个子网" style="zoom:67%;"></p>
+<h3 id="公有私有ip地址">公有私有ip地址</h3>
+<p>在 A、B、C 分类地址，实际上有分公有 IP 地址和私有 IP 地址。</p>
+<p><img src="图解网络学习笔记/22-17002784937201.jpg" alt="img" style="zoom:50%;"></p>
+<p>平时我们办公室、家里、学校用的 IP 地址，一般都是私有 IP
+地址。因为这些地址允许组织内部的 IT
+人员自己管理、自己分配，而且可以重复。因此，你学校的某个私有 IP
+地址和我学校的可以是一样的。</p>
+<p>就像每个小区都有自己的楼编号和门牌号，你小区家可以叫 1 栋 101
+号，我小区家也可以叫 1 栋
+101，没有任何问题。但一旦出了小区，就需要带上中山路 666 号（公网 IP
+地址），是国家统一分配的，不能两个小区都叫中山路 666。</p>
+<p>所以，公有 IP
+地址是有个组织统一分配的，假设你要开一个博客网站，那么你就需要去申请购买一个公有
+IP，这样全世界的人才能访问。并且公有 IP
+地址基本上要在整个互联网范围内保持唯一。</p>
+<p><img src="图解网络学习笔记/23-17002784937203.jpg" alt="公有 IP 地址与私有 IP 地址" style="zoom:50%;"></p>
+<p>公有IP地址管理：</p>
+<p>私有 IP 地址通常是内部的 IT 人员管理，公有 IP 地址是由
+<code>ICANN</code>
+组织管理，中文叫「互联网名称与数字地址分配机构」。</p>
+<p>IANA 是 ICANN 的其中一个机构，它负责分配互联网 IP
+地址，是按州的方式层层分配。</p>
+<p><img src="图解网络学习笔记/24-17002785204957.jpg" alt="img" style="zoom:80%;"></p>
+<ul>
+<li>ARIN 北美地区</li>
+<li>LACNIC 拉丁美洲和一些加勒比群岛</li>
+<li>RIPE NCC 欧洲、中东和中亚</li>
+<li>AfriNIC 非洲地区</li>
+<li>APNIC 亚太地区</li>
+</ul>
+<p>其中，在中国是由 CNNIC 的机构进行管理，它是中国国内唯一指定的全局 IP
+地址管理的组织</p>
+<h3 id="路由控制">路由控制</h3>
+<p>IP地址的<strong>网络地址</strong>这一部分是用于进行路由控制。</p>
+<p>路由控制表：记录着网络地址与下一步应该发送至路由器的地址</p>
+<p>流程：</p>
+<p><img src="图解网络学习笔记/25-170027942603410.jpg" alt="IP 地址与路由控制" style="zoom: 50%;"></p>
+<p><strong>环回地址不会流向网络。</strong></p>
+<h3 id="ip分片与重组">IP分片与重组</h3>
+<p><strong>MTU：最大传输单元</strong></p>
+<ul>
+<li>每种数据链路的MTU都是不相同的，如FDDI 数据链路 MTU 4352、以太网的
+MTU 是 1500 字节等。</li>
+</ul>
+<p>以太网内：</p>
+<p>当 IP 数据包大小大于 MTU 时， IP 数据包就会被分片。经过分片之后的 IP
+数据报在被重组的时候，只能由目标主机进行，路由器是不会进行重组的。</p>
+<p>假设发送方发送一个 4000
+字节的大数据报，若要传输在以太网链路，则需要把数据报分片成 3
+个小数据报进行传输，再交由接收方重组成大数据报。</p>
+<p><img src="图解网络学习笔记/26.jpg" alt="分片与重组" style="zoom:80%;"></p>
+<p>在分片传输中，一旦某个分片丢失，则会造成整个 IP 数据报作废，所以 TCP
+引入了 <code>MSS</code> 也就是在 TCP 层进行分片不由 IP 层分片，那么对于
+UDP 我们尽量不要发送一个大于 <code>MTU</code> 的数据报文。</p>
+<h2 id="ipv6">IPV6</h2>
+<p>特点：</p>
+<p>IPv6 不仅仅只是可分配的地址变多了，它还有非常多的亮点。</p>
+<ul>
+<li>IPv6 可自动配置，即使没有 DHCP
+服务器也可以实现自动分配IP地址，真是<strong>便捷到即插即用</strong>啊。</li>
+<li>IPv6 包头包首部长度采用固定的值 <code>40</code>
+字节，去掉了包头校验和，简化了首部结构，减轻了路由器负荷，大大<strong>提高了传输的性能</strong>。</li>
+<li>IPv6 有应对伪造 IP
+地址的网络安全功能以及防止线路窃听的功能，大大<strong>提升了安全性</strong>。</li>
+<li><strong>...</strong> （由你发现更多的亮点）</li>
+</ul>
+<p><strong>地址标识方法</strong></p>
+<p>IPv4 地址长度共 32 位，是以每 8
+位作为一组，并用点分十进制的表示方式。</p>
+<p>IPv6 地址长度是 128 位，是以每 16 位作为一组，每组用冒号 「:」
+隔开。</p>
+<figure>
+<img src="图解网络学习笔记/27-17003642385521.jpg" alt="IPv6 地址表示方法">
+<figcaption aria-hidden="true">IPv6 地址表示方法</figcaption>
+</figure>
+<p>如果出现连续的 0 时还可以将这些 0 省略，并用两个冒号
+「::」隔开。但是，一个 IP 地址中只允许出现一次两个连续的冒号。</p>
+<figure>
+<img src="图解网络学习笔记/28-17003642385523.jpg" alt="Pv6 地址缺省表示方">
+<figcaption aria-hidden="true">Pv6 地址缺省表示方</figcaption>
+</figure>
+<p><strong>IPV6地址结构</strong></p>
+<p>IPv6 类似 IPv4，也是通过 IP 地址的前几位标识 IP 地址的种类。</p>
+<p>IPv6 的地址主要有以下类型地址：</p>
+<ul>
+<li>单播地址，用于一对一的通信</li>
+<li>组播地址，用于一对多的通信</li>
+<li>任播地址，用于通信最近的节点，最近的节点是由路由协议决定</li>
+<li>没有广播地址</li>
+</ul>
+<p><img src="图解网络学习笔记/29-17003642636937.jpg" alt="IPv6地址结构" style="zoom:67%;"></p>
+<p><strong>单播地址</strong></p>
+<p>对于一对一通信的 IPv6
+地址，主要划分了三类单播地址，每类地址的有效范围都不同。</p>
+<ul>
+<li>在同一链路单播通信，不经过路由器，可以使用<strong>链路本地单播地址</strong>，IPv4
+没有此类型</li>
+<li>在内网里单播通信，可以使用<strong>唯一本地地址</strong>，相当于 IPv4
+的私有 IP</li>
+<li>在互联网通信，可以使用<strong>全局单播地址</strong>，相当于 IPv4
+的公有 IP</li>
+</ul>
+<p><strong>IPV4与IPV6首部对比</strong></p>
+<figure>
+<img src="图解网络学习笔记/31.jpg" alt="IPv4 首部与 IPv6 首部的差异">
+<figcaption aria-hidden="true">IPv4 首部与 IPv6 首部的差异</figcaption>
+</figure>
+<p>IPv6 相比 IPv4 的首部改进：</p>
+<ul>
+<li><strong>取消了首部校验和字段。</strong>
+因为在数据链路层和传输层都会校验，因此 IPv6 直接取消了 IP 的校验</li>
+<li><strong>取消了分片/重新组装相关字段。</strong>
+分片与重组是耗时的过程，IPv6
+不允许在中间路由器进行分片与重组，这种操作只能在源与目标主机，这将大大提高了路由器转发的速度</li>
+<li><strong>取消选项字段。</strong> 选项字段不再是标准 IP
+首部的一部分了，但它并没有消失，而是可能出现在 IPv6
+首部中的「下一个首部」指出的位置上。删除该选项字段使的 IPv6
+的首部成为固定长度的 <code>40</code> 字节</li>
+</ul>
+<h2 id="ip协议相关">IP协议相关</h2>
+<h3 id="dns">DNS</h3>
+<p>域名作用：方便人类记忆。</p>
+<p>DNS域名解析：将域名网址自动转换为具体的 IP 地址。</p>
+<h4 id="域名层级关系">域名层级关系</h4>
+<p>DNS 中的域名都是用<strong>句点</strong>来分隔的，比如
+<code>www.server.com</code>，这里的句点代表了不同层次之间的<strong>界限</strong>。</p>
+<ul>
+<li><strong>越靠右</strong>的位置表示其层级<strong>越高</strong>。</li>
+</ul>
+<p>层级关系类似Linux文件系统一样：</p>
+<p><img src="图解网络学习笔记/32.jpg" alt="DNS 树状结构" style="zoom:50%;"></p>
+<h4 id="域名解析工作流程">域名解析工作流程</h4>
+<p><img src="图解网络学习笔记/33.jpg" alt="域名解析的工作流程" style="zoom: 50%;"></p>
+<ol type="1">
+<li>客户端首先会发出一个 DNS 请求，问 www.server.com 的 IP
+是啥，并发给<strong>本地 DNS 服务器</strong>（也就是客户端的 TCP/IP
+设置中填写的 DNS 服务器地址）。</li>
+<li>本地域名服务器收到客户端的请求后，如果缓存里的表格能找到
+www.server.com，则它直接返回 IP 地址。如果没有，本地 DNS
+会去问它的<strong>根域名服务器</strong>：“老大， 能告诉我 www.server.com
+的 IP 地址吗？”
+根域名服务器是最高层次的，它不直接用于域名解析，但能指明一条道路。</li>
+<li>根 DNS 收到来自本地 DNS 的请求后，发现后置是
+.com，说：“www.server.com 这个域名归 .com 区域管理”，我给你 <strong>.com
+顶级域名服务</strong>器地址给你，你去问问它吧。”</li>
+<li>本地 DNS 收到顶级域名服务器的地址后，发起请求问“老二， 你能告诉我
+www.server.com 的 IP 地址吗？”</li>
+<li>顶级域名服务器说：“我给你负责 www.server.com 区域的权威 DNS
+服务器的地址，你去问它应该能问到”。</li>
+<li>本地 DNS 于是转向问<strong>权威 DNS
+服务器</strong>：“老三，www.server.com对应的IP是啥呀？” server.com
+的权威 DNS
+服务器，它是域名解析结果的原出处。为啥叫权威呢？就是我的域名我做主。</li>
+<li>权威 DNS 服务器查询后将对应的 IP 地址 X.X.X.X 告诉本地 DNS。</li>
+<li>本地 DNS 再将 IP 地址返回客户端，客户端和目标建立连接。</li>
+</ol>
+<h3 id="arp">ARP</h3>
+<p>IP数据包传输过程中，确定了源 IP 地址和目标 IP
+地址后，就会通过主机「路由表」确定 IP 数据包下一跳。</p>
+<p>下一跳的MAC地址，通过ARP协议计算。</p>
+<p><strong>ARP如何确定MAC地址</strong></p>
+<p>借助 <strong>ARP 请求与 ARP 响应</strong>两种类型的包确定 MAC
+地址。</p>
+<p><img src="图解网络学习笔记/34.jpg" alt="ARP 广播" style="zoom:50%;"></p>
+<ul>
+<li>主机会通过<strong>广播</strong>发送 ARP
+请求，这个包中包含了想要知道的 MAC 地址的主机 IP 地址。</li>
+<li>当同个链路中的所有设备收到 ARP 请求时，会去拆开 ARP
+请求包里的内容，如果 ARP 请求包中的目标 IP 地址与自己的 IP
+地址一致，那么这个设备就将自己的 MAC 地址塞入 <strong>ARP
+响应包</strong>返回给主机。</li>
+</ul>
+<blockquote>
+<p>操作系统通常会把第一次通过 ARP 获取的 MAC
+地址缓存起来，以便下次直接从缓存中找到对应 IP 地址的 MAC 地址。不过，MAC
+地址的缓存是有一定期限的，超过这个期限，缓存的内容将被清除。</p>
+</blockquote>
+<h4 id="rarp">RARP</h4>
+<p>已知MAC地址，求IP地址。</p>
+<p>通常这需要架设一台 <code>RARP</code>
+服务器，在这个服务器上<strong>注册设备的 MAC 地址及其 IP
+地址</strong>。然后再将这个设备接入到网络：</p>
+<ul>
+<li>设备（主机）会发送一条「我的 MAC
+地址是XXXX，请告诉我，我的IP地址应该是什么」的请求信息。</li>
+<li>RARP 服务器接到这个消息后返回「MAC地址为 XXXX 的设备，IP地址为
+XXXX」的信息给这个设备。</li>
+</ul>
+<p>最后，设备就根据从 RARP 服务器所收到的应答信息设置自己的 IP
+地址。</p>
+<p><img src="图解网络学习笔记/35.jpg" alt="RARP" style="zoom:80%;"></p>
+<h3 id="dhcp">DHCP</h3>
+<p>作用：让主机动态获取IP地址，避免自配</p>
+<p><strong>工作过程</strong></p>
+<p><img src="图解网络学习笔记/36.jpg" alt="DHCP 工作流程" style="zoom:50%;"></p>
+<ol type="1">
+<li>客户端首先发起 <strong>DHCP 发现报文（DHCP DISCOVER）</strong> 的 IP
+数据报
+<ul>
+<li>由于客户端没有 IP 地址，也不知道 DHCP 服务器的地址，所以使用的是
+<strong>UDP 广播通信</strong>，其使用的广播目的地址是
+255.255.255.255（端口 67） 并且使用 0.0.0.0（端口 68） 作为源 IP
+地址。</li>
+<li>DHCP 客户端将该 IP
+数据报传递给链路层，<strong>链路层</strong>然后将<strong>帧广播</strong>到所有的网络中设备。</li>
+</ul></li>
+<li>DHCP 服务器收到 DHCP 发现报文时，用 <strong>DHCP 提供报文（DHCP
+OFFER）</strong> 向客户端做出响应。
+<ul>
+<li>该报文仍然使用 IP 广播地址 255.255.255.255</li>
+<li>该报文信息携带服务器提供可租约的 IP 地址、子网掩码、默认网关、DNS
+服务器以及 <strong>IP 地址租用期</strong>。</li>
+</ul></li>
+<li>客户端收到一个或多个服务器的 DHCP
+提供报文后，从中选择一个服务器，并向选中的服务器发送 <strong>DHCP
+请求报文（DHCP REQUEST</strong>进行响应，回显配置的参数。</li>
+<li>最后，服务端用 <strong>DHCP ACK 报文</strong>对 DHCP
+请求报文进行响应，应答所要求的参数</li>
+</ol>
+<p><strong>特点</strong></p>
+<ol type="1">
+<li>全程UDP广播通信</li>
+</ol>
+<h4 id="dhcp中继代理">DHCP中继代理</h4>
+<p>客户端与服务器通信用的是广播，但如果 DHCP
+服务器和客户端不是在同一个局域网内，路由器又不会转发广播包，那每个网络都要配一个
+DHCP 服务器，开销过大，因此诞生了DHCP中继代理，有了 DHCP
+中继代理以后，<strong>对不同网段的 IP 地址分配也可以由一个 DHCP
+服务器统一进行管理。</strong></p>
+<p><img src="图解网络学习笔记/37.jpg" alt=" DHCP 中继代理" style="zoom:50%;"></p>
+<ul>
+<li>DHCP 客户端会向 DHCP 中继代理发送 DHCP 请求包，而 DHCP
+中继代理在收到这个广播包以后，再以<strong>单播</strong>的形式发给 DHCP
+服务器。</li>
+<li>服务器端收到该包以后再向 DHCP 中继代理返回应答，并由 DHCP
+中继代理将此包广播给 DHCP 客户端 。</li>
+</ul>
+<h3 id="nat">NAT</h3>
+<p>目的：缓解对IP地址的高频使用。</p>
+<p>原理：是一种<strong>网络地址转换</strong>技术，把私有 IP
+地址转换成公有 IP 地址。</p>
+<p><img src="图解网络学习笔记/38.jpg" alt="NAT" style="zoom: 50%;"></p>
+<ul>
+<li>普通的 NAT 转换没什么意义，IP地址并没有减少使用</li>
+</ul>
+<p>把 IP 地址 + 端口号一起进行转换，就用一个全球 IP
+地址，这种转换技术就叫<strong>网络地址与端口转换 NAPT。</strong></p>
+<p><strong>缺点</strong></p>
+<p>NAT/NAPT 都依赖于自己的转换表，因此会有以下的问题：</p>
+<ul>
+<li>外部无法主动与 NAT 内部服务器建立连接，因为 NAPT
+转换表没有转换记录。</li>
+<li>转换表的生成与转换操作都会产生性能开销。</li>
+<li>通信过程中，如果 NAT 路由器重启了，所有的 TCP 连接都将被重置。</li>
+</ul>
+<p><strong>改进</strong></p>
+<ol type="1">
+<li><p>使用IPV6</p></li>
+<li><p>采用NAT穿透技术</p>
+<p>NAT 穿越技术拥有这样的功能，它能够让网络应用程序主动发现自己位于 NAT
+设备之后，并且会主动获得 NAT 设备的公有
+IP，并为自己建立端口映射条目，注意这些都是
+NAT设备后的应用程序自动完成的。</p>
+<p>也就是说，在 NAT
+穿透技术中，NAT设备后的应用程序处于主动地位，它已经明确地知道 NAT
+设备要修改它外发的数据包，于是它主动配合 NAT
+设备的操作，主动地建立好映射，这样就不像以前由 NAT
+设备来建立映射了。</p>
+<p>说人话，就是客户端主动从 NAT 设备获取公有 IP
+地址，然后自己建立端口映射条目，然后用这个条目对外通信，就不需要 NAT
+设备来进行转换了。</p></li>
+</ol>
+<h4 id="napt">NAPT</h4>
+<p><img src="图解网络学习笔记/39.jpg" alt="NAPT" style="zoom: 50%;"></p>
+<ol type="1">
+<li>图中有两个客户端 192.168.1.10 和 192.168.1.11 同时与服务器
+183.232.231.172 进行通信，并且这两个客户端的本地端口都是 1025。</li>
+<li>到达路由器进行转发以后，<strong>两个私有 IP 地址都转换 IP
+地址为公有地址
+120.229.175.121，但是以不同的端口号作为区分。</strong></li>
+<li>随后生成一个 NAPT
+路由器的转换表，就可以正确地转换地址跟端口的组合，令客户端 A、B
+能同时与服务器之间进行通信。
+<ul>
+<li>这种转换表在 NAT 路由器上自动生成。例如，在 TCP 的情况下，建立 TCP
+连接首次握手时的 SYN
+包一经发出，就会生成这个表。而后又随着收到关闭连接时发出 FIN
+包的确认应答从表中被删除。</li>
+</ul></li>
+</ol>
+<h3 id="icmp">ICMP</h3>
+<p>ICMP 全称是 <strong>Internet Control Message
+Protocol</strong>，也就是<strong>互联网控制报文协议</strong>。</p>
+<p><strong>作用：</strong></p>
+<ul>
+<li><strong>确认IP包是否到达目标地址</strong></li>
+<li><strong>报告发送过程中 IP 包被废弃的原因</strong></li>
+<li><strong>改善网络设置</strong></li>
+</ul>
+<p>应对不可达的报文，ICMP工作流程：</p>
+<p><img src="图解网络学习笔记/40.jpg" alt="ICMP 目标不可达消息" style="zoom:50%;"></p>
+<h4 id="包头格式">包头格式</h4>
+<p><img src="图解网络学习笔记/5-170062309557316.jpg" alt="ICMP 报文" style="zoom:50%;"></p>
+<h4 id="类型">类型</h4>
+<p>ICMP 大致可以分为两大类：</p>
+<ul>
+<li>一类是用于诊断的查询消息，也就是「<strong>查询报文类型</strong>」</li>
+<li>另一类是通知出错原因的错误消息，也就是「<strong>差错报文类型</strong>」</li>
+</ul>
+<p><img src="图解网络学习笔记/41.jpg" alt="常见的 ICMP 类型" style="zoom:50%;"></p>
+<h5 id="查询报文">查询报文</h5>
+<p>回送消息 —— 类型 <code>0</code> 和 <code>8</code></p>
+<p>作用：回送消息用于进行通信的主机或路由器之间，判断所发送的数据包是否已经成功到达对端的一种消息，<code>ping</code>
+命令就是利用这个消息实现的。</p>
+<ul>
+<li>只要正常返回了ICMP回送响应，发送端到接收端就可达状态</li>
+</ul>
+<p>可以向对端主机发送<strong>回送请求</strong>的消息（<code>ICMP Echo Request Message</code>，类型
+<code>8</code>），也可以接收对端主机发回来的<strong>回送应答</strong>消息（<code>ICMP Echo Reply Message</code>，类型
+<code>0</code>）。</p>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ping/8.jpg" alt="ICMP 回送请求和回送应答报文" style="zoom: 50%;"></p>
+<p>相比原生的 ICMP，这里多了两个字段：</p>
+<ul>
+<li><strong>标识符</strong>：用以区分是哪个应用程序发 ICMP
+包，比如用进程 <code>PID</code> 作为标识符；</li>
+<li><strong>序号</strong>：序列号从 <code>0</code>
+开始，每发送一次新的回送请求就会加 <code>1</code>，
+可以用来确认网络包是否有丢失。</li>
+</ul>
+<h5 id="差错报文">差错报文</h5>
+<p>目标不可达类型的代码：</p>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ping/9.jpg" alt="目标不可达类型的常见代码号" style="zoom:50%;"></p>
+<p><strong>a.网络不可达代码为 0</strong></p>
+<p><em>外卖版本：</em></p>
+<p>小林第一次送外卖时，小区里只有 A 和 B 区两栋楼，但送餐地址写的是 C
+区楼，小林表示头上很多问号，压根就没这个地方。</p>
+<p><em>正常版本：</em></p>
+<p>IP 地址是分为网络号和主机号的，所以当路由器中的路由器表匹配不到接收方
+IP 的网络号，就通过 ICMP
+协议以<strong>网络不可达</strong>（<code>Network Unreachable</code>）的原因告知主机。</p>
+<p>自从不再有网络分类以后，网络不可达也渐渐不再使用了。</p>
+<p><strong>b.主机不可达代码为 1</strong></p>
+<p><em>外卖版本：</em></p>
+<p>小林第二次送外卖时，这次小区有 5 层楼高的 C
+区楼了，找到地方了，但送餐地址写的是 C 区楼 601 号房
+，说明找不到这个房间。</p>
+<p><em>正常版本：</em></p>
+<p>当路由表中没有该主机的信息，或者该主机没有连接到网络，那么会通过 ICMP
+协议以<strong>主机不可达</strong>（<code>Host Unreachable</code>）的原因告知主机。</p>
+<p><strong>c. 协议不可达代码为 2</strong></p>
+<p><em>外卖版本：</em></p>
+<p>小林第三次送外卖时，这次小区有 C 区楼，也有 601
+号房，找到地方了，也找到房间了，但是一开门人家是外国人说的是英语，我说的是中文！语言不通，外卖送达失败~</p>
+<p><em>正常版本：</em></p>
+<p>当主机使用 TCP
+协议访问对端主机时，能找到对端的主机了，可是对端主机的防火墙已经禁止 TCP
+协议访问，那么会通过 ICMP
+协议以<strong>协议不可达</strong>的原因告知主机。</p>
+<p><strong>d. 端口不可达代码为 3</strong></p>
+<p><em>外卖版本：</em></p>
+<p>小林第四次送外卖时，这次小区有 C 区楼，也有 601
+号房，找到地方了，也找到房间了，房间里的人也是说中文的人了，但是人家说他要的不是外卖，而是快递。。。</p>
+<p><em>正常版本：</em></p>
+<p>当主机访问对端主机 8080
+端口时，这次能找到对端主机了，防火墙也没有限制，可是发现对端主机没有进程监听
+8080 端口，那么会通过 ICMP
+协议以<strong>端口不可达</strong>的原因告知主机。</p>
+<p><strong>e. 需要进行分片但设置了不分片位代码为 4</strong></p>
+<p><em>外卖版本：</em></p>
+<p>小林第五次送外卖时，这次是个吃播博主点了 100
+份外卖，但是吃播博主要求一次性要把全部外卖送达，小林的一台电动车装不下呀，这样就没办法送达了。</p>
+<p><em>正常版本：</em></p>
+<p>发送端主机发送 IP 数据报时，将 IP
+首部的<strong>分片禁止标志位</strong>设置为<code>1</code>。根据这个标志位，途中的路由器遇到超过
+MTU 大小的数据包时，不会进行分片，而是直接抛弃。</p>
+<h3 id="igmp">IGMP</h3>
+<p><img src="图解网络学习笔记/42.jpg" alt="组播模型" style="zoom:50%;"></p>
+<p><strong>IGMP
+是因特网组管理协议，工作在主机（组播成员）和最后一跳路由之间</strong>，如上图中的蓝色部分。</p>
+<ul>
+<li>IGMP
+报文向<strong>路由器申请</strong>加入和退出组播组，默认情况下路由器是不会转发组播包到连接中的主机，除非主机通过
+IGMP 加入到组播组，主机申请加入到组播组时，路由器就会记录 IGMP
+路由器表，路由器后续就会转发组播包到对应的主机了。</li>
+<li>IGMP 报文采用 IP 封装，IP 头部的协议号为 2，而且 TTL 字段值通常为
+1，因为 IGMP 是工作在主机与连接的路由器之间。</li>
+</ul>
+<h4 id="工作机制"><strong>工作机制</strong></h4>
+<p><strong>常规查询与响应工作机制</strong></p>
+<p><img src="图解网络学习笔记/43.jpg" alt=" IGMP 常规查询与响应工作机制" style="zoom: 67%;"></p>
+<ol type="1">
+<li>路由器会周期性发送目的地址为
+<code>224.0.0.1</code>（组播地址，表示同一网段内所有主机和路由器）
+<strong>IGMP 常规查询报文</strong>。</li>
+<li>主机1 和 主机 3
+收到这个查询，随后会启动「<strong>报告延迟计时器</strong>」，计时器的时间是随机的，通常是
+0~10 秒，计时器超时后主机就会发送 <strong>IGMP
+成员关系报告报文</strong>（源 IP 地址为自己主机的 IP 地址，目的 IP
+地址为组播地址）。
+<ul>
+<li>如果在定时器超时之前，收到同一个组内的其他主机发送的成员关系报告报文，则自己不再发送，这样可以减少网络中多余的
+IGMP 报文数量。</li>
+</ul></li>
+<li>路由器收到主机的成员关系报文后，就会在 IGMP
+路由表中加入该组播组，后续网络中一旦该组播地址的数据到达路由器，它会把数据包转发出去。</li>
+</ol>
+<p><strong>离开组播组工作机制</strong></p>
+<p>情况一：网段中仍有该组播组</p>
+<p><img src="图解网络学习笔记/44.jpg" alt=" IGMPv2 离开组播组工作机制 情况1" style="zoom:67%;"></p>
+<ol type="1">
+<li>主机 1 要离开组 224.1.1.1，发送 IGMPv2 离组报文，报文的目的地址是
+224.0.0.2（表示发向网段内的所有路由器）</li>
+<li>路由器 收到该报文后，以 1 秒为间隔连续发送 IGMP
+特定组查询报文（共计发送 2 个），以便确认该网络是否还有 224.1.1.1
+组的其他成员。</li>
+<li>主机 3 仍然是组 224.1.1.1
+的成员，因此它立即响应这个特定组查询。路由器知道该网络中仍然存在该组播组的成员，于是继续向该网络转发
+224.1.1.1 的组播数据包。</li>
+</ol>
+<p>情况二：网段中没有该组播组</p>
+<p><img src="图解网络学习笔记/45.jpg" alt=" IGMPv2 离开组播组工作机制 情况2" style="zoom:67%;"></p>
+<ol type="1">
+<li>主机 1 要离开组播组 224.1.1.1，发送 IGMP 离组报文。</li>
+<li>路由器收到该报文后，以 1 秒为间隔连续发送 IGMP
+特定组查询报文（共计发送 2 个）。此时在该网段内，组 224.1.1.1
+已经没有其他成员了，因此没有主机响应这个查询。</li>
+<li>一定时间后，路由器认为该网段中已经没有 224.1.1.1
+组播组成员了，将不会再向这个网段转发该组播地址的数据包。</li>
+</ol>
+<h2 id="ping工作原理">ping工作原理</h2>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io">Vlong_shen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io/2023/06/19/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://vlsmhd.github.io/2023/06/19/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://vlsmhd.github.io" target="_blank">VLS_Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/26/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0/" title="设计模式学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">设计模式学习</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/19/leetcode%E6%A0%91%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="leetcode树题目专项训练"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">leetcode树题目专项训练</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/05/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E2%80%94%E2%80%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="计算机网络—自顶向下方法——学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-26</div><div class="title">计算机网络—自顶向下方法——学习笔记</div></div></a></div><div><a href="/2023/04/04/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" title="Leetcode-Hot100-15. 三数之和"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-04</div><div class="title">Leetcode-Hot100-15. 三数之和</div></div></a></div><div><a href="/2023/04/01/22.%20%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/" title="Leetcode-Hot100-22.括号生成"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-01</div><div class="title">Leetcode-Hot100-22.括号生成</div></div></a></div><div><a href="/2023/04/03/226.%20%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/" title="Leetcode-Hot100-226. 翻转二叉树"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-03</div><div class="title">Leetcode-Hot100-226. 翻转二叉树</div></div></a></div><div><a href="/2023/03/31/3.%20%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" title="Leetcode-Hot100-3.无重复字符的最长子串"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">Leetcode-Hot100-3.无重复字符的最长子串</div></div></a></div><div><a href="/2023/04/24/Leetcode-Hot100-108.-%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" title="Leetcode-Hot100-108. 将有序数组转换为二叉搜索树"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-24</div><div class="title">Leetcode-Hot100-108. 将有序数组转换为二叉搜索树</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Vlong_shen</div><div class="author-info__description">一名热爱编程的程序员</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">121</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">69</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VLSmhd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/VLSmhd" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/-" target="_blank" title="联系我QQ：1067853293"><i class="fab fa-qq"></i></a><a class="social-icon" href="/-" target="_blank" title="微信：18956757208"><i class="fa fa-wechat"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#osi%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">OSI网络模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tcpip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">TCP&#x2F;IP网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">1.2.1.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">1.2.2.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">1.2.3.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82"><span class="toc-number">1.2.4.</span> <span class="toc-text">网络接口层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.2.5.</span> <span class="toc-text">数据封装格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%AE%E5%85%A5%E7%BD%91%E5%9D%80%E5%88%B0%E7%BD%91%E9%A1%B5%E6%98%BE%E7%A4%BA%E7%9A%84%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91"><span class="toc-number">1.3.</span> <span class="toc-text">键入网址到网页显示的底层逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E8%A7%A3%E6%9E%90url"><span class="toc-number">1.3.1.</span> <span class="toc-text">HTTP解析URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9C%9F%E5%AE%9E%E5%9C%B0%E5%9D%80%E6%9F%A5%E8%AF%A2dns"><span class="toc-number">1.3.2.</span> <span class="toc-text">真实地址查询——DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">域名解析流程：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="toc-number">1.3.3.</span> <span class="toc-text">协议栈：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="toc-number">1.3.4.</span> <span class="toc-text">TCP可靠传输</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http"><span class="toc-number">2.</span> <span class="toc-text">HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number">2.1.1.</span> <span class="toc-text">常见状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E5%B8%B8%E8%A7%81%E5%AD%97%E6%AE%B5"><span class="toc-number">2.1.2.</span> <span class="toc-text">http常见字段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#uri%E5%92%8Curl"><span class="toc-number">2.1.3.</span> <span class="toc-text">URI和URL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get%E4%B8%8Epost"><span class="toc-number">2.2.</span> <span class="toc-text">Get与POST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-number">2.2.1.</span> <span class="toc-text">GET</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#post"><span class="toc-number">2.2.2.</span> <span class="toc-text">POST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%AF%E5%90%A6%E5%AE%89%E5%85%A8%E5%92%8C%E5%B9%82%E7%AD%89"><span class="toc-number">2.2.3.</span> <span class="toc-text">是否安全和幂等</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E7%BC%93%E5%AD%98"><span class="toc-number">2.3.</span> <span class="toc-text">HTTP缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E7%BC%93%E5%AD%98"><span class="toc-number">2.3.1.</span> <span class="toc-text">强制缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="toc-number">2.3.2.</span> <span class="toc-text">协商缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E7%89%B9%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">HTTP特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81"><span class="toc-number">2.4.1.</span> <span class="toc-text">无状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cookie"><span class="toc-number">2.4.1.1.</span> <span class="toc-text">cookie</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%8E%E6%96%87%E4%BC%A0%E8%BE%93"><span class="toc-number">2.4.2.</span> <span class="toc-text">明文传输</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#https"><span class="toc-number">2.5.</span> <span class="toc-text">HTTPS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#https%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">2.5.1.</span> <span class="toc-text">https的安全性操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E5%8A%A0%E5%AF%86"><span class="toc-number">2.5.1.1.</span> <span class="toc-text">混合加密</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">2.5.1.1.1.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">2.5.1.1.2.</span> <span class="toc-text">非对称加密</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="toc-number">2.5.1.2.</span> <span class="toc-text">摘要算法 + 数字签名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="toc-number">2.5.1.3.</span> <span class="toc-text">数字证书</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#https%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-number">2.5.2.</span> <span class="toc-text">https建立连接的过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E7%89%88%E6%9C%AC%E6%BC%94%E5%8F%98"><span class="toc-number">2.6.</span> <span class="toc-text">HTTP版本演变</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http1.1"><span class="toc-number">2.7.</span> <span class="toc-text">HTTP1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http2"><span class="toc-number">2.8.</span> <span class="toc-text">HTTP2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http3"><span class="toc-number">2.9.</span> <span class="toc-text">HTTP3</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tcp"><span class="toc-number">3.</span> <span class="toc-text">TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="toc-number">3.1.</span> <span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp%E5%A4%B4%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">TCP头格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.1.2.</span> <span class="toc-text">TCP连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp%E4%B8%8Eudp%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.1.3.</span> <span class="toc-text">TCP与UDP的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B"><span class="toc-number">3.2.</span> <span class="toc-text">连接建立</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B"><span class="toc-number">3.2.1.</span> <span class="toc-text">三次握手过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">3.2.2.</span> <span class="toc-text">为什么三次握手</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E5%8E%86%E5%8F%B2%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">避免历史连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%8F%8C%E6%96%B9%E5%88%9D%E5%A7%8B%E5%BA%8F%E5%88%97%E5%8F%B7"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">同步双方初始序列号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E8%B5%84%E6%BA%90%E6%B5%AA%E8%B4%B9"><span class="toc-number">3.2.2.3.</span> <span class="toc-text">避免资源浪费</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A2%E5%A4%B1%E6%8F%A1%E6%89%8B%E6%8A%A5%E6%96%87"><span class="toc-number">3.2.3.</span> <span class="toc-text">丢失握手报文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%A2%E5%A4%B1"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">第一次丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%A2%E5%A4%B1"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">第二次丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%A2%E5%A4%B1"><span class="toc-number">3.2.3.3.</span> <span class="toc-text">第三次丢失</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%BA%8F%E5%88%97%E5%8F%B7isn"><span class="toc-number">3.2.4.</span> <span class="toc-text">初始序列号ISN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E9%83%BD%E8%A6%81%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84isn"><span class="toc-number">3.2.4.1.</span> <span class="toc-text">为什么每次建立连接都要不一样的ISN</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8F%B7%E5%9B%9E%E7%BB%95"><span class="toc-number">3.2.4.1.1.</span> <span class="toc-text">序列号回绕</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%96%AD%E5%BC%80"><span class="toc-number">3.3.</span> <span class="toc-text">连接断开</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E8%BF%87%E7%A8%8B"><span class="toc-number">3.3.1.</span> <span class="toc-text">四次挥手过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-time_wait-%E7%AD%89%E5%BE%85%E7%9A%84%E6%97%B6%E9%97%B4%E6%98%AF-2msl"><span class="toc-number">3.3.1.1.</span> <span class="toc-text">为什么 TIME_WAIT
+等待的时间是 2MSL</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A2%E5%A4%B1%E6%8C%A5%E6%89%8B%E6%8A%A5%E6%96%87"><span class="toc-number">3.3.2.</span> <span class="toc-text">丢失挥手报文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%A2%E5%A4%B1-1"><span class="toc-number">3.3.2.1.</span> <span class="toc-text">第一次丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%A2%E5%A4%B1-1"><span class="toc-number">3.3.2.2.</span> <span class="toc-text">第二次丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%A2%E5%A4%B1-1"><span class="toc-number">3.3.2.3.</span> <span class="toc-text">第三次丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%A2%E5%A4%B1"><span class="toc-number">3.3.2.4.</span> <span class="toc-text">第四次丢失</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E4%BC%A0%E6%9C%BA%E5%88%B6"><span class="toc-number">3.4.</span> <span class="toc-text">重传机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0"><span class="toc-number">3.4.1.</span> <span class="toc-text">超时重传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0"><span class="toc-number">3.4.2.</span> <span class="toc-text">快速重传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sack"><span class="toc-number">3.4.3.</span> <span class="toc-text">SACK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#duplicate-sack"><span class="toc-number">3.4.4.</span> <span class="toc-text">Duplicate SACK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%BA%E5%88%B6"><span class="toc-number">3.5.</span> <span class="toc-text">滑动窗口机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E6%96%B9"><span class="toc-number">3.5.1.</span> <span class="toc-text">发送方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%96%B9"><span class="toc-number">3.5.2.</span> <span class="toc-text">接收方</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">3.6.</span> <span class="toc-text">流量控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E8%BF%87%E7%A8%8B"><span class="toc-number">3.6.1.</span> <span class="toc-text">流量控制过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F"><span class="toc-number">3.6.2.</span> <span class="toc-text">操作系统缓冲区&amp;滑动窗口大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E5%85%B3%E9%97%AD"><span class="toc-number">3.6.3.</span> <span class="toc-text">窗口关闭</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%E7%8E%B0%E8%B1%A1"><span class="toc-number">3.6.3.1.</span> <span class="toc-text">死锁现象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%8A%E6%B6%82%E7%AA%97%E5%8F%A3%E7%BB%BC%E5%90%88%E5%BE%81"><span class="toc-number">3.6.4.</span> <span class="toc-text">糊涂窗口综合征</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%96%B9%E8%A7%A3%E5%86%B3%E7%AD%96%E7%95%A5"><span class="toc-number">3.6.4.1.</span> <span class="toc-text">接收方解决策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E6%96%B9%E8%A7%A3%E5%86%B3%E7%AD%96%E7%95%A5"><span class="toc-number">3.6.4.2.</span> <span class="toc-text">发送方解决策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#nagle-%E7%AE%97%E6%B3%95"><span class="toc-number">3.6.4.2.1.</span> <span class="toc-text">Nagle 算法</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">3.7.</span> <span class="toc-text">拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%85%A2%E5%90%AF%E5%8A%A8"><span class="toc-number">3.7.1.</span> <span class="toc-text">慢启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D"><span class="toc-number">3.7.2.</span> <span class="toc-text">拥塞避免</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E5%8F%91%E7%94%9F"><span class="toc-number">3.7.3.</span> <span class="toc-text">拥塞发生</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0-1"><span class="toc-number">3.7.3.1.</span> <span class="toc-text">超时重传</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0-1"><span class="toc-number">3.7.3.2.</span> <span class="toc-text">快速重传</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%81%A2%E5%A4%8D"><span class="toc-number">3.7.4.</span> <span class="toc-text">快速恢复</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ip"><span class="toc-number">4.</span> <span class="toc-text">IP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ip%E5%9C%B0%E5%9D%80ipv4"><span class="toc-number">4.1.</span> <span class="toc-text">IP地址（IPV4）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E5%9C%B0%E5%9D%80"><span class="toc-number">4.1.1.</span> <span class="toc-text">分类地址</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#abc%E7%B1%BB%E5%9C%B0%E5%9D%80"><span class="toc-number">4.1.1.1.</span> <span class="toc-text">ABC类地址</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD%E5%9C%B0%E5%9D%80"><span class="toc-number">4.1.1.1.1.</span> <span class="toc-text">广播地址</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#de%E7%B1%BB%E5%9C%B0%E5%9D%80"><span class="toc-number">4.1.1.2.</span> <span class="toc-text">DE类地址</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%9A%E6%92%AD%E5%9C%B0%E5%9D%80"><span class="toc-number">4.1.1.2.1.</span> <span class="toc-text">多播地址</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%88%86%E7%B1%BB%E5%9C%B0%E5%9D%80cidr"><span class="toc-number">4.1.2.</span> <span class="toc-text">无分类地址CIDR</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="toc-number">4.1.2.1.</span> <span class="toc-text">子网掩码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86"><span class="toc-number">4.1.2.2.</span> <span class="toc-text">子网划分</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E6%9C%89%E7%A7%81%E6%9C%89ip%E5%9C%B0%E5%9D%80"><span class="toc-number">4.1.3.</span> <span class="toc-text">公有私有ip地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E6%8E%A7%E5%88%B6"><span class="toc-number">4.1.4.</span> <span class="toc-text">路由控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ip%E5%88%86%E7%89%87%E4%B8%8E%E9%87%8D%E7%BB%84"><span class="toc-number">4.1.5.</span> <span class="toc-text">IP分片与重组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ipv6"><span class="toc-number">4.2.</span> <span class="toc-text">IPV6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%85%B3"><span class="toc-number">4.3.</span> <span class="toc-text">IP协议相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dns"><span class="toc-number">4.3.1.</span> <span class="toc-text">DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E5%B1%82%E7%BA%A7%E5%85%B3%E7%B3%BB"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">域名层级关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">4.3.1.2.</span> <span class="toc-text">域名解析工作流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#arp"><span class="toc-number">4.3.2.</span> <span class="toc-text">ARP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#rarp"><span class="toc-number">4.3.2.1.</span> <span class="toc-text">RARP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dhcp"><span class="toc-number">4.3.3.</span> <span class="toc-text">DHCP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#dhcp%E4%B8%AD%E7%BB%A7%E4%BB%A3%E7%90%86"><span class="toc-number">4.3.3.1.</span> <span class="toc-text">DHCP中继代理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nat"><span class="toc-number">4.3.4.</span> <span class="toc-text">NAT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#napt"><span class="toc-number">4.3.4.1.</span> <span class="toc-text">NAPT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#icmp"><span class="toc-number">4.3.5.</span> <span class="toc-text">ICMP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%85%E5%A4%B4%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.3.5.1.</span> <span class="toc-text">包头格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.3.5.2.</span> <span class="toc-text">类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%8A%A5%E6%96%87"><span class="toc-number">4.3.5.2.1.</span> <span class="toc-text">查询报文</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B7%AE%E9%94%99%E6%8A%A5%E6%96%87"><span class="toc-number">4.3.5.2.2.</span> <span class="toc-text">差错报文</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#igmp"><span class="toc-number">4.3.6.</span> <span class="toc-text">IGMP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">4.3.6.1.</span> <span class="toc-text">工作机制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ping%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">4.4.</span> <span class="toc-text">ping工作原理</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/17/LCR%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="LCR题目专项训练">LCR题目专项训练</a><time datetime="2023-11-17T02:01:30.758Z" title="发表于 2023-11-17 10:01:30">2023-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/08/leetcode%E6%95%B0%E5%AD%A6%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="leetcode数学题目专项训练">leetcode数学题目专项训练</a><time datetime="2023-11-08T01:18:07.132Z" title="发表于 2023-11-08 09:18:07">2023-11-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/06/leetcode%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%A2%98%E7%9B%AE%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" title="leetcode字符串题目专项训练">leetcode字符串题目专项训练</a><time datetime="2023-11-06T03:35:20.394Z" title="发表于 2023-11-06 11:35:20">2023-11-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/04/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="并发编程设计模式">并发编程设计模式</a><time datetime="2023-11-04T07:19:35.683Z" title="发表于 2023-11-04 15:19:35">2023-11-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/04/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" title="JUC并发编程应用场景">JUC并发编程应用场景</a><time datetime="2023-11-04T06:48:15.410Z" title="发表于 2023-11-04 14:48:15">2023-11-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Vlong_shen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
