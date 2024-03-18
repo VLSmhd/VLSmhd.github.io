@@ -1,17 +1,17 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>JVM学习 | VLS_Blog</title><meta name="author" content="Vlong_shen"><meta name="copyright" content="Vlong_shen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="JVM内存结构 程序计数器 Program Counter Register 程序计数器（寄存器） 作用：是记录下一条 jvm 指令的执行地址行号。 特点：  线程私有 不会溢出  如下是一段字节码指令，注释对应的具体的代码块： 1234567891011121314151617180: getstatic #20 &#x2F;&#x2F; PrintStream out &#x3D; System.out">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>黑马JVM学习 | VLS_Blog</title><meta name="author" content="Vlong_shen"><meta name="copyright" content="Vlong_shen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="JVM内存结构 程序计数器 Program Counter Register 程序计数器（寄存器） 作用：是记录下一条 jvm 指令的执行地址行号。 特点：  线程私有 不会溢出  如下是一段字节码指令，注释对应的具体的代码块： 1234567891011121314151617180: getstatic #20 &#x2F;&#x2F; PrintStream out &#x3D; System.out">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM学习">
-<meta property="og:url" content="https://vlsmhd.github.io/2023/12/18/JVM%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="黑马JVM学习">
+<meta property="og:url" content="https://vlsmhd.github.io/2023/12/18/%E9%BB%91%E9%A9%ACJVM%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="VLS_Blog">
 <meta property="og:description" content="JVM内存结构 程序计数器 Program Counter Register 程序计数器（寄存器） 作用：是记录下一条 jvm 指令的执行地址行号。 特点：  线程私有 不会溢出  如下是一段字节码指令，注释对应的具体的代码块： 1234567891011121314151617180: getstatic #20 &#x2F;&#x2F; PrintStream out &#x3D; System.out">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://vlsmhd.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2023-12-18T02:10:13.777Z">
-<meta property="article:modified_time" content="2024-03-05T14:25:16.072Z">
+<meta property="article:modified_time" content="2024-03-14T02:02:05.630Z">
 <meta property="article:author" content="Vlong_shen">
 <meta property="article:tag" content="learn">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://vlsmhd.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://vlsmhd.github.io/2023/12/18/JVM%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://vlsmhd.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://vlsmhd.github.io/2023/12/18/%E9%BB%91%E9%A9%ACJVM%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: undefined,
@@ -52,12 +52,12 @@
     rightside: false,
   }
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'JVM学习',
+  title: '黑马JVM学习',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2024-03-05 22:25:16'
+  postUpdate: '2024-03-14 10:02:05'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -162,7 +162,7 @@
     }
     detectApple()
     })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="VLS_Blog" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">120</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">76</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="VLS_Blog"><img class="site-icon" src="https://vlsmhd.github.io/img/avatar.jpg"/><span class="site-name">VLS_Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JVM学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-18T02:10:13.777Z" title="发表于 2023-12-18 10:10:13">2023-12-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-05T14:25:16.072Z" title="更新于 2024-03-05 22:25:16">2024-03-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JVM学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="jvm内存结构">JVM内存结构</h1>
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">118</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">77</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="VLS_Blog"><img class="site-icon" src="https://vlsmhd.github.io/img/avatar.jpg"/><span class="site-name">VLS_Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> Photo</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">黑马JVM学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-18T02:10:13.777Z" title="发表于 2023-12-18 10:10:13">2023-12-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-14T02:02:05.630Z" title="更新于 2024-03-14 10:02:05">2024-03-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="黑马JVM学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="jvm内存结构">JVM内存结构</h1>
 <h2 id="程序计数器">程序计数器</h2>
 <p>Program Counter Register 程序计数器（寄存器）</p>
 <p>作用：是<strong>记录下一条 jvm 指令</strong>的执行地址行号。</p>
@@ -276,9 +276,9 @@ str</li>
 </ul>
 <h4 id="位置">位置</h4>
 <p>1.8版本：</p>
-<p><img src="JVM学习/image-20231223132738881.png" alt="image-20231223132738881" style="zoom:80%;" /></p>
+<p><img src="image-20231223132738881.png" alt="image-20231223132738881" style="zoom:80%;" /></p>
 <p>1.6版本以下：</p>
-<p><img src="JVM学习/image-20231223132804083.png" alt="image-20231223132804083" style="zoom:80%;" /></p>
+<p><img src="image-20231223132804083.png" alt="image-20231223132804083" style="zoom:80%;" /></p>
 <h4 id="调优">调优</h4>
 <p>因为StringTable是由HashTable实现的，所以可以适当增加HashTable桶的个数，来减少字符串放入串池所需要的时间</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:StringTableSize=桶个数（最少设置为 1009 以上）</span><br></pre></td></tr></table></figure>
@@ -294,7 +294,7 @@ str</li>
 不同的虚拟机有不同的实现</li>
 </ul>
 <figure>
-<img src="JVM学习/image-20231222114529710.png" alt="方法区" />
+<img src="image-20231222114529710.png" alt="方法区" />
 <figcaption aria-hidden="true">方法区</figcaption>
 </figure>
 <h3 id="运行时常量池">运行时常量池</h3>
@@ -302,11 +302,11 @@ str</li>
 <p>反编译如下代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>得到：</p>
-<p><img src="JVM学习/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-17032216964146.png" alt="字节码-代码指令" style="zoom:80%;" /></p>
+<p><img src="watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-17032216964146.png" alt="字节码-代码指令" style="zoom:80%;" /></p>
 <ul>
 <li>红框内的就是在常量表中的地址</li>
 </ul>
-<p><img src="JVM学习/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-17032216494603.png" alt="字节码-常量池表" style="zoom:80%;" /></p>
+<p><img src="watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-17032216494603.png" alt="字节码-常量池表" style="zoom:80%;" /></p>
 <p><strong>常量池</strong></p>
 <p>就是一张表，虚拟机指令根据这张常量表找到要执行的类名、方法名、参数类型、字面量信息</p>
 <p><strong>运行时常量池</strong></p>
@@ -321,14 +321,14 @@ str</li>
 </ul>
 <h3 id="优势-文件读写">优势-文件读写</h3>
 <p>正常文件读写流程</p>
-<p><img src="JVM学习/image-20231224103120537.png" alt="image-20231224103120537" style="zoom:80%;" /></p>
+<p><img src="image-20231224103120537.png" alt="image-20231224103120537" style="zoom:80%;" /></p>
 <p>因为 java
 不能直接操作文件管理，需要切换到内核态，使用本地方法进行操作，然后读取磁盘文件，会在系统内存中创建一个缓冲区，将数据读到系统缓冲区，
 然后在将系统缓冲区数据，复制到 java
 堆内存中。缺点是数据存储了两份，在系统内存中有一份，java
 堆中有一份，造成了不必要的复制。</p>
 <p><strong>使用了 DirectBuffer 文件读取流程</strong></p>
-<p><img src="JVM学习/image-20231224103633606.png" alt="image-20231224103633606" style="zoom:67%;" /></p>
+<p><img src="image-20231224103633606.png" alt="image-20231224103633606" style="zoom:67%;" /></p>
 <p>直接内存是<strong>操作系统和 Java
 程序共享的一块区域</strong>，无需将代码从系统内存复制到 Java
 堆内存，从而提高了效率。</p>
@@ -363,12 +363,12 @@ DirectByteBuffer ）被回收以后就会调用 Cleaner 的 clean
 <p>概念：当一个对象被引用时，这个对象的引用计数器 +
 1，值为0表示不在被引用，直接清除</p>
 <p>缺陷：循环引用问题</p>
-<p><img src="JVM学习/image-20231225103144019.png" alt="image-20231225103144019" style="zoom:80%;" /></p>
+<p><img src="image-20231225103144019.png" alt="image-20231225103144019" style="zoom:80%;" /></p>
 <ul>
 <li>两个对象的计数都为1，导致两个对象都无法被释放。</li>
 </ul>
 <h4 id="种引用类型">5种引用类型</h4>
-<p><img src="JVM学习/image-20231226102624330.png" alt="image-20231226102624330" style="zoom: 67%;" /></p>
+<p><img src="image-20231226102624330.png" alt="image-20231226102624330" style="zoom: 67%;" /></p>
 <h5 id="强引用">强引用</h5>
 <p>所有 GC Roots
 对象都不通过【强引用】引用该对象，该对象才能被垃圾回收</p>
@@ -378,7 +378,7 @@ DirectByteBuffer ）被回收以后就会调用 Cleaner 的 clean
 <p>仅有弱引用引用该对象时，在垃圾回收时，无论内存是否充足，都会回收弱引用对象，可以配合引用队列来释放弱引用自身。</p>
 <h6 id="threadlocal内存泄露">ThreadLocal内存泄露</h6>
 <figure>
-<img src="JVM学习/v2-50b25a5f65fe02d6eebe27801a94c833_720w.webp"
+<img src="v2-50b25a5f65fe02d6eebe27801a94c833_720w.webp"
 alt="ThreadLocal引用" />
 <figcaption aria-hidden="true">ThreadLocal引用</figcaption>
 </figure>
@@ -419,8 +419,7 @@ Analyzer工具查看</h5>
 </ul></li>
 <li><p>打开 Eclipse Memory Analyzer 对 1.bin 文件进行分析</p>
 <figure>
-<img src="JVM学习/image-20231225103710405.png"
-alt="image-20231225103710405" />
+<img src="image-20231225103710405.png" alt="image-20231225103710405" />
 <figcaption aria-hidden="true">image-20231225103710405</figcaption>
 </figure></li>
 </ol>
@@ -435,22 +434,20 @@ alt="image-20231225103710405" />
 <ul>
 <li>会产生内存碎片</li>
 </ul>
-<p><img src="JVM学习/image-20231227111055176.png" alt="image-20231227111055176" style="zoom:67%;" /></p>
+<p><img src="image-20231227111055176.png" alt="image-20231227111055176" style="zoom:67%;" /></p>
 <h3 id="标记-整理">标记-整理</h3>
 <p>清除完之后，会把存活的对象的内存地址重新整理，排列整齐，保证不出现内存碎片问题，但是效率比较慢。</p>
 <p>存活对象比较多的话，整理起来耗时，占用CPU，甚至出现用户程序阻塞的问题。</p>
-<p><img src="JVM学习/image-20231227111237657.png" alt="image-20231227111237657" style="zoom:67%;" /></p>
+<p><img src="image-20231227111237657.png" alt="image-20231227111237657" style="zoom:67%;" /></p>
 <h3 id="标记-复制">标记-复制</h3>
 <p>一种空间换时间的思想，两段空间，省去了整理对象的用时，同时能保证对象复制到另一半内存空间之后不会产生内存碎片。</p>
 <figure>
-<img src="JVM学习/image-20231227111408977.png"
-alt="image-20231227111408977" />
+<img src="image-20231227111408977.png" alt="image-20231227111408977" />
 <figcaption aria-hidden="true">image-20231227111408977</figcaption>
 </figure>
 <h3 id="分代回收">分代回收</h3>
 <figure>
-<img src="JVM学习/image-20231228195330497.png"
-alt="image-20231228195330497" />
+<img src="image-20231228195330497.png" alt="image-20231228195330497" />
 <figcaption aria-hidden="true">image-20231228195330497</figcaption>
 </figure>
 <ol type="1">
@@ -541,8 +538,7 @@ CPU 上</li>
 <li>堆内存较少，适合个人电脑</li>
 </ul>
 <figure>
-<img src="JVM学习/image-20231230171402073.png"
-alt="image-20231230171402073" />
+<img src="image-20231230171402073.png" alt="image-20231230171402073" />
 <figcaption aria-hidden="true">image-20231230171402073</figcaption>
 </figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//老年代新生代都采用</span><br><span class="line">-XX:+UseSerialGC=serial + serialOld</span><br></pre></td></tr></table></figure>
@@ -573,8 +569,7 @@ The World）</p>
 <li>目的：让单位时间内，STW 的时间最短</li>
 </ul>
 <figure>
-<img src="JVM学习/image-20231230173848573.png"
-alt="image-20231230173848573" />
+<img src="image-20231230173848573.png" alt="image-20231230173848573" />
 <figcaption aria-hidden="true">image-20231230173848573</figcaption>
 </figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseParallelGC ~ -XX:+UsePrallerOldGC</span><br><span class="line">-XX:+UseAdaptiveSizePolicy</span><br><span class="line">-XX:GCTimeRatio=ratio // 1/(1+radio)</span><br><span class="line">-XX:MaxGCPauseMillis=ms // 200ms</span><br><span class="line">-XX:ParallelGCThreads=n</span><br></pre></td></tr></table></figure>
@@ -609,8 +604,7 @@ GC 的自适应调节策略。</li>
 <li>尽可能让 STW 的单次时间最短</li>
 </ul>
 <figure>
-<img src="JVM学习/image-20231230174314031.png"
-alt="image-20231230174314031" />
+<img src="image-20231230174314031.png" alt="image-20231230174314031" />
 <figcaption aria-hidden="true">image-20231230174314031</figcaption>
 </figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseConcMarkSweepGC ~ -XX:+UseParNewGC ~ SerialOld</span><br><span class="line">-XX:ParallelGCThreads=n ~ -XX:ConcGCThreads=threads</span><br><span class="line">-XX:CMSInitiatingOccupancyFraction=percent</span><br><span class="line">-XX:+CMSScavengeBeforeRemark</span><br></pre></td></tr></table></figure>
@@ -649,7 +643,7 @@ serial Old
 <p>JDK8 并不是默认开启的，所需要参数开启</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseG1GC</span><br><span class="line">-XX:G1HeapRegionSize=size</span><br><span class="line">-XX:MaxGCPauseMillis=time</span><br></pre></td></tr></table></figure>
 <h4 id="垃圾回收阶段">垃圾回收阶段</h4>
-<p><img src="JVM学习/image-20240102110849985.png" alt="image-20240102110849985" style="zoom:67%;" /></p>
+<p><img src="image-20240102110849985.png" alt="image-20240102110849985" style="zoom:67%;" /></p>
 <ul>
 <li>Young Collection：对新生代垃圾收集</li>
 <li>Young Collection + Concurrent
@@ -662,15 +656,15 @@ Mark：如果老年代内存到达一定的阈值了，新生代垃圾收集同�
 GC 产生的停顿时间！</p>
 <p>每个小区间可以代表：E：eden，S：幸存区，O：老年代</p>
 <figure>
-<img src="JVM学习/20210210122339138.gif" alt="Young Collection" />
+<img src="20210210122339138.gif" alt="Young Collection" />
 <figcaption aria-hidden="true">Young Collection</figcaption>
 </figure>
 <p>注意：会产生STW</p>
 <h6 id="跨代引用">跨代引用</h6>
 <p>老年代可能有老年对象引用了新生代对象（卡表），这样可以使新生代对象不被回收</p>
-<p><img src="JVM学习/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-170416686796910.png" alt="跨代引用" style="zoom:50%;" /></p>
+<p><img src="watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-170416686796910.png" alt="跨代引用" style="zoom:50%;" /></p>
 <p><strong>卡表&amp;Remembered Set</strong></p>
-<p><img src="JVM学习/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-170416698795213.png" alt="卡表" style="zoom:50%;" /></p>
+<p><img src="watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-170416698795213.png" alt="卡表" style="zoom:50%;" /></p>
 <ul>
 <li>Remembered Set 存在于E中，用于保存新生代对象对应的脏卡
 <ul>
@@ -681,11 +675,11 @@ GC 产生的停顿时间！</p>
 <h5 id="young-collection-cm">Young Collection + CM</h5>
 <p>老年代占用堆空间比例达到阈值时，进行并发标记（不会STW），由 JVM
 参数决定 -XX:InitiatingHeapOccupancyPercent=percent （默认45%）</p>
-<p><img src="JVM学习/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70.png" alt="在这里插入图片描述" style="zoom:50%;" /></p>
+<p><img src="watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70.png" alt="在这里插入图片描述" style="zoom:50%;" /></p>
 <h5 id="mixed-collection">Mixed Collection</h5>
 <p>会对 E S O
 进行<strong>全面的回收</strong>，阶段分为：最终标记、拷贝存活的对象（都会产生STW）</p>
-<p><img src="JVM学习/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-17041665984177.png" alt="Mixed Collection" style="zoom:50%;" /></p>
+<p><img src="watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-17041665984177.png" alt="Mixed Collection" style="zoom:50%;" /></p>
 <h5 id="full-gc">Full GC</h5>
 <p>G1 在老年代内存不足时（老年代所占内存超过阈值）</p>
 <ul>
@@ -697,23 +691,23 @@ GC，然后<strong>退化成 serial Old</strong>
 </ul>
 <h5 id="remark">Remark</h5>
 <p>三色标记法：</p>
-<p><img src="JVM学习/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-170416746268716.png" alt="三色标记法" style="zoom:33%;" /></p>
+<p><img src="watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-170416746268716.png" alt="三色标记法" style="zoom:33%;" /></p>
 <ul>
 <li>黑色：已被处理，需要保留的</li>
 <li>灰色：正在处理中的</li>
 <li>白色：还未处理的</li>
 </ul>
 <p>并发标记问题：</p>
-<p><img src="JVM学习/image-20240102115226270.png" alt="标记1" style="zoom:67%;" /></p>
+<p><img src="image-20240102115226270.png" alt="标记1" style="zoom:67%;" /></p>
 <p>这时，B断掉与C的引用，但是与此同时，A打算引用C，这时会引发Remark：</p>
 <ul>
 <li><p>之前 C 未被引用，这时 A 引用了 C ，就会给 C
 加一个写屏障，写屏障的指令会被执行，将 C 放入一个队列当中，并将 C 变为
 <strong>处理中</strong>状态，也就是灰色</p>
-<p><img src="JVM学习/image-20240102115559103.png" alt="Remark1" style="zoom:50%;" /></p></li>
+<p><img src="image-20240102115559103.png" alt="Remark1" style="zoom:50%;" /></p></li>
 <li><p>在并发标记阶段结束以后，重新标记阶段会 STW
 ，然后将放在该队列中的对象重新处理，发现有强引用引用它，就会处理它，由灰色变成黑色。</p>
-<p><img src="JVM学习/image-20240102115620042.png" alt="Remark2" style="zoom:50%;" /></p></li>
+<p><img src="image-20240102115620042.png" alt="Remark2" style="zoom:50%;" /></p></li>
 </ul>
 <h4 id="优化">优化</h4>
 <h5 id="字符串去重">字符串去重</h5>
@@ -737,7 +731,7 @@ GC，然后<strong>退化成 serial Old</strong>
 <li>回收时被优先考虑</li>
 <li>G1会跟踪老年代所有incoming（卡表）引用，如果老年代incoming引用为0的巨型对象就可以在新生代垃圾回收时处理掉</li>
 </ul>
-<p><img src="JVM学习/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-170416845516119.png" alt="巨型对象的回收" style="zoom:50%;" /></p>
+<p><img src="watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MDI4MDU3Ng==,size_16,color_FFFFFF,t_70-170416845516119.png" alt="巨型对象的回收" style="zoom:50%;" /></p>
 <h2 id="gc调优">gc调优</h2>
 <p>查看虚拟机参数命令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\JavaJDK1.8\bin\java   -XX:+PrintFlagsFinal -version | findstr &quot;GC&quot;</span><br></pre></td></tr></table></figure>
@@ -840,21 +834,19 @@ GC。而且触发 Minor GC 时，清理新生代所花费的时间会更长</li>
 <p><strong>常量池载入运行时常量池</strong></p>
 <p>将静态变量放到常量池中，其实常量池也属于方法区，单独抽出来了。</p>
 <figure>
-<img src="JVM学习/image-20240108120650688.png" alt="常量池载入" />
+<img src="image-20240108120650688.png" alt="常量池载入" />
 <figcaption aria-hidden="true">常量池载入</figcaption>
 </figure>
 <p><strong>方法字节码载入方法区</strong></p>
 <figure>
-<img src="JVM学习/image-20240108121208720.png"
-alt="方法字节码载入方法区" />
+<img src="image-20240108121208720.png" alt="方法字节码载入方法区" />
 <figcaption aria-hidden="true">方法字节码载入方法区</figcaption>
 </figure>
 <p><strong>main 线程开始运行，分配栈帧内存</strong></p>
 <p>（stack=2，locals=4）对应操作数栈有 2 个空间（每个空间 4
 个字节），局部变量表中有 4 个槽位。</p>
 <figure>
-<img src="JVM学习/image-20240108150115655.png"
-alt="image-20240108150115655" />
+<img src="image-20240108150115655.png" alt="image-20240108150115655" />
 <figcaption aria-hidden="true">image-20240108150115655</figcaption>
 </figure>
 <p><strong>执行引擎执行代码</strong></p>
@@ -874,7 +866,7 @@ short 范围的数字存入了常量池</strong></li>
 </ul></li>
 </ol>
 <figure>
-<img src="JVM学习/image-20240108152307214.png" alt="bipush" />
+<img src="image-20240108152307214.png" alt="bipush" />
 <figcaption aria-hidden="true">bipush</figcaption>
 </figure>
 <ol start="2" type="1">
@@ -885,7 +877,7 @@ short 范围的数字存入了常量池</strong></li>
 </ul></li>
 </ol>
 <figure>
-<img src="JVM学习/image-20240108152626006.png" alt="istore 1" />
+<img src="image-20240108152626006.png" alt="istore 1" />
 <figcaption aria-hidden="true">istore 1</figcaption>
 </figure>
 <ol start="3" type="1">
@@ -896,7 +888,7 @@ short 范围的数字存入了常量池</strong></li>
 </ul></li>
 </ol>
 <figure>
-<img src="JVM学习/image-20240108152733243.png" alt="ldc #3" />
+<img src="image-20240108152733243.png" alt="ldc #3" />
 <figcaption aria-hidden="true">ldc #3</figcaption>
 </figure>
 <ol start="4" type="1">
@@ -906,7 +898,7 @@ short 范围的数字存入了常量池</strong></li>
 </ul></li>
 </ol>
 <figure>
-<img src="JVM学习/image-20240108152838616.png" alt="istore 2" />
+<img src="image-20240108152838616.png" alt="istore 2" />
 <figcaption aria-hidden="true">istore 2</figcaption>
 </figure>
 <ol start="5" type="1">
@@ -917,11 +909,11 @@ short 范围的数字存入了常量池</strong></li>
 </ul></li>
 </ol>
 <figure>
-<img src="JVM学习/image-20240108154151871.png" alt="iload" />
+<img src="image-20240108154151871.png" alt="iload" />
 <figcaption aria-hidden="true">iload</figcaption>
 </figure>
 <figure>
-<img src="JVM学习/image-20240108154407127.png" alt="iload" />
+<img src="image-20240108154407127.png" alt="iload" />
 <figcaption aria-hidden="true">iload</figcaption>
 </figure>
 <ol start="6" type="1">
@@ -931,7 +923,7 @@ short 范围的数字存入了常量池</strong></li>
 </ul></li>
 </ol>
 <figure>
-<img src="JVM学习/image-20240108154817167.png" alt="iadd" />
+<img src="image-20240108154817167.png" alt="iadd" />
 <figcaption aria-hidden="true">iadd</figcaption>
 </figure>
 <ol start="7" type="1">
@@ -941,7 +933,7 @@ short 范围的数字存入了常量池</strong></li>
 </ul></li>
 </ol>
 <figure>
-<img src="JVM学习/image-20240108154904597.png" alt="istore" />
+<img src="image-20240108154904597.png" alt="istore" />
 <figcaption aria-hidden="true">istore</figcaption>
 </figure>
 <ol start="8" type="1">
@@ -951,14 +943,14 @@ short 范围的数字存入了常量池</strong></li>
 </ul></li>
 </ol>
 <figure>
-<img src="JVM学习/image-20240108155055022.png" alt="getstatic #4" />
+<img src="image-20240108155055022.png" alt="getstatic #4" />
 <figcaption aria-hidden="true">getstatic #4</figcaption>
 </figure>
 <ol start="9" type="1">
 <li><strong>iload 3</strong></li>
 </ol>
 <figure>
-<img src="JVM学习/image-20240108155129991.png" alt="iload 3" />
+<img src="image-20240108155129991.png" alt="iload 3" />
 <figcaption aria-hidden="true">iload 3</figcaption>
 </figure>
 <ol start="10" type="1">
@@ -971,7 +963,7 @@ short 范围的数字存入了常量池</strong></li>
 </ul></li>
 </ol>
 <figure>
-<img src="JVM学习/image-20240108155220452.png" alt="invokevirtual 5" />
+<img src="image-20240108155220452.png" alt="invokevirtual 5" />
 <figcaption aria-hidden="true">invokevirtual 5</figcaption>
 </figure>
 <p>​</p>
@@ -980,8 +972,7 @@ short 范围的数字存入了常量池</strong></li>
 <li><p>清除 main 操作数栈内容</p></li>
 </ul>
 <figure>
-<img src="JVM学习/image-20240108155322128.png"
-alt="清除 main 操作数栈内容" />
+<img src="image-20240108155322128.png" alt="清除 main 操作数栈内容" />
 <figcaption aria-hidden="true">清除 main 操作数栈内容</figcaption>
 </figure>
 <ol start="11" type="1">
@@ -1092,8 +1083,7 @@ String.class，作用是把 klass 暴露给 java 使用</p></li>
 的地址，让对象可以通过其找到方法区中的instanceKlass，从而获取类的各种信息</p></li>
 </ul>
 <figure>
-<img src="JVM学习/image-20240127173914863.png"
-alt="jvm内存结构——类存储" />
+<img src="image-20240127173914863.png" alt="jvm内存结构——类存储" />
 <figcaption aria-hidden="true">jvm内存结构——类存储</figcaption>
 </figure>
 <h3 id="链接">链接</h3>
@@ -1241,5 +1231,5 @@ Cache</strong>，下次遇到相同的代码，直接执行，无需再编译</l
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(9 * 9);</span><br></pre></td></tr></table></figure>
 <p>再进行<strong>常量折叠</strong>：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(8);</span><br></pre></td></tr></table></figure>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io">Vlong_shen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io/2023/12/18/JVM%E5%AD%A6%E4%B9%A0/">https://vlsmhd.github.io/2023/12/18/JVM%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://vlsmhd.github.io" target="_blank">VLS_Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/01/04/2024%E6%98%A5%E6%8B%9B%E6%8A%95%E9%80%92%E8%AE%B0%E5%BD%95/" title="2024春招投递记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">2024春招投递记录</div></div></a></div><div class="next-post pull-right"><a href="/2023/11/29/%E6%B8%90%E8%BF%9B%E5%BC%8Fredis%E7%BC%93%E5%AD%98%E5%B7%A5%E5%85%B7Vedis/" title="渐进式redis缓存工具Vedis"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">渐进式redis缓存工具Vedis</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Vlong_shen</div><div class="author-info__description">一名热爱编程的程序员</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">120</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">76</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VLSmhd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/VLSmhd" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/-" target="_blank" title="联系我QQ：1067853293"><i class="fab fa-qq"></i></a><a class="social-icon" href="/-" target="_blank" title="微信：18956757208"><i class="fa fa-wechat"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text">程序计数器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88"><span class="toc-number">1.2.</span> <span class="toc-text">虚拟机栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#stackoverflow"><span class="toc-number">1.2.1.</span> <span class="toc-text">StackOverFlow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E8%AF%8A%E6%96%AD"><span class="toc-number">1.2.2.</span> <span class="toc-text">线程运行诊断</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cpu%E5%8D%A0%E7%94%A8%E5%88%86%E6%9E%90"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">CPU占用分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%E5%88%86%E6%9E%90"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">死锁分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88"><span class="toc-number">1.3.</span> <span class="toc-text">本地方法栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%86"><span class="toc-number">1.4.</span> <span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA"><span class="toc-number">1.4.1.</span> <span class="toc-text">堆内存溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E5%86%85%E5%AD%98%E8%AF%8A%E6%96%AD"><span class="toc-number">1.4.2.</span> <span class="toc-text">堆内存诊断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stringtable"><span class="toc-number">1.4.3.</span> <span class="toc-text">StringTable</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#intern%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">intern方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E4%BC%98"><span class="toc-number">1.4.3.3.</span> <span class="toc-text">调优</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="toc-number">1.5.</span> <span class="toc-text">方法区</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="toc-number">1.5.1.</span> <span class="toc-text">运行时常量池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98"><span class="toc-number">1.6.</span> <span class="toc-text">直接内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99"><span class="toc-number">1.6.1.</span> <span class="toc-text">优势-文件读写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E6%94%B6%E5%8E%9F%E7%90%86"><span class="toc-number">1.6.2.</span> <span class="toc-text">回收原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%81%E7%94%A8%E6%98%BE%E7%A4%BA%E5%9B%9E%E6%94%B6"><span class="toc-number">1.6.3.</span> <span class="toc-text">禁用显示回收</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gc%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">GC垃圾回收机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%9B%9E%E6%94%B6%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">判断回收条件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E6%B3%95"><span class="toc-number">2.1.1.</span> <span class="toc-text">引用计数法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A7%8D%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">5种引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%BA%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.1.1.1.</span> <span class="toc-text">强引用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BD%AF%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.1.1.2.</span> <span class="toc-text">软引用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.1.1.3.</span> <span class="toc-text">弱引用</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#threadlocal%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="toc-number">2.1.1.1.3.1.</span> <span class="toc-text">ThreadLocal内存泄露</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%99%9A%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.1.1.4.</span> <span class="toc-text">虚引用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%88%E7%BB%93%E5%99%A8%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.1.1.5.</span> <span class="toc-text">终结器引用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">2.1.2.</span> <span class="toc-text">可达性分析法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E4%BD%9C%E4%B8%BAgc-root%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">可以作为GC root的对象</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#eclipse-memory-analyzer%E5%B7%A5%E5%85%B7%E6%9F%A5%E7%9C%8B"><span class="toc-number">2.1.2.1.1.</span> <span class="toc-text">Eclipse Memory
-Analyzer工具查看</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">垃圾回收算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4"><span class="toc-number">2.2.1.</span> <span class="toc-text">标记-清除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86"><span class="toc-number">2.2.2.</span> <span class="toc-text">标记-整理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E5%A4%8D%E5%88%B6"><span class="toc-number">2.2.3.</span> <span class="toc-text">标记-复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E4%BB%A3%E5%9B%9E%E6%94%B6"><span class="toc-number">2.2.4.</span> <span class="toc-text">分代回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gc%E8%B0%83%E4%BC%98%E5%8F%82%E6%95%B0"><span class="toc-number">2.2.5.</span> <span class="toc-text">GC调优参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="toc-number">2.3.</span> <span class="toc-text">垃圾回收器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E8%A1%8C"><span class="toc-number">2.3.1.</span> <span class="toc-text">串行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%9E%E5%90%90%E9%87%8F%E4%BC%98%E5%85%88"><span class="toc-number">2.3.2.</span> <span class="toc-text">吞吐量优先</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4%E4%BC%98%E5%85%88"><span class="toc-number">2.3.3.</span> <span class="toc-text">响应时间优先</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cms-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">CMS 收集器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#g1"><span class="toc-number">2.3.4.</span> <span class="toc-text">G1</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E9%98%B6%E6%AE%B5"><span class="toc-number">2.3.4.1.</span> <span class="toc-text">垃圾回收阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#young-collection"><span class="toc-number">2.3.4.1.1.</span> <span class="toc-text">Young Collection</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%B7%A8%E4%BB%A3%E5%BC%95%E7%94%A8"><span class="toc-number">2.3.4.1.1.1.</span> <span class="toc-text">跨代引用</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#young-collection-cm"><span class="toc-number">2.3.4.1.2.</span> <span class="toc-text">Young Collection + CM</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mixed-collection"><span class="toc-number">2.3.4.1.3.</span> <span class="toc-text">Mixed Collection</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#full-gc"><span class="toc-number">2.3.4.1.4.</span> <span class="toc-text">Full GC</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#remark"><span class="toc-number">2.3.4.1.5.</span> <span class="toc-text">Remark</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96"><span class="toc-number">2.3.4.2.</span> <span class="toc-text">优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8E%BB%E9%87%8D"><span class="toc-number">2.3.4.2.1.</span> <span class="toc-text">字符串去重</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B7%A8%E5%9E%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9B%9E%E6%94%B6"><span class="toc-number">2.3.4.2.2.</span> <span class="toc-text">巨型对象的回收</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gc%E8%B0%83%E4%BC%98"><span class="toc-number">2.4.</span> <span class="toc-text">gc调优</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E7%94%9F%E4%BB%A3%E8%B0%83%E4%BC%98"><span class="toc-number">2.4.1.</span> <span class="toc-text">新生代调优</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%80%81%E5%B9%B4%E4%BB%A3%E8%B0%83%E4%BC%98"><span class="toc-number">2.4.2.</span> <span class="toc-text">老年代调优</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%8A%80%E6%9C%AF"><span class="toc-number">3.</span> <span class="toc-text">字节码技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">3.1.</span> <span class="toc-text">类文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4"><span class="toc-number">3.2.</span> <span class="toc-text">字节码指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#javap%E5%B7%A5%E5%85%B7"><span class="toc-number">3.2.1.</span> <span class="toc-text">javap工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B"><span class="toc-number">3.2.2.</span> <span class="toc-text">图解案例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%E5%9F%BA%E7%A1%80%E8%BF%90%E7%AE%97"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">赋值基础运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#i-i%E6%A1%88%E4%BE%8B"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">i++ ++i案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x%E6%81%92%E7%AD%89%E4%BA%8E0"><span class="toc-number">3.2.2.3.</span> <span class="toc-text">x恒等于0</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">3.2.3.</span> <span class="toc-text">构造方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">静态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="toc-number">3.2.4.</span> <span class="toc-text">方法调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%80%81%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.5.</span> <span class="toc-text">多态原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6"><span class="toc-number">3.2.6.</span> <span class="toc-text">异常机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9Atry-catch"><span class="toc-number">3.2.6.1.</span> <span class="toc-text">普通try-catch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9Acatch%E5%9D%97"><span class="toc-number">3.2.6.2.</span> <span class="toc-text">多catch块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#finally"><span class="toc-number">3.2.6.3.</span> <span class="toc-text">finally</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD"><span class="toc-number">4.</span> <span class="toc-text">类加载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-number">4.1.</span> <span class="toc-text">过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD"><span class="toc-number">4.1.1.</span> <span class="toc-text">加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5"><span class="toc-number">4.1.2.</span> <span class="toc-text">链接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81"><span class="toc-number">4.1.2.1.</span> <span class="toc-text">验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">4.1.2.2.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-number">4.1.2.3.</span> <span class="toc-text">解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">4.1.3.</span> <span class="toc-text">初始化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-number">4.2.</span> <span class="toc-text">类加载器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE"><span class="toc-number">4.2.1.</span> <span class="toc-text">双亲委派</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-number">4.3.</span> <span class="toc-text">自定义类加载器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%9F%E4%BC%98%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text">运行期优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91"><span class="toc-number">5.1.</span> <span class="toc-text">即时编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E7%BC%96%E8%AF%91"><span class="toc-number">5.1.1.</span> <span class="toc-text">分层编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%86%85%E8%81%94"><span class="toc-number">5.1.2.</span> <span class="toc-text">方法内联</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/12/V%E8%81%8A%E9%A1%B9%E7%9B%AE/" title="V聊项目">V聊项目</a><time datetime="2024-03-12T06:37:32.019Z" title="发表于 2024-03-12 14:37:32">2024-03-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/12/Github%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" title="Github使用指南">Github使用指南</a><time datetime="2024-03-12T05:13:50.541Z" title="发表于 2024-03-12 13:13:50">2024-03-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/01/%E7%94%A8%E5%8F%8B%E5%AE%9E%E4%B9%A0%E7%BB%8F%E5%8E%86/" title="用友实习经历">用友实习经历</a><time datetime="2024-03-01T05:15:29.005Z" title="发表于 2024-03-01 13:15:29">2024-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/02/27/Feed%E6%B5%81%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" title="Feed流系统设计">Feed流系统设计</a><time datetime="2024-02-27T06:57:38.771Z" title="发表于 2024-02-27 14:57:38">2024-02-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/02/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80/" title="系统设计基础">系统设计基础</a><time datetime="2024-02-27T03:35:23.450Z" title="发表于 2024-02-27 11:35:23">2024-02-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Vlong_shen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io">Vlong_shen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://vlsmhd.github.io/2023/12/18/%E9%BB%91%E9%A9%ACJVM%E5%AD%A6%E4%B9%A0/">https://vlsmhd.github.io/2023/12/18/%E9%BB%91%E9%A9%ACJVM%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://vlsmhd.github.io" target="_blank">VLS_Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/01/04/2024%E6%98%A5%E6%8B%9B%E6%8A%95%E9%80%92%E8%AE%B0%E5%BD%95/" title="2024春招投递记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">2024春招投递记录</div></div></a></div><div class="next-post pull-right"><a href="/2023/11/29/%E6%B8%90%E8%BF%9B%E5%BC%8Fredis%E7%BC%93%E5%AD%98%E5%B7%A5%E5%85%B7Vedis/" title="渐进式redis缓存工具Vedis"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">渐进式redis缓存工具Vedis</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Vlong_shen</div><div class="author-info__description">一名热爱编程的程序员</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">118</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">77</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VLSmhd"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/VLSmhd" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/-" target="_blank" title="联系我QQ：1067853293"><i class="fab fa-qq"></i></a><a class="social-icon" href="/-" target="_blank" title="微信：18956757208"><i class="fa fa-wechat"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">JVM内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text">程序计数器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88"><span class="toc-number">1.2.</span> <span class="toc-text">虚拟机栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#stackoverflow"><span class="toc-number">1.2.1.</span> <span class="toc-text">StackOverFlow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E8%AF%8A%E6%96%AD"><span class="toc-number">1.2.2.</span> <span class="toc-text">线程运行诊断</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cpu%E5%8D%A0%E7%94%A8%E5%88%86%E6%9E%90"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">CPU占用分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%E5%88%86%E6%9E%90"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">死锁分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88"><span class="toc-number">1.3.</span> <span class="toc-text">本地方法栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%86"><span class="toc-number">1.4.</span> <span class="toc-text">堆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA"><span class="toc-number">1.4.1.</span> <span class="toc-text">堆内存溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E5%86%85%E5%AD%98%E8%AF%8A%E6%96%AD"><span class="toc-number">1.4.2.</span> <span class="toc-text">堆内存诊断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stringtable"><span class="toc-number">1.4.3.</span> <span class="toc-text">StringTable</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#intern%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">intern方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E4%BC%98"><span class="toc-number">1.4.3.3.</span> <span class="toc-text">调优</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="toc-number">1.5.</span> <span class="toc-text">方法区</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="toc-number">1.5.1.</span> <span class="toc-text">运行时常量池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98"><span class="toc-number">1.6.</span> <span class="toc-text">直接内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99"><span class="toc-number">1.6.1.</span> <span class="toc-text">优势-文件读写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E6%94%B6%E5%8E%9F%E7%90%86"><span class="toc-number">1.6.2.</span> <span class="toc-text">回收原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%81%E7%94%A8%E6%98%BE%E7%A4%BA%E5%9B%9E%E6%94%B6"><span class="toc-number">1.6.3.</span> <span class="toc-text">禁用显示回收</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gc%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">GC垃圾回收机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%9B%9E%E6%94%B6%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">判断回收条件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E6%B3%95"><span class="toc-number">2.1.1.</span> <span class="toc-text">引用计数法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A7%8D%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">5种引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%BA%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.1.1.1.</span> <span class="toc-text">强引用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BD%AF%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.1.1.2.</span> <span class="toc-text">软引用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.1.1.3.</span> <span class="toc-text">弱引用</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#threadlocal%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="toc-number">2.1.1.1.3.1.</span> <span class="toc-text">ThreadLocal内存泄露</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%99%9A%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.1.1.4.</span> <span class="toc-text">虚引用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%88%E7%BB%93%E5%99%A8%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.1.1.5.</span> <span class="toc-text">终结器引用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">2.1.2.</span> <span class="toc-text">可达性分析法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E4%BD%9C%E4%B8%BAgc-root%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">可以作为GC root的对象</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#eclipse-memory-analyzer%E5%B7%A5%E5%85%B7%E6%9F%A5%E7%9C%8B"><span class="toc-number">2.1.2.1.1.</span> <span class="toc-text">Eclipse Memory
+Analyzer工具查看</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">垃圾回收算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4"><span class="toc-number">2.2.1.</span> <span class="toc-text">标记-清除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86"><span class="toc-number">2.2.2.</span> <span class="toc-text">标记-整理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E5%A4%8D%E5%88%B6"><span class="toc-number">2.2.3.</span> <span class="toc-text">标记-复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E4%BB%A3%E5%9B%9E%E6%94%B6"><span class="toc-number">2.2.4.</span> <span class="toc-text">分代回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gc%E8%B0%83%E4%BC%98%E5%8F%82%E6%95%B0"><span class="toc-number">2.2.5.</span> <span class="toc-text">GC调优参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="toc-number">2.3.</span> <span class="toc-text">垃圾回收器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E8%A1%8C"><span class="toc-number">2.3.1.</span> <span class="toc-text">串行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%9E%E5%90%90%E9%87%8F%E4%BC%98%E5%85%88"><span class="toc-number">2.3.2.</span> <span class="toc-text">吞吐量优先</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4%E4%BC%98%E5%85%88"><span class="toc-number">2.3.3.</span> <span class="toc-text">响应时间优先</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cms-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">CMS 收集器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#g1"><span class="toc-number">2.3.4.</span> <span class="toc-text">G1</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E9%98%B6%E6%AE%B5"><span class="toc-number">2.3.4.1.</span> <span class="toc-text">垃圾回收阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#young-collection"><span class="toc-number">2.3.4.1.1.</span> <span class="toc-text">Young Collection</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%B7%A8%E4%BB%A3%E5%BC%95%E7%94%A8"><span class="toc-number">2.3.4.1.1.1.</span> <span class="toc-text">跨代引用</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#young-collection-cm"><span class="toc-number">2.3.4.1.2.</span> <span class="toc-text">Young Collection + CM</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mixed-collection"><span class="toc-number">2.3.4.1.3.</span> <span class="toc-text">Mixed Collection</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#full-gc"><span class="toc-number">2.3.4.1.4.</span> <span class="toc-text">Full GC</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#remark"><span class="toc-number">2.3.4.1.5.</span> <span class="toc-text">Remark</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96"><span class="toc-number">2.3.4.2.</span> <span class="toc-text">优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8E%BB%E9%87%8D"><span class="toc-number">2.3.4.2.1.</span> <span class="toc-text">字符串去重</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B7%A8%E5%9E%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9B%9E%E6%94%B6"><span class="toc-number">2.3.4.2.2.</span> <span class="toc-text">巨型对象的回收</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gc%E8%B0%83%E4%BC%98"><span class="toc-number">2.4.</span> <span class="toc-text">gc调优</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E7%94%9F%E4%BB%A3%E8%B0%83%E4%BC%98"><span class="toc-number">2.4.1.</span> <span class="toc-text">新生代调优</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%80%81%E5%B9%B4%E4%BB%A3%E8%B0%83%E4%BC%98"><span class="toc-number">2.4.2.</span> <span class="toc-text">老年代调优</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%8A%80%E6%9C%AF"><span class="toc-number">3.</span> <span class="toc-text">字节码技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">3.1.</span> <span class="toc-text">类文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4"><span class="toc-number">3.2.</span> <span class="toc-text">字节码指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#javap%E5%B7%A5%E5%85%B7"><span class="toc-number">3.2.1.</span> <span class="toc-text">javap工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B"><span class="toc-number">3.2.2.</span> <span class="toc-text">图解案例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%E5%9F%BA%E7%A1%80%E8%BF%90%E7%AE%97"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">赋值基础运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#i-i%E6%A1%88%E4%BE%8B"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">i++ ++i案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x%E6%81%92%E7%AD%89%E4%BA%8E0"><span class="toc-number">3.2.2.3.</span> <span class="toc-text">x恒等于0</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">3.2.3.</span> <span class="toc-text">构造方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">静态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="toc-number">3.2.4.</span> <span class="toc-text">方法调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%80%81%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.5.</span> <span class="toc-text">多态原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6"><span class="toc-number">3.2.6.</span> <span class="toc-text">异常机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9Atry-catch"><span class="toc-number">3.2.6.1.</span> <span class="toc-text">普通try-catch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9Acatch%E5%9D%97"><span class="toc-number">3.2.6.2.</span> <span class="toc-text">多catch块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#finally"><span class="toc-number">3.2.6.3.</span> <span class="toc-text">finally</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD"><span class="toc-number">4.</span> <span class="toc-text">类加载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-number">4.1.</span> <span class="toc-text">过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD"><span class="toc-number">4.1.1.</span> <span class="toc-text">加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5"><span class="toc-number">4.1.2.</span> <span class="toc-text">链接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81"><span class="toc-number">4.1.2.1.</span> <span class="toc-text">验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">4.1.2.2.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-number">4.1.2.3.</span> <span class="toc-text">解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">4.1.3.</span> <span class="toc-text">初始化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-number">4.2.</span> <span class="toc-text">类加载器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE"><span class="toc-number">4.2.1.</span> <span class="toc-text">双亲委派</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-number">4.3.</span> <span class="toc-text">自定义类加载器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%9F%E4%BC%98%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text">运行期优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91"><span class="toc-number">5.1.</span> <span class="toc-text">即时编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E7%BC%96%E8%AF%91"><span class="toc-number">5.1.1.</span> <span class="toc-text">分层编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%86%85%E8%81%94"><span class="toc-number">5.1.2.</span> <span class="toc-text">方法内联</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/13/WebSocket/" title="WebSocket">WebSocket</a><time datetime="2024-03-13T09:07:51.702Z" title="发表于 2024-03-13 17:07:51">2024-03-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/12/V%E8%81%8A%E9%A1%B9%E7%9B%AE/" title="V聊项目">V聊项目</a><time datetime="2024-03-12T06:37:32.019Z" title="发表于 2024-03-12 14:37:32">2024-03-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/12/Github%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" title="Github使用指南">Github使用指南</a><time datetime="2024-03-12T05:13:50.541Z" title="发表于 2024-03-12 13:13:50">2024-03-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/01/%E7%94%A8%E5%8F%8B%E5%AE%9E%E4%B9%A0%E7%BB%8F%E5%8E%86/" title="用友实习经历">用友实习经历</a><time datetime="2024-03-01T05:15:29.005Z" title="发表于 2024-03-01 13:15:29">2024-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/02/27/Feed%E6%B5%81%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" title="Feed流系统设计">Feed流系统设计</a><time datetime="2024-02-27T06:57:38.771Z" title="发表于 2024-02-27 14:57:38">2024-02-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Vlong_shen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
