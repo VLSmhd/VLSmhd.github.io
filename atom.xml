@@ -6,7 +6,7 @@
   <link href="https://vlsmhd.github.io/atom.xml" rel="self"/>
   
   <link href="https://vlsmhd.github.io/"/>
-  <updated>2024-07-14T14:03:00.654Z</updated>
+  <updated>2024-07-14T14:39:37.423Z</updated>
   <id>https://vlsmhd.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://vlsmhd.github.io/2024/07/14/%E6%98%BE%E5%8D%A1%E7%9F%A5%E8%AF%86/"/>
     <id>https://vlsmhd.github.io/2024/07/14/%E6%98%BE%E5%8D%A1%E7%9F%A5%E8%AF%86/</id>
     <published>2024-07-14T14:02:59.346Z</published>
-    <updated>2024-07-14T14:03:00.654Z</updated>
+    <updated>2024-07-14T14:39:37.423Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="游戏性能相关">游戏性能相关</h1><figure><imgsrc="C:\Users\LEGION\AppData\Roaming\Typora\typora-user-images\image-20240714220234981.png"alt="游戏性能决定因素" /><figcaption aria-hidden="true">游戏性能决定因素</figcaption></figure><ul><li>cuda数</li><li>架构</li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="游戏性能相关">游戏性能相关</h1><figure><imgsrc="C:\Users\LEGION\AppData\Roaming\Typora\typora-user-images\image-20240714220234981.png"alt="游戏性能决定因素" /><figcaption aria-hidden="true">游戏性能决定因素</figcaption></figure><ul><li>cuda数</li><li>架构</li></ul><h1 id="选择显卡">选择显卡</h1><h2 id="性能需求">性能需求</h2><figure><img src="显卡知识/image-20240714220812130.png" alt="显卡性能天梯图" /><figcaption aria-hidden="true">显卡性能天梯图</figcaption></figure><h2 id="显卡型号">显卡型号</h2><h2 id="aic品牌">AIC品牌</h2><p>同GPU芯片，有各种厂家</p><figure><img src="显卡知识/image-20240714221520478.png" alt="显卡不同AIC品牌" /><figcaption aria-hidden="true">显卡不同AIC品牌</figcaption></figure><ul><li>只完成电路板、散热模块设计</li></ul><h2 id="实际产品">实际产品</h2>]]></content>
     
     
       
@@ -49,7 +49,7 @@ al</summary>
     <link href="https://vlsmhd.github.io/2024/07/13/%E6%98%BE%E7%A4%BA%E5%B1%8F%E5%8F%82%E6%95%B0/"/>
     <id>https://vlsmhd.github.io/2024/07/13/%E6%98%BE%E7%A4%BA%E5%B1%8F%E5%8F%82%E6%95%B0/</id>
     <published>2024-07-12T16:41:23.059Z</published>
-    <updated>2024-07-13T15:42:15.365Z</updated>
+    <updated>2024-07-14T14:39:40.040Z</updated>
     
     <content type="html"><![CDATA[<h1 id="宽高比">宽高比</h1><ul><li>16:9：标准</li><li>4:3</li><li>16:10</li><li>带鱼屏：21:9、32:9<ul><li>看电影</li><li>玩单机</li></ul></li></ul><h1 id="分辨率">分辨率</h1><p>定义：横向纵向有多少像素点，16 * 9，横向16像素点，纵向9像素点。</p><p>常见市面分辨率：</p><figure><imgsrc="C:\Users\LEGION\AppData\Roaming\Typora\typora-user-images\image-20240712234939974.png"alt="image-20240712234939974" /><figcaption aria-hidden="true">image-20240712234939974</figcaption></figure><h1 id="面板种类">面板种类</h1><figure><imgsrc="C:\Users\LEGION\AppData\Roaming\Typora\typora-user-images\image-20240712235403347.png"alt="image-20240712235403347" /><figcaption aria-hidden="true">image-20240712235403347</figcaption></figure><h1 id="直曲屏">直曲屏</h1><p>曲率</p><ul><li>1000r</li><li>1500r</li><li>1800r</li></ul><h1 id="刷新率">刷新率</h1><p>帧率（FPS）：1s包含的帧数</p><p>刷新率 ：显示器每秒刷新帧数 单位：赫兹hz</p><p>常规刷新率：60、70hz</p><p>高刷：100、120、144、155、165、200、240、360</p><h1 id="响应时间">响应时间</h1><p>定义：单个像素点色彩转换的时间</p><h1 id="g-sync-and-freesync">G-sync and Freesync</h1><p>显卡的效率比显示屏快，会出现页撕裂现象</p><p>解决：开垂直同步</p><p>显卡帧率比显示器刷新率高：</p><ol type="1"><li>锁帧</li></ol><h1 id="色域">色域</h1><p>专业人士考虑。</p><h1 id="三星g7配置">三星G7配置</h1><p>hdmi2.1</p><p>dp1.4：</p><h2 id="hdr设置">HDR设置</h2><p>笔记本默认不开启，需要设置显示器显示规则（只在大显示器上显示），随后在设置-&gt; 屏幕 -&gt; 使用HDR显示（没有HDR选项，进入window HD color）设置</p><p>快捷键开启 win + alt + b</p><h1 id="k显示屏常见问题">4k显示屏常见问题</h1><h2 id="p视频观看模糊">1080p视频观看模糊</h2><p>解决方案1：显卡设置 -&gt; 显示 -&gt; 调整桌面尺寸和位置 -&gt;更改显示器缩放为整数缩放</p>]]></content>
     
